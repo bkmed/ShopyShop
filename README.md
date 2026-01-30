@@ -95,15 +95,33 @@ A premium, comprehensive ecommerce platform built with **React Native Web**. Thi
 
 ## 🧪 Development & Testing
 
+### E2E Testing with Cypress
+The project includes a comprehensive set of E2E tests for authentication, admin dashboard, and shopping flows.
+
+```bash
+# Open Cypress Test Runner
+npm run cypress:open
+
+# Run all tests headlessly
+npm run cypress:run
+```
+
+### 👤 Demo Accounts
+To explore the platform with different roles, use the following demo credentials (automatically seeded):
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin@demo.com` | `admin123` |
+| **Stock Manager** | `stock@demo.com` | `stock123` |
+| **User (Customer)** | `user@demo.com` | `user123` |
+
+### 🛠 Other Commands
 ```bash
 # Linting
 npm run lint
 
 # Formatting (Prettier)
-npx prettier --write .
-
-# Build for Production (Web)
-npm run build-gh-pages
+npm run format
 ```
 
 ---

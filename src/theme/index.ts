@@ -1,20 +1,20 @@
 export const palette = {
-  primary: '#0066CC', // Trust blue for ecommerce
-  secondary: '#00C853', // Success green for "Add to Cart"
-  accent: '#FF6700', // Vibrant orange for CTAs/promotions
-  error: '#D32F2F', // Clear error red
-  success: '#4CAF50', // Confirmation green
-  warning: '#FFA000', // Warning amber
+  primary: '#2D5BFF', // Modern electric blue
+  secondary: '#00F294', // Cyber green
+  accent: '#FF3D71', // Electric pink-red
+  error: '#FF3B30',
+  success: '#34C759',
+  warning: '#FFCC00',
   white: '#FFFFFF',
   black: '#000000',
-  gray100: '#F5F5F5', // Light background
-  gray200: '#EEEEEE',
-  gray300: '#E0E0E0',
-  gray500: '#9E9E9E', // Medium gray for subtext
-  gray800: '#424242', // Dark gray for text
-  gray900: '#212121', // Near black
-  darkSurface: '#1E1E1E',
-  darkBackground: '#121212',
+  gray100: '#F8F9FA',
+  gray200: '#E9ECEF',
+  gray300: '#DEE2E6',
+  gray500: '#ADB5BD',
+  gray800: '#343A40',
+  gray900: '#212529',
+  darkSurface: '#151718',
+  darkBackground: '#0F0F10',
 };
 
 const spacing = {
@@ -91,7 +91,36 @@ const textVariants = {
   },
 };
 
-export const lightTheme = {
+export interface ThemeColors {
+  primary: string;
+  secondary: string;
+  accent: string;
+  background: string;
+  surface: string;
+  text: string;
+  subText: string;
+  border: string;
+  error: string;
+  success: string;
+  warning: string;
+  warningBackground: string;
+  primaryBackground: string;
+  successBackground: string;
+  card: string;
+  notification: string;
+  glass: string;
+  glassBorder: string;
+}
+
+export interface Theme {
+  dark: boolean;
+  colors: ThemeColors;
+  spacing: typeof spacing;
+  shadows: typeof shadows;
+  textVariants: any;
+}
+
+export const lightTheme: Theme = {
   dark: false,
   colors: {
     primary: palette.primary,
@@ -110,6 +139,8 @@ export const lightTheme = {
     successBackground: '#E3FCEF',
     card: palette.white,
     notification: palette.error,
+    glass: 'rgba(255, 255, 255, 0.7)',
+    glassBorder: 'rgba(255, 255, 255, 0.2)',
   },
   spacing,
   shadows,
@@ -123,7 +154,7 @@ export const lightTheme = {
   },
 };
 
-export const darkTheme = {
+export const darkTheme: Theme = {
   dark: true,
   colors: {
     primary: '#4C9AFF', // Lighter blue for dark mode accessibility
@@ -142,6 +173,8 @@ export const darkTheme = {
     successBackground: '#006644',
     card: palette.darkSurface,
     notification: palette.error,
+    glass: 'rgba(21, 23, 24, 0.7)',
+    glassBorder: 'rgba(255, 255, 255, 0.1)',
   },
   spacing,
   shadows,
@@ -155,7 +188,7 @@ export const darkTheme = {
   },
 };
 
-export const premiumTheme = {
+export const premiumTheme: Theme = {
   dark: true,
   colors: {
     primary: '#FFD700', // Gold for premium
@@ -174,6 +207,8 @@ export const premiumTheme = {
     successBackground: '#1B5E20',
     card: '#1E1E1E',
     notification: '#FFD700',
+    glass: 'rgba(26, 26, 26, 0.7)',
+    glassBorder: 'rgba(255, 215, 0, 0.1)',
   },
   spacing,
   shadows: {
@@ -187,7 +222,7 @@ export const premiumTheme = {
       ...(Platform.OS === 'web' && {
         boxShadow: '0px 4px 10px rgba(255, 215, 0, 0.3)',
       }),
-    },
+    } as any, // Cast to any to avoid complex shadow overlap issues
   },
   textVariants: {
     ...textVariants,
@@ -225,6 +260,8 @@ export const createCustomTheme = (customColors: {
       successBackground: '#E3FCEF',
       card: customColors.surface,
       notification: customColors.primary,
+      glass: customColors.surface + 'B3',
+      glassBorder: 'rgba(255, 255, 255, 0.1)',
     },
     spacing,
     shadows,
@@ -239,5 +276,4 @@ export const createCustomTheme = (customColors: {
   };
 };
 
-export type Theme = typeof lightTheme;
 export const theme = lightTheme; // Default export for backward compatibility during refactor

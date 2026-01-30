@@ -12,12 +12,27 @@
     "noData": "No data available yet",
     "trends": "Sales Trends"
   },
+  "admin": {
+    "adminConsole": "Admin Console",
+    "revenue": "Revenue",
+    "quickActions": "Quick Actions",
+    "manageProducts": "Manage Products",
+    "manageCategories": "Manage Categories",
+    "viewAllOrders": "View All Orders",
+    "globalAnalytics": "Global Analytics"
+  },
+  "announcements": {
+    "addAnnouncement": "Add Announcement",
+    "noAnnouncements": "No announcements yet",
+    "title": "Announcements"
+  },
   "cart": {
     "addToCart": "Add to Cart",
     "cart": "Shopping Cart",
     "checkout": "Proceed to Checkout",
     "continueShopping": "Continue Shopping",
     "emptyCart": "Your cart is empty",
+    "empty": "Your cart is empty",
     "itemAdded": "Item added to cart",
     "itemRemoved": "Item removed from cart",
     "quantity": "Quantity",
@@ -25,7 +40,12 @@
     "subtotal": "Subtotal",
     "title": "Cart",
     "total": "Total",
-    "updateQuantity": "Update Quantity"
+    "updateQuantity": "Update Quantity",
+    "shoppingCart": "Shopping Cart",
+    "cartSummary": "Cart Summary",
+    "vouchers": "Vouchers",
+    "applyVoucher": "Apply Voucher",
+    "shop_now": "Shop Now"
   },
   "catalog": {
     "addNewProduct": "Add New Product",
@@ -42,8 +62,31 @@
     "priceRange": "Price Range",
     "searchProducts": "Search products...",
     "sortBy": "Sort By",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price ↑",
+    "sortPriceDesc": "Price ↓",
     "title": "Catalog",
-    "viewProduct": "View Product"
+    "viewProduct": "View Product",
+    "list": "Product List",
+    "detail": "Product Detail",
+    "search": "Search Catalog"
+  },
+  "categories": {
+    "title": "Categories",
+    "add": "Add Category",
+    "edit": "Edit Category",
+    "delete": "Delete Category",
+    "search": "Search Categories",
+    "list": "Category List",
+    "name": "Category Name",
+    "description": "Category Description",
+    "parent": "Parent Category",
+    "noCategories": "No categories found"
+  },
+  "chat": {
+    "noMessages": "No messages yet",
+    "title": "Chat",
+    "typeMessage": "Type a message..."
   },
   "chatBot": {
     "greeting": "Hello {{name}}! I am your shopping assistant. How can I help you today?",
@@ -56,7 +99,10 @@
     "fallback": "I'm not sure about that. Try asking 'Show my cart' or 'What's on sale?'.",
     "howCanIHelp": "How can I help you today?",
     "helpDetails": "I can help you with:\\n• Browsing the **Product Catalog**\\n• Managing your **Shopping Cart**\\n• Tracking your **Orders**\\n• Finding **Deals and Promotions**",
-    "responseCaVa": "I'm doing great, thank you for asking! How can I assist you?"
+    "responseCaVa": "I'm doing great, thank you for asking! How can I assist you?",
+    "chat": "Chat Assistant",
+    "typing": "Assistant is typing...",
+    "sendMessage": "Send message"
   },
   "checkout": {
     "billingAddress": "Billing Address",
@@ -71,20 +117,37 @@
     "title": "Checkout",
     "thankYou": "Thank you for your order!"
   },
+  "dashboard": {
+    "hi": "Hi",
+    "goodMorning": "Good morning",
+    "goodAfternoon": "Good afternoon",
+    "goodEvening": "Good evening",
+    "personalizedGreeting": "Your personalized shopping dashboard",
+    "activeOrderStatus": "Active Order Status",
+    "trackOrder": "Track Order"
+  },
   "common": {
     "add": "Add",
-    "addToCart": "Add to Cart",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "searchPlaceholder": "Search...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "list": "List",
+    "detail": "Detail",
+    "update": "Update",
     "address": "Address",
     "all": "All",
     "apply": "Apply",
     "back": "Back",
-    "cancel": "Cancel",
-    "category": "Category",
     "close": "Close",
     "confirm": "Confirm",
     "confirmDelete": "Are you sure you want to delete this?",
     "count": "Count",
-    "delete": "Delete",
     "deleteFailed": "Failed to delete item",
     "deleteMessage": "Are you sure you want to delete this item?",
     "deleteSuccess": "Item deleted successfully",
@@ -92,7 +155,6 @@
     "description": "Description",
     "details": "Details",
     "done": "Done",
-    "edit": "Edit",
     "email": "Email",
     "error": "Error",
     "errorTitle": "Error",
@@ -116,10 +178,7 @@
     "products": "Products",
     "quantity": "Quantity",
     "required": "This field is required",
-    "save": "Save",
     "saveError": "Failed to save changes",
-    "search": "Search",
-    "searchPlaceholder": "Search...",
     "select": "Select",
     "selectCategory": "Select Category",
     "send": "Send",
@@ -133,10 +192,20 @@
     "unavailable": "Unavailable",
     "unitPrice": "Unit Price",
     "unknown": "Unknown",
-    "update": "Update",
     "yes": "Yes",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "assistant": "Assistant",
+    "category": "Category",
+    "loadFailed": "Failed to load data",
+    "logout": "Logout",
+    "publish": "Publish",
+    "searchPlaceholderGlobal": "Search across the app...",
+    "selectCountry": "Select Country",
+    "selectDate": "Select Date",
+    "unauthorized": "Unauthorized access",
+    "validate": "Validate",
+    "viewAll": "View All"
   },
   "home": {
     "appName": "ShopyShop",
@@ -151,7 +220,9 @@
     "quickActions": "Quick Actions",
     "browseProducts": "Browse Products",
     "viewOrders": "View Orders",
-    "manageInventory": "Manage Inventory"
+    "manageInventory": "Manage Inventory",
+    "featured": "Featured Products",
+    "welcome_desc": "Discover amazing products today."
   },
   "languages": {
     "ar": "العربية",
@@ -161,6 +232,12 @@
     "fr": "Français",
     "hi": "हिन्दी",
     "zh": "中文"
+  },
+  "leaves": {
+    "addedToCalendar": "Added to calendar",
+    "addToCalendar": "Add to Calendar",
+    "calendarError": "Could not access calendar",
+    "calendarPermissionRequired": "Calendar permission is required"
   },
   "login": {
     "admin": "Admin",
@@ -183,7 +260,8 @@
     "stockManager": "Stock Manager",
     "customer": "Customer",
     "user": "User",
-    "welcomeBack": "Welcome Back"
+    "welcomeBack": "Welcome Back",
+    "tipTitle": "Demo Credentials"
   },
   "navigation": {
     "analytics": "Analytics",
@@ -199,7 +277,8 @@
     "stockManagement": "Stock Management",
     "wishlist": "Wishlist",
     "categories": "Categories",
-    "chatBot": "Assistant"
+    "chatBot": "Assistant",
+    "chat": "Chat"
   },
   "notifications": {
     "markAllAsRead": "Mark all as read",
@@ -210,7 +289,10 @@
     "stockAlert": "Product back in stock",
     "title": "Notifications",
     "welcomeMessage": "Welcome to ShopyShop! Start browsing our amazing products.",
-    "welcomeTitle": "Welcome to ShopyShop!"
+    "welcomeTitle": "Welcome to ShopyShop!",
+    "broadcastTitle": "Broadcast",
+    "sent": "Sent",
+    "target": "Target"
   },
   "orders": {
     "orderDetails": "Order Details",
@@ -231,7 +313,26 @@
     "cancelled": "Cancelled",
     "shippingInfo": "Shipping Information",
     "estimatedDelivery": "Estimated Delivery",
-    "items": "Items"
+    "items": "Items",
+    "list": "Order List",
+    "detail": "Order Detail",
+    "search": "Search Orders",
+    "add": "New Order"
+  },
+  "inventory": {
+    "inventoryControl": "Inventory Control",
+    "lowStockAlerts": "Low Stock Alerts",
+    "immediateAttention": "Items requiring immediate attention",
+    "totalUnits": "Total Units",
+    "recentMovements": "Recent Movements",
+    "warehouseOps": "Warehouse Ops",
+    "fullInventory": "Full Inventory",
+    "receiveStock": "Receive Stock",
+    "pickAndPack": "Pick & Pack"
+  },
+  "payroll": {
+    "currency": "Currency",
+    "fillRequired": "Please fill all required fields"
   },
   "products": {
     "addProduct": "Add Product",
@@ -261,7 +362,11 @@
     "variants": "Variants",
     "reviews": "Reviews",
     "rating": "Rating",
-    "specifications": "Specifications"
+    "specifications": "Specifications",
+    "list": "Product List",
+    "detail": "Product Detail",
+    "search": "Search Products",
+    "add": "Add Product"
   },
   "profile": {
     "title": "Profile",
@@ -285,7 +390,42 @@
     "city": "City",
     "state": "State/Province",
     "zipCode": "Zip/Postal Code",
-    "country": "Country"
+    "country": "Country",
+    "security": "Security",
+    "billing": "Billing",
+    "contact": "Contact",
+    "edit": "Edit Profile",
+    "language": "Language",
+    "languageChangeError": "Could not change language",
+    "logoutError": "Error logging out",
+    "restartRequired": "Restart Required",
+    "restartRequiredMessage": "Please restart the app to apply changes.",
+    "updatedSuccessfully": "Profile updated successfully"
+  },
+  "roles": {
+    "admin": "Admin",
+    "stockManager": "Stock Manager",
+    "customer": "Customer",
+    "user": "User",
+    "title": "Roles",
+    "anonyme": "Guest"
+  },
+  "search": {
+    "noResultsFor": "No results found for"
+  },
+  "sections": {
+    "dashboard": "Dashboard",
+    "statistics": "Statistics",
+    "recentActivity": "Recent Activity",
+    "quickLinks": "Quick Links",
+    "inventory": "Inventory",
+    "sales": "Sales",
+    "customers": "Customers",
+    "account": "Account",
+    "communication": "Communication",
+    "management": "Management",
+    "personal": "Personal",
+    "shop": "Shop"
   },
   "settings": {
     "title": "Settings",
@@ -308,7 +448,19 @@
     "about": "About",
     "version": "Version",
     "termsOfService": "Terms of Service",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "backgroundColor": "Background Color",
+    "customizeColors": "Customize Colors",
+    "customizeMenu": "Customize Menu",
+    "customizeMenuDesc": "Manage your sidebar links",
+    "personal": "Personal Settings",
+    "primaryColor": "Primary Color",
+    "secondaryColor": "Secondary Color",
+    "surfaceColor": "Surface Color",
+    "themeCustom": "Custom",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "themePremium": "Premium"
   },
   "signUp": {
     "title": "Create Account",
@@ -328,7 +480,8 @@
     "errorEmptyPassword": "Password is required",
     "errorWeakPassword": "Password must be at least 6 characters",
     "errorTitle": "Registration Error",
-    "errorRegistrationFailed": "Could not create account"
+    "errorRegistrationFailed": "Could not create account",
+    "errorEmptyFields": "Please fill all fields"
   },
   "stock": {
     "stockManagement": "Stock Management",
@@ -343,7 +496,11 @@
     "currentStock": "Current Stock",
     "availableStock": "Available Stock",
     "reservedStock": "Reserved Stock",
-    "title": "Inventory"
+    "title": "Inventory",
+    "list": "Inventory List",
+    "detail": "Stock Detail",
+    "search": "Search Inventory",
+    "add": "Add Stock"
   },
   "wishlist": {
     "addToWishlist": "Add to Wishlist",
@@ -353,7 +510,11 @@
     "emptyWishlist": "Your wishlist is empty",
     "moveToCart": "Move to Cart",
     "title": "Wishlist",
-    "productNotAvailable": "Product not available"
+    "productNotAvailable": "Product not available",
+    "list": "Wishlist Items",
+    "detail": "Wishlist Detail",
+    "search": "Search Wishlist",
+    "add": "Add to Wishlist"
   },
   "reviews": {
     "writeReview": "Write a Review",
@@ -411,5 +572,8 @@
   "offline": {
     "limitedFunctionality": "Some features may be unavailable",
     "noConnection": "No Internet Connection"
-  }
+  },
+  "session_expired": "Session expired. Please log in again.",
+  "T": "T",
+  "window": "Window"
 }

@@ -140,3 +140,13 @@ export interface Currency {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface InventoryLog {
+  id: string;
+  productId: string;
+  productName: string;
+  change: number; // + or -
+  reason: string;
+  performedBy: string; // userId
+  createdAt: string;
+}

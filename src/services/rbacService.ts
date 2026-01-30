@@ -28,6 +28,7 @@ export enum Permission {
   MANAGE_SETTINGS = 'manage_settings',
   MANAGE_STOCK = 'manage_stock',
   MANAGE_USERS = 'manage_users',
+  MANAGE_CURRENCIES = 'manage_currencies',
 }
 
 const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
@@ -44,6 +45,7 @@ const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permission.MANAGE_SETTINGS,
     Permission.MANAGE_STOCK,
     Permission.MANAGE_USERS,
+    Permission.MANAGE_CURRENCIES,
   ],
   [Role.GESTIONNAIRE_DE_STOCK]: [
     Permission.VIEW_CATALOG,

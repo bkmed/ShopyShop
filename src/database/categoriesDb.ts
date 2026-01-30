@@ -12,6 +12,10 @@ export const categoriesDb = {
     return selectAllCategories(store.getState());
   },
 
+  getById: async (id: string): Promise<Category | null> => {
+    return selectAllCategories(store.getState()).find(c => c.id === id) || null;
+  },
+
   add: async (
     category: Omit<Category, 'id' | 'createdAt' | 'updatedAt'>,
   ): Promise<string> => {

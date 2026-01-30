@@ -22,6 +22,7 @@ import notificationsReducer from './slices/notificationsSlice';
 import messagesReducer from './slices/messagesSlice';
 import currenciesReducer from './slices/currenciesSlice';
 import analyticsReducer from './slices/analyticsSlice';
+import wishlistReducer from './slices/wishlistSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   messages: messagesReducer,
   currencies: currenciesReducer,
   analytics: analyticsReducer,
+  wishlist: wishlistReducer,
 });
 
 const persistConfig = {
@@ -50,6 +52,7 @@ const persistConfig = {
     'messages',
     'currencies',
     'analytics',
+    'wishlist',
   ], // add slices here to persist
 };
 

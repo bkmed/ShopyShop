@@ -38,6 +38,23 @@ import { CompanyChatScreen } from '../screens/chat/CompanyChatScreen';
 import { CatalogScreen } from '../screens/shop/CatalogScreen';
 import { CartScreen } from '../screens/shop/CartScreen';
 import { LanguageSelectionScreen } from '../screens/settings/LanguageSelectionScreen';
+import { ProductListScreen } from '../screens/products/ProductListScreen';
+import { ProductDetailScreen } from '../screens/products/ProductDetailScreen';
+import { ProductAddScreen } from '../screens/products/ProductAddScreen';
+import { CategoryListScreen } from '../screens/categories/CategoryListScreen';
+import { CategoryDetailScreen } from '../screens/categories/CategoryDetailScreen';
+import { CategoryAddScreen } from '../screens/categories/CategoryAddScreen';
+import { WishlistListScreen } from '../screens/wishlist/WishlistListScreen';
+import { OrderListScreen } from '../screens/orders/OrderListScreen';
+import { OrderDetailScreen } from '../screens/orders/OrderDetailScreen';
+import { OrderAddScreen } from '../screens/orders/OrderAddScreen';
+import { InventoryListScreen } from '../screens/inventory/InventoryListScreen';
+import { InventoryDetailScreen } from '../screens/inventory/InventoryDetailScreen';
+import { InventoryAddScreen } from '../screens/inventory/InventoryAddScreen';
+import { AdminDashboardScreen } from '../screens/dashboards/AdminDashboardScreen';
+import { StockManagerDashboardScreen } from '../screens/dashboards/StockManagerDashboardScreen';
+import { UserDashboardScreen } from '../screens/dashboards/UserDashboardScreen';
+import { CurrencyManagerScreen } from '../screens/settings/CurrencyManagerScreen';
 import { NotificationBell } from '../components/common/NotificationBell';
 import { SearchOverlay } from '../components/common/SearchOverlay';
 import { ChatBot } from '../components/common/ChatBot';
@@ -170,6 +187,148 @@ const CartStack = () => {
   );
 };
 
+const ProductsStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="ProductList"
+        component={ProductListScreen}
+        options={{ title: t('products.title') }}
+      />
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetailScreen}
+        options={{ title: t('products.detail') }}
+      />
+      <Stack.Screen
+        name="ProductAdd"
+        component={ProductAddScreen}
+        options={{ title: t('products.add') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const CategoriesStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="CategoryList"
+        component={CategoryListScreen}
+        options={{ title: t('categories.title') }}
+      />
+      <Stack.Screen
+        name="CategoryDetail"
+        component={CategoryDetailScreen}
+        options={{ title: t('categories.detail') }}
+      />
+      <Stack.Screen
+        name="CategoryAdd"
+        component={CategoryAddScreen}
+        options={{ title: t('categories.add') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const WishlistStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="WishlistList"
+        component={WishlistListScreen}
+        options={{ title: t('navigation.wishlist') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const OrdersStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="OrderList"
+        component={OrderListScreen}
+        options={{ title: t('navigation.orders') }}
+      />
+      <Stack.Screen
+        name="OrderDetail"
+        component={OrderDetailScreen}
+        options={{ title: t('orders.detail') || 'Order Detail' }}
+      />
+      <Stack.Screen
+        name="OrderAdd"
+        component={OrderAddScreen}
+        options={{ title: t('orders.add') || 'Add Order' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const InventoryStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="InventoryList"
+        component={InventoryListScreen}
+        options={{ title: t('navigation.inventory') }}
+      />
+      <Stack.Screen
+        name="InventoryDetail"
+        component={InventoryDetailScreen}
+        options={{ title: t('inventory.detail') || 'Inventory Detail' }}
+      />
+      <Stack.Screen
+        name="InventoryAdd"
+        component={InventoryAddScreen}
+        options={{ title: t('inventory.adjust') || 'Adjust Stock' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+// Stacks are defined below
+
 // ======= Tabs (Mobile) =======
 const Tab = createBottomTabNavigator();
 
@@ -241,12 +400,12 @@ const useNavigationSections = () => {
           },
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
         ],
       },
@@ -427,9 +586,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -457,6 +616,38 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   );
 };
 
+const DashboardsStack = () => {
+  const { theme } = useTheme();
+  const { user } = useAuth();
+
+  const getDashboard = () => {
+    switch (user?.role) {
+      case 'admin':
+        return AdminDashboardScreen;
+      case 'gestionnaire_de_stock':
+        return StockManagerDashboardScreen;
+      default:
+        return UserDashboardScreen;
+    }
+  };
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="DashboardRoot"
+        component={getDashboard()}
+        options={{ title: 'Dashboard' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const DrawerNavigator = () => {
   const { user } = useAuth();
 
@@ -465,22 +656,18 @@ const DrawerNavigator = () => {
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{ headerShown: false }}
     >
-      <Drawer.Screen name="Main" component={TabNavigator} />
-
-      {rbacService.hasPermission(user, Permission.VIEW_ANALYTICS) && (
-        <Drawer.Screen name="Analytics" component={AnalyticsStack} />
-      )}
-
-      {rbacService.hasPermission(user, Permission.MANAGE_STOCK) && (
-        <Drawer.Screen name="Inventory" component={HomeStack} />
-      )}
-
-      {/* Placeholder screens for ecommerce */}
-      <Drawer.Screen name="Catalog" component={HomeStack} />
-      <Drawer.Screen name="Cart" component={HomeStack} />
-      <Drawer.Screen name="Orders" component={HomeStack} />
-      <Drawer.Screen name="Wishlist" component={HomeStack} />
+      <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="Dashboard" component={DashboardsStack} />
+      <Drawer.Screen name="Catalog" component={CatalogStack} />
+      <Drawer.Screen name="Cart" component={CartStack} />
+      <Drawer.Screen name="Orders" component={OrdersStack} />
+      <Drawer.Screen name="Wishlist" component={WishlistStack} />
+      <Drawer.Screen name="Products" component={ProductsStack} />
+      <Drawer.Screen name="Categories" component={CategoriesStack} />
       <Drawer.Screen name="Settings" component={SettingsStack} />
+      {rbacService.hasPermission(user, Permission.MANAGE_CURRENCIES) && (
+        <Drawer.Screen name="Currencies" component={SettingsStack} />
+      )}
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Chat" component={CompanyChatScreen} />
       <Drawer.Screen name="Assistant">{() => <ChatBot />}</Drawer.Screen>
@@ -549,20 +736,23 @@ const WebNavigator = () => {
       contextValue.setActiveTab('Home', 'Announcements');
     }
   };
+
   const getActiveComponent = () => {
     switch (activeTab) {
       case 'Home':
         return <HomeStack />;
+      case 'Dashboard':
+        return <DashboardsStack />;
       case 'Catalog':
-        return <HomeStack />; // Placeholder
+        return <CatalogStack />;
       case 'Categories':
-        return <HomeStack />; // Placeholder
+        return <CategoriesStack />;
       case 'Cart':
-        return <HomeStack />; // Placeholder
+        return <CartStack />;
       case 'Orders':
-        return <HomeStack />; // Placeholder
+        return <OrdersStack />;
       case 'Wishlist':
-        return <HomeStack />; // Placeholder
+        return <WishlistStack />;
       case 'Analytics':
         if (!rbacService.hasPermission(user, Permission.VIEW_ANALYTICS))
           return <HomeStack />;
@@ -570,23 +760,17 @@ const WebNavigator = () => {
       case 'Inventory':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <HomeStack />; // Placeholder
+        return <InventoryStack />;
       case 'Products':
         if (!rbacService.hasPermission(user, Permission.MANAGE_PRODUCTS))
           return <HomeStack />;
-        return <HomeStack />; // Placeholder
-      case 'ManageOrders':
-        if (!rbacService.hasPermission(user, Permission.MANAGE_ORDERS))
-          return <HomeStack />;
-        return <HomeStack />; // Placeholder
+        return <ProductsStack />;
       case 'Chat':
         return <CompanyChatScreen />;
       case 'Assistant':
         return <ChatBot />;
-      case 'Language':
-        return <LanguageSelectionScreen />;
       case 'Settings':
-        return <PersonalSettingsScreen />;
+        return <SettingsStack />;
       case 'Profile':
         return <ProfileStack />;
       default:
@@ -598,7 +782,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -612,7 +796,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (
@@ -1075,15 +1259,19 @@ export const AppNavigator = () => {
 const webStyles = StyleSheet.create({
   sidebar: {
     width: 260,
-
     height: '100vh' as any,
-
     position: 'sticky' as any,
     top: 0,
     paddingVertical: 24,
     ...Platform.select({
       web: {
-        boxShadow: '4px 0 10px rgba(0,0,0,0.05)',
+        background: theme.colors.glass,
+        backdropFilter: 'blur(16px)',
+        borderRight: `1px solid ${theme.colors.glassBorder}`,
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+      },
+      default: {
+        backgroundColor: theme.colors.surface,
       },
     }),
   },
@@ -1141,6 +1329,19 @@ const webStyles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 4,
     gap: 16,
+    borderRadius: 12,
+    marginHorizontal: 16,
+  },
+  activeNavItem: {
+    backgroundColor: 'rgba(45, 91, 255, 0.1)',
+  },
+  activeNavIndicator: {
+    width: 4,
+    height: 16,
+    borderRadius: 2,
+    backgroundColor: '#2D5BFF',
+    position: 'absolute',
+    left: 8,
   },
   navIcon: {
     fontSize: 20,

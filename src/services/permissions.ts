@@ -9,59 +9,11 @@ import {
 import notifee, { AuthorizationStatus } from '@notifee/react-native';
 import { notificationService } from './notificationService';
 
-// Declare web-only globals
+// Declare web-only globals only if they are missing or need specific typing
 declare global {
-  interface Navigator {
-    permissions?: {
-      query(permissionDesc: {
-        name: PermissionName;
-      }): Promise<{ state: PermissionState }>;
-    };
-    mediaDevices?: {
-      getUserMedia(constraints: {
-        video?: boolean;
-        audio?: boolean;
-      }): Promise<MediaStream>;
-    };
-  }
-  interface MediaStream {
-    getTracks(): Array<{ stop(): void }>;
-  }
   interface Window {
-    Notification?: {
-      permission: 'granted' | 'denied' | 'default';
-      requestPermission(): Promise<'granted' | 'denied' | 'default'>;
-    };
-    localStorage: {
-      getItem(key: string): string | null;
-      setItem(key: string, value: string): void;
-      removeItem(key: string): void;
-    };
+    Notification?: any;
   }
-  const Notification: {
-    permission: 'granted' | 'denied' | 'default';
-    requestPermission(): Promise<'granted' | 'denied' | 'default'>;
-  };
-  const localStorage: {
-    getItem(key: string): string | null;
-    setItem(key: string, value: string): void;
-    removeItem(key: string): void;
-  };
-  type PermissionName =
-    | 'camera'
-    | 'microphone'
-    | 'geolocation'
-    | 'notifications'
-    | 'persistent-storage'
-    | 'midi'
-    | 'push'
-    | 'background-fetch'
-    | 'periodic-background-sync'
-    | 'accelerometer'
-    | 'gyroscope'
-    | 'magnetometer'
-    | 'ambient-light-sensor';
-  type PermissionState = 'granted' | 'denied' | 'prompt';
 }
 
 export type PermissionStatus =
@@ -79,18 +31,18 @@ class PermissionsService {
     if (Platform.OS === 'web') {
       const nav =
         typeof window !== 'undefined'
-          ? (window as unknown as { navigator: Navigator }).navigator
+          ? (window as unknown as { navigator: any }).navigator
           : null;
       if (nav?.permissions?.query) {
         try {
           const result = await nav.permissions.query({ name: 'camera' });
           return this.mapWebPermissionState(result.state);
         } catch {
-          if (nav.mediaDevices?.getUserMedia) {
+          if (nav.mediaDevices && typeof nav.mediaDevices.getUserMedia === 'function') {
             return 'denied';
           }
         }
-      } else if (nav?.mediaDevices?.getUserMedia) {
+      } else if (nav?.mediaDevices && typeof nav.mediaDevices.getUserMedia === 'function') {
         return 'denied';
       }
       return 'unavailable';

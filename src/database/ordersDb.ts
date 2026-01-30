@@ -16,6 +16,10 @@ export const ordersDb = {
     return selectOrdersByUserId(userId)(store.getState());
   },
 
+  getById: async (id: string): Promise<Order | null> => {
+    return selectAllOrders(store.getState()).find(o => o.id === id) || null;
+  },
+
   add: async (
     order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>,
   ): Promise<string> => {

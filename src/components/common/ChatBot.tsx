@@ -54,8 +54,7 @@ export const ChatBot = () => {
         id: '1',
         text:
           t('chatBot.greeting', { name: user?.name || 'Shopper' }) ||
-          `Hello ${
-            user?.name || 'Shopper'
+          `Hello ${user?.name || 'Shopper'
           }! How can I help you with your shopping today?`,
         sender: 'bot',
         timestamp: new Date(),
@@ -117,22 +116,34 @@ export const ChatBot = () => {
       };
     }
 
-    if (
-      input.includes('catalog') ||
-      input.includes('product') ||
-      input.includes('shop')
-    ) {
+    if (input.includes('catalog') || input.includes('product') || input.includes('shop') || input.includes('browse')) {
+      if (input.includes('cheap') || input.includes('low price') || input.includes('budget')) {
+        return {
+          text: 'Looking for a deal? I can show you our most affordable products!',
+          action: { label: 'View Budget Deals', screen: 'Catalog', subScreen: 'lowPrice' },
+        };
+      }
       return {
         text: 'Explore our latest products in the catalog!',
         action: { label: 'Browse Shop', screen: 'Catalog' },
       };
     }
 
-    if (
-      input.includes('profile') ||
-      input.includes('account') ||
-      input.includes('compte')
-    ) {
+    if (input.includes('promo') || input.includes('sale') || input.includes('discount') || input.includes('off')) {
+      return {
+        text: '🎉 Great news! Use code SHOPY20 for 20% off your next order. Check out our seasonal sale items!',
+        action: { label: 'View Sales', screen: 'Catalog', subScreen: 'sale' },
+      };
+    }
+
+    if (input.includes('currency') || input.includes('devise') || input.includes('money')) {
+      return {
+        text: 'You can change your preferred currency in the settings page.',
+        action: { label: 'Currency Settings', screen: 'Settings', subScreen: 'Currencies' },
+      };
+    }
+
+    if (input.includes('profile') || input.includes('account') || input.includes('compte')) {
       return {
         text: 'You can manage your account and settings in your profile.',
         action: { label: 'Go to Profile', screen: 'Profile' },
@@ -140,7 +151,7 @@ export const ChatBot = () => {
     }
 
     return {
-      text: "I'm ShopyShop's virtual assistant. I can help you find products, check your orders, or manage your cart!",
+      text: t('chatBot.placeholder') || "I'm ShopyShop's virtual assistant. I can help you find products, check your orders, or find the best deals!",
     };
   };
 
@@ -169,10 +180,10 @@ export const ChatBot = () => {
           item.sender === 'user'
             ? { backgroundColor: theme.colors.primary }
             : {
-                backgroundColor: theme.colors.surface,
-                borderColor: theme.colors.border,
-                borderWidth: 1,
-              },
+              backgroundColor: theme.colors.surface,
+              borderColor: theme.colors.border,
+              borderWidth: 1,
+            },
         ]}
       >
         <Text
