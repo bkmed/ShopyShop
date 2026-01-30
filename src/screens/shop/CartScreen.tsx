@@ -5,7 +5,6 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Image,
   ActivityIndicator,
   Alert,
   Platform,
@@ -14,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
+// import { RootState } from '../../store';
 import {
   removeFromCart,
   updateQuantity,
@@ -44,10 +43,10 @@ export const CartScreen = () => {
       try {
         setLoading(true);
         const extendedItems = await Promise.all(
-          cartItems.map(async (item) => {
+          cartItems.map(async item => {
             const product = await productsDb.getById(item.productId);
             return { ...item, product };
-          })
+          }),
         );
         setItems(extendedItems);
       } catch (error) {
@@ -77,32 +76,46 @@ export const CartScreen = () => {
   const renderItem = ({ item }: { item: ExtendedCartItem }) => {
     if (!item.product) return null;
     return (
-      <View style={[styles.cartItem, { backgroundColor: theme.colors.surface }]}>
+      <View
+        style={[styles.cartItem, { backgroundColor: theme.colors.surface }]}
+      >
         <View style={styles.imagePlaceholder}>
           <Text style={{ fontSize: 32 }}>🛍️</Text>
         </View>
         <View style={{ flex: 1, paddingHorizontal: 16 }}>
-          <Text style={[styles.name, { color: theme.colors.text }]}>{item.product.name}</Text>
+          <Text style={[styles.name, { color: theme.colors.text }]}>
+            {item.product.name}
+          </Text>
           <Text style={[styles.price, { color: theme.colors.primary }]}>
             {item.product.currency} {item.product.price}
           </Text>
           <View style={styles.qtyContainer}>
             <TouchableOpacity
               onPress={() => handleUpdateQty(item.productId, item.quantity - 1)}
-              style={[styles.qtyBtn, { borderColor: theme.colors.border, borderWidth: 1 }]}
+              style={[
+                styles.qtyBtn,
+                { borderColor: theme.colors.border, borderWidth: 1 },
+              ]}
             >
               <Text style={{ color: theme.colors.text }}>-</Text>
             </TouchableOpacity>
-            <Text style={[styles.qtyText, { color: theme.colors.text }]}>{item.quantity}</Text>
+            <Text style={[styles.qtyText, { color: theme.colors.text }]}>
+              {item.quantity}
+            </Text>
             <TouchableOpacity
               onPress={() => handleUpdateQty(item.productId, item.quantity + 1)}
-              style={[styles.qtyBtn, { borderColor: theme.colors.border, borderWidth: 1 }]}
+              style={[
+                styles.qtyBtn,
+                { borderColor: theme.colors.border, borderWidth: 1 },
+              ]}
             >
               <Text style={{ color: theme.colors.text }}>+</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity onPress={() => dispatch(removeFromCart(item.productId))}>
+        <TouchableOpacity
+          onPress={() => dispatch(removeFromCart(item.productId))}
+        >
           <Text style={{ color: '#FF4444', fontSize: 20 }}>🗑️</Text>
         </TouchableOpacity>
       </View>
@@ -111,19 +124,27 @@ export const CartScreen = () => {
 
   if (loading && items.length === 0) {
     return (
-      <View style={[styles.centered, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.centered, { backgroundColor: theme.colors.background }]}
+      >
         <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>{t('navigation.cart')}</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>
+          {t('navigation.cart')}
+        </Text>
         {items.length > 0 && (
           <TouchableOpacity onPress={() => dispatch(clearCart())}>
-            <Text style={{ color: '#FF4444' }}>{t('cart.clear') || 'Clear'}</Text>
+            <Text style={{ color: '#FF4444' }}>
+              {t('cart.clear') || 'Clear'}
+            </Text>
           </TouchableOpacity>
         )}
       </View>
@@ -138,7 +159,9 @@ export const CartScreen = () => {
             style={[styles.shopBtn, { backgroundColor: theme.colors.primary }]}
             onPress={() => navigation.navigate('CatalogTab')}
           >
-            <Text style={styles.shopBtnText}>{t('cart.shop_now') || 'Shop Now'}</Text>
+            <Text style={styles.shopBtnText}>
+              {t('cart.shop_now') || 'Shop Now'}
+            </Text>
           </TouchableOpacity>
         </View>
       ) : (
@@ -157,20 +180,32 @@ export const CartScreen = () => {
                 borderTopColor: theme.colors.glassBorder,
                 borderTopWidth: 1,
               },
-              Platform.OS === 'web' && { backdropFilter: 'blur(16px)' } as any
+              Platform.OS === 'web' &&
+                ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
-              <Text style={[styles.totalLabel, { color: theme.colors.text }]}>{t('cart.total') || 'Total'}</Text>
-              <Text style={[styles.totalAmount, { color: theme.colors.primary }]}>
+              <Text style={[styles.totalLabel, { color: theme.colors.text }]}>
+                {t('cart.total') || 'Total'}
+              </Text>
+              <Text
+                style={[styles.totalAmount, { color: theme.colors.primary }]}
+              >
                 {items[0]?.product?.currency} {total.toFixed(2)}
               </Text>
             </View>
             <TouchableOpacity
-              style={[styles.checkoutBtn, { backgroundColor: theme.colors.primary }]}
-              onPress={() => Alert.alert('Checkout', 'Feature under construction')}
+              style={[
+                styles.checkoutBtn,
+                { backgroundColor: theme.colors.primary },
+              ]}
+              onPress={() =>
+                Alert.alert('Checkout', 'Feature under construction')
+              }
             >
-              <Text style={styles.checkoutBtnText}>{t('cart.checkout') || 'Checkout'}</Text>
+              <Text style={styles.checkoutBtnText}>
+                {t('cart.checkout') || 'Checkout'}
+              </Text>
             </TouchableOpacity>
           </View>
         </>
@@ -179,136 +214,137 @@ export const CartScreen = () => {
   );
 };
 
-const createStyles = (theme: any) => StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 24,
-    marginTop: 10,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '800',
-  },
-  listContent: {
-    padding: 24,
-    paddingBottom: 160,
-  },
-  cartItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 20,
-    borderRadius: 24,
-    marginBottom: 16,
-    ...theme.shadows.small,
-  },
-  imagePlaceholder: {
-    width: 90,
-    height: 90,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0,0,0,0.03)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  name: {
-    fontSize: 17,
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-  price: {
-    fontSize: 15,
-    fontWeight: '800',
-    marginBottom: 12,
-  },
-  qtyContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-  },
-  qtyBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.02)',
-  },
-  qtyText: {
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    padding: 24,
-    paddingBottom: Platform.OS === 'ios' ? 44 : 24,
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    ...Platform.select({
-      web: {
-        boxShadow: '0 -10px 40px rgba(0,0,0,0.05)',
-      },
-      default: {
-        elevation: 20,
-      }
-    }),
-  },
-  totalRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  totalLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  totalAmount: {
-    fontSize: 28,
-    fontWeight: '900',
-  },
-  checkoutBtn: {
-    height: 64,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...theme.shadows.medium,
-  },
-  checkoutBtnText: {
-    color: '#FFF',
-    fontSize: 18,
-    fontWeight: '800',
-    letterSpacing: 0.5,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  emptyText: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginTop: 24,
-    marginBottom: 32,
-    textAlign: 'center',
-  },
-  shopBtn: {
-    paddingHorizontal: 48,
-    paddingVertical: 18,
-    borderRadius: 20,
-    ...theme.shadows.small,
-  },
-  shopBtnText: {
-    color: '#FFF',
-    fontWeight: '800',
-    fontSize: 16,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 24,
+      marginTop: 10,
+    },
+    title: {
+      fontSize: 32,
+      fontWeight: '800',
+    },
+    listContent: {
+      padding: 24,
+      paddingBottom: 160,
+    },
+    cartItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 20,
+      borderRadius: 24,
+      marginBottom: 16,
+      ...theme.shadows.small,
+    },
+    imagePlaceholder: {
+      width: 90,
+      height: 90,
+      borderRadius: 20,
+      backgroundColor: 'rgba(0,0,0,0.03)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    name: {
+      fontSize: 17,
+      fontWeight: '700',
+      marginBottom: 6,
+    },
+    price: {
+      fontSize: 15,
+      fontWeight: '800',
+      marginBottom: 12,
+    },
+    qtyContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 16,
+    },
+    qtyBtn: {
+      width: 32,
+      height: 32,
+      borderRadius: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.02)',
+    },
+    qtyText: {
+      fontSize: 16,
+      fontWeight: '700',
+    },
+    footer: {
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      padding: 24,
+      paddingBottom: Platform.OS === 'ios' ? 44 : 24,
+      borderTopLeftRadius: 32,
+      borderTopRightRadius: 32,
+      ...Platform.select({
+        web: {
+          boxShadow: '0 -10px 40px rgba(0,0,0,0.05)',
+        },
+        default: {
+          elevation: 20,
+        },
+      }),
+    },
+    totalRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 24,
+    },
+    totalLabel: {
+      fontSize: 16,
+      fontWeight: '600',
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+    },
+    totalAmount: {
+      fontSize: 28,
+      fontWeight: '900',
+    },
+    checkoutBtn: {
+      height: 64,
+      borderRadius: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...theme.shadows.medium,
+    },
+    checkoutBtnText: {
+      color: '#FFF',
+      fontSize: 18,
+      fontWeight: '800',
+      letterSpacing: 0.5,
+    },
+    centered: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+    },
+    emptyText: {
+      fontSize: 20,
+      fontWeight: '600',
+      marginTop: 24,
+      marginBottom: 32,
+      textAlign: 'center',
+    },
+    shopBtn: {
+      paddingHorizontal: 48,
+      paddingVertical: 18,
+      borderRadius: 20,
+      ...theme.shadows.small,
+    },
+    shopBtnText: {
+      color: '#FFF',
+      fontWeight: '800',
+      fontSize: 16,
+    },
+  });

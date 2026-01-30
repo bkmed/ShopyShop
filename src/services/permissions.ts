@@ -38,11 +38,17 @@ class PermissionsService {
           const result = await nav.permissions.query({ name: 'camera' });
           return this.mapWebPermissionState(result.state);
         } catch {
-          if (nav.mediaDevices && typeof nav.mediaDevices.getUserMedia === 'function') {
+          if (
+            nav.mediaDevices &&
+            typeof nav.mediaDevices.getUserMedia === 'function'
+          ) {
             return 'denied';
           }
         }
-      } else if (nav?.mediaDevices && typeof nav.mediaDevices.getUserMedia === 'function') {
+      } else if (
+        nav?.mediaDevices &&
+        typeof nav.mediaDevices.getUserMedia === 'function'
+      ) {
         return 'denied';
       }
       return 'unavailable';

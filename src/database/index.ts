@@ -6,7 +6,7 @@ export { productsDb } from './productsDb';
 export { categoriesDb } from './categoriesDb';
 export { ordersDb } from './ordersDb';
 export { currenciesDb } from './currenciesDb';
-export { companySettingsDb } from './companySettingsDb';
+// export { companySettingsDb } from './companySettingsDb';
 
 // Export schemas
 export * from './schema';

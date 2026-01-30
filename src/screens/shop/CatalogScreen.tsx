@@ -29,8 +29,10 @@ export const CatalogScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 });
-  const [sortOrder, setSortOrder] = useState<'newest' | 'priceAsc' | 'priceDesc'>('newest');
+  const [priceRange] = useState({ min: 0, max: 10000 });
+  const [sortOrder, setSortOrder] = useState<
+    'newest' | 'priceAsc' | 'priceDesc'
+  >('newest');
   const filterAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -65,10 +67,14 @@ export const CatalogScreen = () => {
 
   const filteredProducts = products
     .filter(p => {
-      const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      const matchesSearch =
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory ? p.categoryId === selectedCategory : true;
-      const matchesPrice = p.price >= priceRange.min && p.price <= priceRange.max;
+      const matchesCategory = selectedCategory
+        ? p.categoryId === selectedCategory
+        : true;
+      const matchesPrice =
+        p.price >= priceRange.min && p.price <= priceRange.max;
       return matchesSearch && matchesCategory && matchesPrice;
     })
     .sort((a, b) => {
@@ -86,7 +92,10 @@ export const CatalogScreen = () => {
         <Text style={{ fontSize: 32 }}>🎁</Text>
       </View>
       <View style={styles.info}>
-        <Text style={[styles.name, { color: theme.colors.text }]} numberOfLines={1}>
+        <Text
+          style={[styles.name, { color: theme.colors.text }]}
+          numberOfLines={1}
+        >
           {item.name}
         </Text>
         <Text style={[styles.price, { color: theme.colors.primary }]}>
@@ -106,14 +115,21 @@ export const CatalogScreen = () => {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.text }]}>
           {t('navigation.catalog')}
         </Text>
       </View>
 
-      <View style={[styles.searchContainer, { backgroundColor: theme.colors.surface }]}>
+      <View
+        style={[
+          styles.searchContainer,
+          { backgroundColor: theme.colors.surface },
+        ]}
+      >
         <Text style={{ marginRight: 8 }}>🔍</Text>
         <TextInput
           style={[styles.searchInput, { color: theme.colors.text }]}
@@ -122,7 +138,10 @@ export const CatalogScreen = () => {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <TouchableOpacity onPress={() => setShowFilters(!showFilters)} style={styles.filterToggle}>
+        <TouchableOpacity
+          onPress={() => setShowFilters(!showFilters)}
+          style={styles.filterToggle}
+        >
           <Text style={{ fontSize: 18 }}>{showFilters ? '❌' : '⚙️'}</Text>
         </TouchableOpacity>
       </View>
@@ -140,10 +159,12 @@ export const CatalogScreen = () => {
             }),
             opacity: filterAnimation,
             overflow: 'hidden',
-          }
+          },
         ]}
       >
-        <Text style={[styles.filterLabel, { color: theme.colors.text }]}>Sort By</Text>
+        <Text style={[styles.filterLabel, { color: theme.colors.text }]}>
+          Sort By
+        </Text>
         <View style={styles.sortOptions}>
           {(['newest', 'priceAsc', 'priceDesc'] as const).map(option => (
             <TouchableOpacity
@@ -152,11 +173,24 @@ export const CatalogScreen = () => {
               style={[
                 styles.sortBtn,
                 { borderColor: theme.colors.border },
-                sortOrder === option && { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary }
+                sortOrder === option && {
+                  backgroundColor: theme.colors.primary,
+                  borderColor: theme.colors.primary,
+                },
               ]}
             >
-              <Text style={{ color: sortOrder === option ? '#FFF' : theme.colors.text, fontSize: 12, fontWeight: '600' }}>
-                {option === 'newest' ? 'Newest' : option === 'priceAsc' ? 'Price ↑' : 'Price ↓'}
+              <Text
+                style={{
+                  color: sortOrder === option ? '#FFF' : theme.colors.text,
+                  fontSize: 12,
+                  fontWeight: '600',
+                }}
+              >
+                {option === 'newest'
+                  ? 'Newest'
+                  : option === 'priceAsc'
+                  ? 'Price ↑'
+                  : 'Price ↓'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -164,15 +198,28 @@ export const CatalogScreen = () => {
       </Animated.View>
 
       <View style={styles.categoriesWrapper}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoryList}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoryList}
+        >
           <TouchableOpacity
             style={[
               styles.categoryChip,
-              { backgroundColor: !selectedCategory ? theme.colors.primary : theme.colors.surface }
+              {
+                backgroundColor: !selectedCategory
+                  ? theme.colors.primary
+                  : theme.colors.surface,
+              },
             ]}
             onPress={() => setSelectedCategory(null)}
           >
-            <Text style={{ color: !selectedCategory ? '#FFF' : theme.colors.text, fontWeight: 'bold' }}>
+            <Text
+              style={{
+                color: !selectedCategory ? '#FFF' : theme.colors.text,
+                fontWeight: 'bold',
+              }}
+            >
               {t('common.all') || 'All'}
             </Text>
           </TouchableOpacity>
@@ -181,11 +228,21 @@ export const CatalogScreen = () => {
               key={cat.id}
               style={[
                 styles.categoryChip,
-                { backgroundColor: selectedCategory === cat.id ? theme.colors.primary : theme.colors.surface }
+                {
+                  backgroundColor:
+                    selectedCategory === cat.id
+                      ? theme.colors.primary
+                      : theme.colors.surface,
+                },
               ]}
               onPress={() => setSelectedCategory(cat.id)}
             >
-              <Text style={{ color: selectedCategory === cat.id ? '#FFF' : theme.colors.text }}>
+              <Text
+                style={{
+                  color:
+                    selectedCategory === cat.id ? '#FFF' : theme.colors.text,
+                }}
+              >
                 {cat.name}
               </Text>
             </TouchableOpacity>
@@ -207,7 +264,9 @@ export const CatalogScreen = () => {
           columnWrapperStyle={styles.columnWrapper}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
-              <Text style={{ color: theme.colors.subText }}>{t('products.noProducts')}</Text>
+              <Text style={{ color: theme.colors.subText }}>
+                {t('products.noProducts')}
+              </Text>
             </View>
           }
         />

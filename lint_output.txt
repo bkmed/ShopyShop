@@ -1,0 +1,16 @@
+
+> shopyshop@0.0.1 lint
+> eslint .
+
+
+/Users/mohamedbenkhedher/Documents/GitHub/Starter/src/navigation/AppNavigator.tsx
+  333:7  error  'Tab' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mohamedbenkhedher/Documents/GitHub/Starter/src/screens/orders/OrderDetailScreen.tsx
+  10:10  error  'useNavigation' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mohamedbenkhedher/Documents/GitHub/Starter/src/screens/settings/CurrencyManagerScreen.tsx
+  50:18  error  '_error' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 3 problems (3 errors, 0 warnings)
+

@@ -16,7 +16,7 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import notifee, { EventType } from '@notifee/react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
@@ -54,7 +54,7 @@ import { InventoryAddScreen } from '../screens/inventory/InventoryAddScreen';
 import { AdminDashboardScreen } from '../screens/dashboards/AdminDashboardScreen';
 import { StockManagerDashboardScreen } from '../screens/dashboards/StockManagerDashboardScreen';
 import { UserDashboardScreen } from '../screens/dashboards/UserDashboardScreen';
-import { CurrencyManagerScreen } from '../screens/settings/CurrencyManagerScreen';
+// import { CurrencyManagerScreen } from '../screens/settings/CurrencyManagerScreen';
 import { NotificationBell } from '../components/common/NotificationBell';
 import { SearchOverlay } from '../components/common/SearchOverlay';
 import { ChatBot } from '../components/common/ChatBot';
@@ -330,8 +330,9 @@ const InventoryStack = () => {
 // Stacks are defined below
 
 // ======= Tabs (Mobile) =======
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
+/*
 const TabNavigator = () => (
   <Tab.Navigator screenOptions={{ headerShown: false }}>
     <Tab.Screen
@@ -361,6 +362,7 @@ const TabNavigator = () => (
     />
   </Tab.Navigator>
 );
+*/
 
 // ======= Drawer (Mobile) =======
 const Drawer = createDrawerNavigator();
@@ -400,12 +402,12 @@ const useNavigationSections = () => {
           },
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-              {
-                key: 'Analytics',
-                label: t('navigation.analytics'),
-                icon: '📊',
-              },
-            ]
+                {
+                  key: 'Analytics',
+                  label: t('navigation.analytics'),
+                  icon: '📊',
+                },
+              ]
             : []),
         ],
       },
@@ -586,9 +588,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                        borderWidth: 1,
-                        borderColor: theme.colors.primary,
-                      }),
+                          borderWidth: 1,
+                          borderColor: theme.colors.primary,
+                        }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -679,6 +681,7 @@ const DrawerNavigator = () => {
 const WebNavigator = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  const webStyles = getWebStyles(theme);
   const { user } = useAuth();
   const { width, height } = useWindowDimensions();
   const isMobile = width < 1045;
@@ -782,7 +785,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      { }
+      {}
       <View
         style={
           [
@@ -796,7 +799,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        { }
+        {}
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (
@@ -1256,160 +1259,161 @@ export const AppNavigator = () => {
 };
 
 // ======= Web Styles =======
-const webStyles = StyleSheet.create({
-  sidebar: {
-    width: 260,
-    height: '100vh' as any,
-    position: 'sticky' as any,
-    top: 0,
-    paddingVertical: 24,
-    ...Platform.select({
-      web: {
-        background: theme.colors.glass,
-        backdropFilter: 'blur(16px)',
-        borderRight: `1px solid ${theme.colors.glassBorder}`,
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-      },
-      default: {
-        backgroundColor: theme.colors.surface,
-      },
-    }),
-  },
-  sidebarBrand: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-    marginBottom: 40,
-    gap: 12,
-  },
-  sidebarLogo: {
-    width: 40,
-    height: 40,
-  },
-  sidebarTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  sidebarProfile: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 32,
-    gap: 12,
-  },
-  profileAvatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatarText: {
-    color: '#FFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  profileInfo: {
-    flex: 1,
-  },
-  profileName: {
-    fontSize: 15,
-    fontWeight: '700',
-  },
-  profileRole: {
-    fontSize: 12,
-  },
-  sidebarNav: {
-    flex: 1,
-  },
-  sidebarNavItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    marginBottom: 4,
-    gap: 16,
-    borderRadius: 12,
-    marginHorizontal: 16,
-  },
-  activeNavItem: {
-    backgroundColor: 'rgba(45, 91, 255, 0.1)',
-  },
-  activeNavIndicator: {
-    width: 4,
-    height: 16,
-    borderRadius: 2,
-    backgroundColor: '#2D5BFF',
-    position: 'absolute',
-    left: 8,
-  },
-  navIcon: {
-    fontSize: 20,
-  },
-  navLabel: {
-    fontSize: 15,
-  },
-  mobileHeader: {
-    height: 64,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    zIndex: 100,
-  },
-  subHeader: {
-    height: 56,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-  },
-  brandContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 32,
-    height: 32,
-  },
-  hamburgerButton: {
-    padding: 8,
-  },
-  hamburgerText: {
-    fontSize: 24,
-  },
-  backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButtonText: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  mobileMenuOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  mobileMenu: {
-    width: 280,
-    padding: 24,
-  },
-  closeButton: {
-    alignSelf: 'flex-end',
-    padding: 10,
-    marginBottom: 10,
-  },
-  closeButtonText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  mobileMenuItem: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginVertical: 4,
-  },
-  mobileMenuItemText: {
-    fontSize: 17,
-  },
-});
+const getWebStyles = (theme: any) =>
+  StyleSheet.create({
+    sidebar: {
+      width: 260,
+      height: '100vh' as any,
+      position: 'sticky' as any,
+      top: 0,
+      paddingVertical: 24,
+      ...Platform.select({
+        web: {
+          background: theme.colors.glass,
+          backdropFilter: 'blur(16px)',
+          borderRight: `1px solid ${theme.colors.glassBorder}`,
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        },
+        default: {
+          backgroundColor: theme.colors.surface,
+        },
+      }),
+    },
+    sidebarBrand: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 24,
+      marginBottom: 40,
+      gap: 12,
+    },
+    sidebarLogo: {
+      width: 40,
+      height: 40,
+    },
+    sidebarTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    sidebarProfile: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      marginBottom: 32,
+      gap: 12,
+    },
+    profileAvatar: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    avatarText: {
+      color: '#FFF',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    profileInfo: {
+      flex: 1,
+    },
+    profileName: {
+      fontSize: 15,
+      fontWeight: '700',
+    },
+    profileRole: {
+      fontSize: 12,
+    },
+    sidebarNav: {
+      flex: 1,
+    },
+    sidebarNavItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 14,
+      paddingHorizontal: 24,
+      marginBottom: 4,
+      gap: 16,
+      borderRadius: 12,
+      marginHorizontal: 16,
+    },
+    activeNavItem: {
+      backgroundColor: 'rgba(45, 91, 255, 0.1)',
+    },
+    activeNavIndicator: {
+      width: 4,
+      height: 16,
+      borderRadius: 2,
+      backgroundColor: '#2D5BFF',
+      position: 'absolute',
+      left: 8,
+    },
+    navIcon: {
+      fontSize: 20,
+    },
+    navLabel: {
+      fontSize: 15,
+    },
+    mobileHeader: {
+      height: 64,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: 20,
+      zIndex: 100,
+    },
+    subHeader: {
+      height: 56,
+      paddingHorizontal: 24,
+      justifyContent: 'center',
+    },
+    brandContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    logo: {
+      width: 32,
+      height: 32,
+    },
+    hamburgerButton: {
+      padding: 8,
+    },
+    hamburgerText: {
+      fontSize: 24,
+    },
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    backButtonText: {
+      fontSize: 15,
+      fontWeight: '600',
+    },
+    mobileMenuOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
+    mobileMenu: {
+      width: 280,
+      padding: 24,
+    },
+    closeButton: {
+      alignSelf: 'flex-end',
+      padding: 10,
+      marginBottom: 10,
+    },
+    closeButtonText: {
+      fontSize: 24,
+      fontWeight: 'bold',
+    },
+    mobileMenuItem: {
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      marginVertical: 4,
+    },
+    mobileMenuItemText: {
+      fontSize: 17,
+    },
+  });
