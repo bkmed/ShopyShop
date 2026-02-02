@@ -45,6 +45,7 @@
     "cartSummary": "कार्ट सारांश",
     "vouchers": "वाउचर",
     "applyVoucher": "वाउचर लागू करें",
+    "buyNow": "अभी खरीदें",
     "shop_now": "अभी खरीदारी करें"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "लापता उत्पाद",
     "units": "इकाइयां",
     "adjust": "समायोजित करें",
-    "searchPlaceholder": "इन्वेंटरी खोजें..."
+    "searchPlaceholder": "इन्वेंटरी खोजें...",
+    "history": "इन्वेंटरी इतिहास",
+    "detail": "इन्वेंटरी विवरण",
+    "noHistory": "अभी तक कोई स्टॉक मूवमेंट रिकॉर्ड नहीं किया गया है।",
+    "currentStock": "वर्तमान स्टॉक",
+    "notFound": "इन्वेंटरी में उत्पाद नहीं मिला"
   },
   "payroll": {
     "currency": "मुद्रा",

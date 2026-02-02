@@ -40,7 +40,9 @@ export const currenciesDb = {
     store.dispatch(setSelectedAction(code));
   },
 
-  add: async (currency: Omit<Currency, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
+  add: async (
+    currency: Omit<Currency, 'id' | 'createdAt' | 'updatedAt'>,
+  ): Promise<string> => {
     const now = new Date().toISOString();
     const id = Date.now().toString();
     const newCurrency: Currency = {

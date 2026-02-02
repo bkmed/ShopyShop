@@ -47,15 +47,20 @@ export const {
   setSelectedCurrency,
   addCurrency,
   updateCurrency,
-  deleteCurrency
+  deleteCurrency,
 } = currenciesSlice.actions;
 
 export const selectAllCurrencies = (state: { currencies: CurrenciesState }) =>
   state.currencies.items;
-export const selectSelectedCurrencyCode = (state: { currencies: CurrenciesState }) =>
-  state.currencies.selectedCurrency;
-export const selectSelectedCurrency = (state: { currencies: CurrenciesState }) =>
-  state.currencies.items.find(c => c.code === state.currencies.selectedCurrency);
+export const selectSelectedCurrencyCode = (state: {
+  currencies: CurrenciesState;
+}) => state.currencies.selectedCurrency;
+export const selectSelectedCurrency = (state: {
+  currencies: CurrenciesState;
+}) =>
+  state.currencies.items.find(
+    c => c.code === state.currencies.selectedCurrency,
+  );
 export const selectCurrencyById =
   (id: string) => (state: { currencies: CurrenciesState }) =>
     state.currencies.items.find(c => c.id === id);

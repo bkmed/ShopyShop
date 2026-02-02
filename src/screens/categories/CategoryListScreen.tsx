@@ -21,7 +21,8 @@ export const CategoryListScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
   const { user } = useAuth();
-  const isAdminOrManager = rbacService.isAdmin(user) || rbacService.isStockManager(user);
+  const isAdminOrManager =
+    rbacService.isAdmin(user) || rbacService.isStockManager(user);
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,9 +47,12 @@ export const CategoryListScreen = () => {
   );
 
   const filteredCategories = categories.filter(c => {
-    const matchesSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = c.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     if (isAdminOrManager) return matchesSearch;
-    const isAvailable = !c.availableDate || new Date(c.availableDate) <= new Date();
+    const isAvailable =
+      !c.availableDate || new Date(c.availableDate) <= new Date();
     return matchesSearch && isAvailable;
   });
 
@@ -76,7 +80,12 @@ export const CategoryListScreen = () => {
           {item.description || t('categories.noDescription')}
         </Text>
       </View>
-      <View style={[styles.arrowContainer, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[
+          styles.arrowContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <Text style={{ color: theme.colors.primary }}>➔</Text>
       </View>
     </TouchableOpacity>

@@ -45,6 +45,7 @@
     "cartSummary": "Cart Summary",
     "vouchers": "Vouchers",
     "applyVoucher": "Apply Voucher",
+    "buyNow": "Buy Now",
     "shop_now": "Shop Now"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "Missing Products",
     "units": "Units",
     "adjust": "Adjust",
-    "searchPlaceholder": "Search inventory..."
+    "searchPlaceholder": "Search inventory...",
+    "history": "Inventory History",
+    "detail": "Inventory Detail",
+    "noHistory": "No stock movement recorded yet.",
+    "currentStock": "Current Stock",
+    "notFound": "Product not found in inventory"
   },
   "payroll": {
     "currency": "Currency",

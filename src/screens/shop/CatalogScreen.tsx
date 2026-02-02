@@ -191,8 +191,8 @@ export const CatalogScreen = () => {
                 {option === 'newest'
                   ? 'Newest'
                   : option === 'priceAsc'
-                    ? 'Price ↑'
-                    : 'Price ↓'}
+                  ? 'Price ↑'
+                  : 'Price ↓'}
               </Text>
             </TouchableOpacity>
           ))}

@@ -27,7 +27,8 @@ export const CategoryAddScreen = () => {
     name: editingCategory?.name || '',
     description: editingCategory?.description || '',
     parentId: editingCategory?.parentId || '',
-    availableDate: editingCategory?.availableDate || new Date().toISOString().split('T')[0],
+    availableDate:
+      editingCategory?.availableDate || new Date().toISOString().split('T')[0],
   });
 
   const handleSave = async () => {
@@ -53,7 +54,7 @@ export const CategoryAddScreen = () => {
         Alert.alert(
           t('common.success'),
           t('categories.updatedSuccessfully') ||
-          'Category updated successfully',
+            'Category updated successfully',
         );
       } else {
         await categoriesDb.add(categoryData);

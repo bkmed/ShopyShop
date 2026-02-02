@@ -24,7 +24,8 @@ export const ProductListScreen = () => {
   const navigation = useNavigation<any>();
   const { user } = useAuth();
   const { formatPrice } = useCurrency();
-  const isStockManager = rbacService.isStockManager(user) || rbacService.isAdmin(user);
+  const isStockManager =
+    rbacService.isStockManager(user) || rbacService.isAdmin(user);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -38,18 +39,25 @@ export const ProductListScreen = () => {
         productsDb.getAll(),
         categoriesDb.getAll(),
       ]);
-      const isAdminOrManager = rbacService.isAdmin(user) || rbacService.isStockManager(user);
+      const isAdminOrManager =
+        rbacService.isAdmin(user) || rbacService.isStockManager(user);
 
-      const categoryMap = new Map<string, Category>(categoriesData.map(c => [c.id, c]));
+      const categoryMap = new Map<string, Category>(
+        categoriesData.map(c => [c.id, c]),
+      );
 
       const filteredByRole = isAdminOrManager
         ? data
         : data.filter(p => {
-          const productAvailable = !p.availableDate || new Date(p.availableDate) <= new Date();
-          const category = categoryMap.get(p.categoryId);
-          const categoryAvailable = !category || !category.availableDate || new Date(category.availableDate) <= new Date();
-          return productAvailable && categoryAvailable;
-        });
+            const productAvailable =
+              !p.availableDate || new Date(p.availableDate) <= new Date();
+            const category = categoryMap.get(p.categoryId);
+            const categoryAvailable =
+              !category ||
+              !category.availableDate ||
+              new Date(category.availableDate) <= new Date();
+            return productAvailable && categoryAvailable;
+          });
 
       setProducts(filteredByRole);
       setFilteredProducts(filteredByRole);
@@ -86,7 +94,12 @@ export const ProductListScreen = () => {
       style={[styles.productCard, { backgroundColor: theme.colors.surface }]}
       onPress={() => navigation.navigate('ProductDetail', { id: item.id })}
     >
-      <View style={[styles.productIconContainer, { backgroundColor: theme.colors.primary + '10' }]}>
+      <View
+        style={[
+          styles.productIconContainer,
+          { backgroundColor: theme.colors.primary + '10' },
+        ]}
+      >
         <Text style={{ fontSize: 32 }}>📦</Text>
       </View>
       <View style={{ flex: 1 }}>
@@ -97,11 +110,19 @@ export const ProductListScreen = () => {
           {t('products.productStock')}: {item.stockQuantity}
         </Text>
         <Text style={[styles.productPrice, { color: theme.colors.primary }]}>
-          {formatPrice(isStockManager ? (item.unitPrice || item.price) : item.price, item.currency)}
+          {formatPrice(
+            isStockManager ? item.unitPrice || item.price : item.price,
+            item.currency,
+          )}
           {isStockManager && ` (${t('inventory.unitPrice')})`}
         </Text>
       </View>
-      <View style={[styles.arrowContainer, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[
+          styles.arrowContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <Text style={{ color: theme.colors.primary }}>➔</Text>
       </View>
     </TouchableOpacity>

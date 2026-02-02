@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { useContext } from 'react';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useSelector, useDispatch } from 'react-redux';
 // import { RootState } from '../../store';
@@ -35,6 +37,7 @@ export const CartScreen = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const { formatPrice } = useCurrency();
+  const { setActiveTab } = useContext(WebNavigationContext);
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
   const [items, setItems] = useState<ExtendedCartItem[]>([]);
@@ -159,7 +162,13 @@ export const CartScreen = () => {
           </Text>
           <TouchableOpacity
             style={[styles.shopBtn, { backgroundColor: theme.colors.primary }]}
-            onPress={() => navigation.navigate('CatalogTab')}
+            onPress={() => {
+              if (Platform.OS === 'web') {
+                setActiveTab('Catalog');
+              } else {
+                navigation.navigate('Catalog');
+              }
+            }}
           >
             <Text style={styles.shopBtnText}>
               {t('cart.shop_now') || 'Shop Now'}

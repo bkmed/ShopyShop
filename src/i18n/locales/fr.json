@@ -45,6 +45,7 @@
     "cartSummary": "Résumé du panier",
     "vouchers": "Bons d'achat",
     "applyVoucher": "Appliquer le bon",
+    "buyNow": "Acheter maintenant",
     "shop_now": "Acheter maintenant"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "Produits Manquants",
     "units": "Unités",
     "adjust": "Ajuster",
-    "searchPlaceholder": "Rechercher dans l'inventaire..."
+    "searchPlaceholder": "Rechercher dans l'inventaire...",
+    "history": "Historique de l'inventaire",
+    "detail": "Détails de l'inventaire",
+    "noHistory": "Aucun mouvement de stock enregistré pour le moment.",
+    "currentStock": "Stock Actuel",
+    "notFound": "Produit non trouvé dans l'inventaire"
   },
   "payroll": {
     "currency": "Devise",

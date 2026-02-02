@@ -11,6 +11,12 @@ import { useTheme } from '../../context/ThemeContext';
 import { NotificationBell } from './NotificationBell';
 import { Theme } from '../../theme';
 import { useAuth } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/slices/cartSlice';
+import { productsDb } from '../../database/productsDb';
+import { Product } from '../../database/schema';
+import { useCurrency } from '../../utils/currencyUtils';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 interface GlassHeaderProps {
   title?: string;
@@ -84,6 +90,85 @@ const createStyles = (theme: Theme) =>
       fontWeight: '600',
       fontSize: 14,
     },
+    badge: {
+      position: 'absolute',
+      top: 4,
+      right: 4,
+      backgroundColor: '#FF3B30',
+      borderRadius: 10,
+      minWidth: 16,
+      height: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 4,
+      zIndex: 1,
+    },
+    badgeText: {
+      color: '#FFF',
+      fontSize: 10,
+      fontWeight: 'bold',
+    },
+    cartDropdown: {
+      position: 'absolute',
+      top: 60,
+      right: 0,
+      width: 300,
+      backgroundColor: theme.colors.surface,
+      borderRadius: 16,
+      padding: 16,
+      ...theme.shadows.large,
+      borderWidth: 1,
+      borderColor: theme.colors.border + '33',
+    },
+    cartItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 12,
+      gap: 12,
+    },
+    cartItemInfo: {
+      flex: 1,
+    },
+    cartItemName: {
+      fontSize: 14,
+      fontWeight: '600',
+      color: theme.colors.text,
+    },
+    cartItemPrice: {
+      fontSize: 12,
+      color: theme.colors.primary,
+    },
+    totalRow: {
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.border + '33',
+      paddingTop: 12,
+      marginTop: 8,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    totalLabel: {
+      fontSize: 14,
+      fontWeight: '700',
+      color: theme.colors.text,
+    },
+    totalValue: {
+      fontSize: 16,
+      fontWeight: '800',
+      color: theme.colors.primary,
+    },
+    viewCartBtn: {
+      backgroundColor: theme.colors.primary,
+      borderRadius: 12,
+      paddingVertical: 10,
+      alignItems: 'center',
+      marginTop: 16,
+    },
+    viewCartText: {
+      color: '#FFF',
+      fontWeight: '700',
+      fontSize: 14,
+    },
   });
 
 export const GlassHeader = ({
@@ -97,7 +182,34 @@ export const GlassHeader = ({
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { user } = useAuth();
+  const cartItems = useSelector(selectCartItems);
+  const { formatPrice } = useCurrency();
+  const { setActiveTab } = React.useContext(WebNavigationContext);
+  const [showCart, setShowCart] = React.useState(false);
+  const [cartProducts, setCartProducts] = React.useState<Record<string, Product>>({});
+
   const styles = React.useMemo(() => createStyles(theme), [theme]);
+
+  React.useEffect(() => {
+    const loadProducts = async () => {
+      const productMap: Record<string, Product> = {};
+      for (const item of cartItems) {
+        if (!cartProducts[item.productId]) {
+          const p = await productsDb.getById(item.productId);
+          if (p) productMap[item.productId] = p;
+        }
+      }
+      if (Object.keys(productMap).length > 0) {
+        setCartProducts(prev => ({ ...prev, ...productMap }));
+      }
+    };
+    loadProducts();
+  }, [cartItems]);
+
+  const totalAmount = cartItems.reduce((acc, item) => {
+    const p = cartProducts[item.productId];
+    return acc + (p?.price || 0) * item.quantity;
+  }, 0);
 
   const getInitials = (name: string) => {
     return name
@@ -106,6 +218,27 @@ export const GlassHeader = ({
       .join('')
       .toUpperCase()
       .substring(0, 2);
+  };
+
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const prevCount = React.useRef(cartCount);
+
+  React.useEffect(() => {
+    if (cartCount > prevCount.current) {
+      setShowCart(true);
+      const timer = setTimeout(() => setShowCart(false), 3000);
+      return () => clearTimeout(timer);
+    }
+    prevCount.current = cartCount;
+  }, [cartCount]);
+
+  const handleViewCart = () => {
+    setShowCart(false);
+    if (Platform.OS === 'web') {
+      setActiveTab('Cart');
+    } else {
+      // Assuming navigation is handled externally for mobile or via AppNavigator
+    }
   };
 
   return (
@@ -130,6 +263,46 @@ export const GlassHeader = ({
             <Text style={{ fontSize: 20 }}>🔍</Text>
           </TouchableOpacity>
         )}
+
+        <View style={{ position: 'relative' }}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => setShowCart(!showCart)}
+          >
+            {cartCount > 0 && (
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{cartCount}</Text>
+              </View>
+            )}
+            <Text style={{ fontSize: 24 }}>🛒</Text>
+          </TouchableOpacity>
+
+          {showCart && cartItems.length > 0 && (
+            <View style={styles.cartDropdown}>
+              {cartItems.map(item => (
+                <View key={item.productId} style={styles.cartItem}>
+                  <Text style={{ fontSize: 24 }}>📦</Text>
+                  <View style={styles.cartItemInfo}>
+                    <Text style={styles.cartItemName} numberOfLines={1}>
+                      {cartProducts[item.productId]?.name || '...'}
+                    </Text>
+                    <Text style={styles.cartItemPrice}>
+                      {item.quantity} x {formatPrice(cartProducts[item.productId]?.price || 0)}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+              <View style={styles.totalRow}>
+                <Text style={styles.totalLabel}>{t('cart.total') || 'Total'}</Text>
+                <Text style={styles.totalValue}>{formatPrice(totalAmount)}</Text>
+              </View>
+              <TouchableOpacity style={styles.viewCartBtn} onPress={handleViewCart}>
+                <Text style={styles.viewCartText}>{t('cart.title') || 'View Cart'}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+
         <NotificationBell />
         <TouchableOpacity
           style={[styles.iconButton, styles.profileButton]}

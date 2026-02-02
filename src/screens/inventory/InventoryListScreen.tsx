@@ -67,7 +67,12 @@ export const InventoryListScreen = () => {
         onPress={() => navigation.navigate('InventoryDetail', { id: item.id })}
       >
         <View style={styles.proRow}>
-          <View style={[styles.iconContainer, { backgroundColor: theme.colors.primary + '10' }]}>
+          <View
+            style={[
+              styles.iconContainer,
+              { backgroundColor: theme.colors.primary + '10' },
+            ]}
+          >
             <Text style={{ fontSize: 24 }}>📦</Text>
           </View>
           <View style={{ flex: 1 }}>
@@ -76,8 +81,17 @@ export const InventoryListScreen = () => {
                 {item.name}
               </Text>
               {category && (
-                <View style={[styles.badge, { backgroundColor: theme.colors.primary + '15' }]}>
-                  <Text style={[styles.badgeText, { color: theme.colors.primary }]}>{category.name}</Text>
+                <View
+                  style={[
+                    styles.badge,
+                    { backgroundColor: theme.colors.primary + '15' },
+                  ]}
+                >
+                  <Text
+                    style={[styles.badgeText, { color: theme.colors.primary }]}
+                  >
+                    {category.name}
+                  </Text>
                 </View>
               )}
             </View>
@@ -90,7 +104,9 @@ export const InventoryListScreen = () => {
               style={[
                 styles.quantity,
                 {
-                  color: lowStock ? '#FF4444' : theme.colors.success || '#4CD964',
+                  color: lowStock
+                    ? '#FF4444'
+                    : theme.colors.success || '#4CD964',
                 },
               ]}
             >
@@ -102,18 +118,39 @@ export const InventoryListScreen = () => {
           </View>
         </View>
 
-        <View style={[styles.proFooter, { borderTopColor: theme.colors.border }]}>
+        <View
+          style={[styles.proFooter, { borderTopColor: theme.colors.border }]}
+        >
           <View style={styles.stat}>
-            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Unit Price</Text>
-            <Text style={[styles.statValue, { color: theme.colors.text }]}>{formatPrice(item.unitPrice || item.price, item.currency)}</Text>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
+              Unit Price
+            </Text>
+            <Text style={[styles.statValue, { color: theme.colors.text }]}>
+              {formatPrice(item.unitPrice || item.price, item.currency)}
+            </Text>
           </View>
           <View style={styles.stat}>
-            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Stock Value</Text>
-            <Text style={[styles.statValue, { color: theme.colors.text }]}>{formatPrice(stockValue, item.currency)}</Text>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
+              Stock Value
+            </Text>
+            <Text style={[styles.statValue, { color: theme.colors.text }]}>
+              {formatPrice(stockValue, item.currency)}
+            </Text>
           </View>
           <View style={styles.statEnd}>
-            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Status</Text>
-            <Text style={[styles.statValue, { color: lowStock ? '#FF4444' : theme.colors.success || '#4CD964' }]}>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
+              Status
+            </Text>
+            <Text
+              style={[
+                styles.statValue,
+                {
+                  color: lowStock
+                    ? '#FF4444'
+                    : theme.colors.success || '#4CD964',
+                },
+              ]}
+            >
               {lowStock ? 'Low Stock' : 'Good'}
             </Text>
           </View>

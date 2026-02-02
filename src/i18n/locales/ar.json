@@ -45,6 +45,7 @@
     "cartSummary": "ملخص السلة",
     "vouchers": "القسائم",
     "applyVoucher": "تطبيق القسيمة",
+    "buyNow": "اشتري الآن",
     "shop_now": "تسوق الآن"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "المنتجات المفقودة",
     "units": "الوحدات",
     "adjust": "تعديل",
-    "searchPlaceholder": "البحث في المخزون..."
+    "searchPlaceholder": "البحث في المخزون...",
+    "history": "سجل المخزون",
+    "detail": "تفاصيل المخزون",
+    "noHistory": "لا يوجد سجل حركة مخزون مسجل بعد.",
+    "currentStock": "المخزون الحالي",
+    "notFound": "المنتج غير موجود في المخزون"
   },
   "payroll": {
     "currency": "العملة",

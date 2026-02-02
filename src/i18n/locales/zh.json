@@ -45,6 +45,7 @@
     "cartSummary": "购物车摘要",
     "vouchers": "代金券",
     "applyVoucher": "使用代金券",
+    "buyNow": "立即购买",
     "shop_now": "立即购物"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "缺失产品",
     "units": "单位",
     "adjust": "调整",
-    "searchPlaceholder": "搜索库存..."
+    "searchPlaceholder": "搜索库存...",
+    "history": "库存历史",
+    "detail": "库存详情",
+    "noHistory": "尚无库存变动记录。",
+    "currentStock": "当前库存",
+    "notFound": "库存中未找到该产品"
   },
   "payroll": {
     "currency": "货币",

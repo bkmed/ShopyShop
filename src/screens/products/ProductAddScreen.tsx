@@ -29,7 +29,8 @@ export const ProductAddScreen = () => {
     price: editingProduct?.price?.toString() || '',
     stockQuantity: editingProduct?.stockQuantity?.toString() || '0',
     currency: editingProduct?.currency || 'USD',
-    availableDate: editingProduct?.availableDate || new Date().toISOString().split('T')[0],
+    availableDate:
+      editingProduct?.availableDate || new Date().toISOString().split('T')[0],
     unitPrice: editingProduct?.unitPrice?.toString() || '0',
     categoryId: editingProduct?.categoryId || '1',
   });

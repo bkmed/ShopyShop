@@ -41,7 +41,12 @@ const FeaturedCard = ({
       style={[styles.featuredCard, { backgroundColor: theme.colors.surface }]}
       onPress={() => onPress(product)}
     >
-      <View style={[styles.productImagePlaceholder, { backgroundColor: theme.colors.primary + '10' }]}>
+      <View
+        style={[
+          styles.productImagePlaceholder,
+          { backgroundColor: theme.colors.primary + '10' },
+        ]}
+      >
         <Text style={{ fontSize: 40 }}>🛍️</Text>
       </View>
       <View style={styles.productInfo}>
@@ -189,7 +194,9 @@ export const HomeScreen = () => {
             style={[styles.exploreBtn, { backgroundColor: '#FFF' }]}
             onPress={() => setActiveTab('Catalog', '')}
           >
-            <Text style={{ color: theme.colors.primary, fontWeight: '800' }}>Explore Now</Text>
+            <Text style={{ color: theme.colors.primary, fontWeight: '800' }}>
+              Explore Now
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.bannerIconContainer}>
@@ -286,7 +293,12 @@ export const HomeScreen = () => {
                 >
                   {formatPrice(order.totalAmount, order.currency)}
                 </Text>
-                <View style={[styles.statusBadge, { backgroundColor: theme.colors.primary + '20' }]}>
+                <View
+                  style={[
+                    styles.statusBadge,
+                    { backgroundColor: theme.colors.primary + '20' },
+                  ]}
+                >
                   <Text
                     style={[
                       styles.orderStatus,

@@ -155,7 +155,11 @@ export interface InventoryLog {
   createdAt: string;
 }
 
-export type ReclamationStatus = 'pending' | 'investigating' | 'resolved' | 'rejected';
+export type ReclamationStatus =
+  | 'pending'
+  | 'investigating'
+  | 'resolved'
+  | 'rejected';
 
 export interface Reclamation {
   id: string;

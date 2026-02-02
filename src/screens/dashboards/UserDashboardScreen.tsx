@@ -1,13 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import React, { useState, useCallback, useContext } from 'react';
+import { Platform, View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
@@ -20,6 +14,15 @@ export const UserDashboardScreen = () => {
   const { theme } = useTheme();
   const { user } = useAuth();
   const navigation = useNavigation<any>();
+  const { setActiveTab } = useContext(WebNavigationContext);
+
+  const handleNavigate = (tab: string, screen?: string, params?: any) => {
+    if (Platform.OS === 'web') {
+      setActiveTab(tab, screen, params);
+    } else {
+      navigation.navigate(tab, params);
+    }
+  };
 
   const getTimeGreeting = () => {
     const hour = new Date().getHours();
@@ -78,7 +81,8 @@ export const UserDashboardScreen = () => {
     >
       <View style={styles.welcome}>
         <Text style={[styles.greeting, { color: theme.colors.text }]}>
-          {getTimeGreeting()}, {user?.name.split(' ')[0] || t('login.customer')} 👋
+          {getTimeGreeting()}, {user?.name.split(' ')[0] || t('login.customer')}{' '}
+          👋
         </Text>
         <Text style={[styles.subGreeting, { color: theme.colors.subText }]}>
           {t('dashboard.personalizedGreeting')}
@@ -88,7 +92,7 @@ export const UserDashboardScreen = () => {
       <View style={styles.statsRow}>
         <TouchableOpacity
           style={[styles.statCard, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Orders')}
+          onPress={() => handleNavigate('Orders')}
         >
           <Text style={styles.statIcon}>📦</Text>
           <Text style={[styles.statVal, { color: theme.colors.text }]}>
@@ -100,7 +104,7 @@ export const UserDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.statCard, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Wishlist')}
+          onPress={() => handleNavigate('Wishlist')}
         >
           <Text style={styles.statIcon}>❤️</Text>
           <Text style={[styles.statVal, { color: theme.colors.text }]}>
@@ -122,7 +126,9 @@ export const UserDashboardScreen = () => {
         ]}
       >
         <View style={{ flex: 1 }}>
-          <Text style={styles.bannerTitle}>{t('dashboard.activeOrderStatus')}</Text>
+          <Text style={styles.bannerTitle}>
+            {t('dashboard.activeOrderStatus')}
+          </Text>
           <Text style={styles.bannerVal}>
             {stats.recentStatus.toUpperCase()}
           </Text>
@@ -143,7 +149,7 @@ export const UserDashboardScreen = () => {
       <View style={styles.menu}>
         <TouchableOpacity
           style={[styles.menuItem, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Catalog')}
+          onPress={() => handleNavigate('Catalog')}
         >
           <Text style={styles.menuIcon}>🏬</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>
@@ -153,7 +159,7 @@ export const UserDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.menuItem, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Chat')}
+          onPress={() => handleNavigate('Chat')}
         >
           <Text style={styles.menuIcon}>🤖</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>
@@ -163,7 +169,7 @@ export const UserDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.menuItem, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => handleNavigate('Profile')}
         >
           <Text style={styles.menuIcon}>👤</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>

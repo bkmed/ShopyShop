@@ -45,6 +45,7 @@
     "cartSummary": "Resumen del carrito",
     "vouchers": "Cupones",
     "applyVoucher": "Aplicar cupón",
+    "buyNow": "Comprar ahora",
     "shop_now": "Comprar ahora"
   },
   "catalog": {
@@ -364,7 +365,12 @@
     "missingProducts": "Productos Faltantes",
     "units": "Unidades",
     "adjust": "Ajustar",
-    "searchPlaceholder": "Buscar inventario..."
+    "searchPlaceholder": "Buscar inventario...",
+    "history": "Historial de stock",
+    "detail": "Detalle de stock",
+    "noHistory": "Aún no se han registrado movimientos de stock.",
+    "currentStock": "Stock actual",
+    "notFound": "Producto no encontrado en el inventario"
   },
   "payroll": {
     "currency": "Moneda",

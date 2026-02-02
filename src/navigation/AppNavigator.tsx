@@ -185,6 +185,11 @@ const CatalogStack = () => {
         component={CatalogScreen}
         options={{ title: t('navigation.catalog') }}
       />
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetailScreen}
+        options={{ title: t('catalog.detail') }}
+      />
     </Stack.Navigator>
   );
 };
@@ -482,33 +487,39 @@ const useNavigationSections = () => {
       {
         title: t('sections.shop') || 'Shop',
         items: [
-          ...(!isManagementRole ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }] : []),
+          ...(!isManagementRole
+            ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }]
+            : []),
           {
             key: 'Catalog',
-            label: (t('navigation.catalog') || 'Catalog'),
+            label: t('navigation.catalog') || 'Catalog',
             icon: '🛍️',
           },
-          ...(!isManagementRole ? [
-            {
-              key: 'Categories',
-              label: t('navigation.categories') || 'Categories',
-              icon: '🗂️',
-            },
-            { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-          ] : []),
+          ...(!isManagementRole
+            ? [
+              {
+                key: 'Categories',
+                label: t('navigation.categories') || 'Categories',
+                icon: '🗂️',
+              },
+              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+            ]
+            : []),
         ],
       },
       {
         title: t('sections.account') || 'Account',
         items: [
-          ...(!isManagementRole ? [
-            { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-            {
-              key: 'Wishlist',
-              label: t('navigation.wishlist') || 'Wishlist',
-              icon: '❤️',
-            },
-          ] : []),
+          ...(!isManagementRole
+            ? [
+              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+              {
+                key: 'Wishlist',
+                label: t('navigation.wishlist') || 'Wishlist',
+                icon: '❤️',
+              },
+            ]
+            : []),
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
               {
@@ -518,18 +529,20 @@ const useNavigationSections = () => {
               },
             ]
             : []),
-          ...(!isManagementRole ? [
-            {
-              key: 'Purchases',
-              label: t('navigation.purchases') || 'Purchases',
-              icon: '🛍️',
-            },
-            {
-              key: 'Reclamations',
-              label: t('navigation.reclamations') || 'Claims',
-              icon: '⚠️',
-            },
-          ] : []),
+          ...(!isManagementRole
+            ? [
+              {
+                key: 'Purchases',
+                label: t('navigation.purchases') || 'Purchases',
+                icon: '🛍️',
+              },
+              {
+                key: 'Reclamations',
+                label: t('navigation.reclamations') || 'Claims',
+                icon: '⚠️',
+              },
+            ]
+            : []),
         ],
       },
     ];
@@ -919,6 +932,16 @@ const WebNavigator = () => {
         return <SettingsStack />;
       case 'Profile':
         return <ProfileStack />;
+      case 'ManageOrders':
+        return <OrdersStack />;
+      case 'UserManagement':
+        return <UserManagementStack />;
+      case 'CurrencyAdmin':
+        return <UserManagementStack />;
+      case 'Language':
+        return <SettingsStack />;
+      case 'Currency':
+        return <SettingsStack />;
       default:
         return <HomeStack />;
     }
