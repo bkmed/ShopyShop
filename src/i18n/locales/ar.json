@@ -83,16 +83,24 @@
     "base": "العملة الأساسية",
     "chooseDisplay": "اختر عملة العرض",
     "updateSuccess": "تم تحديث العملة بنجاح",
-    "deleteSuccess": "تم حذف العملة بنجاح"
+    "deleteSuccess": "تم حذف العملة بنجاح",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه العملة؟",
+    "addBtn": "إضافة عملة",
+    "editTitle": "تعديل العملة",
+    "addNew": "إضافة عملة جديدة",
+    "manageTitle": "إدارة العملات"
   },
   "categories": {
     "title": "الفئات",
     "add": "إضافة فئة",
     "edit": "تعديل الفئة",
+    "delete": "حذف الفئة",
     "nameRequired": "اسم الفئة مطلوب",
     "savedSuccessfully": "تم حفظ الفئة بنجاح",
     "updatedSuccessfully": "تم تحديث الفئة بنجاح",
     "deletedSuccessfully": "تم حذف الفئة بنجاح",
+    "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الفئة؟",
+    "noDescription": "لا يوجد وصف متاح",
     "search": "البحث في الفئات",
     "list": "قائمة الفئات",
     "name": "اسم الفئة",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "البحث في الطلبات...",
     "totalAmount": "المبلغ الإجمالي",
     "shippingAddress": "عنوان الشحن",
-    "createNew": "إنشاء طلب جديد"
+    "createNew": "إنشاء طلب جديد",
+    "manageStatus": "إدارة الحالة",
+    "customers": "العملاء"
   },
   "purchases": {
     "title": "سجل المشتريات",
@@ -403,7 +413,9 @@
     "currentStock": "المخزون الحالي",
     "notFound": "المنتج غير موجود في المخزون",
     "quantity": "الكمية",
-    "totalValue": "القيمة الإجمالية"
+    "totalValue": "القيمة الإجمالية",
+    "adjustmentAmount": "مبلغ التعديل",
+    "reason": "السبب"
   },
   "payroll": {
     "currency": "العملة",

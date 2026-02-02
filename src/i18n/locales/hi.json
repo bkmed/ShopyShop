@@ -83,16 +83,24 @@
     "base": "आधार मुद्रा",
     "chooseDisplay": "प्रदर्शन मुद्रा चुनें",
     "updateSuccess": "मुद्रा सफलतापूर्वक अपडेट की गई",
-    "deleteSuccess": "मुद्रा सफलतापूर्वक हटाई गई"
+    "deleteSuccess": "मुद्रा सफलतापूर्वक हटाई गई",
+    "confirmDelete": "क्या आप वाकई इस मुद्रा को हटाना चाहते हैं?",
+    "addBtn": "मुद्रा जोड़ें",
+    "editTitle": "मुद्रा संपादित करें",
+    "addNew": "नई मुद्रा जोड़ें",
+    "manageTitle": "मुद्रा प्रबंधन"
   },
   "categories": {
     "title": "श्रेणियां",
     "add": "श्रेणी जोड़ें",
     "edit": "श्रेणी संपादित करें",
+    "delete": "श्रेणी हटाएं",
     "nameRequired": "श्रेणी का नाम अनिवार्य है",
     "savedSuccessfully": "श्रेणी सफलतापूर्वक सहेजी गई",
     "updatedSuccessfully": "श्रेणी सफलतापूर्वक अपडेट की गई",
     "deletedSuccessfully": "श्रेणी सफलतापूर्वक हटा दी गई",
+    "deleteConfirm": "क्या आप वाकई इस श्रेणी को हटाना चाहते हैं?",
+    "noDescription": "कोई विवरण उपलब्ध नहीं है",
     "search": "श्रेणियां खोजें",
     "list": "श्रेणी सूची",
     "name": "श्रेणी का नाम",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "ऑर्डर खोजें...",
     "totalAmount": "कुल राशि",
     "shippingAddress": "शिपिंग पता",
-    "createNew": "नया ऑर्डर बनाएं"
+    "createNew": "नया ऑर्डर बनाएं",
+    "manageStatus": "स्थिति प्रबंधित करें",
+    "customers": "ग्राहक"
   },
   "purchases": {
     "title": "खरीद इतिहास",
@@ -403,7 +413,9 @@
     "currentStock": "वर्तमान स्टॉक",
     "notFound": "इन्वेंटरी में उत्पाद नहीं मिला",
     "quantity": "मात्रा",
-    "totalValue": "कुल मूल्य"
+    "totalValue": "कुल मूल्य",
+    "adjustmentAmount": "समायोजन राशि",
+    "reason": "कारण"
   },
   "payroll": {
     "currency": "मुद्रा",

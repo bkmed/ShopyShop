@@ -83,16 +83,24 @@
     "base": "Base Currency",
     "chooseDisplay": "Choose Display Currency",
     "updateSuccess": "Currency updated successfully",
-    "deleteSuccess": "Currency deleted successfully"
+    "deleteSuccess": "Currency deleted successfully",
+    "confirmDelete": "Are you sure you want to delete this currency?",
+    "addBtn": "Add Currency",
+    "editTitle": "Edit Currency",
+    "addNew": "Add New Currency",
+    "manageTitle": "Currency Management"
   },
   "categories": {
     "title": "Categories",
     "add": "Add Category",
     "edit": "Edit Category",
+    "delete": "Delete Category",
     "nameRequired": "Category name is required",
     "savedSuccessfully": "Category saved successfully",
     "updatedSuccessfully": "Category updated successfully",
     "deletedSuccessfully": "Category deleted successfully",
+    "deleteConfirm": "Are you sure you want to delete this category?",
+    "noDescription": "No description available",
     "search": "Search categories...",
     "list": "Category List",
     "name": "Category Name",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "Search orders...",
     "totalAmount": "Total Amount",
     "shippingAddress": "Shipping Address",
-    "createNew": "Create New Order"
+    "createNew": "Create New Order",
+    "manageStatus": "Manage Status",
+    "customers": "Customers"
   },
   "purchases": {
     "title": "Purchase History",
@@ -403,7 +413,9 @@
     "currentStock": "Current Stock",
     "notFound": "Product not found in inventory",
     "quantity": "Quantity",
-    "totalValue": "Total Value"
+    "totalValue": "Total Value",
+    "adjustmentAmount": "Adjustment Amount",
+    "reason": "Reason"
   },
   "payroll": {
     "currency": "Currency",

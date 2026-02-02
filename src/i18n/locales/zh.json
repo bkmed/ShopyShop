@@ -83,16 +83,24 @@
     "base": "基础货币",
     "chooseDisplay": "选择显示货币",
     "updateSuccess": "货币更新成功",
-    "deleteSuccess": "货币删除成功"
+    "deleteSuccess": "货币删除成功",
+    "confirmDelete": "您确定要删除此货币吗？",
+    "addBtn": "添加货币",
+    "editTitle": "编辑货币",
+    "addNew": "添加新货币",
+    "manageTitle": "货币管理"
   },
   "categories": {
     "title": "类别",
     "add": "添加类别",
     "edit": "编辑类别",
+    "delete": "删除类别",
     "nameRequired": "类别名称必填",
     "savedSuccessfully": "类别保存成功",
     "updatedSuccessfully": "类别更新成功",
     "deletedSuccessfully": "类别删除成功",
+    "deleteConfirm": "您确定要删除此类别吗？",
+    "noDescription": "暂无说明",
     "search": "搜索类别",
     "list": "类别列表",
     "name": "类别名称",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "搜索订单...",
     "totalAmount": "总金额",
     "shippingAddress": "收货地址",
-    "createNew": "新建订单"
+    "createNew": "新建订单",
+    "manageStatus": "管理状态",
+    "customers": "客户"
   },
   "purchases": {
     "title": "购买历史",
@@ -403,7 +413,9 @@
     "currentStock": "当前库存",
     "notFound": "库存中未找到该产品",
     "quantity": "数量",
-    "totalValue": "总价值"
+    "totalValue": "总价值",
+    "adjustmentAmount": "调整金额",
+    "reason": "原因"
   },
   "payroll": {
     "currency": "货币",

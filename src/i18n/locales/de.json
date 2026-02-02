@@ -83,16 +83,24 @@
     "base": "Basiswährung",
     "chooseDisplay": "Anzeigewährung wählen",
     "updateSuccess": "Währung erfolgreich aktualisiert",
-    "deleteSuccess": "Währung erfolgreich gelöscht"
+    "deleteSuccess": "Währung erfolgreich gelöscht",
+    "confirmDelete": "Sind Sie sicher, dass Sie diese Währung löschen möchten?",
+    "addBtn": "Währung hinzufügen",
+    "editTitle": "Währung bearbeiten",
+    "addNew": "Neue Währung hinzufügen",
+    "manageTitle": "Währungsverwaltung"
   },
   "categories": {
     "title": "Kategorien",
     "add": "Kategorie hinzufügen",
     "edit": "Kategorie bearbeiten",
+    "delete": "Kategorie löschen",
     "nameRequired": "Kategoriename ist erforderlich",
     "savedSuccessfully": "Kategorie erfolgreich gespeichert",
     "updatedSuccessfully": "Kategorie erfolgreich aktualisiert",
     "deletedSuccessfully": "Kategorie erfolgreich gelöscht",
+    "deleteConfirm": "Sind Sie sicher, dass Sie diese Kategorie löschen möchten?",
+    "noDescription": "Keine Beschreibung verfügbar",
     "search": "Kategorien suchen",
     "list": "Kategorieliste",
     "name": "Kategoriename",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "Bestellungen suchen...",
     "totalAmount": "Gesamtbetrag",
     "shippingAddress": "Lieferadresse",
-    "createNew": "Neue Bestellung erstellen"
+    "createNew": "Neue Bestellung erstellen",
+    "manageStatus": "Status verwalten",
+    "customers": "Kunden"
   },
   "purchases": {
     "title": "Kaufhistorie",
@@ -403,7 +413,9 @@
     "currentStock": "Aktueller Bestand",
     "notFound": "Produkt nicht im Bestand gefunden",
     "quantity": "Menge",
-    "totalValue": "Gesamtwert"
+    "totalValue": "Gesamtwert",
+    "adjustmentAmount": "Anpassungsbetrag",
+    "reason": "Grund"
   },
   "payroll": {
     "currency": "Währung",

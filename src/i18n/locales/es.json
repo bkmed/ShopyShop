@@ -83,16 +83,24 @@
     "base": "Moneda base",
     "chooseDisplay": "Elegir moneda de visualización",
     "updateSuccess": "Moneda actualizada con éxito",
-    "deleteSuccess": "Moneda eliminada con éxito"
+    "deleteSuccess": "Moneda eliminada con éxito",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar esta moneda?",
+    "addBtn": "Añadir moneda",
+    "editTitle": "Editar moneda",
+    "addNew": "Añadir nueva moneda",
+    "manageTitle": "Gestión de monedas"
   },
   "categories": {
     "title": "Categorías",
     "add": "Añadir categoría",
     "edit": "Editar categoría",
+    "delete": "Eliminar categoría",
     "nameRequired": "El nombre de la categoría es obligatorio",
     "savedSuccessfully": "Categoría guardada con éxito",
     "updatedSuccessfully": "Categoría actualizada con éxito",
     "deletedSuccessfully": "Categoría eliminada con éxito",
+    "deleteConfirm": "¿Estás seguro de que deseas eliminar esta categoría?",
+    "noDescription": "No hay descripción disponible",
     "search": "Buscar categorías",
     "list": "Lista de categorías",
     "name": "Nombre de la categoría",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "Buscar pedidos...",
     "totalAmount": "Importe total",
     "shippingAddress": "Dirección de envío",
-    "createNew": "Crear nuevo pedido"
+    "createNew": "Crear nuevo pedido",
+    "manageStatus": "Gestionar estado",
+    "customers": "Clientes"
   },
   "purchases": {
     "title": "Historial de compras",
@@ -403,7 +413,9 @@
     "currentStock": "Stock actual",
     "notFound": "Producto no encontrado en el inventario",
     "quantity": "Cantidad",
-    "totalValue": "Valor total"
+    "totalValue": "Valor total",
+    "adjustmentAmount": "Monto de ajuste",
+    "reason": "Razón"
   },
   "payroll": {
     "currency": "Moneda",

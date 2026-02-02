@@ -83,17 +83,25 @@
     "base": "Devise de base",
     "chooseDisplay": "Choisir la devise d'affichage",
     "updateSuccess": "Devise mise à jour avec succès",
-    "deleteSuccess": "Devise supprimée avec succès"
+    "deleteSuccess": "Devise supprimée avec succès",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette devise ?",
+    "addBtn": "Ajouter une devise",
+    "editTitle": "Modifier la devise",
+    "addNew": "Ajouter une nouvelle devise",
+    "manageTitle": "Gestion des devises"
   },
   "categories": {
     "title": "Catégories",
     "add": "Ajouter une catégorie",
     "edit": "Modifier la catégorie",
+    "delete": "Supprimer la catégorie",
     "search": "Rechercher des catégories",
     "nameRequired": "Le nom de la catégorie est requis",
     "savedSuccessfully": "Catégorie enregistrée avec succès",
     "updatedSuccessfully": "Catégorie mise à jour avec succès",
     "deletedSuccessfully": "Catégorie supprimée avec succès",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette catégorie ?",
+    "noDescription": "Aucune description disponible",
     "list": "Liste des catégories",
     "name": "Nom de la catégorie",
     "description": "Description de la catégorie",
@@ -344,7 +352,9 @@
     "searchPlaceholder": "Rechercher des commandes...",
     "totalAmount": "Montant total",
     "shippingAddress": "Adresse de livraison",
-    "createNew": "Créer une nouvelle commande"
+    "createNew": "Créer une nouvelle commande",
+    "manageStatus": "Gérer le statut",
+    "customers": "Clients"
   },
   "purchases": {
     "title": "Historique d'achats",
@@ -403,7 +413,9 @@
     "currentStock": "Stock Actuel",
     "notFound": "Produit non trouvé dans l'inventaire",
     "quantity": "Quantité",
-    "totalValue": "Valeur totale"
+    "totalValue": "Valeur totale",
+    "adjustmentAmount": "Montant de l'ajustement",
+    "reason": "Raison"
   },
   "payroll": {
     "currency": "Devise",

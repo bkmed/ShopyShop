@@ -40,22 +40,17 @@ export const CategoryDetailScreen = () => {
   }, [id]);
 
   const handleDelete = () => {
-    Alert.alert(
-      t('common.confirmDelete'),
-      t('categories.deleteConfirm') ||
-        'Are you sure you want to delete this category?',
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: async () => {
-            await categoriesDb.delete(id);
-            navigation.goBack();
-          },
+    Alert.alert(t('common.confirmDelete'), t('categories.deleteConfirm'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('common.delete'),
+        style: 'destructive',
+        onPress: async () => {
+          await categoriesDb.delete(id);
+          navigation.goBack();
         },
-      ],
-    );
+      },
+    ]);
   };
 
   if (loading) {

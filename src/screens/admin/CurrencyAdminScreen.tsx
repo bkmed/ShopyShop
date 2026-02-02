@@ -103,7 +103,7 @@ export const CurrencyAdminScreen = () => {
             {item.code}{' '}
             {item.isBase && (
               <Text style={{ color: theme.colors.primary, fontSize: 12 }}>
-                (Base)
+                ({t('currencies.base')})
               </Text>
             )}
           </Text>
@@ -131,7 +131,7 @@ export const CurrencyAdminScreen = () => {
       <View style={[styles.cardStats, { borderTopColor: theme.colors.border }]}>
         <View style={styles.statItem}>
           <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
-            Rate
+            {t('currencies.rate')}
           </Text>
           <Text style={[styles.statValue, { color: theme.colors.text }]}>
             1 {item.isBase ? item.code : 'USD?'} = {item.rate} {item.code}
@@ -139,7 +139,7 @@ export const CurrencyAdminScreen = () => {
         </View>
         <View style={styles.statItem}>
           <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
-            Status
+            {t('common.status')}
           </Text>
           <Text
             style={[
@@ -170,20 +170,20 @@ export const CurrencyAdminScreen = () => {
         ListHeaderComponent={() => (
           <View style={styles.header}>
             <Text style={[styles.title, { color: theme.colors.text }]}>
-              Currency Management
+              {t('currencies.manageTitle')}
             </Text>
 
             <View
               style={[styles.form, { backgroundColor: theme.colors.surface }]}
             >
               <Text style={[styles.formTitle, { color: theme.colors.text }]}>
-                {editingId ? 'Edit Currency' : 'Add New Currency'}
+                {editingId ? t('currencies.editTitle') : t('currencies.addNew')}
               </Text>
 
               <View style={styles.formRow}>
                 <View style={styles.formGroup}>
                   <Text style={[styles.label, { color: theme.colors.subText }]}>
-                    Code
+                    {t('currencies.code')}
                   </Text>
                   <TextInput
                     style={[
@@ -202,7 +202,7 @@ export const CurrencyAdminScreen = () => {
                 </View>
                 <View style={styles.formGroup}>
                   <Text style={[styles.label, { color: theme.colors.subText }]}>
-                    Symbol
+                    {t('currencies.symbol')}
                   </Text>
                   <TextInput
                     style={[
@@ -222,7 +222,7 @@ export const CurrencyAdminScreen = () => {
               <View style={styles.formRow}>
                 <View style={styles.formGroup}>
                   <Text style={[styles.label, { color: theme.colors.subText }]}>
-                    Rate
+                    {t('currencies.rate')}
                   </Text>
                   <TextInput
                     style={[
@@ -242,7 +242,7 @@ export const CurrencyAdminScreen = () => {
                 </View>
                 <View style={styles.formGroupCenter}>
                   <Text style={[styles.label, { color: theme.colors.subText }]}>
-                    Base
+                    {t('currencies.base')}
                   </Text>
                   <Switch
                     value={form.isBase}
@@ -255,7 +255,7 @@ export const CurrencyAdminScreen = () => {
                 </View>
                 <View style={styles.formGroupCenter}>
                   <Text style={[styles.label, { color: theme.colors.subText }]}>
-                    Active
+                    {t('common.active')}
                   </Text>
                   <Switch
                     value={form.isActive}
@@ -286,7 +286,9 @@ export const CurrencyAdminScreen = () => {
                       });
                     }}
                   >
-                    <Text style={{ color: theme.colors.text }}>Cancel</Text>
+                    <Text style={{ color: theme.colors.text }}>
+                      {t('common.cancel')}
+                    </Text>
                   </TouchableOpacity>
                 )}
                 <TouchableOpacity
@@ -297,7 +299,7 @@ export const CurrencyAdminScreen = () => {
                   onPress={handleSave}
                 >
                   <Text style={styles.saveBtnText}>
-                    {editingId ? 'Update' : 'Add Currency'}
+                    {editingId ? t('common.update') : t('currencies.addBtn')}
                   </Text>
                 </TouchableOpacity>
               </View>
