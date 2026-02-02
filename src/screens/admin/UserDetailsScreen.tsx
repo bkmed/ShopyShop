@@ -62,7 +62,22 @@ export const UserDetailsScreen = () => {
       t('common.deleteTitle'),
       t('common.confirmDelete'),
       async () => {
+        const userName = user?.name || 'Unknown';
         await usersDb.delete(id);
+
+        // Broadcast notification (admin only)
+        const { notificationService } = await import('../../services/notificationService');
+        const { useAuth } = await import('../../context/AuthContext');
+        const auth = useAuth();
+        if (auth?.user?.role === 'admin') {
+          await notificationService.broadcastNotification({
+            title: t('notifications.userDeleted', { name: userName }),
+            body: t('notifications.userDeleted', { name: userName }),
+            targetType: 'all',
+            senderId: auth.user.id,
+          });
+        }
+
         navigation.goBack();
       },
       t('common.delete'),

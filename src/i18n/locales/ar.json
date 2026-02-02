@@ -137,7 +137,8 @@
     "responseCaVa": "أنا بخير تماماً، شكراً لسؤالك! كيف يمكنني مساعدتك؟",
     "chat": "مساعد المحادثة",
     "typing": "المساعد يكتب...",
-    "sendMessage": "إرسال الرسالة"
+    "sendMessage": "إرسال الرسالة",
+    "placeholder": "اكتب رسالتك..."
   },
   "checkout": {
     "billingAddress": "عنوان الفواتير",
@@ -334,7 +335,10 @@
     "welcomeTitle": "مرحباً بك في ShopyShop!",
     "broadcastTitle": "بث",
     "sent": "أرسلت",
-    "target": "الهدف"
+    "target": "الهدف",
+    "userAdded": "تمت إضافة المستخدم الجديد {{name}} إلى النظام",
+    "userEdited": "تم تحديث المستخدم {{name}}",
+    "userDeleted": "تمت إزالة المستخدم {{name}} من النظام"
   },
   "orders": {
     "orderDetails": "تفاصيل الطلب",
@@ -388,7 +392,13 @@
     "saved": "تم حفظ العرض بنجاح",
     "deleted": "تم حذف العرض بنجاح",
     "codePlaceholder": "CODE",
-    "percentagePlaceholder": "20"
+    "percentagePlaceholder": "20",
+    "codeAndPercentageRequired": "الرمز والنسبة المئوية مطلوبة",
+    "failedToSave": "فشل في حفظ العرض",
+    "save": "حفظ العرض",
+    "allCategories": "جميع الفئات",
+    "expiryDate": "تاريخ الانتهاء",
+    "noPromos": "لم يتم العثور على رموز ترويجية"
   },
   "reclamations": {
     "title": "الشكاوى",

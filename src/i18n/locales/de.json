@@ -137,7 +137,8 @@
     "responseCaVa": "Mir geht es blendend, danke der Nachfrage! Wie kann ich dir behilflich sein?",
     "chat": "Chat-Assistent",
     "typing": "Assistent schreibt...",
-    "sendMessage": "Nachricht senden"
+    "sendMessage": "Nachricht senden",
+    "placeholder": "Deine Nachricht eingeben..."
   },
   "checkout": {
     "billingAddress": "Rechnungsadresse",
@@ -334,7 +335,10 @@
     "welcomeTitle": "Willkommen bei ShopyShop!",
     "broadcastTitle": "Rundsendung",
     "sent": "Gesendet",
-    "target": "Ziel"
+    "target": "Ziel",
+    "userAdded": "Neuer Benutzer {{name}} wurde zum System hinzugefügt",
+    "userEdited": "Benutzer {{name}} wurde aktualisiert",
+    "userDeleted": "Benutzer {{name}} wurde aus dem System entfernt"
   },
   "orders": {
     "orderDetails": "Bestelldetails",
@@ -388,7 +392,13 @@
     "saved": "Promo erfolgreich gespeichert",
     "deleted": "Promo erfolgreich gelöscht",
     "codePlaceholder": "CODE",
-    "percentagePlaceholder": "20"
+    "percentagePlaceholder": "20",
+    "codeAndPercentageRequired": "Code und Prozentsatz sind erforderlich",
+    "failedToSave": "Fehler beim Speichern der Promo",
+    "save": "Promo speichern",
+    "allCategories": "Alle Kategorien",
+    "expiryDate": "Ablaufdatum",
+    "noPromos": "Keine Promo-Codes gefunden"
   },
   "reclamations": {
     "title": "Reklamationen",

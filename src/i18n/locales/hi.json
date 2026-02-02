@@ -137,7 +137,8 @@
     "responseCaVa": "मैं बहुत अच्छा हूँ, पूछने के लिए धन्यवाद! मैं आपकी क्या सहायता कर सकता हूँ?",
     "chat": "चैट असिस्टेंट",
     "typing": "असिस्टेंट टाइप कर रहा है...",
-    "sendMessage": "संदेश भेजें"
+    "sendMessage": "संदेश भेजें",
+    "placeholder": "अपना संदेश टाइप करें..."
   },
   "checkout": {
     "billingAddress": "बिलिंग पता",
@@ -334,7 +335,10 @@
     "welcomeTitle": "ShopyShop में आपका स्वागत है!",
     "broadcastTitle": "प्रसारण",
     "sent": "भेजा",
-    "target": "लक्षय"
+    "target": "लक्षय",
+    "userAdded": "नया उपयोगकर्ता {{name}} सिस्टम में जोड़ा गया है",
+    "userEdited": "उपयोगकर्ता {{name}} को अपडेट किया गया है",
+    "userDeleted": "उपयोगकर्ता {{name}} को सिस्टम से हटा दिया गया है"
   },
   "orders": {
     "orderDetails": "ऑर्डर विवरण",
@@ -388,7 +392,13 @@
     "saved": "प्रोमो सफलतापूर्वक सहेजा गया",
     "deleted": "प्रोमो सफलतापूर्वक हटाया गया",
     "codePlaceholder": "CODE",
-    "percentagePlaceholder": "20"
+    "percentagePlaceholder": "20",
+    "codeAndPercentageRequired": "कोड और प्रतिशत आवश्यक हैं",
+    "failedToSave": "प्रोमो सहेजने में विफल",
+    "save": "प्रोमो सहेजें",
+    "allCategories": "सभी श्रेणियाँ",
+    "expiryDate": "समाप्ति तिथि",
+    "noPromos": "कोई प्रोमो कोड नहीं मिला"
   },
   "reclamations": {
     "title": "शिकायतें",

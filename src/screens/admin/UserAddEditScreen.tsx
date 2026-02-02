@@ -65,6 +65,19 @@ export const UserAddEditScreen = () => {
       if (isEditing) {
         await usersDb.update(id, { name, email, role });
         AlertService.showSuccess(toast, t('users.updatedSuccessfully'));
+
+        // Broadcast notification (admin only)
+        const { notificationService } = await import('../../services/notificationService');
+        const { useAuth } = await import('../../context/AuthContext');
+        const auth = useAuth();
+        if (auth?.user?.role === 'admin') {
+          await notificationService.broadcastNotification({
+            title: t('notifications.userEdited', { name }),
+            body: t('notifications.userEdited', { name }),
+            targetType: 'all',
+            senderId: auth.user.id,
+          });
+        }
       } else {
         await usersDb.add({
           name,
@@ -73,11 +86,24 @@ export const UserAddEditScreen = () => {
           status: 'active',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-        } as any); // Type assertion might be needed depending on strictness
+        } as any);
         AlertService.showSuccess(
           toast,
           t('users.createdSuccessfully') || 'User created',
         );
+
+        // Broadcast notification (admin only)
+        const { notificationService } = await import('../../services/notificationService');
+        const { useAuth } = await import('../../context/AuthContext');
+        const auth = useAuth();
+        if (auth?.user?.role === 'admin') {
+          await notificationService.broadcastNotification({
+            title: t('notifications.userAdded', { name }),
+            body: t('notifications.userAdded', { name }),
+            targetType: 'all',
+            senderId: auth.user.id,
+          });
+        }
       }
       navigation.goBack();
     } catch (error) {

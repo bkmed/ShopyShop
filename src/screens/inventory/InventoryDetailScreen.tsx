@@ -102,7 +102,7 @@ export const InventoryDetailScreen = () => {
                   borderColor: theme.colors.primary,
                 },
               ]}
-              onPress={() => navigation.navigate('ProductAdd', { product })}
+              onPress={() => navigation.navigate('InventoryAdd', { product })}
             >
               <Text
                 style={[styles.adjustBtnText, { color: theme.colors.primary }]}

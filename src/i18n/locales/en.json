@@ -137,7 +137,8 @@
     "responseCaVa": "I'm doing great, thank you for asking! How can I assist you?",
     "chat": "Chat Assistant",
     "typing": "Assistant is typing...",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "placeholder": "Type your message..."
   },
   "checkout": {
     "billingAddress": "Billing Address",
@@ -334,7 +335,10 @@
     "welcomeTitle": "Welcome to ShopyShop!",
     "broadcastTitle": "Broadcast",
     "sent": "Sent",
-    "target": "Target"
+    "target": "Target",
+    "userAdded": "New user {{name}} has been added to the system",
+    "userEdited": "User {{name}} has been updated",
+    "userDeleted": "User {{name}} has been removed from the system"
   },
   "orders": {
     "orderDetails": "Order Details",
@@ -388,7 +392,13 @@
     "active": "Active",
     "inactive": "Inactive",
     "saved": "Promo saved successfully",
-    "deleted": "Promo deleted successfully"
+    "deleted": "Promo deleted successfully",
+    "codeAndPercentageRequired": "Code and percentage are required",
+    "failedToSave": "Failed to save promo",
+    "save": "Save Promo",
+    "allCategories": "All Categories",
+    "expiryDate": "Expiry Date",
+    "noPromos": "No promo codes found"
   },
   "reclamations": {
     "title": "Claims",

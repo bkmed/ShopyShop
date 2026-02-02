@@ -137,7 +137,8 @@
     "responseCaVa": "我很好，谢谢关心！请问有什么可以帮您的？",
     "chat": "聊天助手",
     "typing": "助手正在输入...",
-    "sendMessage": "发送消息"
+    "sendMessage": "发送消息",
+    "placeholder": "输入您的消息..."
   },
   "checkout": {
     "billingAddress": "账单地址",
@@ -334,7 +335,10 @@
     "welcomeTitle": "欢迎来到 ShopyShop!",
     "broadcastTitle": "广播",
     "sent": "已发送",
-    "target": "目标"
+    "target": "目标",
+    "userAdded": "新用户 {{name}} 已添加到系统",
+    "userEdited": "用户 {{name}} 已更新",
+    "userDeleted": "用户 {{name}} 已从系统中删除"
   },
   "orders": {
     "orderDetails": "订单详情",
@@ -388,7 +392,13 @@
     "saved": "优惠已保存",
     "deleted": "优惠已删除",
     "codePlaceholder": "CODE",
-    "percentagePlaceholder": "20"
+    "percentagePlaceholder": "20",
+    "codeAndPercentageRequired": "代码和百分比为必填项",
+    "failedToSave": "保存优惠失败",
+    "save": "保存优惠",
+    "allCategories": "所有类别",
+    "expiryDate": "到期日期",
+    "noPromos": "未找到优惠码"
   },
   "reclamations": {
     "title": "投诉",
