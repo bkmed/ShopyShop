@@ -137,12 +137,13 @@ export interface ChatMessage {
   createdAt: string;
 }
 
-export interface Currency {
+export interface PromoCode {
   id: string;
   code: string;
-  symbol: string;
-  createdAt: string;
-  updatedAt: string;
+  percentage: number;
+  categoryId: string; // Restricted to category
+  isActive: boolean;
+  expiryDate: string;
 }
 
 export interface InventoryLog {

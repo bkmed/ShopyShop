@@ -42,6 +42,7 @@
     "total": "Total",
     "updateQuantity": "Mettre à jour la quantité",
     "shoppingCart": "Panier d'achat",
+    "clear": "Vider le panier",
     "cartSummary": "Résumé du panier",
     "vouchers": "Bons d'achat",
     "applyVoucher": "Appliquer le bon",
@@ -150,6 +151,7 @@
     "detail": "Détail",
     "update": "Mettre à jour",
     "address": "Adresse",
+    "actions": "Actions",
     "all": "Tout",
     "apply": "Appliquer",
     "back": "Retour",
@@ -444,6 +446,15 @@
     "restartRequired": "Redémarrage requis",
     "restartRequiredMessage": "Veuillez redémarrer l'application pour appliquer les modifications.",
     "updatedSuccessfully": "Profil mis à jour avec succès"
+  },
+  "users": {
+    "title": "Gestion des utilisateurs",
+    "detail": "Détails de l'utilisateur",
+    "admin": "Administrateur",
+    "stockManager": "Gestionnaire de Stock",
+    "gestionnaire_de_stock": "Gestionnaire de Stock",
+    "customer": "Client",
+    "user": "Utilisateur"
   },
   "roles": {
     "admin": "Administrateur",

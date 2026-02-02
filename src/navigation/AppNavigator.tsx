@@ -194,14 +194,21 @@ const CatalogStack = () => {
   );
 };
 
+import { CheckoutScreen } from '../screens/shop/CheckoutScreen';
+
 const CartStack = () => {
   const { t } = useTranslation();
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="CartMain"
+        name="Cart"
         component={CartScreen}
-        options={{ title: t('navigation.cart') }}
+        options={{ title: t('cart.title') }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={CheckoutScreen}
+        options={{ title: t('cart.checkout') || 'Checkout' }}
       />
     </Stack.Navigator>
   );
@@ -402,6 +409,8 @@ const ReclamationsStack = () => {
   );
 };
 
+import { UserAddEditScreen } from '../screens/admin/UserAddEditScreen';
+
 const UserManagementStack = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -429,6 +438,30 @@ const UserManagementStack = () => {
         component={CurrencyAdminScreen}
         options={{ title: 'Currency Management' }}
       />
+      <Stack.Screen
+        name="UserAddEdit"
+        component={UserAddEditScreen}
+        options={{ title: t('users.detail') || 'User Details' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+import { PromoListScreen } from '../screens/admin/PromoListScreen';
+import { PromoAddEditScreen } from '../screens/admin/PromoAddEditScreen';
+
+const PromoStack = () => {
+  const { theme } = useTheme();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen name="PromoList" component={PromoListScreen} options={{ title: 'Promo Codes' }} />
+      <Stack.Screen name="PromoAddEdit" component={PromoAddEditScreen} options={{ title: 'Promo Detail' }} />
     </Stack.Navigator>
   );
 };
@@ -482,6 +515,7 @@ const useNavigationSections = () => {
     const isStockManager = rbacService.isStockManager(user);
     const isAdmin = rbacService.isAdmin(user);
     const isManagementRole = isStockManager || isAdmin;
+    const isManager = isAdmin || user?.role === 'gestionnaire_de_stock';
 
     const sections = [
       {
@@ -584,6 +618,11 @@ const useNavigationSections = () => {
         label: 'Currencies',
         icon: '💱',
       });
+      managementItems.push({
+        key: 'Promos',
+        label: 'Promos',
+        icon: '🎟️',
+      });
     }
 
     if (managementItems.length > 0) {
@@ -605,14 +644,29 @@ const useNavigationSections = () => {
       ],
     });
 
+    const personalItems = [
+      { key: 'Settings', label: t('navigation.settings'), icon: '⚙️' },
+      { key: 'Language', label: t('profile.language'), icon: '🌐' },
+      { key: 'Currency', label: t('settings.currency'), icon: '💵' },
+      { key: 'Profile', label: t('navigation.profile'), icon: '👤' },
+    ];
+
+    if (!isManager) {
+      personalItems.splice(1, 0, {
+        key: 'Purchases',
+        label: t('navigation.purchases') || 'Purchases',
+        icon: '🛍️',
+      });
+      personalItems.splice(2, 0, {
+        key: 'Reclamations',
+        label: t('navigation.reclamations') || 'Reclamations',
+        icon: '📝',
+      });
+    }
+
     sections.push({
       title: t('sections.personal'),
-      items: [
-        { key: 'Settings', label: t('navigation.settings'), icon: '⚙️' },
-        { key: 'Language', label: t('profile.language'), icon: '🌐' },
-        { key: 'Currency', label: t('settings.currency'), icon: '💵' },
-        { key: 'Profile', label: t('navigation.profile'), icon: '👤' },
-      ],
+      items: personalItems,
     });
 
     return sections;
@@ -942,6 +996,10 @@ const WebNavigator = () => {
         return <SettingsStack />;
       case 'Currency':
         return <SettingsStack />;
+      case 'Devise': // Support French key
+        return <SettingsStack />;
+      case 'Promos':
+        return <PromoStack />;
       default:
         return <HomeStack />;
     }

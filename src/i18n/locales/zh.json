@@ -42,6 +42,7 @@
     "total": "总计",
     "updateQuantity": "更新数量",
     "shoppingCart": "购物车",
+    "clear": "清空购物车",
     "cartSummary": "购物车摘要",
     "vouchers": "代金券",
     "applyVoucher": "使用代金券",
@@ -150,6 +151,7 @@
     "detail": "详情",
     "update": "更新",
     "address": "地址",
+    "actions": "操作",
     "all": "全部",
     "apply": "应用",
     "back": "返回",
@@ -444,6 +446,14 @@
     "restartRequired": "需要重启",
     "restartRequiredMessage": "请重启应用程序以应用更改。",
     "updatedSuccessfully": "个人资料已成功更新"
+  },
+  "users": {
+    "title": "用户管理",
+    "detail": "用户详情",
+    "admin": "管理员",
+    "stockManager": "库存管理员",
+    "customer": "客户",
+    "user": "用户"
   },
   "roles": {
     "admin": "管理员",

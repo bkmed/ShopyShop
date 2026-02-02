@@ -88,9 +88,17 @@ export const UserListScreen = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>
-          {t('roles.title')}
-        </Text>
+        <View style={styles.headerRow}>
+          <Text style={[styles.title, { color: theme.colors.text }]}>
+            {t('roles.title')}
+          </Text>
+          <TouchableOpacity
+            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            onPress={() => navigation.navigate('UserAddEdit')}
+          >
+            <Text style={styles.addButtonText}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View
@@ -109,26 +117,28 @@ export const UserListScreen = () => {
         />
       </View>
 
-      {loading ? (
-        <View style={styles.centered}>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        </View>
-      ) : (
-        <FlatList
-          data={filteredUsers}
-          keyExtractor={item => item.id}
-          renderItem={renderUserItem}
-          contentContainerStyle={styles.listContent}
-          ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <Text style={{ color: theme.colors.subText }}>
-                {t('common.noResult')}
-              </Text>
-            </View>
-          }
-        />
-      )}
-    </View>
+      {
+        loading ? (
+          <View style={styles.centered}>
+            <ActivityIndicator size="large" color={theme.colors.primary} />
+          </View>
+        ) : (
+          <FlatList
+            data={filteredUsers}
+            keyExtractor={item => item.id}
+            renderItem={renderUserItem}
+            contentContainerStyle={styles.listContent}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Text style={{ color: theme.colors.subText }}>
+                  {t('common.noResult')}
+                </Text>
+              </View>
+            }
+          />
+        )
+      }
+    </View >
   );
 };
 
@@ -140,6 +150,29 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 20,
     marginTop: 10,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  addButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  addButtonText: {
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: -2,
   },
   title: {
     fontSize: 28,

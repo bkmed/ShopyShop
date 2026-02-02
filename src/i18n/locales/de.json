@@ -42,6 +42,7 @@
     "total": "Gesamt",
     "updateQuantity": "Menge aktualisieren",
     "shoppingCart": "Warenkorb",
+    "clear": "Warenkorb leeren",
     "cartSummary": "Warenkorb-Übersicht",
     "vouchers": "Gutscheine",
     "applyVoucher": "Gutschein anwenden",
@@ -150,6 +151,7 @@
     "detail": "Detail",
     "update": "Aktualisieren",
     "address": "Adresse",
+    "actions": "Aktionen",
     "all": "Alle",
     "apply": "Anwenden",
     "back": "Zurück",
@@ -313,7 +315,6 @@
     "cancelOrder": "Bestellung stornieren",
     "returnOrder": "Bestellung zurücksenden",
     "reorder": "Erneut bestellen",
-    "noOrders": "Keine Bestellungen gefunden",
     "title": "Bestellungen",
     "pending": "Ausstehend",
     "processing": "In Bearbeitung",
@@ -444,6 +445,14 @@
     "restartRequired": "Neustart erforderlich",
     "restartRequiredMessage": "Bitte starte die App neu, um die Änderungen zu übernehmen.",
     "updatedSuccessfully": "Profil erfolgreich aktualisiert"
+  },
+  "users": {
+    "title": "Benutzerverwaltung",
+    "detail": "Benutzerdetails",
+    "admin": "Administrator",
+    "stockManager": "Lagerverwalter",
+    "customer": "Kunde",
+    "user": "Benutzer"
   },
   "roles": {
     "admin": "Administrator",

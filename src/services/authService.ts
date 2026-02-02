@@ -21,6 +21,8 @@ export interface User {
   role: UserRole;
   avatarUri?: string;
   phone?: string;
+  addresses?: string[];
+  preferredCurrency?: string;
   status?: 'active' | 'pending' | 'rejected';
   notificationPreferences?: {
     push: boolean;
@@ -55,6 +57,8 @@ export const authService = {
         email: user.email,
         role: user.role as UserRole,
         avatarUri: user.avatarUri,
+        addresses: user.addresses,
+        preferredCurrency: user.preferredCurrency,
         status: user.status,
         notificationPreferences: {
           push: true,

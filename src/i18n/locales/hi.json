@@ -42,6 +42,7 @@
     "total": "कुल",
     "updateQuantity": "मात्रा अपडेट करें",
     "shoppingCart": "शॉपिंग कार्ट",
+    "clear": "कार्ट खाली करें",
     "cartSummary": "कार्ट सारांश",
     "vouchers": "वाउचर",
     "applyVoucher": "वाउचर लागू करें",
@@ -150,6 +151,7 @@
     "detail": "विवरण",
     "update": "अपडेट करें",
     "address": "पता",
+    "actions": "कार्रवाई",
     "all": "सभी",
     "apply": "लागू करें",
     "back": "पीछे",
@@ -447,12 +449,16 @@
   },
   "roles": {
     "admin": "प्रशासक",
-    "stockManager": "स्टॉक प्रबंधक",
-    "gestionnaire_de_stock": "स्टॉक प्रबंधक",
     "customer": "ग्राहक",
-    "user": "उपयोगकर्ता",
-    "title": "भूमिकाएं",
-    "anonyme": "अतिथि"
+    "user": "उपयोगकर्ता"
+  },
+  "users": {
+    "title": "उपयोगकर्ता प्रबंधन",
+    "detail": "उपयोगकर्ता विवरण",
+    "admin": "प्रशासक",
+    "stockManager": "स्टॉक प्रबंधक",
+    "customer": "ग्राहक",
+    "user": "उपयोगकर्ता"
   },
   "search": {
     "noResultsFor": "इसके लिए कोई परिणाम नहीं मिला"

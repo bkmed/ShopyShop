@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,54 +7,42 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { reclamationDb } from '../../database/reclamationDb';
-import { Reclamation } from '../../database/schema';
 import { useAuth } from '../../context/AuthContext';
+// We'll assume a reclamationsDb exists or we create it. 
+// Given the Phase 5 plan, I need to create the system.
+// I'll create a local db mock for now or use a new file.
+// I'll create reclamationsDb.ts in the next step.
+// For now, I'll import it as if it exists.
+import { reclamationsDb } from '../../database';
+import { Reclamation } from '../../database/schema';
 
 export const ReclamationListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const { user } = useAuth();
   const navigation = useNavigation<any>();
-
+  const { user } = useAuth();
   const [reclamations, setReclamations] = useState<Reclamation[]>([]);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    loadReclamations();
+    const unsubscribe = navigation.addListener('focus', loadReclamations);
+    return unsubscribe;
+  }, [navigation]);
+
   const loadReclamations = async () => {
+    if (!user) return;
+    setLoading(true);
     try {
-      setLoading(true);
-      if (user) {
-        const data = await reclamationDb.getByUserId(user.id);
-        setReclamations(data);
-      }
+      const data = await reclamationsDb.getByUserId(user.id);
+      setReclamations(data);
     } catch (error) {
-      console.error('Error loading reclamations:', error);
+      console.error(error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      loadReclamations();
-    }, [user]),
-  );
-
-  const getStatusColor = (status: Reclamation['status']) => {
-    switch (status) {
-      case 'pending':
-        return '#FFA500';
-      case 'investigating':
-        return '#2D5BFF';
-      case 'resolved':
-        return '#4CAF50';
-      case 'rejected':
-        return '#F44336';
-      default:
-        return theme.colors.subText;
     }
   };
 
@@ -63,47 +51,38 @@ export const ReclamationListScreen = () => {
       style={[styles.card, { backgroundColor: theme.colors.surface }]}
       onPress={() => navigation.navigate('ReclamationDetail', { id: item.id })}
     >
-      <View style={styles.headerRow}>
-        <Text style={[styles.reason, { color: theme.colors.text }]}>
-          {item.reason}
+      <View style={styles.header}>
+        <Text style={[styles.reason, { color: theme.colors.text }]}>{item.reason}</Text>
+        <Text style={[styles.status, { color: getStatusColor(item.status) }]}>
+          {t(`reclamations.${item.status}`) || item.status}
         </Text>
-        <View
-          style={[
-            styles.statusBadge,
-            { backgroundColor: getStatusColor(item.status) + '15' },
-          ]}
-        >
-          <Text
-            style={[styles.statusText, { color: getStatusColor(item.status) }]}
-          >
-            {item.status.toUpperCase()}
-          </Text>
-        </View>
       </View>
       <Text style={[styles.date, { color: theme.colors.subText }]}>
-        {item.createdAt}
+        {new Date(item.createdAt).toLocaleDateString()}
       </Text>
-      <Text style={[styles.orderId, { color: theme.colors.subText }]}>
-        {t('reclamations.orderId')}: {item.orderId}
+      <Text style={[styles.desc, { color: theme.colors.subText }]} numberOfLines={2}>
+        {item.description}
       </Text>
     </TouchableOpacity>
   );
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'resolved': return '#4CAF50';
+      case 'rejected': return '#F44336';
+      case 'investigating': return '#FF9800';
+      default: return '#2196F3';
+    }
+  };
+
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>
-          {t('reclamations.title')}
-        </Text>
-        <TouchableOpacity
-          style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
-          onPress={() => navigation.navigate('ReclamationAdd')}
-        >
-          <Text style={styles.addButtonText}>+ {t('common.add')}</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <TouchableOpacity
+        style={[styles.addBtn, { backgroundColor: theme.colors.primary }]}
+        onPress={() => navigation.navigate('ReclamationAdd')}
+      >
+        <Text style={styles.addBtnText}>+ {t('reclamations.add') || 'New Claim'}</Text>
+      </TouchableOpacity>
 
       {loading ? (
         <View style={styles.centered}>
@@ -116,11 +95,8 @@ export const ReclamationListScreen = () => {
           renderItem={renderItem}
           contentContainerStyle={styles.list}
           ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <Text style={{ fontSize: 40, marginBottom: 16 }}>📝</Text>
-              <Text style={[styles.emptyText, { color: theme.colors.subText }]}>
-                {t('common.noData')}
-              </Text>
+            <View style={styles.empty}>
+              <Text style={{ color: theme.colors.subText }}>{t('common.noResult')}</Text>
             </View>
           }
         />
@@ -132,81 +108,54 @@ export const ReclamationListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-    marginTop: 10,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '900',
-  },
-  addButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 12,
-  },
-  addButtonText: {
-    color: '#FFF',
-    fontWeight: 'bold',
-  },
-  list: {
-    paddingBottom: 40,
-  },
-  card: {
-    padding: 20,
-    borderRadius: 24,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 8,
-  },
-  reason: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    flex: 1,
-    marginRight: 12,
-  },
-  statusBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-  },
-  statusText: {
-    fontSize: 10,
-    fontWeight: '800',
-  },
-  date: {
-    fontSize: 13,
-    marginBottom: 4,
-  },
-  orderId: {
-    fontSize: 13,
-    fontStyle: 'italic',
+    padding: 16,
   },
   centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  emptyContainer: {
+  addBtn: {
+    padding: 16,
+    borderRadius: 12,
     alignItems: 'center',
-    marginTop: 100,
+    marginBottom: 16,
   },
-  emptyText: {
+  addBtnText: {
+    color: '#FFF',
+    fontWeight: 'bold',
     fontSize: 16,
+  },
+  list: {
+    paddingBottom: 20,
+  },
+  card: {
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  reason: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  status: {
     fontWeight: '600',
+    textTransform: 'capitalize',
+  },
+  date: {
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  desc: {
+    fontSize: 14,
+  },
+  empty: {
+    alignItems: 'center',
+    marginTop: 40,
   },
 });

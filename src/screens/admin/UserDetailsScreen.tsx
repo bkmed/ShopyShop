@@ -145,6 +145,12 @@ export const UserDetailsScreen = () => {
           {t('common.actions')}
         </Text>
         <TouchableOpacity
+          style={[styles.editButton, { backgroundColor: theme.colors.primary }]}
+          onPress={() => navigation.navigate('UserAddEdit', { id: user.id })}
+        >
+          <Text style={styles.editText}>{t('common.edit') || 'Edit'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           style={[styles.deleteButton, { backgroundColor: '#FF4444' }]}
           onPress={handleDelete}
         >
@@ -211,6 +217,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     marginTop: 10,
+  },
+  editButton: {
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  editText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   deleteText: {
     color: '#FFF',

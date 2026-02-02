@@ -223,6 +223,10 @@ export const GlassHeader = ({
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const prevCount = React.useRef(cartCount);
 
+  const isStockManager = user?.role === 'gestionnaire_de_stock';
+  const isAdmin = user?.role === 'admin';
+  const isManager = isStockManager || isAdmin;
+
   React.useEffect(() => {
     if (cartCount > prevCount.current) {
       setShowCart(true);
@@ -264,44 +268,46 @@ export const GlassHeader = ({
           </TouchableOpacity>
         )}
 
-        <View style={{ position: 'relative' }}>
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={() => setShowCart(!showCart)}
-          >
-            {cartCount > 0 && (
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{cartCount}</Text>
+        {!isManager && (
+          <View style={{ position: 'relative' }}>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => setShowCart(!showCart)}
+            >
+              {cartCount > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{cartCount}</Text>
+                </View>
+              )}
+              <Text style={{ fontSize: 24 }}>🛒</Text>
+            </TouchableOpacity>
+
+            {showCart && cartItems.length > 0 && (
+              <View style={styles.cartDropdown}>
+                {cartItems.map(item => (
+                  <View key={item.productId} style={styles.cartItem}>
+                    <Text style={{ fontSize: 24 }}>📦</Text>
+                    <View style={styles.cartItemInfo}>
+                      <Text style={styles.cartItemName} numberOfLines={1}>
+                        {cartProducts[item.productId]?.name || '...'}
+                      </Text>
+                      <Text style={styles.cartItemPrice}>
+                        {item.quantity} x {formatPrice(cartProducts[item.productId]?.price || 0)}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+                <View style={styles.totalRow}>
+                  <Text style={styles.totalLabel}>{t('cart.total') || 'Total'}</Text>
+                  <Text style={styles.totalValue}>{formatPrice(totalAmount)}</Text>
+                </View>
+                <TouchableOpacity style={styles.viewCartBtn} onPress={handleViewCart}>
+                  <Text style={styles.viewCartText}>{t('cart.title') || 'View Cart'}</Text>
+                </TouchableOpacity>
               </View>
             )}
-            <Text style={{ fontSize: 24 }}>🛒</Text>
-          </TouchableOpacity>
-
-          {showCart && cartItems.length > 0 && (
-            <View style={styles.cartDropdown}>
-              {cartItems.map(item => (
-                <View key={item.productId} style={styles.cartItem}>
-                  <Text style={{ fontSize: 24 }}>📦</Text>
-                  <View style={styles.cartItemInfo}>
-                    <Text style={styles.cartItemName} numberOfLines={1}>
-                      {cartProducts[item.productId]?.name || '...'}
-                    </Text>
-                    <Text style={styles.cartItemPrice}>
-                      {item.quantity} x {formatPrice(cartProducts[item.productId]?.price || 0)}
-                    </Text>
-                  </View>
-                </View>
-              ))}
-              <View style={styles.totalRow}>
-                <Text style={styles.totalLabel}>{t('cart.total') || 'Total'}</Text>
-                <Text style={styles.totalValue}>{formatPrice(totalAmount)}</Text>
-              </View>
-              <TouchableOpacity style={styles.viewCartBtn} onPress={handleViewCart}>
-                <Text style={styles.viewCartText}>{t('cart.title') || 'View Cart'}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
+          </View>
+        )}
 
         <NotificationBell />
         <TouchableOpacity

@@ -42,6 +42,7 @@
     "total": "Total",
     "updateQuantity": "Update Quantity",
     "shoppingCart": "Shopping Cart",
+    "clear": "Clear Cart",
     "cartSummary": "Cart Summary",
     "vouchers": "Vouchers",
     "applyVoucher": "Apply Voucher",
@@ -150,6 +151,7 @@
     "detail": "Detail",
     "update": "Update",
     "address": "Address",
+    "actions": "Actions",
     "all": "All",
     "apply": "Apply",
     "back": "Back",
@@ -445,11 +447,16 @@
     "restartRequiredMessage": "Please restart the app to apply changes.",
     "updatedSuccessfully": "Profile updated successfully"
   },
-  "roles": {
-    "admin": "Admin",
+  "users": {
+    "title": "User Management",
+    "detail": "User Details",
+    "admin": "Administrator",
     "stockManager": "Stock Manager",
-    "gestionnaire_de_stock": "Stock Manager",
     "customer": "Customer",
+    "user": "User"
+  },
+  "roles": {
+    "gestionnaire_de_stock": "Stock Manager",
     "user": "User",
     "title": "Roles",
     "anonyme": "Guest"

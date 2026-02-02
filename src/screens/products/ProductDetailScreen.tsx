@@ -313,7 +313,7 @@ export const ProductDetailScreen = () => {
         )}
       </View>
 
-      {!isStockManager && (
+      {!isManager && !isStockManager && (
         <View
           style={[
             screenStyles.footer,

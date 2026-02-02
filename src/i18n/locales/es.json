@@ -42,6 +42,7 @@
     "total": "Total",
     "updateQuantity": "Actualizar cantidad",
     "shoppingCart": "Carrito de compras",
+    "clear": "Vaciar carrito",
     "cartSummary": "Resumen del carrito",
     "vouchers": "Cupones",
     "applyVoucher": "Aplicar cupón",
@@ -150,6 +151,7 @@
     "detail": "Detalle",
     "update": "Actualizar",
     "address": "Dirección",
+    "actions": "Acciones",
     "all": "Todo",
     "apply": "Aplicar",
     "back": "Volver",
@@ -444,6 +446,14 @@
     "restartRequired": "Reinicio requerido",
     "restartRequiredMessage": "Por favor, reinicia la aplicación para aplicar los cambios.",
     "updatedSuccessfully": "Perfil actualizado con éxito"
+  },
+  "users": {
+    "title": "Gestión de usuarios",
+    "detail": "Détails de l'utilisateur",
+    "admin": "Administrador",
+    "stockManager": "Gestor de Stock",
+    "customer": "Cliente",
+    "user": "Usuario"
   },
   "roles": {
     "admin": "Administrador",
