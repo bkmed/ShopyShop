@@ -337,6 +337,21 @@
     "list": "Liste des achats",
     "detail": "Détail de l'achat"
   },
+  "promos": {
+    "title": "Codes Promo",
+    "list": "Liste des Promos",
+    "add": "Ajouter Promo",
+    "detail": "Détail Promo",
+    "code": "Code",
+    "percentage": "Pourcentage",
+    "category": "Catégorie",
+    "expiry": "Date d'expiration",
+    "status": "Statut",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "saved": "Promo enregistrée avec succès",
+    "deleted": "Promo supprimée avec succès"
+  },
   "reclamations": {
     "title": "Réclamations",
     "list": "Liste des réclamations",

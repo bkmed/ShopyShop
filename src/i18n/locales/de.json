@@ -315,6 +315,7 @@
     "cancelOrder": "Bestellung stornieren",
     "returnOrder": "Bestellung zurücksenden",
     "reorder": "Erneut bestellen",
+    "noOrders": "Keine Bestellungen gefunden",
     "title": "Bestellungen",
     "pending": "Ausstehend",
     "processing": "In Bearbeitung",
@@ -335,6 +336,21 @@
     "title": "Kaufhistorie",
     "list": "Kaufliste",
     "detail": "Kaufdetail"
+  },
+  "promos": {
+    "title": "Promo-Codes",
+    "list": "Promo-Liste",
+    "add": "Promo hinzufügen",
+    "detail": "Promo-Detail",
+    "code": "Code",
+    "percentage": "Prozentsatz",
+    "category": "Kategorie",
+    "expiry": "Ablaufdatum",
+    "status": "Status",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "saved": "Promo erfolgreich gespeichert",
+    "deleted": "Promo erfolgreich gelöscht"
   },
   "reclamations": {
     "title": "Reklamationen",

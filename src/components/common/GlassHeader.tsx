@@ -186,7 +186,9 @@ export const GlassHeader = ({
   const { formatPrice } = useCurrency();
   const { setActiveTab } = React.useContext(WebNavigationContext);
   const [showCart, setShowCart] = React.useState(false);
-  const [cartProducts, setCartProducts] = React.useState<Record<string, Product>>({});
+  const [cartProducts, setCartProducts] = React.useState<
+    Record<string, Product>
+  >({});
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
@@ -292,17 +294,27 @@ export const GlassHeader = ({
                         {cartProducts[item.productId]?.name || '...'}
                       </Text>
                       <Text style={styles.cartItemPrice}>
-                        {item.quantity} x {formatPrice(cartProducts[item.productId]?.price || 0)}
+                        {item.quantity} x{' '}
+                        {formatPrice(cartProducts[item.productId]?.price || 0)}
                       </Text>
                     </View>
                   </View>
                 ))}
                 <View style={styles.totalRow}>
-                  <Text style={styles.totalLabel}>{t('cart.total') || 'Total'}</Text>
-                  <Text style={styles.totalValue}>{formatPrice(totalAmount)}</Text>
+                  <Text style={styles.totalLabel}>
+                    {t('cart.total') || 'Total'}
+                  </Text>
+                  <Text style={styles.totalValue}>
+                    {formatPrice(totalAmount)}
+                  </Text>
                 </View>
-                <TouchableOpacity style={styles.viewCartBtn} onPress={handleViewCart}>
-                  <Text style={styles.viewCartText}>{t('cart.title') || 'View Cart'}</Text>
+                <TouchableOpacity
+                  style={styles.viewCartBtn}
+                  onPress={handleViewCart}
+                >
+                  <Text style={styles.viewCartText}>
+                    {t('cart.title') || 'View Cart'}
+                  </Text>
                 </TouchableOpacity>
               </View>
             )}

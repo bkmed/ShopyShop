@@ -38,7 +38,9 @@ export const ReclamationDetailScreen = () => {
 
   if (loading) {
     return (
-      <View style={[styles.centered, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.centered, { backgroundColor: theme.colors.background }]}
+      >
         <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
@@ -46,41 +48,71 @@ export const ReclamationDetailScreen = () => {
 
   if (!reclamation) {
     return (
-      <View style={[styles.centered, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.centered, { backgroundColor: theme.colors.background }]}
+      >
         <Text style={{ color: theme.colors.text }}>Reclamation not found</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <View style={[styles.card, { backgroundColor: theme.colors.surface }]}>
         <View style={styles.header}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>Status</Text>
-          <View style={[styles.badge, { backgroundColor: getStatusColor(reclamation.status) + '20' }]}>
-            <Text style={[styles.statusText, { color: getStatusColor(reclamation.status) }]}>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            Status
+          </Text>
+          <View
+            style={[
+              styles.badge,
+              { backgroundColor: getStatusColor(reclamation.status) + '20' },
+            ]}
+          >
+            <Text
+              style={[
+                styles.statusText,
+                { color: getStatusColor(reclamation.status) },
+              ]}
+            >
               {t(`reclamations.${reclamation.status}`) || reclamation.status}
             </Text>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>{t('reclamations.reason')}</Text>
-          <Text style={[styles.value, { color: theme.colors.text }]}>{reclamation.reason}</Text>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('reclamations.reason')}
+          </Text>
+          <Text style={[styles.value, { color: theme.colors.text }]}>
+            {reclamation.reason}
+          </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>{t('reclamations.description')}</Text>
-          <Text style={[styles.value, { color: theme.colors.text }]}>{reclamation.description}</Text>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('reclamations.description')}
+          </Text>
+          <Text style={[styles.value, { color: theme.colors.text }]}>
+            {reclamation.description}
+          </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>{t('orders.orderNumber')}</Text>
-          <Text style={[styles.value, { color: theme.colors.text }]}>{reclamation.orderId}</Text>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('orders.orderNumber')}
+          </Text>
+          <Text style={[styles.value, { color: theme.colors.text }]}>
+            {reclamation.orderId}
+          </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>Date</Text>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            Date
+          </Text>
           <Text style={[styles.value, { color: theme.colors.text }]}>
             {new Date(reclamation.createdAt).toLocaleString()}
           </Text>
@@ -92,10 +124,14 @@ export const ReclamationDetailScreen = () => {
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case 'resolved': return '#4CAF50';
-    case 'rejected': return '#F44336';
-    case 'investigating': return '#FF9800';
-    default: return '#2196F3';
+    case 'resolved':
+      return '#4CAF50';
+    case 'rejected':
+      return '#F44336';
+    case 'investigating':
+      return '#FF9800';
+    default:
+      return '#2196F3';
   }
 };
 

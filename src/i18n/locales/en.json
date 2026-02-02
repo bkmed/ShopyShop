@@ -337,6 +337,21 @@
     "list": "Purchase List",
     "detail": "Purchase Detail"
   },
+  "promos": {
+    "title": "Promo Codes",
+    "list": "Promo List",
+    "add": "Add Promo",
+    "detail": "Promo Detail",
+    "code": "Code",
+    "percentage": "Percentage",
+    "category": "Category",
+    "expiry": "Expiry Date",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "saved": "Promo saved successfully",
+    "deleted": "Promo deleted successfully"
+  },
   "reclamations": {
     "title": "Claims",
     "list": "Claims List",
@@ -456,7 +471,10 @@
     "user": "User"
   },
   "roles": {
+    "admin": "Admin",
+    "stockManager": "Stock Manager",
     "gestionnaire_de_stock": "Stock Manager",
+    "customer": "Customer",
     "user": "User",
     "title": "Roles",
     "anonyme": "Guest"

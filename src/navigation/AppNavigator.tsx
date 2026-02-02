@@ -460,8 +460,16 @@ const PromoStack = () => {
         headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
       }}
     >
-      <Stack.Screen name="PromoList" component={PromoListScreen} options={{ title: 'Promo Codes' }} />
-      <Stack.Screen name="PromoAddEdit" component={PromoAddEditScreen} options={{ title: 'Promo Detail' }} />
+      <Stack.Screen
+        name="PromoList"
+        component={PromoListScreen}
+        options={{ title: 'Promo Codes' }}
+      />
+      <Stack.Screen
+        name="PromoAddEdit"
+        component={PromoAddEditScreen}
+        options={{ title: 'Promo Detail' }}
+      />
     </Stack.Navigator>
   );
 };
@@ -531,13 +539,13 @@ const useNavigationSections = () => {
           },
           ...(!isManagementRole
             ? [
-              {
-                key: 'Categories',
-                label: t('navigation.categories') || 'Categories',
-                icon: '🗂️',
-              },
-              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-            ]
+                {
+                  key: 'Categories',
+                  label: t('navigation.categories') || 'Categories',
+                  icon: '🗂️',
+                },
+                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+              ]
             : []),
         ],
       },
@@ -546,36 +554,36 @@ const useNavigationSections = () => {
         items: [
           ...(!isManagementRole
             ? [
-              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-              {
-                key: 'Wishlist',
-                label: t('navigation.wishlist') || 'Wishlist',
-                icon: '❤️',
-              },
-            ]
+                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+                {
+                  key: 'Wishlist',
+                  label: t('navigation.wishlist') || 'Wishlist',
+                  icon: '❤️',
+                },
+              ]
             : []),
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-              {
-                key: 'Analytics',
-                label: t('navigation.analytics'),
-                icon: '📊',
-              },
-            ]
+                {
+                  key: 'Analytics',
+                  label: t('navigation.analytics'),
+                  icon: '📊',
+                },
+              ]
             : []),
           ...(!isManagementRole
             ? [
-              {
-                key: 'Purchases',
-                label: t('navigation.purchases') || 'Purchases',
-                icon: '🛍️',
-              },
-              {
-                key: 'Reclamations',
-                label: t('navigation.reclamations') || 'Claims',
-                icon: '⚠️',
-              },
-            ]
+                {
+                  key: 'Purchases',
+                  label: t('navigation.purchases') || 'Purchases',
+                  icon: '🛍️',
+                },
+                {
+                  key: 'Reclamations',
+                  label: t('navigation.reclamations') || 'Claims',
+                  icon: '⚠️',
+                },
+              ]
             : []),
         ],
       },
@@ -790,9 +798,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                        borderWidth: 1,
-                        borderColor: theme.colors.primary,
-                      }),
+                          borderWidth: 1,
+                          borderColor: theme.colors.primary,
+                        }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -1009,7 +1017,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      { }
+      {}
       <View
         style={
           [
@@ -1023,7 +1031,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        { }
+        {}
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (

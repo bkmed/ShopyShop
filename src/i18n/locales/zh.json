@@ -337,6 +337,21 @@
     "list": "购买列表",
     "detail": "购买详情"
   },
+  "promos": {
+    "title": "优惠码",
+    "list": "优惠列表",
+    "add": "添加优惠",
+    "detail": "优惠详情",
+    "code": "代码",
+    "percentage": "百分比",
+    "category": "类别",
+    "expiry": "到期日期",
+    "status": "状态",
+    "active": "有效",
+    "inactive": "无效",
+    "saved": "优惠已保存",
+    "deleted": "优惠已删除"
+  },
   "reclamations": {
     "title": "投诉",
     "list": "投诉列表",

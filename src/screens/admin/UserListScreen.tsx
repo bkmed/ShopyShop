@@ -93,7 +93,10 @@ export const UserListScreen = () => {
             {t('roles.title')}
           </Text>
           <TouchableOpacity
-            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            style={[
+              styles.addButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
             onPress={() => navigation.navigate('UserAddEdit')}
           >
             <Text style={styles.addButtonText}>+</Text>
@@ -117,28 +120,26 @@ export const UserListScreen = () => {
         />
       </View>
 
-      {
-        loading ? (
-          <View style={styles.centered}>
-            <ActivityIndicator size="large" color={theme.colors.primary} />
-          </View>
-        ) : (
-          <FlatList
-            data={filteredUsers}
-            keyExtractor={item => item.id}
-            renderItem={renderUserItem}
-            contentContainerStyle={styles.listContent}
-            ListEmptyComponent={
-              <View style={styles.emptyContainer}>
-                <Text style={{ color: theme.colors.subText }}>
-                  {t('common.noResult')}
-                </Text>
-              </View>
-            }
-          />
-        )
-      }
-    </View >
+      {loading ? (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        </View>
+      ) : (
+        <FlatList
+          data={filteredUsers}
+          keyExtractor={item => item.id}
+          renderItem={renderUserItem}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={{ color: theme.colors.subText }}>
+                {t('common.noResult')}
+              </Text>
+            </View>
+          }
+        />
+      )}
+    </View>
   );
 };
 

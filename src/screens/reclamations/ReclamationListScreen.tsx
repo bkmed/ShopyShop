@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
-// We'll assume a reclamationsDb exists or we create it. 
+// We'll assume a reclamationsDb exists or we create it.
 // Given the Phase 5 plan, I need to create the system.
 // I'll create a local db mock for now or use a new file.
 // I'll create reclamationsDb.ts in the next step.
@@ -52,7 +52,9 @@ export const ReclamationListScreen = () => {
       onPress={() => navigation.navigate('ReclamationDetail', { id: item.id })}
     >
       <View style={styles.header}>
-        <Text style={[styles.reason, { color: theme.colors.text }]}>{item.reason}</Text>
+        <Text style={[styles.reason, { color: theme.colors.text }]}>
+          {item.reason}
+        </Text>
         <Text style={[styles.status, { color: getStatusColor(item.status) }]}>
           {t(`reclamations.${item.status}`) || item.status}
         </Text>
@@ -60,7 +62,10 @@ export const ReclamationListScreen = () => {
       <Text style={[styles.date, { color: theme.colors.subText }]}>
         {new Date(item.createdAt).toLocaleDateString()}
       </Text>
-      <Text style={[styles.desc, { color: theme.colors.subText }]} numberOfLines={2}>
+      <Text
+        style={[styles.desc, { color: theme.colors.subText }]}
+        numberOfLines={2}
+      >
         {item.description}
       </Text>
     </TouchableOpacity>
@@ -68,20 +73,28 @@ export const ReclamationListScreen = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'resolved': return '#4CAF50';
-      case 'rejected': return '#F44336';
-      case 'investigating': return '#FF9800';
-      default: return '#2196F3';
+      case 'resolved':
+        return '#4CAF50';
+      case 'rejected':
+        return '#F44336';
+      case 'investigating':
+        return '#FF9800';
+      default:
+        return '#2196F3';
     }
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <TouchableOpacity
         style={[styles.addBtn, { backgroundColor: theme.colors.primary }]}
         onPress={() => navigation.navigate('ReclamationAdd')}
       >
-        <Text style={styles.addBtnText}>+ {t('reclamations.add') || 'New Claim'}</Text>
+        <Text style={styles.addBtnText}>
+          + {t('reclamations.add') || 'New Claim'}
+        </Text>
       </TouchableOpacity>
 
       {loading ? (
@@ -96,7 +109,9 @@ export const ReclamationListScreen = () => {
           contentContainerStyle={styles.list}
           ListEmptyComponent={
             <View style={styles.empty}>
-              <Text style={{ color: theme.colors.subText }}>{t('common.noResult')}</Text>
+              <Text style={{ color: theme.colors.subText }}>
+                {t('common.noResult')}
+              </Text>
             </View>
           }
         />

@@ -26,12 +26,7 @@ export const ReclamationAddScreen = () => {
   const [orderId, setOrderId] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const reasons = [
-    'Order not received',
-    'Damaged item',
-    'Wrong item',
-    'Other',
-  ];
+  const reasons = ['Order not received', 'Damaged item', 'Wrong item', 'Other'];
 
   const handleSubmit = async () => {
     if (!reason || !description) {
@@ -48,7 +43,10 @@ export const ReclamationAddScreen = () => {
         description,
         status: 'pending',
       });
-      Alert.alert(t('common.success'), t('reclamations.submitted') || 'Claim submitted');
+      Alert.alert(
+        t('common.success'),
+        t('reclamations.submitted') || 'Claim submitted',
+      );
       navigation.goBack();
     } catch (error) {
       console.error(error);
@@ -59,26 +57,33 @@ export const ReclamationAddScreen = () => {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <View style={[styles.form, { backgroundColor: theme.colors.surface }]}>
         <Text style={[styles.label, { color: theme.colors.text }]}>
           {t('reclamations.reason') || 'Reason'}
         </Text>
         <View style={styles.reasonsContainer}>
-          {reasons.map((r) => (
+          {reasons.map(r => (
             <TouchableOpacity
               key={r}
               style={[
                 styles.reasonBtn,
-                reason === r && { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
-                { borderColor: theme.colors.border }
+                reason === r && {
+                  backgroundColor: theme.colors.primary,
+                  borderColor: theme.colors.primary,
+                },
+                { borderColor: theme.colors.border },
               ]}
               onPress={() => setReason(r)}
             >
-              <Text style={[
-                styles.reasonText,
-                { color: reason === r ? '#FFF' : theme.colors.text }
-              ]}>
+              <Text
+                style={[
+                  styles.reasonText,
+                  { color: reason === r ? '#FFF' : theme.colors.text },
+                ]}
+              >
                 {r}
               </Text>
             </TouchableOpacity>
@@ -89,7 +94,10 @@ export const ReclamationAddScreen = () => {
           {t('orders.orderNumber') || 'Order ID (Optional)'}
         </Text>
         <TextInput
-          style={[styles.input, { color: theme.colors.text, borderColor: theme.colors.border }]}
+          style={[
+            styles.input,
+            { color: theme.colors.text, borderColor: theme.colors.border },
+          ]}
           value={orderId}
           onChangeText={setOrderId}
           placeholder="ORD-..."
@@ -100,7 +108,11 @@ export const ReclamationAddScreen = () => {
           {t('reclamations.description') || 'Description'}
         </Text>
         <TextInput
-          style={[styles.input, styles.textArea, { color: theme.colors.text, borderColor: theme.colors.border }]}
+          style={[
+            styles.input,
+            styles.textArea,
+            { color: theme.colors.text, borderColor: theme.colors.border },
+          ]}
           value={description}
           onChangeText={setDescription}
           multiline
@@ -117,7 +129,9 @@ export const ReclamationAddScreen = () => {
           {loading ? (
             <ActivityIndicator color="#FFF" />
           ) : (
-            <Text style={styles.submitBtnText}>{t('common.submit') || 'Submit'}</Text>
+            <Text style={styles.submitBtnText}>
+              {t('common.submit') || 'Submit'}
+            </Text>
           )}
         </TouchableOpacity>
       </View>

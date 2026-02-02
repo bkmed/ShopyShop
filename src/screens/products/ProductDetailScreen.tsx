@@ -372,7 +372,12 @@ export const ProductDetailScreen = () => {
               ]}
               onPress={() => handleAddToCart(false)}
             >
-              <Text style={[screenStyles.addToCartText, { color: theme.colors.primary }]}>
+              <Text
+                style={[
+                  screenStyles.addToCartText,
+                  { color: theme.colors.primary },
+                ]}
+              >
                 {t('cart.addToCart')}
               </Text>
             </TouchableOpacity>

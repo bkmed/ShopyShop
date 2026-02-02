@@ -337,6 +337,21 @@
     "list": "Lista de compras",
     "detail": "Detalle de la compra"
   },
+  "promos": {
+    "title": "Códigos Promocionales",
+    "list": "Lista de Promociones",
+    "add": "Añadir Promoción",
+    "detail": "Detalle de Promoción",
+    "code": "Código",
+    "percentage": "Porcentaje",
+    "category": "Categoría",
+    "expiry": "Fecha de caducidad",
+    "status": "Estado",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "saved": "Promoción guardada con éxito",
+    "deleted": "Promoción eliminada con éxito"
+  },
   "reclamations": {
     "title": "Reclamaciones",
     "list": "Lista de reclamaciones",
