@@ -330,6 +330,9 @@
     "search": "Buscar pedidos",
     "add": "Nuevo pedido",
     "searchplaceholder": "Buscar pedidos...",
+    "searchPlaceholder": "Buscar pedidos...",
+    "totalAmount": "Importe total",
+    "shippingAddress": "Dirección de envío",
     "createNew": "Crear nuevo pedido"
   },
   "purchases": {

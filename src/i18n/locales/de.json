@@ -330,6 +330,9 @@
     "search": "Bestellungen suchen",
     "add": "Neue Bestellung",
     "searchplaceholder": "Bestellungen suchen...",
+    "searchPlaceholder": "Bestellungen suchen...",
+    "totalAmount": "Gesamtbetrag",
+    "shippingAddress": "Lieferadresse",
     "createNew": "Neue Bestellung erstellen"
   },
   "purchases": {

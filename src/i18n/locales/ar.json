@@ -330,6 +330,9 @@
     "search": "البحث في الطلبات",
     "add": "طلب جديد",
     "searchplaceholder": "البحث في الطلبات...",
+    "searchPlaceholder": "بحث في الطلبات...",
+    "totalAmount": "المبلغ الإجمالي",
+    "shippingAddress": "عنوان الشحن",
     "createNew": "إنشاء طلب جديد"
   },
   "purchases": {

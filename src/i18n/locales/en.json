@@ -330,6 +330,9 @@
     "search": "Search Orders",
     "add": "New Order",
     "searchplaceholder": "Search orders...",
+    "searchPlaceholder": "Search orders...",
+    "totalAmount": "Total Amount",
+    "shippingAddress": "Shipping Address",
     "createNew": "Create New Order"
   },
   "purchases": {

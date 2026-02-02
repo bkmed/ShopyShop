@@ -330,6 +330,9 @@
     "search": "ऑर्डर खोजें",
     "add": "नया ऑर्डर",
     "searchplaceholder": "ऑर्डर खोजें...",
+    "searchPlaceholder": "ऑर्डर खोजें...",
+    "totalAmount": "कुल राशि",
+    "shippingAddress": "शिपिंग पता",
     "createNew": "नया ऑर्डर बनाएं"
   },
   "purchases": {

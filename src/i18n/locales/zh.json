@@ -330,6 +330,9 @@
     "search": "搜索订单",
     "add": "新订单",
     "searchplaceholder": "搜索订单...",
+    "searchPlaceholder": "搜索订单...",
+    "totalAmount": "总金额",
+    "shippingAddress": "收货地址",
     "createNew": "新建订单"
   },
   "purchases": {

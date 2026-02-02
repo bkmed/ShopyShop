@@ -138,6 +138,46 @@ const SettingsStack = () => {
   );
 };
 
+const LanguageStack = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="Language"
+        component={LanguageSelectionScreen}
+        options={{ title: t('profile.language') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const CurrencyStack = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="Currency"
+        component={CurrencySelectionScreen}
+        options={{ title: t('settings.currency') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const ProfileStack = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
@@ -957,6 +997,10 @@ const WebNavigator = () => {
   const getActiveComponent = () => {
     switch (activeTab) {
       case 'Home':
+        // Role-based Home Redirection
+        if (rbacService.isAdmin(user) || rbacService.isStockManager(user)) {
+          return <DashboardsStack />;
+        }
         return <HomeStack />;
       case 'Dashboard':
         return <DashboardsStack />;
@@ -1001,11 +1045,11 @@ const WebNavigator = () => {
       case 'CurrencyAdmin':
         return <UserManagementStack />;
       case 'Language':
-        return <SettingsStack />;
+        return <LanguageStack />;
       case 'Currency':
-        return <SettingsStack />;
-      case 'Devise': // Support French key
-        return <SettingsStack />;
+        return <CurrencyStack />;
+      case 'Devise':
+        return <CurrencyStack />;
       case 'Promos':
         return <PromoStack />;
       default:
