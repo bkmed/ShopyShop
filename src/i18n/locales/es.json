@@ -45,7 +45,8 @@
     "vouchers": "Cupones",
     "applyVoucher": "Aplicar cupón",
     "buyNow": "Comprar ahora",
-    "shop_now": "Comprar ahora"
+    "shop_now": "Comprar ahora",
+    "featureUnderConstruction": "Función en construcción"
   },
   "catalog": {
     "addNewProduct": "Añadir nuevo producto",

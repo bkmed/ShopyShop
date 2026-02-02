@@ -45,7 +45,8 @@
     "vouchers": "Bons d'achat",
     "applyVoucher": "Appliquer le bon",
     "buyNow": "Acheter maintenant",
-    "shop_now": "Magasiner maintenant"
+    "shop_now": "Magasiner maintenant",
+    "featureUnderConstruction": "Fonctionnalité en construction"
   },
   "catalog": {
     "addNewProduct": "Ajouter un nouveau produit",

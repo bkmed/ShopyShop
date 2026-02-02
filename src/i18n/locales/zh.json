@@ -45,7 +45,8 @@
     "vouchers": "代金券",
     "applyVoucher": "使用代金券",
     "buyNow": "立即购买",
-    "shop_now": "立即购物"
+    "shop_now": "立即购物",
+    "featureUnderConstruction": "功能建设中"
   },
   "catalog": {
     "addNewProduct": "添加新产品",

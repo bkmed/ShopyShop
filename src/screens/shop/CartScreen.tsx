@@ -211,7 +211,10 @@ export const CartScreen = () => {
                 { backgroundColor: theme.colors.primary },
               ]}
               onPress={() =>
-                Alert.alert('Checkout', 'Feature under construction')
+                Alert.alert(
+                  t('cart.checkout'),
+                  t('cart.featureUnderConstruction'),
+                )
               }
             >
               <Text style={styles.checkoutBtnText}>

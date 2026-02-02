@@ -10,6 +10,7 @@ import {
   Switch,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { promosDb } from '../../database/promosDb';
 import { categoriesDb } from '../../database/categoriesDb';
@@ -18,6 +19,7 @@ import { Picker } from '@react-native-picker/picker';
 
 export const PromoAddEditScreen = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const route = useRoute<any>();
   const { id } = route.params || {};
@@ -61,7 +63,7 @@ export const PromoAddEditScreen = () => {
 
   const handleSave = async () => {
     if (!code || !percentage) {
-      Alert.alert('Error', 'Code and Percentage are required');
+      Alert.alert(t('common.error'), t('promos.codeAndPercentageRequired'));
       return;
     }
 
@@ -82,7 +84,7 @@ export const PromoAddEditScreen = () => {
       navigation.goBack();
     } catch (error) {
       console.error(error);
-      Alert.alert('Error', 'Failed to save promo');
+      Alert.alert(t('common.error'), t('promos.failedToSave'));
     }
   };
 
@@ -91,7 +93,9 @@ export const PromoAddEditScreen = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <View style={[styles.form, { backgroundColor: theme.colors.surface }]}>
-        <Text style={[styles.label, { color: theme.colors.text }]}>Code</Text>
+        <Text style={[styles.label, { color: theme.colors.text }]}>
+          {t('promos.code')}
+        </Text>
         <TextInput
           style={[
             styles.input,
@@ -105,7 +109,7 @@ export const PromoAddEditScreen = () => {
         />
 
         <Text style={[styles.label, { color: theme.colors.text }]}>
-          Percentage (%)
+          {t('promos.percentage')}
         </Text>
         <TextInput
           style={[
@@ -120,7 +124,7 @@ export const PromoAddEditScreen = () => {
         />
 
         <Text style={[styles.label, { color: theme.colors.text }]}>
-          Category
+          {t('categories.title')}
         </Text>
         <View
           style={[
@@ -137,12 +141,26 @@ export const PromoAddEditScreen = () => {
             style={{ color: theme.colors.text }}
             dropdownIconColor={theme.colors.text}
           >
-            <Picker.Item label="All Categories" value="all" />
+            <Picker.Item label={t('promos.allCategories')} value="all" />
             {categories.map(cat => (
               <Picker.Item key={cat.id} label={cat.name} value={cat.id} />
             ))}
           </Picker>
         </View>
+
+        <Text style={[styles.label, { color: theme.colors.text }]}>
+          {t('promos.expiryDate')}
+        </Text>
+        <TextInput
+          style={[
+            styles.input,
+            { color: theme.colors.text, borderColor: theme.colors.border },
+          ]}
+          value={expiryDate}
+          onChangeText={setExpiryDate}
+          placeholder="YYYY-MM-DD"
+          placeholderTextColor={theme.colors.subText}
+        />
 
         <View style={styles.switchRow}>
           <Text
@@ -151,7 +169,7 @@ export const PromoAddEditScreen = () => {
               { color: theme.colors.text, marginBottom: 0 },
             ]}
           >
-            Active
+            {t('common.active')}
           </Text>
           <Switch value={isActive} onValueChange={setIsActive} />
         </View>
@@ -160,7 +178,7 @@ export const PromoAddEditScreen = () => {
           style={[styles.saveBtn, { backgroundColor: theme.colors.primary }]}
           onPress={handleSave}
         >
-          <Text style={styles.saveBtnText}>Save Promo</Text>
+          <Text style={styles.saveBtnText}>{t('promos.save')}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

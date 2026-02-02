@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
@@ -20,6 +20,7 @@ export const OrderDetailScreen = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { formatPrice } = useCurrency();
+  const navigation = useNavigation<any>();
   const route = useRoute<any>();
   const { id } = route.params;
 
@@ -119,6 +120,29 @@ export const OrderDetailScreen = () => {
             {order.shippingAddress}
           </Text>
         </View>
+
+        {user?.role === 'admin' && (
+          <View style={styles.section}>
+            <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+              {t('common.actions') || 'Actions'}
+            </Text>
+            <TouchableOpacity
+              style={[
+                styles.editBtn,
+                {
+                  borderColor: theme.colors.primary,
+                  borderWidth: 1,
+                  backgroundColor: theme.colors.surface,
+                },
+              ]}
+              onPress={() => navigation.navigate('OrderAdd', { order })}
+            >
+              <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
+                {t('common.edit')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {user?.role === 'admin' && (
           <View style={styles.section}>
@@ -237,6 +261,11 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 16,
     lineHeight: 22,
+  },
+  editBtn: {
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
   },
   statusButtons: {
     flexDirection: 'row',

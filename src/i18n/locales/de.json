@@ -45,7 +45,8 @@
     "vouchers": "Gutscheine",
     "applyVoucher": "Gutschein anwenden",
     "buyNow": "Jetzt kaufen",
-    "shop_now": "Jetzt einkaufen"
+    "shop_now": "Jetzt einkaufen",
+    "featureUnderConstruction": "Funktion im Aufbau"
   },
   "catalog": {
     "addNewProduct": "Neues Produkt hinzufügen",

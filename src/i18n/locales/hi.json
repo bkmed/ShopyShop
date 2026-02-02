@@ -45,7 +45,8 @@
     "vouchers": "वाउचर",
     "applyVoucher": "वाउचर लागू करें",
     "buyNow": "अभी खरीदें",
-    "shop_now": "अभी खरीदारी करें"
+    "shop_now": "अभी खरीदारी करें",
+    "featureUnderConstruction": "सुविधा निर्माणाधीन"
   },
   "catalog": {
     "addNewProduct": "नया उत्पाद जोड़ें",

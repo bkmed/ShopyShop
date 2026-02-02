@@ -58,7 +58,6 @@ import { CurrencySelectionScreen } from '../screens/settings/CurrencySelectionSc
 import { CurrencyAdminScreen } from '../screens/admin/CurrencyAdminScreen';
 import { CustomThemeColorsScreen } from '../screens/settings/CustomThemeColorsScreen';
 import { NotificationBell } from '../components/common/NotificationBell';
-import { SearchOverlay } from '../components/common/SearchOverlay';
 import { ChatBot } from '../components/common/ChatBot';
 import { useAuth } from '../context/AuthContext';
 import { GlassHeader } from '../components/common/GlassHeader';
@@ -944,7 +943,6 @@ const WebNavigator = () => {
   const { activeTab, subScreen, screenParams } = navState;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [collapsedSections, setCollapsedSections] = useState<{
     [key: string]: boolean;
   }>({});
@@ -970,25 +968,6 @@ const WebNavigator = () => {
     }),
     [activeTab, subScreen, screenParams, handleNavigate],
   );
-
-  const handleSearchSelect = (result: { type: string; id?: string }) => {
-    setIsSearchVisible(false);
-    if (result.type === 'product') {
-      contextValue.setActiveTab('Catalog', 'ProductDetails', {
-        id: Number(result.id),
-      });
-    } else if (result.type === 'category') {
-      contextValue.setActiveTab('Categories', '', {
-        categoryId: Number(result.id),
-      });
-    } else if (result.type === 'order') {
-      contextValue.setActiveTab('Orders', 'OrderDetails', {
-        orderId: result.id,
-      });
-    } else if (result.type === 'announcement') {
-      contextValue.setActiveTab('Home', 'Announcements');
-    }
-  };
 
   const getActiveComponent = () => {
     switch (activeTab) {
@@ -1105,20 +1084,6 @@ const WebNavigator = () => {
             </TouchableOpacity>
 
             <View style={{ padding: 16, gap: 12 }}>
-              <TouchableOpacity
-                style={[
-                  webStyles.sidebarNavItem,
-                  { backgroundColor: `${theme.colors.primary}10` },
-                ]}
-                onPress={() => setIsSearchVisible(true)}
-              >
-                <Text style={webStyles.navIcon}>🔍</Text>
-                <Text
-                  style={[webStyles.navLabel, { color: theme.colors.primary }]}
-                >
-                  {t('common.search')}
-                </Text>
-              </TouchableOpacity>
               <NotificationBell />
             </View>
 
@@ -1234,7 +1199,6 @@ const WebNavigator = () => {
                 : undefined
             }
             onMenuPress={() => setIsMenuOpen(true)}
-            onSearchPress={() => setIsSearchVisible(true)}
             onProfilePress={() => handleNavigate('Profile')}
           />
         )}
@@ -1415,11 +1379,6 @@ const WebNavigator = () => {
           </View>
         )}
       </View>
-      <SearchOverlay
-        visible={isSearchVisible}
-        onClose={() => setIsSearchVisible(false)}
-        onSelect={handleSearchSelect}
-      />
     </WebNavigationContext.Provider>
   );
 };

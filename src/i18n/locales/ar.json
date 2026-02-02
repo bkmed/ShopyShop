@@ -45,7 +45,8 @@
     "vouchers": "القسائم",
     "applyVoucher": "تطبيق القسيمة",
     "buyNow": "اشتري الآن",
-    "shop_now": "تسوق الآن"
+    "shop_now": "تسوق الآن",
+    "featureUnderConstruction": "الميزة قيد الإنشاء"
   },
   "catalog": {
     "addNewProduct": "إضافة منتج جديد",
