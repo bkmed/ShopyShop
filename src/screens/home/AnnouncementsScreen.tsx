@@ -164,7 +164,7 @@ export const AnnouncementsScreen = () => {
                 style={styles.input}
                 value={newTitle}
                 onChangeText={setNewTitle}
-                placeholder="News Title"
+                placeholder={t('announcements.titlePlaceholder')}
                 placeholderTextColor={theme.colors.subText}
               />
 
@@ -175,7 +175,7 @@ export const AnnouncementsScreen = () => {
                 onChangeText={setNewContent}
                 multiline
                 numberOfLines={4}
-                placeholder="News Content"
+                placeholder={t('announcements.contentPlaceholder')}
                 placeholderTextColor={theme.colors.subText}
               />
 

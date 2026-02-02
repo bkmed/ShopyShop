@@ -14,12 +14,17 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { currenciesDb } from '../../database/currenciesDb';
 import { Currency } from '../../database/schema';
 
 export const CurrencyAdminScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const modal = useModal();
+  const toast = useToast();
 
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,7 +57,7 @@ export const CurrencyAdminScreen = () => {
 
   const handleSave = async () => {
     if (!form.code || !form.symbol) {
-      Alert.alert(t('common.error'), t('common.errorEmptyFields'));
+      AlertService.showError(toast, t('common.errorEmptyFields'));
       return;
     }
 
@@ -65,8 +70,14 @@ export const CurrencyAdminScreen = () => {
       setEditingId(null);
       setForm({ code: '', symbol: '', rate: 1, isBase: false, isActive: true });
       loadCurrencies();
+      AlertService.showSuccess(
+        toast,
+        editingId
+          ? t('common.updatedSuccessfully') || 'Updated successfully'
+          : t('common.savedSuccessfully') || 'Saved successfully'
+      );
     } catch {
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     }
   };
 
@@ -82,17 +93,17 @@ export const CurrencyAdminScreen = () => {
   };
 
   const handleDelete = (id: string) => {
-    Alert.alert(t('common.confirm'), t('currencies.confirmDelete'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await currenciesDb.delete(id);
-          loadCurrencies();
-        },
+    AlertService.showConfirmation(
+      modal,
+      t('common.confirm'),
+      t('currencies.confirmDelete'),
+      async () => {
+        await currenciesDb.delete(id);
+        loadCurrencies();
+        AlertService.showSuccess(toast, t('common.deletedSuccessfully') || 'Deleted successfully');
       },
-    ]);
+      t('common.delete')
+    );
   };
 
   const renderItem = ({ item }: { item: Currency }) => (
@@ -193,7 +204,7 @@ export const CurrencyAdminScreen = () => {
                         borderColor: theme.colors.border,
                       },
                     ]}
-                    placeholder="EUR"
+                    placeholder={t('currencies.codePlaceholder')}
                     value={form.code}
                     onChangeText={text =>
                       setForm({ ...form, code: text.toUpperCase() })
@@ -212,7 +223,7 @@ export const CurrencyAdminScreen = () => {
                         borderColor: theme.colors.border,
                       },
                     ]}
-                    placeholder="€"
+                    placeholder={t('currencies.symbolPlaceholder')}
                     value={form.symbol}
                     onChangeText={text => setForm({ ...form, symbol: text })}
                   />
@@ -232,7 +243,7 @@ export const CurrencyAdminScreen = () => {
                         borderColor: theme.colors.border,
                       },
                     ]}
-                    placeholder="1.0"
+                    placeholder={t('currencies.ratePlaceholder')}
                     keyboardType="numeric"
                     value={form.rate.toString()}
                     onChangeText={text =>

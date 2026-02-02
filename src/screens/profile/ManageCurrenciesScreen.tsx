@@ -102,7 +102,7 @@ export const ManageCurrenciesScreen = () => {
             style={[styles.input, { flex: 2 }]}
             value={newCode}
             onChangeText={setNewCode}
-            placeholder="USD"
+            placeholder={t('currencies.codePlaceholder')}
             placeholderTextColor={theme.colors.subText}
             autoCapitalize="characters"
           />
@@ -110,7 +110,7 @@ export const ManageCurrenciesScreen = () => {
             style={[styles.input, { flex: 1 }]}
             value={newSymbol}
             onChangeText={setNewSymbol}
-            placeholder="$"
+            placeholder={t('currencies.symbolPlaceholder')}
             placeholderTextColor={theme.colors.subText}
           />
           <TouchableOpacity style={styles.addButton} onPress={handleAdd}>

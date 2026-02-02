@@ -11,6 +11,9 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { promosDb } from '../../database/promosDb';
 import { PromoCode } from '../../database/schema';
 
@@ -18,6 +21,8 @@ export const PromoListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
   const [promos, setPromos] = useState<PromoCode[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,17 +45,17 @@ export const PromoListScreen = () => {
   };
 
   const handleDelete = (id: string) => {
-    Alert.alert(t('common.delete'), t('common.deleteConfirm'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await promosDb.delete(id);
-          loadPromos();
-        },
+    AlertService.showConfirmation(
+      modal,
+      t('common.delete'),
+      t('common.deleteConfirm'),
+      async () => {
+        await promosDb.delete(id);
+        AlertService.showSuccess(toast, t('common.deletedSuccessfully') || 'Deleted successfully');
+        loadPromos();
       },
-    ]);
+      t('common.delete')
+    );
   };
 
   const renderItem = ({ item }: { item: PromoCode }) => (
@@ -72,7 +77,7 @@ export const PromoListScreen = () => {
             { color: item.isActive ? '#4CAF50' : '#F44336' },
           ]}
         >
-          {item.isActive ? 'Active' : 'Inactive'}
+          {item.isActive ? t('common.active') : t('common.inactive')}
         </Text>
       </View>
       <View style={styles.actions}>
@@ -97,7 +102,9 @@ export const PromoListScreen = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>Promos</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>
+          {t('promos.title')}
+        </Text>
         <TouchableOpacity
           style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
           onPress={() => navigation.navigate('PromoAddEdit')}
@@ -119,7 +126,7 @@ export const PromoListScreen = () => {
           ListEmptyComponent={
             <View style={styles.empty}>
               <Text style={{ color: theme.colors.subText }}>
-                No promos found
+                {t('promos.noPromos')}
               </Text>
             </View>
           }

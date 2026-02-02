@@ -6,11 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Category } from '../../database/schema';
 
@@ -18,6 +20,8 @@ export const CategoryDetailScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
   const route = useRoute<any>();
   const { id } = route.params;
 
@@ -40,17 +44,16 @@ export const CategoryDetailScreen = () => {
   }, [id]);
 
   const handleDelete = () => {
-    Alert.alert(t('common.confirmDelete'), t('categories.deleteConfirm'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await categoriesDb.delete(id);
-          navigation.goBack();
-        },
+    AlertService.showConfirmation(
+      modal,
+      t('common.confirmDelete'),
+      t('categories.deleteConfirm'),
+      async () => {
+        await categoriesDb.delete(id);
+        navigation.goBack();
       },
-    ]);
+      t('common.delete')
+    );
   };
 
   if (loading) {

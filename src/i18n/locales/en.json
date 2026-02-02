@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "Add Announcement",
     "noAnnouncements": "No announcements yet",
-    "title": "Announcements"
+    "title": "Announcements",
+    "titlePlaceholder": "News Title",
+    "contentPlaceholder": "News Content"
   },
   "cart": {
     "addToCart": "Add to Cart",
@@ -89,7 +91,10 @@
     "addBtn": "Add Currency",
     "editTitle": "Edit Currency",
     "addNew": "Add New Currency",
-    "manageTitle": "Currency Management"
+    "manageTitle": "Currency Management",
+    "codePlaceholder": "EUR",
+    "symbolPlaceholder": "€",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "Categories",
@@ -109,7 +114,9 @@
     "parent": "Parent Category",
     "noCategories": "No categories found",
     "detail": "Category Detail",
-    "filter": "Filter Categories"
+    "filter": "Filter Categories",
+    "namePlaceholder": "e.g. Electronics",
+    "descriptionPlaceholder": "Enter category description..."
   },
   "chat": {
     "noMessages": "No messages yet",
@@ -235,8 +242,11 @@
     "selectCountry": "Select Country",
     "selectDate": "Select Date",
     "unauthorized": "Unauthorized access",
+    "placeholderZero": "0",
     "validate": "Validate",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "YYYY-MM-DD"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "Shipping Address",
     "createNew": "Create New Order",
     "manageStatus": "Manage Status",
-    "customers": "Customers"
+    "customers": "Customers",
+    "addressPlaceholder": "Enter full address..."
   },
   "purchases": {
     "title": "Purchase History",
@@ -371,6 +382,8 @@
     "percentage": "Percentage",
     "category": "Category",
     "expiry": "Expiry Date",
+    "codePlaceholder": "SUMMER2024",
+    "percentagePlaceholder": "20",
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
@@ -386,7 +399,9 @@
     "status": "Status",
     "submitted": "Submitted",
     "description": "Description",
-    "orderId": "Order ID"
+    "orderId": "Order ID",
+    "orderIdPlaceholder": "ORD-...",
+    "descriptionPlaceholder": "Describe your issue..."
   },
   "inventory": {
     "inventoryControl": "Inventory Control",
@@ -416,7 +431,9 @@
     "quantity": "Quantity",
     "totalValue": "Total Value",
     "adjustmentAmount": "Adjustment Amount",
-    "reason": "Reason"
+    "reason": "Reason",
+    "changePlaceholder": "+0",
+    "reasonPlaceholder": "e.g. Restock, Damaged, Sale"
   },
   "payroll": {
     "currency": "Currency",
@@ -437,6 +454,7 @@
     "productCategory": "Category",
     "productStock": "Stock Quantity",
     "productSKU": "SKU",
+    "skuPlaceholder": "e.g. 17381293",
     "productImages": "Product Images",
     "addImage": "Add Image",
     "inStock": "In Stock",

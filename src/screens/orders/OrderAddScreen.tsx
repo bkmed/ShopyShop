@@ -15,12 +15,17 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 
 export const OrderAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { user } = useAuth();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
 
   const [form, setForm] = useState({
     userId: user?.id || '',
@@ -33,9 +38,9 @@ export const OrderAddScreen = () => {
 
   const handleCreate = async () => {
     if (!form.totalAmount || !form.shippingAddress) {
-      Alert.alert(
-        t('common.error'),
-        t('common.errorEmptyFields') || 'Please fill required fields',
+      AlertService.showError(
+        toast,
+        t('common.errorEmptyFields') || 'Please fill required fields'
       );
       return;
     }
@@ -52,14 +57,15 @@ export const OrderAddScreen = () => {
         shippingAddress: form.shippingAddress,
         billingAddress: form.billingAddress || form.shippingAddress,
       });
-      Alert.alert(
-        t('common.success'),
-        t('orders.created') || 'Order created successfully',
+
+      AlertService.showSuccess(
+        toast,
+        t('orders.created') || 'Order created successfully'
       );
       navigation.goBack();
     } catch (error) {
       console.error('Error creating order:', error);
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     }
   };
 
@@ -88,7 +94,7 @@ export const OrderAddScreen = () => {
             value={form.totalAmount}
             onChangeText={text => setForm({ ...form, totalAmount: text })}
             keyboardType="decimal-pad"
-            placeholder="0.00"
+            placeholder={t('common.placeholderAmount')}
           />
         </View>
 
@@ -109,7 +115,7 @@ export const OrderAddScreen = () => {
             onChangeText={text => setForm({ ...form, shippingAddress: text })}
             multiline
             numberOfLines={3}
-            placeholder="Enter full address..."
+            placeholder={t('orders.addressPlaceholder')}
           />
         </View>
 

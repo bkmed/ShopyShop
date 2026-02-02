@@ -13,12 +13,17 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { reclamationsDb } from '../../database';
 
 export const ReclamationAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const modal = useModal();
+  const toast = useToast();
   const { user } = useAuth();
 
   const [reason, setReason] = useState('');
@@ -30,7 +35,7 @@ export const ReclamationAddScreen = () => {
 
   const handleSubmit = async () => {
     if (!reason || !description) {
-      Alert.alert(t('common.error'), t('common.required'));
+      AlertService.showError(toast, t('common.required'));
       return;
     }
 
@@ -43,14 +48,15 @@ export const ReclamationAddScreen = () => {
         description,
         status: 'pending',
       });
-      Alert.alert(
-        t('common.success'),
-        t('reclamations.submitted') || 'Claim submitted',
+
+      AlertService.showSuccess(
+        toast,
+        t('reclamations.submitted') || 'Claim submitted'
       );
       navigation.goBack();
     } catch (error) {
       console.error(error);
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     } finally {
       setLoading(false);
     }
@@ -100,7 +106,7 @@ export const ReclamationAddScreen = () => {
           ]}
           value={orderId}
           onChangeText={setOrderId}
-          placeholder="ORD-..."
+          placeholder={t('reclamations.orderIdPlaceholder')}
           placeholderTextColor={theme.colors.subText}
         />
 
@@ -117,7 +123,7 @@ export const ReclamationAddScreen = () => {
           onChangeText={setDescription}
           multiline
           numberOfLines={4}
-          placeholder="Describe your issue..."
+          placeholder={t('reclamations.descriptionPlaceholder')}
           placeholderTextColor={theme.colors.subText}
         />
 

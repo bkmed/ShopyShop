@@ -12,6 +12,9 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { promosDb } from '../../database/promosDb';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Category } from '../../database/schema';
@@ -20,6 +23,8 @@ import { Picker } from '@react-native-picker/picker';
 export const PromoAddEditScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const modal = useModal();
+  const toast = useToast();
   const navigation = useNavigation();
   const route = useRoute<any>();
   const { id } = route.params || {};
@@ -63,7 +68,7 @@ export const PromoAddEditScreen = () => {
 
   const handleSave = async () => {
     if (!code || !percentage) {
-      Alert.alert(t('common.error'), t('promos.codeAndPercentageRequired'));
+      AlertService.showError(toast, t('promos.codeAndPercentageRequired'));
       return;
     }
 
@@ -84,7 +89,7 @@ export const PromoAddEditScreen = () => {
       navigation.goBack();
     } catch (error) {
       console.error(error);
-      Alert.alert(t('common.error'), t('promos.failedToSave'));
+      AlertService.showError(toast, t('promos.failedToSave'));
     }
   };
 
@@ -103,7 +108,7 @@ export const PromoAddEditScreen = () => {
           ]}
           value={code}
           onChangeText={setCode}
-          placeholder="SUMMER2024"
+          placeholder={t('promos.codePlaceholder')}
           placeholderTextColor={theme.colors.subText}
           autoCapitalize="characters"
         />
@@ -119,7 +124,7 @@ export const PromoAddEditScreen = () => {
           value={percentage}
           onChangeText={setPercentage}
           keyboardType="numeric"
-          placeholder="20"
+          placeholder={t('promos.percentagePlaceholder')}
           placeholderTextColor={theme.colors.subText}
         />
 
@@ -158,7 +163,7 @@ export const PromoAddEditScreen = () => {
           ]}
           value={expiryDate}
           onChangeText={setExpiryDate}
-          placeholder="YYYY-MM-DD"
+          placeholder={t('common.dateFormatPlaceholder')}
           placeholderTextColor={theme.colors.subText}
         />
 

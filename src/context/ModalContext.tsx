@@ -24,7 +24,7 @@ interface ModalOptions {
   buttons?: ModalButton[];
 }
 
-interface ModalContextType {
+export interface ModalContextType {
   showModal: (options: ModalOptions) => void;
   hideModal: () => void;
 }
@@ -160,7 +160,7 @@ const ModalContent: React.FC<{
                 style={[
                   styles.buttonText,
                   button.style === 'destructive' &&
-                    styles.destructiveButtonText,
+                  styles.destructiveButtonText,
                   button.style === 'cancel' && styles.cancelButtonText,
                 ]}
               >

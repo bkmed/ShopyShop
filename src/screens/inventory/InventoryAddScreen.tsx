@@ -16,11 +16,16 @@ import { useTheme } from '../../context/ThemeContext';
 import { inventoryDb } from '../../database/inventoryDb';
 import { Product } from '../../database/schema';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 
 export const InventoryAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { user } = useAuth();
+  const modal = useModal();
+  const toast = useToast();
   const navigation = useNavigation<any>();
   const route = useRoute<any>();
   const initialProduct = route.params?.product as Product;
@@ -33,9 +38,9 @@ export const InventoryAddScreen = () => {
 
   const handleAdjust = async () => {
     if (!form.productId || !form.change || !form.reason) {
-      Alert.alert(
-        t('common.error'),
-        t('common.errorEmptyFields') || 'Please fill required fields',
+      AlertService.showError(
+        toast,
+        t('common.errorEmptyFields') || 'Please fill required fields'
       );
       return;
     }
@@ -47,14 +52,14 @@ export const InventoryAddScreen = () => {
         form.reason,
         user?.id || 'anonymous',
       );
-      Alert.alert(
-        t('common.success'),
-        t('inventory.adjusted') || 'Inventory adjusted successfully',
+      AlertService.showSuccess(
+        toast,
+        t('inventory.adjusted') || 'Inventory adjusted successfully'
       );
       navigation.goBack();
     } catch (error: any) {
       console.error('Error adjusting inventory:', error);
-      Alert.alert(t('common.error'), error.message || t('common.saveError'));
+      AlertService.showError(toast, error.message || t('common.saveError'));
     }
   };
 
@@ -83,7 +88,7 @@ export const InventoryAddScreen = () => {
               ]}
               value={form.productId}
               onChangeText={text => setForm({ ...form, productId: text })}
-              placeholder="e.g. 17381293"
+              placeholder={t('products.skuPlaceholder')}
             />
           </View>
         )}
@@ -103,7 +108,7 @@ export const InventoryAddScreen = () => {
             value={form.change}
             onChangeText={text => setForm({ ...form, change: text })}
             keyboardType="numbers-and-punctuation"
-            placeholder="+0"
+            placeholder={t('inventory.changePlaceholder')}
           />
         </View>
 
@@ -121,7 +126,7 @@ export const InventoryAddScreen = () => {
             ]}
             value={form.reason}
             onChangeText={text => setForm({ ...form, reason: text })}
-            placeholder="e.g. Restock, Damaged, Sale"
+            placeholder={t('inventory.reasonPlaceholder')}
           />
         </View>
 

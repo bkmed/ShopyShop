@@ -13,12 +13,17 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { productsDb } from '../../database/productsDb';
 import { Product } from '../../database/schema';
 
 export const ProductAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const modal = useModal();
+  const toast = useToast();
   const navigation = useNavigation<any>();
   const route = useRoute<any>();
   const editingProduct = route.params?.product as Product;
@@ -37,7 +42,7 @@ export const ProductAddScreen = () => {
 
   const handleSave = async () => {
     if (!form.name.trim() || !form.price.trim()) {
-      Alert.alert(t('common.error'), t('signUp.errorEmptyFields'));
+      AlertService.showError(toast, t('signUp.errorEmptyFields'));
       return;
     }
 
@@ -57,46 +62,41 @@ export const ProductAddScreen = () => {
     try {
       if (editingProduct) {
         await productsDb.update(editingProduct.id, productData);
-        Alert.alert(t('common.success'), t('products.productUpdated'));
+        AlertService.showSuccess(toast, t('products.productUpdated'));
       } else {
         await productsDb.add(productData);
-        Alert.alert(t('common.success'), t('products.productSaved'));
+        AlertService.showSuccess(toast, t('products.productSaved'));
       }
       navigation.goBack();
     } catch (error) {
       console.error('Error saving product:', error);
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     }
   };
 
   const handleDelete = () => {
-    Alert.alert(
+    AlertService.showConfirmation(
+      modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-        'Are you sure you want to delete this product?',
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              if (editingProduct) {
-                await productsDb.delete(editingProduct.id);
-                Alert.alert(
-                  t('common.success'),
-                  t('products.deletedSuccessfully') ||
-                    'Product deleted successfully',
-                );
-                navigation.goBack();
-              }
-            } catch (error) {
-              console.error('Error deleting product:', error);
-              Alert.alert(t('common.error'), t('common.deleteError'));
-            }
-          },
-        },
-      ],
+      'Are you sure you want to delete this product?',
+      async () => {
+        try {
+          if (editingProduct) {
+            await productsDb.delete(editingProduct.id);
+            AlertService.showSuccess(
+              toast,
+              t('products.deletedSuccessfully') ||
+              'Product deleted successfully'
+            );
+            navigation.goBack();
+          }
+        } catch (error) {
+          console.error('Error deleting product:', error);
+          AlertService.showError(toast, t('common.deleteError'));
+        }
+      },
+      t('common.delete')
     );
   };
 
@@ -168,7 +168,7 @@ export const ProductAddScreen = () => {
               ]}
               value={form.price}
               onChangeText={text => setForm({ ...form, price: text })}
-              placeholder="0.00"
+              placeholder={t('common.placeholderAmount')}
               keyboardType="decimal-pad"
               placeholderTextColor={theme.colors.subText}
             />
@@ -187,7 +187,7 @@ export const ProductAddScreen = () => {
               ]}
               value={form.stockQuantity}
               onChangeText={text => setForm({ ...form, stockQuantity: text })}
-              placeholder="0"
+              placeholder={t('common.placeholderZero')}
               keyboardType="number-pad"
               placeholderTextColor={theme.colors.subText}
             />
@@ -208,7 +208,7 @@ export const ProductAddScreen = () => {
             ]}
             value={form.unitPrice}
             onChangeText={text => setForm({ ...form, unitPrice: text })}
-            placeholder="0.00"
+            placeholder={t('common.placeholderAmount')}
             keyboardType="decimal-pad"
             placeholderTextColor={theme.colors.subText}
           />
@@ -228,7 +228,7 @@ export const ProductAddScreen = () => {
             ]}
             value={form.availableDate}
             onChangeText={text => setForm({ ...form, availableDate: text })}
-            placeholder="YYYY-MM-DD"
+            placeholder={t('common.dateFormatPlaceholder')}
             placeholderTextColor={theme.colors.subText}
           />
         </View>

@@ -12,12 +12,17 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { usersDb } from '../../database/usersDb';
 
 export const UserAddEditScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const modal = useModal();
+  const toast = useToast();
   const route = useRoute<any>();
   const { id } = route.params || {};
   const isEditing = !!id;
@@ -46,15 +51,15 @@ export const UserAddEditScreen = () => {
       }
     } catch (error) {
       console.error('Error loading user:', error);
-      Alert.alert(t('common.error'), t('common.errorLoad'));
+      AlertService.showError(toast, t('common.errorLoad'));
     } finally {
       setInitialLoading(false);
     }
   };
 
-  const handlSave = async () => {
+  const handleSave = async () => {
     if (!name.trim() || !email.trim()) {
-      Alert.alert(t('common.error'), t('common.required'));
+      AlertService.showError(toast, t('common.required'));
       return;
     }
 
@@ -62,7 +67,7 @@ export const UserAddEditScreen = () => {
       setLoading(true);
       if (isEditing) {
         await usersDb.update(id, { name, email, role });
-        Alert.alert(t('common.success'), t('users.updatedSuccessfully'));
+        AlertService.showSuccess(toast, t('users.updatedSuccessfully'));
       } else {
         await usersDb.add({
           name,
@@ -72,15 +77,15 @@ export const UserAddEditScreen = () => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         } as any); // Type assertion might be needed depending on strictness
-        Alert.alert(
-          t('common.success'),
-          t('users.createdSuccessfully') || 'User created',
+        AlertService.showSuccess(
+          toast,
+          t('users.createdSuccessfully') || 'User created'
         );
       }
       navigation.goBack();
     } catch (error) {
       console.error('Error saving user:', error);
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     } finally {
       setLoading(false);
     }
@@ -116,7 +121,7 @@ export const UserAddEditScreen = () => {
           ]}
           value={name}
           onChangeText={setName}
-          placeholder="John Doe"
+          placeholder={t('signUp.namePlaceholder')}
           placeholderTextColor={theme.colors.subText}
         />
 
@@ -130,7 +135,7 @@ export const UserAddEditScreen = () => {
           ]}
           value={email}
           onChangeText={setEmail}
-          placeholder="john@example.com"
+          placeholder={t('signUp.emailPlaceholder')}
           placeholderTextColor={theme.colors.subText}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -166,7 +171,7 @@ export const UserAddEditScreen = () => {
 
         <TouchableOpacity
           style={[styles.saveButton, { backgroundColor: theme.colors.primary }]}
-          onPress={handlSave}
+          onPress={handleSave}
           disabled={loading}
         >
           {loading ? (

@@ -14,6 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { useContext } from 'react';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { AlertService } from '../../services/alertService';
 import { useSelector, useDispatch } from 'react-redux';
 // import { RootState } from '../../store';
 import {
@@ -34,6 +36,7 @@ export const CartScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const { formatPrice } = useCurrency();
@@ -192,7 +195,7 @@ export const CartScreen = () => {
                 borderTopWidth: 1,
               },
               Platform.OS === 'web' &&
-                ({ backdropFilter: 'blur(16px)' } as any),
+              ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
@@ -211,9 +214,10 @@ export const CartScreen = () => {
                 { backgroundColor: theme.colors.primary },
               ]}
               onPress={() =>
-                Alert.alert(
+                AlertService.showAlert(
+                  modal,
                   t('cart.checkout'),
-                  t('cart.featureUnderConstruction'),
+                  t('cart.featureUnderConstruction')
                 )
               }
             >

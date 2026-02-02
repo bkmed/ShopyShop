@@ -13,12 +13,17 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Category } from '../../database/schema';
 
 export const CategoryAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const modal = useModal();
+  const toast = useToast();
   const navigation = useNavigation<any>();
   const route = useRoute<any>();
   const editingCategory = route.params?.category as Category;
@@ -33,9 +38,9 @@ export const CategoryAddScreen = () => {
 
   const handleSave = async () => {
     if (!form.name.trim()) {
-      Alert.alert(
-        t('common.error'),
-        t('categories.nameRequired') || 'Category name is required',
+      AlertService.showError(
+        toast,
+        t('categories.nameRequired') || 'Category name is required'
       );
       return;
     }
@@ -51,53 +56,47 @@ export const CategoryAddScreen = () => {
     try {
       if (editingCategory) {
         await categoriesDb.update(editingCategory.id, categoryData);
-        Alert.alert(
-          t('common.success'),
-          t('categories.updatedSuccessfully') ||
-            'Category updated successfully',
+        AlertService.showSuccess(
+          toast,
+          t('categories.updatedSuccessfully') || 'Category updated successfully'
         );
       } else {
         await categoriesDb.add(categoryData);
-        Alert.alert(
-          t('common.success'),
-          t('categories.savedSuccessfully') || 'Category saved successfully',
+        AlertService.showSuccess(
+          toast,
+          t('categories.savedSuccessfully') || 'Category saved successfully'
         );
       }
       navigation.goBack();
     } catch (error) {
       console.error('Error saving category:', error);
-      Alert.alert(t('common.error'), t('common.saveError'));
+      AlertService.showError(toast, t('common.saveError'));
     }
   };
 
   const handleDelete = () => {
-    Alert.alert(
+    AlertService.showConfirmation(
+      modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-        'Are you sure you want to delete this category?',
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              if (editingCategory) {
-                await categoriesDb.delete(editingCategory.id);
-                Alert.alert(
-                  t('common.success'),
-                  t('categories.deletedSuccessfully') ||
-                    'Category deleted successfully',
-                );
-                navigation.goBack();
-              }
-            } catch (error) {
-              console.error('Error deleting category:', error);
-              Alert.alert(t('common.error'), t('common.deleteError'));
-            }
-          },
-        },
-      ],
+      'Are you sure you want to delete this category?',
+      async () => {
+        try {
+          if (editingCategory) {
+            await categoriesDb.delete(editingCategory.id);
+            AlertService.showSuccess(
+              toast,
+              t('categories.deletedSuccessfully') ||
+              'Category deleted successfully'
+            );
+            navigation.goBack();
+          }
+        } catch (error) {
+          console.error('Error deleting category:', error);
+          AlertService.showError(toast, t('common.deleteError'));
+        }
+      },
+      t('common.delete')
     );
   };
 
@@ -125,7 +124,7 @@ export const CategoryAddScreen = () => {
             ]}
             value={form.name}
             onChangeText={text => setForm({ ...form, name: text })}
-            placeholder={t('categories.namePlaceholder') || 'e.g. Electronics'}
+            placeholder={t('categories.namePlaceholder')}
             placeholderTextColor={theme.colors.subText}
           />
         </View>
@@ -145,10 +144,7 @@ export const CategoryAddScreen = () => {
             ]}
             value={form.description}
             onChangeText={text => setForm({ ...form, description: text })}
-            placeholder={
-              t('categories.descriptionPlaceholder') ||
-              'Enter category description...'
-            }
+            placeholder={t('categories.descriptionPlaceholder')}
             placeholderTextColor={theme.colors.subText}
             multiline
             numberOfLines={4}

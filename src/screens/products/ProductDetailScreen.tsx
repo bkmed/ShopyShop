@@ -22,11 +22,16 @@ import { wishlistDb } from '../../database/wishlistDb';
 import { addToCart } from '../../store/slices/cartSlice';
 import { Product } from '../../database/schema';
 import { useCurrency } from '../../utils/currencyUtils';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 
 export const ProductDetailScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
   const { setActiveTab } = useContext(WebNavigationContext);
   const route = useRoute<any>();
   const { id } = route.params;
@@ -69,7 +74,7 @@ export const ProductDetailScreen = () => {
 
   const toggleWishlist = async () => {
     if (!user) {
-      Alert.alert(t('common.error'), t('session_expired'));
+      AlertService.showError(toast, t('session_expired'));
       return;
     }
     if (isWishlisted) {
@@ -82,7 +87,7 @@ export const ProductDetailScreen = () => {
 
   const handleAddToCart = (shouldNavigate = false) => {
     if (!user) {
-      Alert.alert(t('common.error'), t('session_expired'));
+      AlertService.showError(toast, t('session_expired'));
       return;
     }
     if (product) {
@@ -94,7 +99,7 @@ export const ProductDetailScreen = () => {
           navigation.navigate('Cart');
         }
       } else {
-        Alert.alert(t('common.success'), t('cart.itemAdded'));
+        AlertService.showSuccess(toast, t('cart.itemAdded'));
       }
     }
   };
@@ -104,17 +109,16 @@ export const ProductDetailScreen = () => {
   };
 
   const handleDelete = async () => {
-    Alert.alert(t('common.deleteTitle'), t('products.deleteConfirm'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await productsDb.delete(id);
-          navigation.goBack();
-        },
+    AlertService.showConfirmation(
+      modal,
+      t('common.deleteTitle'),
+      t('products.deleteConfirm'),
+      async () => {
+        await productsDb.delete(id);
+        navigation.goBack();
       },
-    ]);
+      t('common.delete')
+    );
   };
 
   const screenStyles = createStyles(theme);
@@ -399,8 +403,8 @@ export const ProductDetailScreen = () => {
   );
 };
 
-const createStyles = (theme: any) =>
-  StyleSheet.create({
+function createStyles(theme: any) {
+  return StyleSheet.create({
     container: {
       flex: 1,
     },
@@ -565,3 +569,4 @@ const createStyles = (theme: any) =>
       alignItems: 'center',
     },
   });
+}

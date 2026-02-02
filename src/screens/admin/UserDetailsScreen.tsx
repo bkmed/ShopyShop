@@ -11,6 +11,9 @@ import {
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { usersDb } from '../../database/usersDb';
 import { UserAccount } from '../../database/schema';
 
@@ -18,6 +21,8 @@ export const UserDetailsScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
   const route = useRoute<any>();
   const { id } = route.params;
 
@@ -45,25 +50,24 @@ export const UserDetailsScreen = () => {
       if (user) {
         await usersDb.updateRole(id, role);
         setUser({ ...user, role });
-        Alert.alert(t('common.success'), t('profile.updatedSuccessfully'));
+        AlertService.showSuccess(toast, t('profile.updatedSuccessfully'));
       }
     } catch {
-      Alert.alert(t('common.error'), t('common.error'));
+      AlertService.showError(toast, t('common.error'));
     }
   };
 
   const handleDelete = async () => {
-    Alert.alert(t('common.deleteTitle'), t('common.confirmDelete'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await usersDb.delete(id);
-          navigation.goBack();
-        },
+    AlertService.showConfirmation(
+      modal,
+      t('common.deleteTitle'),
+      t('common.confirmDelete'),
+      async () => {
+        await usersDb.delete(id);
+        navigation.goBack();
       },
-    ]);
+      t('common.delete')
+    );
   };
 
   if (loading) {

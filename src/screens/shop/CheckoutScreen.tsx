@@ -14,6 +14,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
+import { useToast } from '../../context/ToastContext';
+import { AlertService } from '../../services/alertService';
 import { selectCartItems, clearCart } from '../../store/slices/cartSlice';
 import { productsDb } from '../../database/productsDb';
 import { promosDb } from '../../database/promosDb';
@@ -25,6 +28,8 @@ export const CheckoutScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const modal = useModal();
+  const toast = useToast();
   const { user } = useAuth();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
@@ -81,9 +86,9 @@ export const CheckoutScreen = () => {
 
       const promoObj = await promosDb.getByCode(promoCode);
       if (!promoObj) {
-        Alert.alert(
-          t('common.error'),
-          t('cart.invalidPromo') || 'Invalid Promo Code',
+        AlertService.showError(
+          toast,
+          t('cart.invalidPromo') || 'Invalid Promo Code'
         );
         return;
       }
@@ -106,17 +111,18 @@ export const CheckoutScreen = () => {
 
       if (totalDiscount > 0) {
         setDiscount(totalDiscount);
-        Alert.alert(
-          t('common.success'),
+        AlertService.showSuccess(
+          toast,
           `${t('cart.discountApplied') || 'Discount Applied'}: ${formatPrice(
-            totalDiscount,
-          )}`,
+            totalDiscount
+          )}`
         );
       } else {
-        Alert.alert(
+        AlertService.showAlert(
+          modal,
           t('common.info'),
           t('cart.promoNotApplicable') ||
-            'Promo code not applicable to these items',
+          'Promo code not applicable to these items'
         );
         setDiscount(0);
       }
@@ -127,9 +133,9 @@ export const CheckoutScreen = () => {
 
   const handlePlaceOrder = async () => {
     if (!address.trim()) {
-      Alert.alert(
-        t('common.error'),
-        t('cart.addressRequired') || 'Address is required',
+      AlertService.showError(
+        toast,
+        t('cart.addressRequired') || 'Address is required'
       );
       return;
     }
@@ -163,14 +169,17 @@ export const CheckoutScreen = () => {
       await ordersDb.add(order as any);
 
       dispatch(clearCart());
-      Alert.alert(
+      dispatch(clearCart());
+      AlertService.showAlert(
+        modal,
         t('common.success'),
         t('cart.orderPlaced') || 'Order placed successfully!',
-        [{ text: 'OK', onPress: () => navigation.navigate('Home') }],
+        'OK',
+        () => navigation.navigate('Home')
       );
     } catch (error) {
       console.error('Order placement error:', error);
-      Alert.alert(t('common.error'), t('common.error'));
+      AlertService.showError(toast, t('common.error'));
     } finally {
       setProcessing(false);
     }
@@ -203,7 +212,7 @@ export const CheckoutScreen = () => {
           ]}
           value={address}
           onChangeText={setAddress}
-          placeholder="Enter your address"
+          placeholder={t('orders.addressPlaceholder')}
           placeholderTextColor={theme.colors.subText}
           multiline
         />
@@ -254,7 +263,7 @@ export const CheckoutScreen = () => {
             ]}
             value={promoCode}
             onChangeText={setPromoCode}
-            placeholder="CODE123"
+            placeholder={t('promos.codePlaceholder')}
             placeholderTextColor={theme.colors.subText}
             autoCapitalize="characters"
           />
