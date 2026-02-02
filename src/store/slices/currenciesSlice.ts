@@ -3,12 +3,14 @@ import { Currency } from '../../database/schema';
 
 interface CurrenciesState {
   items: Currency[];
+  selectedCurrency: string; // The code of the selected currency, e.g., 'USD'
   loading: boolean;
   error: string | null;
 }
 
 const initialState: CurrenciesState = {
   items: [],
+  selectedCurrency: 'USD',
   loading: false,
   error: null,
 };
@@ -19,6 +21,9 @@ const currenciesSlice = createSlice({
   reducers: {
     setCurrencies: (state, action: PayloadAction<Currency[]>) => {
       state.items = action.payload;
+    },
+    setSelectedCurrency: (state, action: PayloadAction<string>) => {
+      state.selectedCurrency = action.payload;
     },
     addCurrency: (state, action: PayloadAction<Currency>) => {
       state.items.push(action.payload);
@@ -37,11 +42,20 @@ const currenciesSlice = createSlice({
   },
 });
 
-export const { setCurrencies, addCurrency, updateCurrency, deleteCurrency } =
-  currenciesSlice.actions;
+export const {
+  setCurrencies,
+  setSelectedCurrency,
+  addCurrency,
+  updateCurrency,
+  deleteCurrency
+} = currenciesSlice.actions;
 
 export const selectAllCurrencies = (state: { currencies: CurrenciesState }) =>
   state.currencies.items;
+export const selectSelectedCurrencyCode = (state: { currencies: CurrenciesState }) =>
+  state.currencies.selectedCurrency;
+export const selectSelectedCurrency = (state: { currencies: CurrenciesState }) =>
+  state.currencies.items.find(c => c.code === state.currencies.selectedCurrency);
 export const selectCurrencyById =
   (id: string) => (state: { currencies: CurrenciesState }) =>
     state.currencies.items.find(c => c.id === id);

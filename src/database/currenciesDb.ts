@@ -4,15 +4,16 @@ import {
   addCurrency as addCurrencyAction,
   updateCurrency as updateCurrencyAction,
   deleteCurrency as deleteCurrencyAction,
+  setSelectedCurrency as setSelectedAction,
   selectAllCurrencies,
 } from '../store/slices/currenciesSlice';
 import { Currency } from './schema';
 
-const DEFAULT_CURRENCIES: { code: string; symbol: string }[] = [
-  { code: 'EUR', symbol: '€' },
-  { code: 'USD', symbol: '$' },
-  { code: 'GBP', symbol: '£' },
-  { code: 'TND', symbol: 'DT' },
+const DEFAULT_CURRENCIES: Omit<Currency, 'id' | 'createdAt' | 'updatedAt'>[] = [
+  { code: 'EUR', symbol: '€', rate: 0.92, isBase: false, isActive: true },
+  { code: 'USD', symbol: '$', rate: 1, isBase: true, isActive: true },
+  { code: 'GBP', symbol: '£', rate: 0.79, isBase: false, isActive: true },
+  { code: 'TND', symbol: 'DT', rate: 3.12, isBase: false, isActive: true },
 ];
 
 export const currenciesDb = {
@@ -35,13 +36,16 @@ export const currenciesDb = {
     return selectAllCurrencies(store.getState());
   },
 
-  add: async (code: string, symbol: string): Promise<string> => {
+  setSelected: async (code: string): Promise<void> => {
+    store.dispatch(setSelectedAction(code));
+  },
+
+  add: async (currency: Omit<Currency, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
     const now = new Date().toISOString();
     const id = Date.now().toString();
     const newCurrency: Currency = {
       id,
-      code,
-      symbol,
+      ...currency,
       createdAt: now,
       updatedAt: now,
     };
@@ -49,7 +53,7 @@ export const currenciesDb = {
     return id;
   },
 
-  update: async (id: string, code: string, symbol: string): Promise<void> => {
+  update: async (id: string, updates: Partial<Currency>): Promise<void> => {
     const existing = selectAllCurrencies(store.getState()).find(
       c => c.id === id,
     );
@@ -57,8 +61,7 @@ export const currenciesDb = {
       store.dispatch(
         updateCurrencyAction({
           ...existing,
-          code,
-          symbol,
+          ...updates,
           updatedAt: new Date().toISOString(),
         }),
       );

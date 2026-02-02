@@ -54,7 +54,8 @@ import { InventoryAddScreen } from '../screens/inventory/InventoryAddScreen';
 import { AdminDashboardScreen } from '../screens/dashboards/AdminDashboardScreen';
 import { StockManagerDashboardScreen } from '../screens/dashboards/StockManagerDashboardScreen';
 import { UserDashboardScreen } from '../screens/dashboards/UserDashboardScreen';
-// import { CurrencyManagerScreen } from '../screens/settings/CurrencyManagerScreen';
+import { CurrencySelectionScreen } from '../screens/settings/CurrencySelectionScreen';
+import { CurrencyAdminScreen } from '../screens/admin/CurrencyAdminScreen';
 import { NotificationBell } from '../components/common/NotificationBell';
 import { SearchOverlay } from '../components/common/SearchOverlay';
 import { ChatBot } from '../components/common/ChatBot';
@@ -127,6 +128,11 @@ const SettingsStack = () => {
         name="Language"
         component={LanguageSelectionScreen}
         options={{ title: t('profile.language') }}
+      />
+      <Stack.Screen
+        name="Currency"
+        component={CurrencySelectionScreen}
+        options={{ title: t('settings.currency') }}
       />
     </Stack.Navigator>
   );
@@ -413,6 +419,11 @@ const UserManagementStack = () => {
         component={UserDetailsScreen}
         options={{ title: t('roles.detail') || 'User Details' }}
       />
+      <Stack.Screen
+        name="CurrencyAdmin"
+        component={CurrencyAdminScreen}
+        options={{ title: 'Currency Management' }}
+      />
     </Stack.Navigator>
   );
 };
@@ -465,18 +476,19 @@ const useNavigationSections = () => {
   return useMemo(() => {
     const isStockManager = rbacService.isStockManager(user);
     const isAdmin = rbacService.isAdmin(user);
+    const isManagementRole = isStockManager || isAdmin;
 
     const sections = [
       {
         title: t('sections.shop') || 'Shop',
         items: [
-          ...(!isStockManager ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }] : []),
+          ...(!isManagementRole ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }] : []),
           {
             key: 'Catalog',
             label: (t('navigation.catalog') || 'Catalog'),
             icon: '🛍️',
           },
-          ...(!isStockManager ? [
+          ...(!isManagementRole ? [
             {
               key: 'Categories',
               label: t('navigation.categories') || 'Categories',
@@ -489,7 +501,7 @@ const useNavigationSections = () => {
       {
         title: t('sections.account') || 'Account',
         items: [
-          ...(!isStockManager ? [
+          ...(!isManagementRole ? [
             { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
             {
               key: 'Wishlist',
@@ -506,7 +518,7 @@ const useNavigationSections = () => {
               },
             ]
             : []),
-          ...(!isStockManager ? [
+          ...(!isManagementRole ? [
             {
               key: 'Purchases',
               label: t('navigation.purchases') || 'Purchases',
@@ -554,6 +566,11 @@ const useNavigationSections = () => {
         label: t('roles.title') || 'User Management',
         icon: '👥',
       });
+      managementItems.push({
+        key: 'CurrencyAdmin',
+        label: 'Currencies',
+        icon: '💱',
+      });
     }
 
     if (managementItems.length > 0) {
@@ -580,6 +597,7 @@ const useNavigationSections = () => {
       items: [
         { key: 'Settings', label: t('navigation.settings'), icon: '⚙️' },
         { key: 'Language', label: t('profile.language'), icon: '🌐' },
+        { key: 'Currency', label: t('settings.currency'), icon: '💵' },
         { key: 'Profile', label: t('navigation.profile'), icon: '👤' },
       ],
     });

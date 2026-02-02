@@ -28,8 +28,10 @@ export const ProductAddScreen = () => {
     description: editingProduct?.description || '',
     price: editingProduct?.price?.toString() || '',
     stockQuantity: editingProduct?.stockQuantity?.toString() || '0',
-    categoryId: editingProduct?.categoryId || '1', // Default category
     currency: editingProduct?.currency || 'USD',
+    availableDate: editingProduct?.availableDate || new Date().toISOString().split('T')[0],
+    unitPrice: editingProduct?.unitPrice?.toString() || '0',
+    categoryId: editingProduct?.categoryId || '1',
   });
 
   const handleSave = async () => {
@@ -47,6 +49,8 @@ export const ProductAddScreen = () => {
       currency: form.currency,
       imageUris: [],
       isActive: true,
+      availableDate: new Date(form.availableDate).toISOString(),
+      unitPrice: parseFloat(form.unitPrice),
     };
 
     try {
@@ -156,6 +160,45 @@ export const ProductAddScreen = () => {
               placeholderTextColor={theme.colors.subText}
             />
           </View>
+        </View>
+
+        <View style={styles.formGroup}>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('inventory.unitPrice')}
+          </Text>
+          <TextInput
+            style={[
+              styles.input,
+              {
+                backgroundColor: theme.colors.surface,
+                color: theme.colors.text,
+              },
+            ]}
+            value={form.unitPrice}
+            onChangeText={text => setForm({ ...form, unitPrice: text })}
+            placeholder="0.00"
+            keyboardType="decimal-pad"
+            placeholderTextColor={theme.colors.subText}
+          />
+        </View>
+
+        <View style={styles.formGroup}>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('products.availableDate')}
+          </Text>
+          <TextInput
+            style={[
+              styles.input,
+              {
+                backgroundColor: theme.colors.surface,
+                color: theme.colors.text,
+              },
+            ]}
+            value={form.availableDate}
+            onChangeText={text => setForm({ ...form, availableDate: text })}
+            placeholder="YYYY-MM-DD"
+            placeholderTextColor={theme.colors.subText}
+          />
         </View>
 
         <TouchableOpacity

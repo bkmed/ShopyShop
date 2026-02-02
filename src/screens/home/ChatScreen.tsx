@@ -28,6 +28,7 @@ export const ChatScreen = () => {
   const messages = useSelector(selectMessagesByReceiver('all'));
   const [inputText, setInputText] = useState('');
   const flatListRef = useRef<FlatList>(null);
+  const styles = React.useMemo(() => createStyles(theme), [theme]);
 
   const handleSend = () => {
     if (!inputText.trim()) return;
@@ -154,72 +155,75 @@ export const ChatScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  listContent: {
-    padding: 16,
-  },
-  messageContainer: {
-    marginBottom: 16,
-    maxWidth: '80%',
-  },
-  myMessage: {
-    alignSelf: 'flex-end',
-  },
-  theirMessage: {
-    alignSelf: 'flex-start',
-  },
-  senderName: {
-    fontSize: 11,
-    marginBottom: 4,
-    marginLeft: 4,
-  },
-  messageBubble: {
-    padding: 12,
-    borderRadius: 18,
-  },
-  messageText: {
-    fontSize: 15,
-    lineHeight: 20,
-  },
-  messageTime: {
-    fontSize: 10,
-    marginTop: 4,
-    textAlign: 'right',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 12,
-    borderTopWidth: 1,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 24,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginRight: 10,
-    maxHeight: 100,
-    fontSize: 16,
-  },
-  sendButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sendIcon: {
-    fontSize: 20,
-    color: '#FFF',
-  },
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    listContent: {
+      padding: 16,
+    },
+    messageContainer: {
+      marginBottom: 16,
+      maxWidth: '80%',
+    },
+    myMessage: {
+      alignSelf: 'flex-end',
+    },
+    theirMessage: {
+      alignSelf: 'flex-start',
+    },
+    senderName: {
+      fontSize: 11,
+      marginBottom: 4,
+      marginLeft: 4,
+    },
+    messageBubble: {
+      padding: 14,
+      borderRadius: 22,
+      ...theme.shadows.small,
+    },
+    messageText: {
+      fontSize: 16,
+      lineHeight: 22,
+    },
+    messageTime: {
+      fontSize: 10,
+      marginTop: 6,
+      textAlign: 'right',
+      fontWeight: '600',
+    },
+    inputContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 12,
+      borderTopWidth: 1,
+    },
+    input: {
+      flex: 1,
+      borderWidth: 1,
+      borderRadius: 24,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+      marginRight: 10,
+      maxHeight: 100,
+      fontSize: 16,
+    },
+    sendButton: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    sendIcon: {
+      fontSize: 20,
+      color: '#FFF',
+    },
+    centered: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 40,
+    },
+  });

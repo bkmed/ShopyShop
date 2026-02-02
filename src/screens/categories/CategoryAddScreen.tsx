@@ -27,6 +27,7 @@ export const CategoryAddScreen = () => {
     name: editingCategory?.name || '',
     description: editingCategory?.description || '',
     parentId: editingCategory?.parentId || '',
+    availableDate: editingCategory?.availableDate || new Date().toISOString().split('T')[0],
   });
 
   const handleSave = async () => {
@@ -43,6 +44,7 @@ export const CategoryAddScreen = () => {
       description: form.description,
       parentId: form.parentId || undefined,
       imageUri: '',
+      availableDate: new Date(form.availableDate).toISOString(),
     };
 
     try {
@@ -51,7 +53,7 @@ export const CategoryAddScreen = () => {
         Alert.alert(
           t('common.success'),
           t('categories.updatedSuccessfully') ||
-            'Category updated successfully',
+          'Category updated successfully',
         );
       } else {
         await categoriesDb.add(categoryData);
@@ -118,6 +120,25 @@ export const CategoryAddScreen = () => {
             placeholderTextColor={theme.colors.subText}
             multiline
             numberOfLines={4}
+          />
+        </View>
+
+        <View style={styles.formGroup}>
+          <Text style={[styles.label, { color: theme.colors.subText }]}>
+            {t('products.availableDate') || 'Available Date'}
+          </Text>
+          <TextInput
+            style={[
+              styles.input,
+              {
+                backgroundColor: theme.colors.surface,
+                color: theme.colors.text,
+              },
+            ]}
+            value={form.availableDate}
+            onChangeText={text => setForm({ ...form, availableDate: text })}
+            placeholder="YYYY-MM-DD"
+            placeholderTextColor={theme.colors.subText}
           />
         </View>
 

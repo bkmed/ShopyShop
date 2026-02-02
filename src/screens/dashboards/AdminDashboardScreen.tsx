@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { productsDb } from '../../database/productsDb';
@@ -16,6 +17,7 @@ import { categoriesDb } from '../../database/categoriesDb';
 
 export const AdminDashboardScreen = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const navigation = useNavigation<any>();
 
@@ -87,30 +89,30 @@ export const AdminDashboardScreen = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Text style={[styles.headerTitle, { color: theme.colors.text }]}>
-        Admin Console
+        {t('admin.adminConsole')}
       </Text>
 
       <View style={styles.statsGrid}>
         <StatCard
-          title="Revenue"
+          title={t('admin.revenue')}
           value={`$${stats.revenue.toFixed(2)}`}
           icon="💰"
           color="#4CD964"
         />
         <StatCard
-          title="Orders"
+          title={t('common.orders')}
           value={stats.totalOrders}
           icon="🛍️"
           color="#5856D6"
         />
         <StatCard
-          title="Products"
+          title={t('common.products')}
           value={stats.totalProducts}
           icon="📦"
           color="#FF9500"
         />
         <StatCard
-          title="Categories"
+          title={t('common.categories')}
           value={stats.totalCategories}
           icon="📂"
           color="#FF2D55"
@@ -118,16 +120,16 @@ export const AdminDashboardScreen = () => {
       </View>
 
       <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-        Quick Actions
+        {t('admin.quickActions')}
       </Text>
       <View style={styles.actionsGrid}>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
           onPress={() => navigation.navigate('Products')}
         >
-          <Text style={{ fontSize: 24 }}>➕</Text>
+          <Text style={{ fontSize: 24 }}>🏷️</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
-            Manage Products
+            {t('admin.manageProducts')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -136,7 +138,7 @@ export const AdminDashboardScreen = () => {
         >
           <Text style={{ fontSize: 24 }}>📁</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
-            Manage Categories
+            {t('admin.manageCategories')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -145,16 +147,34 @@ export const AdminDashboardScreen = () => {
         >
           <Text style={{ fontSize: 24 }}>🚚</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
-            View All Orders
+            {t('admin.viewAllOrders')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => navigation.navigate('UserManagement')}
+        >
+          <Text style={{ fontSize: 24 }}>👥</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('roles.title')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
           onPress={() => navigation.navigate('Analytics')}
         >
-          <Text style={{ fontSize: 24 }}>📈</Text>
+          <Text style={{ fontSize: 24 }}>📊</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
-            Global Analytics
+            {t('admin.globalAnalytics')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => navigation.navigate('Catalog')}
+        >
+          <Text style={{ fontSize: 24 }}>📑</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('catalogue.title')}
           </Text>
         </TouchableOpacity>
       </View>

@@ -21,6 +21,7 @@ import { productsDb } from '../database/productsDb';
 import { categoriesDb } from '../database/categoriesDb';
 import { ordersDb } from '../database/ordersDb';
 import { Product, Category, Order } from '../database/schema';
+import { useCurrency } from '../utils/currencyUtils';
 
 // ======= Helper Components =======
 
@@ -28,28 +29,30 @@ const FeaturedCard = ({
   product,
   theme,
   onPress,
+  formatPrice,
 }: {
   product: Product;
   theme: Theme;
   onPress: (p: Product) => void;
+  formatPrice: (p: number, c: string) => string;
 }) => {
   return (
     <TouchableOpacity
       style={[styles.featuredCard, { backgroundColor: theme.colors.surface }]}
       onPress={() => onPress(product)}
     >
-      <View style={styles.productImagePlaceholder}>
+      <View style={[styles.productImagePlaceholder, { backgroundColor: theme.colors.primary + '10' }]}>
         <Text style={{ fontSize: 40 }}>🛍️</Text>
       </View>
       <View style={styles.productInfo}>
         <Text
           style={[styles.productName, { color: theme.colors.text }]}
-          numberOfLines={2}
+          numberOfLines={1}
         >
           {product.name}
         </Text>
         <Text style={[styles.productPrice, { color: theme.colors.primary }]}>
-          {product.currency} {product.price}
+          {formatPrice(product.price, product.currency)}
         </Text>
       </View>
     </TouchableOpacity>
@@ -96,6 +99,7 @@ export const HomeScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const { setActiveTab } = useContext(WebNavigationContext);
+  const { formatPrice } = useCurrency();
   useWindowDimensions();
 
   const [products, setProducts] = useState<Product[]>([]);
@@ -181,18 +185,26 @@ export const HomeScreen = () => {
           <Text style={styles.welcomeSubtitle}>
             {t('home.welcome_desc') || 'Discover amazing products today.'}
           </Text>
+          <TouchableOpacity
+            style={[styles.exploreBtn, { backgroundColor: '#FFF' }]}
+            onPress={() => setActiveTab('Catalog', '')}
+          >
+            <Text style={{ color: theme.colors.primary, fontWeight: '800' }}>Explore Now</Text>
+          </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 60 }}>🛒</Text>
+        <View style={styles.bannerIconContainer}>
+          <Text style={{ fontSize: 80 }}>🛒</Text>
+        </View>
       </View>
 
       {/* Featured Products */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-            {t('home.featured') || 'Featured Products'}
+            {t('home.featured') || 'Featured Products'} ✨
           </Text>
           <TouchableOpacity onPress={() => setActiveTab('Catalog', '')}>
-            <Text style={{ color: theme.colors.primary }}>
+            <Text style={{ color: theme.colors.primary, fontWeight: '700' }}>
               {t('common.viewAll')}
             </Text>
           </TouchableOpacity>
@@ -207,6 +219,7 @@ export const HomeScreen = () => {
               product={item}
               theme={theme}
               onPress={handleProductPress}
+              formatPrice={formatPrice}
             />
           )}
           contentContainerStyle={styles.listPadding}
@@ -259,28 +272,30 @@ export const HomeScreen = () => {
             >
               <View style={styles.orderInfo}>
                 <Text style={[styles.orderId, { color: theme.colors.text }]}>
-                  #{order.id}
+                  Order #{order.id.slice(0, 8)}...
                 </Text>
                 <Text
                   style={[styles.orderDate, { color: theme.colors.subText }]}
                 >
-                  {order.createdAt}
+                  {new Date(order.createdAt).toLocaleDateString()}
                 </Text>
               </View>
               <View style={styles.orderStatusContainer}>
                 <Text
                   style={[styles.orderPrice, { color: theme.colors.primary }]}
                 >
-                  {order.currency} {order.totalAmount}
+                  {formatPrice(order.totalAmount, order.currency)}
                 </Text>
-                <Text
-                  style={[
-                    styles.orderStatus,
-                    { color: theme.colors.secondary },
-                  ]}
-                >
-                  {order.status}
-                </Text>
+                <View style={[styles.statusBadge, { backgroundColor: theme.colors.primary + '20' }]}>
+                  <Text
+                    style={[
+                      styles.orderStatus,
+                      { color: theme.colors.primary },
+                    ]}
+                  >
+                    {order.status}
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
           ))}
@@ -321,9 +336,19 @@ const styles = StyleSheet.create({
   welcomeSubtitle: {
     fontSize: 16,
     color: 'rgba(255,255,255,0.8)',
+    marginBottom: 20,
+  },
+  exploreBtn: {
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 25,
+    alignSelf: 'flex-start',
+  },
+  bannerIconContainer: {
+    padding: 10,
   },
   section: {
-    marginTop: 24,
+    marginTop: 32,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -425,12 +450,17 @@ const styles = StyleSheet.create({
   },
   orderPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '800',
     marginBottom: 4,
   },
+  statusBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
   orderStatus: {
-    fontSize: 12,
-    fontWeight: '600',
+    fontSize: 10,
+    fontWeight: '800',
     textTransform: 'uppercase',
   },
 });

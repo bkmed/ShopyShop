@@ -13,11 +13,13 @@ import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { Order, OrderItem } from '../../database/schema';
 import { useAuth } from '../../context/AuthContext';
+import { useCurrency } from '../../utils/currencyUtils';
 
 export const OrderDetailScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { formatPrice } = useCurrency();
   const route = useRoute<any>();
   const { id } = route.params;
 
@@ -77,7 +79,7 @@ export const OrderDetailScreen = () => {
         </Text>
       </View>
       <Text style={[styles.itemPrice, { color: theme.colors.text }]}>
-        {item.currency} {item.priceAtPurchase * item.quantity}
+        {formatPrice(item.priceAtPurchase * item.quantity, item.currency)}
       </Text>
     </View>
   );
@@ -104,7 +106,7 @@ export const OrderDetailScreen = () => {
               {t('orders.totalAmount')}
             </Text>
             <Text style={[styles.totalValue, { color: theme.colors.primary }]}>
-              {order.currency} {order.totalAmount}
+              {formatPrice(order.totalAmount, order.currency)}
             </Text>
           </View>
         </View>
@@ -178,14 +180,16 @@ const styles = StyleSheet.create({
   },
   headerId: {
     color: '#FFF',
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 28,
+    fontWeight: '900',
   },
   headerStatus: {
-    color: 'rgba(255,255,255,0.8)',
-    fontSize: 16,
+    color: 'rgba(255,255,255,0.9)',
+    fontSize: 14,
     marginTop: 8,
-    fontWeight: '600',
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    letterSpacing: 2,
   },
   content: {
     padding: 20,

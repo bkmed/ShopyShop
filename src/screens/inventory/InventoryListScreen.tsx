@@ -7,27 +7,36 @@ import {
   TouchableOpacity,
   TextInput,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { productsDb } from '../../database/productsDb';
-import { Product } from '../../database/schema';
+import { categoriesDb } from '../../database/categoriesDb';
+import { Product, Category } from '../../database/schema';
+import { useCurrency } from '../../utils/currencyUtils';
 
 export const InventoryListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const { formatPrice } = useCurrency();
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
   const loadInventory = async () => {
     try {
       setLoading(true);
-      const data = await productsDb.getAll();
-      setProducts(data);
+      const [productsData, categoriesData] = await Promise.all([
+        productsDb.getAll(),
+        categoriesDb.getAll(),
+      ]);
+      setProducts(productsData);
+      setCategories(categoriesData);
     } catch (error) {
       console.error('Error loading inventory:', error);
     } finally {
@@ -47,39 +56,71 @@ export const InventoryListScreen = () => {
       p.id.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const renderItem = ({ item }: { item: Product }) => (
-    <TouchableOpacity
-      style={[styles.card, { backgroundColor: theme.colors.surface }]}
-      onPress={() => navigation.navigate('InventoryDetail', { id: item.id })}
-    >
-      <View style={styles.iconContainer}>
-        <Text style={{ fontSize: 24 }}>📦</Text>
-      </View>
-      <View style={{ flex: 1 }}>
-        <Text style={[styles.name, { color: theme.colors.text }]}>
-          {item.name}
-        </Text>
-        <Text style={[styles.sku, { color: theme.colors.subText }]}>
-          SKU: {item.id}
-        </Text>
-      </View>
-      <View style={styles.stockInfo}>
-        <Text
-          style={[
-            styles.quantity,
-            {
-              color: item.stockQuantity < 10 ? '#FF4444' : theme.colors.primary,
-            },
-          ]}
-        >
-          {item.stockQuantity}
-        </Text>
-        <Text style={[styles.unit, { color: theme.colors.subText }]}>
-          {t('inventory.units') || 'Units'}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }: { item: Product }) => {
+    const category = categories.find(c => c.id === item.categoryId);
+    const lowStock = item.stockQuantity < 10;
+    const stockValue = (item.unitPrice || item.price) * item.stockQuantity;
+
+    return (
+      <TouchableOpacity
+        style={[styles.card, { backgroundColor: theme.colors.surface }]}
+        onPress={() => navigation.navigate('InventoryDetail', { id: item.id })}
+      >
+        <View style={styles.proRow}>
+          <View style={[styles.iconContainer, { backgroundColor: theme.colors.primary + '10' }]}>
+            <Text style={{ fontSize: 24 }}>📦</Text>
+          </View>
+          <View style={{ flex: 1 }}>
+            <View style={styles.nameRow}>
+              <Text style={[styles.name, { color: theme.colors.text }]}>
+                {item.name}
+              </Text>
+              {category && (
+                <View style={[styles.badge, { backgroundColor: theme.colors.primary + '15' }]}>
+                  <Text style={[styles.badgeText, { color: theme.colors.primary }]}>{category.name}</Text>
+                </View>
+              )}
+            </View>
+            <Text style={[styles.sku, { color: theme.colors.subText }]}>
+              #{item.id.slice(0, 8)}...
+            </Text>
+          </View>
+          <View style={styles.stockInfo}>
+            <Text
+              style={[
+                styles.quantity,
+                {
+                  color: lowStock ? '#FF4444' : theme.colors.success || '#4CD964',
+                },
+              ]}
+            >
+              {item.stockQuantity}
+            </Text>
+            <Text style={[styles.unit, { color: theme.colors.subText }]}>
+              {t('inventory.units') || 'Units'}
+            </Text>
+          </View>
+        </View>
+
+        <View style={[styles.proFooter, { borderTopColor: theme.colors.border }]}>
+          <View style={styles.stat}>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Unit Price</Text>
+            <Text style={[styles.statValue, { color: theme.colors.text }]}>{formatPrice(item.unitPrice || item.price, item.currency)}</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Stock Value</Text>
+            <Text style={[styles.statValue, { color: theme.colors.text }]}>{formatPrice(stockValue, item.currency)}</Text>
+          </View>
+          <View style={styles.statEnd}>
+            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>Status</Text>
+            <Text style={[styles.statValue, { color: lowStock ? '#FF4444' : theme.colors.success || '#4CD964' }]}>
+              {lowStock ? 'Low Stock' : 'Good'}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View
@@ -195,22 +236,65 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
+    fontWeight: '800',
+  },
+  nameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  proRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  proFooter: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    paddingTop: 12,
+    gap: 16,
+  },
+  stat: {
+    flex: 1,
+  },
+  statEnd: {
+    alignItems: 'flex-end',
+  },
+  statLabel: {
+    fontSize: 9,
+    textTransform: 'uppercase',
     fontWeight: '600',
+    marginBottom: 2,
+  },
+  statValue: {
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  badge: {
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 6,
+  },
+  badgeText: {
+    fontSize: 10,
+    fontWeight: '800',
   },
   sku: {
-    fontSize: 12,
+    fontSize: 11,
     marginTop: 2,
+    fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
   },
   stockInfo: {
     alignItems: 'flex-end',
   },
   quantity: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '900',
   },
   unit: {
-    fontSize: 10,
+    fontSize: 9,
     textTransform: 'uppercase',
+    fontWeight: '700',
   },
   centered: {
     flex: 1,

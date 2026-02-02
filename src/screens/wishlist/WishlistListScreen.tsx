@@ -13,11 +13,13 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { wishlistDb } from '../../database/wishlistDb';
 import { Product } from '../../database/schema';
+import { useCurrency } from '../../utils/currencyUtils';
 
 export const WishlistListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const { formatPrice } = useCurrency();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,7 @@ export const WishlistListScreen = () => {
           {item.name}
         </Text>
         <Text style={[styles.price, { color: theme.colors.primary }]}>
-          {item.currency} {item.price}
+          {formatPrice(item.price, item.currency)}
         </Text>
       </View>
       <TouchableOpacity
@@ -165,12 +167,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '800',
     marginBottom: 4,
   },
   price: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '900',
   },
   removeBtn: {
     padding: 10,

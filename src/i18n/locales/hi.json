@@ -325,7 +325,9 @@
     "list": "ऑर्डर सूची",
     "detail": "ऑर्डर विवरण",
     "search": "ऑर्डर खोजें",
-    "add": "नया ऑर्डर"
+    "add": "नया ऑर्डर",
+    "searchplaceholder": "ऑर्डर खोजें...",
+    "createNew": "नया ऑर्डर बनाएं"
   },
   "purchases": {
     "title": "खरीद इतिहास",
@@ -359,7 +361,10 @@
     "unitPrice": "इकाई मूल्य (लागत)",
     "sellingPrice": "विक्रय मूल्य",
     "fiche": "उत्पाद विवरण",
-    "missingProducts": "लापता उत्पाद"
+    "missingProducts": "लापता उत्पाद",
+    "units": "इकाइयां",
+    "adjust": "समायोजित करें",
+    "searchPlaceholder": "इन्वेंटरी खोजें..."
   },
   "payroll": {
     "currency": "मुद्रा",
@@ -397,7 +402,8 @@
     "list": "उत्पाद सूची",
     "detail": "उत्पाद विवरण",
     "search": "उत्पाद खोजें",
-    "add": "उत्पाद जोड़ें"
+    "add": "उत्पाद जोड़ें",
+    "availableDate": "उपलब्धता तिथि"
   },
   "profile": {
     "title": "प्रोफ़ाइल",

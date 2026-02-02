@@ -325,7 +325,9 @@
     "list": "Order List",
     "detail": "Order Detail",
     "search": "Search Orders",
-    "add": "New Order"
+    "add": "New Order",
+    "searchplaceholder": "Search orders...",
+    "createNew": "Create New Order"
   },
   "purchases": {
     "title": "Purchase History",
@@ -359,7 +361,10 @@
     "unitPrice": "Unit Price (Cost)",
     "sellingPrice": "Selling Price",
     "fiche": "Product Fiche",
-    "missingProducts": "Missing Products"
+    "missingProducts": "Missing Products",
+    "units": "Units",
+    "adjust": "Adjust",
+    "searchPlaceholder": "Search inventory..."
   },
   "payroll": {
     "currency": "Currency",
@@ -397,7 +402,8 @@
     "list": "Product List",
     "detail": "Product Detail",
     "search": "Search Products",
-    "add": "Add Product"
+    "add": "Add Product",
+    "availableDate": "Available Date"
   },
   "profile": {
     "title": "Profile",

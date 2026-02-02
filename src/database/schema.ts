@@ -12,6 +12,7 @@ export interface Category {
   description?: string;
   imageUri?: string;
   parentId?: string; // For subcategories
+  availableDate?: string; // ISO format
   createdAt: string;
   updatedAt: string;
 }
@@ -28,6 +29,7 @@ export interface Product {
   imageUris: string[];
   attributes?: Record<string, any>; // e.g. { size: 'M', color: 'red' }
   fiche?: string; // Technical details/fiche
+  availableDate?: string; // ISO format: when the product becomes visible to users
   rating?: number;
   reviewCount?: number;
   isActive: boolean;
@@ -162,6 +164,17 @@ export interface Reclamation {
   reason: string;
   description: string;
   status: ReclamationStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Currency {
+  id: string;
+  code: string; // e.g., 'USD', 'EUR', 'TND'
+  symbol: string; // e.g., '$', '€', 'DT'
+  rate: number; // exchange rate relative to base currency
+  isBase: boolean;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }

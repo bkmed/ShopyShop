@@ -22,6 +22,7 @@ import {
 } from '../../store/slices/cartSlice';
 import { productsDb } from '../../database/productsDb';
 import { Product, CartItem } from '../../database/schema';
+import { useCurrency } from '../../utils/currencyUtils';
 
 interface ExtendedCartItem extends CartItem {
   product: Product | null;
@@ -33,6 +34,7 @@ export const CartScreen = () => {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
+  const { formatPrice } = useCurrency();
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
   const [items, setItems] = useState<ExtendedCartItem[]>([]);
@@ -86,8 +88,8 @@ export const CartScreen = () => {
           <Text style={[styles.name, { color: theme.colors.text }]}>
             {item.product.name}
           </Text>
-          <Text style={[styles.price, { color: theme.colors.primary }]}>
-            {item.product.currency} {item.product.price}
+          <Text style={[styles.itemPrice, { color: theme.colors.primary }]}>
+            {formatPrice(item.product.price, item.product.currency)}
           </Text>
           <View style={styles.qtyContainer}>
             <TouchableOpacity
@@ -181,7 +183,7 @@ export const CartScreen = () => {
                 borderTopWidth: 1,
               },
               Platform.OS === 'web' &&
-                ({ backdropFilter: 'blur(16px)' } as any),
+              ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
@@ -191,7 +193,7 @@ export const CartScreen = () => {
               <Text
                 style={[styles.totalAmount, { color: theme.colors.primary }]}
               >
-                {items[0]?.product?.currency} {total.toFixed(2)}
+                {formatPrice(total)}
               </Text>
             </View>
             <TouchableOpacity
@@ -256,6 +258,11 @@ const createStyles = (theme: any) =>
       marginBottom: 6,
     },
     price: {
+      fontSize: 15,
+      fontWeight: '800',
+      marginBottom: 12,
+    },
+    itemPrice: {
       fontSize: 15,
       fontWeight: '800',
       marginBottom: 12,

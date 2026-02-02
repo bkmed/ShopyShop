@@ -325,7 +325,9 @@
     "list": "Liste des commandes",
     "detail": "Détail de la commande",
     "search": "Rechercher des commandes",
-    "add": "Nouvelle commande"
+    "add": "Nouvelle commande",
+    "searchplaceholder": "Rechercher des commandes...",
+    "createNew": "Créer une nouvelle commande"
   },
   "purchases": {
     "title": "Historique d'achats",
@@ -359,7 +361,10 @@
     "unitPrice": "Prix Unitaire (Coût)",
     "sellingPrice": "Prix de Vente",
     "fiche": "Fiche Produit",
-    "missingProducts": "Produits Manquants"
+    "missingProducts": "Produits Manquants",
+    "units": "Unités",
+    "adjust": "Ajuster",
+    "searchPlaceholder": "Rechercher dans l'inventaire..."
   },
   "payroll": {
     "currency": "Devise",
@@ -397,7 +402,8 @@
     "list": "Liste des produits",
     "detail": "Détail du produit",
     "search": "Rechercher des produits",
-    "add": "Ajouter un produit"
+    "add": "Ajouter un produit",
+    "availableDate": "Date de disponibilité"
   },
   "profile": {
     "title": "Profil",

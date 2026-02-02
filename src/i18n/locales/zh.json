@@ -325,7 +325,9 @@
     "list": "订单列表",
     "detail": "订单详情",
     "search": "搜索订单",
-    "add": "新订单"
+    "add": "新订单",
+    "searchplaceholder": "搜索订单...",
+    "createNew": "新建订单"
   },
   "purchases": {
     "title": "购买历史",
@@ -359,7 +361,10 @@
     "unitPrice": "单价 (成本)",
     "sellingPrice": "售价",
     "fiche": "产品资料",
-    "missingProducts": "缺失产品"
+    "missingProducts": "缺失产品",
+    "units": "单位",
+    "adjust": "调整",
+    "searchPlaceholder": "搜索库存..."
   },
   "payroll": {
     "currency": "货币",
@@ -397,7 +402,8 @@
     "list": "产品列表",
     "detail": "产品详情",
     "search": "搜索产品",
-    "add": "添加产品"
+    "add": "添加产品",
+    "availableDate": "可用日期"
   },
   "profile": {
     "title": "个人资料",

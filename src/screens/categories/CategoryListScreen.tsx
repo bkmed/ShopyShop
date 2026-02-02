@@ -13,11 +13,15 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Category } from '../../database/schema';
+import { useAuth } from '../../context/AuthContext';
+import { rbacService } from '../../services/rbacService';
 
 export const CategoryListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const { user } = useAuth();
+  const isAdminOrManager = rbacService.isAdmin(user) || rbacService.isStockManager(user);
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,9 +45,12 @@ export const CategoryListScreen = () => {
     }, []),
   );
 
-  const filteredCategories = categories.filter(c =>
-    c.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const filteredCategories = categories.filter(c => {
+    const matchesSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase());
+    if (isAdminOrManager) return matchesSearch;
+    const isAvailable = !c.availableDate || new Date(c.availableDate) <= new Date();
+    return matchesSearch && isAvailable;
+  });
 
   const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
@@ -53,10 +60,10 @@ export const CategoryListScreen = () => {
       <View
         style={[
           styles.iconContainer,
-          { backgroundColor: theme.colors.primary + '15' },
+          { backgroundColor: theme.colors.primary + '10' },
         ]}
       >
-        <Text style={{ fontSize: 24 }}>📂</Text>
+        <Text style={{ fontSize: 24 }}>🗂️</Text>
       </View>
       <View style={{ flex: 1 }}>
         <Text style={[styles.categoryName, { color: theme.colors.text }]}>
@@ -69,7 +76,9 @@ export const CategoryListScreen = () => {
           {item.description || t('categories.noDescription')}
         </Text>
       </View>
-      <Text style={{ color: theme.colors.primary }}>➔</Text>
+      <View style={[styles.arrowContainer, { backgroundColor: theme.colors.background }]}>
+        <Text style={{ color: theme.colors.primary }}>➔</Text>
+      </View>
     </TouchableOpacity>
   );
 
@@ -195,11 +204,18 @@ const styles = StyleSheet.create({
   },
   categoryName: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '800',
     marginBottom: 4,
   },
   categoryDesc: {
     fontSize: 14,
+  },
+  arrowContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   centered: {
     flex: 1,

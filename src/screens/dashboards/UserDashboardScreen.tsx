@@ -9,23 +9,24 @@ import {
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import { ordersDb } from '../../database/ordersDb';
 import { wishlistDb } from '../../database/wishlistDb';
 
 export const UserDashboardScreen = () => {
-  const getTimeGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
-  };
-
+  const { t } = useTranslation();
   const { theme } = useTheme();
-
   const { user } = useAuth();
   const navigation = useNavigation<any>();
+
+  const getTimeGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return t('dashboard.goodMorning');
+    if (hour < 18) return t('dashboard.goodAfternoon');
+    return t('dashboard.goodEvening');
+  };
 
   const [stats, setStats] = useState({
     orderCount: 0,
@@ -46,7 +47,7 @@ export const UserDashboardScreen = () => {
       setStats({
         orderCount: orders.length,
         wishlistCount: wishlist.length,
-        recentStatus: orders.length > 0 ? orders[0].status : 'No orders',
+        recentStatus: orders.length > 0 ? orders[0].status : t('common.none'),
       });
     } catch (error) {
       console.error('Error loading user dashboard:', error);
@@ -77,10 +78,10 @@ export const UserDashboardScreen = () => {
     >
       <View style={styles.welcome}>
         <Text style={[styles.greeting, { color: theme.colors.text }]}>
-          {getTimeGreeting()}, {user?.name.split(' ')[0] || 'Shopper'} 👋
+          {getTimeGreeting()}, {user?.name.split(' ')[0] || t('login.customer')} 👋
         </Text>
         <Text style={[styles.subGreeting, { color: theme.colors.subText }]}>
-          Your personalized shopping dashboard
+          {t('dashboard.personalizedGreeting')}
         </Text>
       </View>
 
@@ -94,7 +95,7 @@ export const UserDashboardScreen = () => {
             {stats.orderCount}
           </Text>
           <Text style={[styles.statLab, { color: theme.colors.subText }]}>
-            Orders
+            {t('common.orders')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -106,7 +107,7 @@ export const UserDashboardScreen = () => {
             {stats.wishlistCount}
           </Text>
           <Text style={[styles.statLab, { color: theme.colors.subText }]}>
-            Saved
+            {t('navigation.wishlist')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -121,7 +122,7 @@ export const UserDashboardScreen = () => {
         ]}
       >
         <View style={{ flex: 1 }}>
-          <Text style={styles.bannerTitle}>Active Order Status</Text>
+          <Text style={styles.bannerTitle}>{t('dashboard.activeOrderStatus')}</Text>
           <Text style={styles.bannerVal}>
             {stats.recentStatus.toUpperCase()}
           </Text>
@@ -131,22 +132,22 @@ export const UserDashboardScreen = () => {
           onPress={() => navigation.navigate('Orders')}
         >
           <Text style={{ color: theme.colors.primary, fontWeight: '800' }}>
-            Track Order
+            {t('dashboard.trackOrder')}
           </Text>
         </TouchableOpacity>
       </View>
 
       <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-        Shopping Experience
+        {t('home.quickActions')}
       </Text>
       <View style={styles.menu}>
         <TouchableOpacity
           style={[styles.menuItem, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('CatalogTab')}
+          onPress={() => navigation.navigate('Catalog')}
         >
           <Text style={styles.menuIcon}>🏬</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>
-            Browse Catalog
+            {t('home.browseProducts')}
           </Text>
           <Text style={{ color: theme.colors.subText }}>→</Text>
         </TouchableOpacity>
@@ -156,7 +157,7 @@ export const UserDashboardScreen = () => {
         >
           <Text style={styles.menuIcon}>🤖</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>
-            Shopping Assistant
+            {t('chatBot.chat')}
           </Text>
           <Text style={{ color: theme.colors.subText }}>→</Text>
         </TouchableOpacity>
@@ -166,7 +167,7 @@ export const UserDashboardScreen = () => {
         >
           <Text style={styles.menuIcon}>👤</Text>
           <Text style={[styles.menuText, { color: theme.colors.text }]}>
-            Account Settings
+            {t('profile.settings')}
           </Text>
           <Text style={{ color: theme.colors.subText }}>→</Text>
         </TouchableOpacity>

@@ -18,6 +18,7 @@ import { rbacService } from '../../services/rbacService';
 import { wishlistDb } from '../../database/wishlistDb';
 import { addToCart } from '../../store/slices/cartSlice';
 import { Product } from '../../database/schema';
+import { useCurrency } from '../../utils/currencyUtils';
 
 
 
@@ -33,6 +34,7 @@ export const ProductDetailScreen = () => {
   const isAdmin = rbacService.isAdmin(user);
   const isManager = isStockManager || isAdmin;
   const dispatch = useDispatch();
+  const { formatPrice } = useCurrency();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -125,8 +127,8 @@ export const ProductDetailScreen = () => {
 
   return (
     <ScrollView style={[screenStyles.container, { backgroundColor: theme.colors.background }]}>
-      <View style={screenStyles.headerImage}>
-        <Text style={{ fontSize: 80 }}>🏷️</Text>
+      <View style={[screenStyles.headerImage, { backgroundColor: theme.colors.primary + '10' }]}>
+        <Text style={{ fontSize: 120 }}>📦</Text>
       </View>
 
       <View style={[screenStyles.content, { backgroundColor: theme.colors.surface }]}>
@@ -142,7 +144,7 @@ export const ProductDetailScreen = () => {
         </View>
 
         <Text style={[screenStyles.price, { color: theme.colors.primary }]}>
-          {product.currency} {isManager ? (product.unitPrice || product.price) : product.price}
+          {formatPrice(isManager ? (product.unitPrice || product.price) : product.price, product.currency)}
           {isManager && ` (${t('inventory.unitPrice')})`}
         </Text>
 
@@ -191,7 +193,7 @@ export const ProductDetailScreen = () => {
           </View>
         </View>
 
-        {isAdmin && (
+        {isManager && (
           <View style={screenStyles.actions}>
             <TouchableOpacity
               style={[screenStyles.editButton, { borderColor: theme.colors.primary, borderWidth: 1 }]}
@@ -277,7 +279,7 @@ const createStyles = (theme: any) =>
       padding: 8,
     },
     price: {
-      fontSize: 24,
+      fontSize: 28,
       fontWeight: '900',
       marginBottom: 12,
     },
@@ -285,46 +287,47 @@ const createStyles = (theme: any) =>
       alignSelf: 'flex-start',
       paddingHorizontal: 12,
       paddingVertical: 6,
-      borderRadius: 8,
+      borderRadius: 12,
       marginBottom: 24,
     },
     stockText: {
       fontSize: 12,
-      fontWeight: 'bold',
+      fontWeight: '800',
+      textTransform: 'uppercase',
     },
     section: {
-      marginBottom: 24,
+      marginBottom: 32,
     },
     sectionTitle: {
       fontSize: 18,
-      fontWeight: '800',
-      marginBottom: 8,
+      fontWeight: '900',
+      marginBottom: 12,
     },
     description: {
       fontSize: 16,
-      lineHeight: 24,
+      lineHeight: 26,
     },
     statsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: 20,
+      marginTop: 24,
     },
     statItem: {
       flex: 0.48,
       padding: 16,
-      borderRadius: 16,
+      borderRadius: 20,
       alignItems: 'center',
       ...theme.shadows.small,
     },
     statLabel: {
-      fontSize: 12,
+      fontSize: 10,
       textTransform: 'uppercase',
-      marginBottom: 4,
-      fontWeight: '600',
+      marginBottom: 6,
+      fontWeight: '700',
     },
     statValue: {
       fontSize: 18,
-      fontWeight: '800',
+      fontWeight: '900',
     },
     actions: {
       flexDirection: 'row',

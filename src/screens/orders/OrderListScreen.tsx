@@ -14,11 +14,13 @@ import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { Order } from '../../database/schema';
 import { useAuth } from '../../context/AuthContext';
+import { useCurrency } from '../../utils/currencyUtils';
 
 export const OrderListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { formatPrice } = useCurrency();
   const navigation = useNavigation<any>();
 
   const [orders, setOrders] = useState<Order[]>([]);
@@ -69,10 +71,10 @@ export const OrderListScreen = () => {
       </View>
       <View style={styles.infoRow}>
         <Text style={[styles.date, { color: theme.colors.subText }]}>
-          {item.createdAt}
+          {new Date(item.createdAt).toLocaleDateString()}
         </Text>
         <Text style={[styles.total, { color: theme.colors.text }]}>
-          {item.currency} {item.totalAmount}
+          {formatPrice(item.totalAmount, item.currency)}
         </Text>
       </View>
       {user?.role === 'admin' && item.userName && (

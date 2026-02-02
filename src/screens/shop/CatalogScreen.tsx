@@ -17,11 +17,13 @@ import { productsDb } from '../../database/productsDb';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Product, Category } from '../../database/schema';
 import { useTranslation } from 'react-i18next';
+import { useCurrency } from '../../utils/currencyUtils';
 
 export const CatalogScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const { formatPrice } = useCurrency();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -99,7 +101,7 @@ export const CatalogScreen = () => {
           {item.name}
         </Text>
         <Text style={[styles.price, { color: theme.colors.primary }]}>
-          {item.currency} {item.price}
+          {formatPrice(item.price, item.currency)}
         </Text>
         <TouchableOpacity
           style={[styles.addBtn, { backgroundColor: theme.colors.primary }]}
@@ -189,8 +191,8 @@ export const CatalogScreen = () => {
                 {option === 'newest'
                   ? 'Newest'
                   : option === 'priceAsc'
-                  ? 'Price ↑'
-                  : 'Price ↓'}
+                    ? 'Price ↑'
+                    : 'Price ↓'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -351,17 +353,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   info: {
-    padding: 12,
+    padding: 16,
   },
   name: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '800',
     marginBottom: 4,
   },
   price: {
-    fontSize: 16,
-    fontWeight: '800',
-    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: '900',
+    marginBottom: 12,
   },
   addBtn: {
     paddingVertical: 8,
