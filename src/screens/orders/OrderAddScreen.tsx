@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -15,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { useAuth } from '../../context/AuthContext';
-import { useModal } from '../../context/ModalContext';
+
 import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 
@@ -24,7 +23,6 @@ export const OrderAddScreen = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const navigation = useNavigation<any>();
-  const modal = useModal();
   const toast = useToast();
 
   const [form, setForm] = useState({
@@ -40,7 +38,7 @@ export const OrderAddScreen = () => {
     if (!form.totalAmount || !form.shippingAddress) {
       AlertService.showError(
         toast,
-        t('common.errorEmptyFields') || 'Please fill required fields'
+        t('common.errorEmptyFields') || 'Please fill required fields',
       );
       return;
     }
@@ -60,7 +58,7 @@ export const OrderAddScreen = () => {
 
       AlertService.showSuccess(
         toast,
-        t('orders.created') || 'Order created successfully'
+        t('orders.created') || 'Order created successfully',
       );
       navigation.goBack();
     } catch (error) {

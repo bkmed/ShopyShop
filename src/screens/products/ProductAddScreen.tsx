@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -79,7 +78,7 @@ export const ProductAddScreen = () => {
       modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-      'Are you sure you want to delete this product?',
+        'Are you sure you want to delete this product?',
       async () => {
         try {
           if (editingProduct) {
@@ -87,7 +86,7 @@ export const ProductAddScreen = () => {
             AlertService.showSuccess(
               toast,
               t('products.deletedSuccessfully') ||
-              'Product deleted successfully'
+                'Product deleted successfully',
             );
             navigation.goBack();
           }
@@ -96,7 +95,7 @@ export const ProductAddScreen = () => {
           AlertService.showError(toast, t('common.deleteError'));
         }
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

@@ -6,7 +6,6 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -195,7 +194,7 @@ export const CartScreen = () => {
                 borderTopWidth: 1,
               },
               Platform.OS === 'web' &&
-              ({ backdropFilter: 'blur(16px)' } as any),
+                ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
@@ -217,7 +216,7 @@ export const CartScreen = () => {
                 AlertService.showAlert(
                   modal,
                   t('cart.checkout'),
-                  t('cart.featureUnderConstruction')
+                  t('cart.featureUnderConstruction'),
                 )
               }
             >

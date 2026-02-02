@@ -11,7 +11,6 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useModal } from '../../context/ModalContext';
-import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 import { categoriesDb } from '../../database/categoriesDb';
 import { Category } from '../../database/schema';
@@ -21,7 +20,6 @@ export const CategoryDetailScreen = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
   const modal = useModal();
-  const toast = useToast();
   const route = useRoute<any>();
   const { id } = route.params;
 
@@ -52,7 +50,7 @@ export const CategoryDetailScreen = () => {
         await categoriesDb.delete(id);
         navigation.goBack();
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

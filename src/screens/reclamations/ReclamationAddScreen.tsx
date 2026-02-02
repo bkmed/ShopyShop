@@ -6,14 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
-import { useModal } from '../../context/ModalContext';
+
 import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 import { reclamationsDb } from '../../database';
@@ -22,7 +21,6 @@ export const ReclamationAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const modal = useModal();
   const toast = useToast();
   const { user } = useAuth();
 
@@ -51,7 +49,7 @@ export const ReclamationAddScreen = () => {
 
       AlertService.showSuccess(
         toast,
-        t('reclamations.submitted') || 'Claim submitted'
+        t('reclamations.submitted') || 'Claim submitted',
       );
       navigation.goBack();
     } catch (error) {

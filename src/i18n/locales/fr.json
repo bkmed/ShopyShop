@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "Ajouter une annonce",
     "noAnnouncements": "Aucune annonce pour le moment",
-    "title": "Annonces"
+    "title": "Annonces",
+    "titlePlaceholder": "Titre",
+    "contentPlaceholder": "Contenu"
   },
   "cart": {
     "addToCart": "Ajouter au panier",
@@ -89,7 +91,10 @@
     "addBtn": "Ajouter une devise",
     "editTitle": "Modifier la devise",
     "addNew": "Ajouter une nouvelle devise",
-    "manageTitle": "Gestion des devises"
+    "manageTitle": "Gestion des devises",
+    "codePlaceholder": "EUR",
+    "symbolPlaceholder": "€",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "Catégories",
@@ -109,7 +114,9 @@
     "parent": "Catégorie parente",
     "noCategories": "Aucune catégorie trouvée",
     "detail": "Détail de la catégorie",
-    "filter": "Filtrer les catégories"
+    "filter": "Filtrer les catégories",
+    "namePlaceholder": "ex. Électronique",
+    "descriptionPlaceholder": "Description..."
   },
   "chat": {
     "noMessages": "Pas encore de messages",
@@ -236,7 +243,10 @@
     "selectDate": "Sélectionner une date",
     "unauthorized": "Accès non autorisé",
     "validate": "Valider",
-    "viewAll": "Voir tout"
+    "viewAll": "Voir tout",
+    "placeholderZero": "0",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "AAAA-MM-JJ"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "Adresse de livraison",
     "createNew": "Créer une nouvelle commande",
     "manageStatus": "Gérer le statut",
-    "customers": "Clients"
+    "customers": "Clients",
+    "addressPlaceholder": "Adresse..."
   },
   "purchases": {
     "title": "Historique d'achats",
@@ -375,7 +386,9 @@
     "active": "Actif",
     "inactive": "Inactif",
     "saved": "Promo enregistrée avec succès",
-    "deleted": "Promo supprimée avec succès"
+    "deleted": "Promo supprimée avec succès",
+    "codePlaceholder": "CODE",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "Réclamations",
@@ -386,7 +399,9 @@
     "status": "Statut",
     "submitted": "Soumise",
     "description": "Description",
-    "orderId": "ID de commande"
+    "orderId": "ID de commande",
+    "orderIdPlaceholder": "CMD-001",
+    "descriptionPlaceholder": "Description..."
   },
   "inventory": {
     "inventoryControl": "Contrôle des stocks",
@@ -416,7 +431,9 @@
     "quantity": "Quantité",
     "totalValue": "Valeur totale",
     "adjustmentAmount": "Montant de l'ajustement",
-    "reason": "Raison"
+    "reason": "Raison",
+    "changePlaceholder": "0",
+    "reasonPlaceholder": "Raison..."
   },
   "payroll": {
     "currency": "Devise",
@@ -457,7 +474,8 @@
     "list": "Liste des produits",
     "detail": "Détail du produit",
     "search": "Rechercher des produits",
-    "add": "Ajouter un produit"
+    "add": "Ajouter un produit",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "Profil",

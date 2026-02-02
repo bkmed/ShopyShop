@@ -6,13 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
   Switch,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { useModal } from '../../context/ModalContext';
 import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 import { promosDb } from '../../database/promosDb';
@@ -23,7 +21,6 @@ import { Picker } from '@react-native-picker/picker';
 export const PromoAddEditScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const modal = useModal();
   const toast = useToast();
   const navigation = useNavigation();
   const route = useRoute<any>();

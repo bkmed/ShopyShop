@@ -7,7 +7,6 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -117,7 +116,7 @@ export const ProductDetailScreen = () => {
         await productsDb.delete(id);
         navigation.goBack();
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

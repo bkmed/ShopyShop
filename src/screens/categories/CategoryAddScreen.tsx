@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -40,7 +39,7 @@ export const CategoryAddScreen = () => {
     if (!form.name.trim()) {
       AlertService.showError(
         toast,
-        t('categories.nameRequired') || 'Category name is required'
+        t('categories.nameRequired') || 'Category name is required',
       );
       return;
     }
@@ -58,13 +57,14 @@ export const CategoryAddScreen = () => {
         await categoriesDb.update(editingCategory.id, categoryData);
         AlertService.showSuccess(
           toast,
-          t('categories.updatedSuccessfully') || 'Category updated successfully'
+          t('categories.updatedSuccessfully') ||
+            'Category updated successfully',
         );
       } else {
         await categoriesDb.add(categoryData);
         AlertService.showSuccess(
           toast,
-          t('categories.savedSuccessfully') || 'Category saved successfully'
+          t('categories.savedSuccessfully') || 'Category saved successfully',
         );
       }
       navigation.goBack();
@@ -79,7 +79,7 @@ export const CategoryAddScreen = () => {
       modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-      'Are you sure you want to delete this category?',
+        'Are you sure you want to delete this category?',
       async () => {
         try {
           if (editingCategory) {
@@ -87,7 +87,7 @@ export const CategoryAddScreen = () => {
             AlertService.showSuccess(
               toast,
               t('categories.deletedSuccessfully') ||
-              'Category deleted successfully'
+                'Category deleted successfully',
             );
             navigation.goBack();
           }
@@ -96,7 +96,7 @@ export const CategoryAddScreen = () => {
           AlertService.showError(toast, t('common.deleteError'));
         }
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

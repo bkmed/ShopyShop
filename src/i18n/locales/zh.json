@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "添加公告",
     "noAnnouncements": "暂无公告",
-    "title": "公告"
+    "title": "公告",
+    "titlePlaceholder": "新闻标题",
+    "contentPlaceholder": "新闻内容"
   },
   "cart": {
     "addToCart": "加入购物车",
@@ -89,7 +91,10 @@
     "addBtn": "添加货币",
     "editTitle": "编辑货币",
     "addNew": "添加新货币",
-    "manageTitle": "货币管理"
+    "manageTitle": "货币管理",
+    "codePlaceholder": "CNY",
+    "symbolPlaceholder": "¥",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "类别",
@@ -109,7 +114,9 @@
     "parent": "父级类别",
     "noCategories": "未找到类别",
     "detail": "类别详情",
-    "filter": "筛选类别"
+    "filter": "筛选类别",
+    "namePlaceholder": "例如 电子产品",
+    "descriptionPlaceholder": "描述..."
   },
   "chat": {
     "noMessages": "暂无消息",
@@ -236,7 +243,10 @@
     "selectDate": "选择日期",
     "unauthorized": "未经授权的访问",
     "validate": "验证",
-    "viewAll": "查看全部"
+    "viewAll": "查看全部",
+    "placeholderZero": "0",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "YYYY-MM-DD"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "收货地址",
     "createNew": "新建订单",
     "manageStatus": "管理状态",
-    "customers": "客户"
+    "customers": "客户",
+    "addressPlaceholder": "地址..."
   },
   "purchases": {
     "title": "购买历史",
@@ -375,7 +386,9 @@
     "active": "有效",
     "inactive": "无效",
     "saved": "优惠已保存",
-    "deleted": "优惠已删除"
+    "deleted": "优惠已删除",
+    "codePlaceholder": "CODE",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "投诉",
@@ -386,7 +399,9 @@
     "status": "状态",
     "submitted": "已提交",
     "description": "描述",
-    "orderId": "订单 ID"
+    "orderId": "订单 ID",
+    "orderIdPlaceholder": "ORD-001",
+    "descriptionPlaceholder": "描述..."
   },
   "inventory": {
     "inventoryControl": "库存控制",
@@ -416,7 +431,9 @@
     "quantity": "数量",
     "totalValue": "总价值",
     "adjustmentAmount": "调整金额",
-    "reason": "原因"
+    "reason": "原因",
+    "changePlaceholder": "0",
+    "reasonPlaceholder": "原因..."
   },
   "payroll": {
     "currency": "货币",
@@ -457,7 +474,8 @@
     "list": "产品列表",
     "detail": "产品详情",
     "search": "搜索产品",
-    "add": "添加产品"
+    "add": "添加产品",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "个人资料",

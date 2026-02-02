@@ -6,7 +6,6 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
-  Alert,
   ActivityIndicator,
   Switch,
   KeyboardAvoidingView,
@@ -74,7 +73,7 @@ export const CurrencyAdminScreen = () => {
         toast,
         editingId
           ? t('common.updatedSuccessfully') || 'Updated successfully'
-          : t('common.savedSuccessfully') || 'Saved successfully'
+          : t('common.savedSuccessfully') || 'Saved successfully',
       );
     } catch {
       AlertService.showError(toast, t('common.saveError'));
@@ -100,9 +99,12 @@ export const CurrencyAdminScreen = () => {
       async () => {
         await currenciesDb.delete(id);
         loadCurrencies();
-        AlertService.showSuccess(toast, t('common.deletedSuccessfully') || 'Deleted successfully');
+        AlertService.showSuccess(
+          toast,
+          t('common.deletedSuccessfully') || 'Deleted successfully',
+        );
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

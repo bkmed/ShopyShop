@@ -6,13 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { useModal } from '../../context/ModalContext';
 import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 import { usersDb } from '../../database/usersDb';
@@ -21,7 +19,6 @@ export const UserAddEditScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const modal = useModal();
   const toast = useToast();
   const route = useRoute<any>();
   const { id } = route.params || {};
@@ -79,7 +76,7 @@ export const UserAddEditScreen = () => {
         } as any); // Type assertion might be needed depending on strictness
         AlertService.showSuccess(
           toast,
-          t('users.createdSuccessfully') || 'User created'
+          t('users.createdSuccessfully') || 'User created',
         );
       }
       navigation.goBack();

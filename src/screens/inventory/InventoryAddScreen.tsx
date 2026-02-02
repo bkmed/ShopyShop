@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -16,7 +15,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { inventoryDb } from '../../database/inventoryDb';
 import { Product } from '../../database/schema';
 import { useAuth } from '../../context/AuthContext';
-import { useModal } from '../../context/ModalContext';
+
 import { useToast } from '../../context/ToastContext';
 import { AlertService } from '../../services/alertService';
 
@@ -24,7 +23,6 @@ export const InventoryAddScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const { user } = useAuth();
-  const modal = useModal();
   const toast = useToast();
   const navigation = useNavigation<any>();
   const route = useRoute<any>();
@@ -40,7 +38,7 @@ export const InventoryAddScreen = () => {
     if (!form.productId || !form.change || !form.reason) {
       AlertService.showError(
         toast,
-        t('common.errorEmptyFields') || 'Please fill required fields'
+        t('common.errorEmptyFields') || 'Please fill required fields',
       );
       return;
     }
@@ -54,7 +52,7 @@ export const InventoryAddScreen = () => {
       );
       AlertService.showSuccess(
         toast,
-        t('inventory.adjusted') || 'Inventory adjusted successfully'
+        t('inventory.adjusted') || 'Inventory adjusted successfully',
       );
       navigation.goBack();
     } catch (error: any) {

@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "إضافة إعلان",
     "noAnnouncements": "لا توجد إعلانات بعد",
-    "title": "الإعلانات"
+    "title": "الإعلانات",
+    "titlePlaceholder": "عنوان",
+    "contentPlaceholder": "محتوى"
   },
   "cart": {
     "addToCart": "إضافة إلى السلة",
@@ -89,7 +91,10 @@
     "addBtn": "إضافة عملة",
     "editTitle": "تعديل العملة",
     "addNew": "إضافة عملة جديدة",
-    "manageTitle": "إدارة العملات"
+    "manageTitle": "إدارة العملات",
+    "codePlaceholder": "SAR",
+    "symbolPlaceholder": "ر.س",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "الفئات",
@@ -109,7 +114,9 @@
     "parent": "الفئة الأم",
     "noCategories": "لم يتم العثور على فئات",
     "detail": "تفاصيل الفئة",
-    "filter": "تصفية الفئات"
+    "filter": "تصفية الفئات",
+    "namePlaceholder": "مثال: إلكترونيات",
+    "descriptionPlaceholder": "وصف..."
   },
   "chat": {
     "noMessages": "لا توجد رسائل بعد",
@@ -236,7 +243,10 @@
     "selectDate": "اختر التاريخ",
     "unauthorized": "دخول غير مصرح به",
     "validate": "تحقق",
-    "viewAll": "عرض الكل"
+    "viewAll": "عرض الكل",
+    "placeholderZero": "0",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "YYYY-MM-DD"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "عنوان الشحن",
     "createNew": "إنشاء طلب جديد",
     "manageStatus": "إدارة الحالة",
-    "customers": "العملاء"
+    "customers": "العملاء",
+    "addressPlaceholder": "العنوان..."
   },
   "purchases": {
     "title": "سجل المشتريات",
@@ -375,7 +386,9 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "saved": "تم حفظ العرض بنجاح",
-    "deleted": "تم حذف العرض بنجاح"
+    "deleted": "تم حذف العرض بنجاح",
+    "codePlaceholder": "CODE",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "الشكاوى",
@@ -386,7 +399,9 @@
     "status": "الحالة",
     "submitted": "تم تقديمها",
     "description": "Description",
-    "orderId": "رقم الطلب"
+    "orderId": "رقم الطلب",
+    "orderIdPlaceholder": "TLB-001",
+    "descriptionPlaceholder": "وصف..."
   },
   "inventory": {
     "inventoryControl": "التحكم في المخزون",
@@ -416,7 +431,9 @@
     "quantity": "الكمية",
     "totalValue": "القيمة الإجمالية",
     "adjustmentAmount": "مبلغ التعديل",
-    "reason": "السبب"
+    "reason": "السبب",
+    "changePlaceholder": "٠",
+    "reasonPlaceholder": "السبب..."
   },
   "payroll": {
     "currency": "العملة",
@@ -457,7 +474,8 @@
     "list": "قائمة المنتجات",
     "detail": "تفاصيل المنتج",
     "search": "البحث عن منتجات",
-    "add": "إضافة منتج"
+    "add": "إضافة منتج",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "الملف الشخصي",

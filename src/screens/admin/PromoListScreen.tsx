@@ -6,7 +6,6 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -51,10 +50,13 @@ export const PromoListScreen = () => {
       t('common.deleteConfirm'),
       async () => {
         await promosDb.delete(id);
-        AlertService.showSuccess(toast, t('common.deletedSuccessfully') || 'Deleted successfully');
+        AlertService.showSuccess(
+          toast,
+          t('common.deletedSuccessfully') || 'Deleted successfully',
+        );
         loadPromos();
       },
-      t('common.delete')
+      t('common.delete'),
     );
   };
 

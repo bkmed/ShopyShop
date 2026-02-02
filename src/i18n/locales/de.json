@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "Ankündigung hinzufügen",
     "noAnnouncements": "Noch keine Ankündigungen",
-    "title": "Ankündigungen"
+    "title": "Ankündigungen",
+    "titlePlaceholder": "Titel",
+    "contentPlaceholder": "Inhalt"
   },
   "cart": {
     "addToCart": "In den Warenkorb",
@@ -89,7 +91,10 @@
     "addBtn": "Währung hinzufügen",
     "editTitle": "Währung bearbeiten",
     "addNew": "Neue Währung hinzufügen",
-    "manageTitle": "Währungsverwaltung"
+    "manageTitle": "Währungsverwaltung",
+    "codePlaceholder": "EUR",
+    "symbolPlaceholder": "€",
+    "ratePlaceholder": "1,0"
   },
   "categories": {
     "title": "Kategorien",
@@ -109,7 +114,9 @@
     "parent": "Übergeordnete Kategorie",
     "noCategories": "Keine Kategorien gefunden",
     "detail": "Kategoriedetail",
-    "filter": "Kategorien filtern"
+    "filter": "Kategorien filtern",
+    "namePlaceholder": "z.B. Elektronik",
+    "descriptionPlaceholder": "Beschreibung..."
   },
   "chat": {
     "noMessages": "Noch keine Nachrichten",
@@ -236,7 +243,10 @@
     "selectDate": "Datum auswählen",
     "unauthorized": "Unbefugter Zugriff",
     "validate": "Validieren",
-    "viewAll": "Alle anzeigen"
+    "viewAll": "Alle anzeigen",
+    "placeholderZero": "0",
+    "placeholderAmount": "0,00",
+    "dateFormatPlaceholder": "JJJJ-MM-TT"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "Lieferadresse",
     "createNew": "Neue Bestellung erstellen",
     "manageStatus": "Status verwalten",
-    "customers": "Kunden"
+    "customers": "Kunden",
+    "addressPlaceholder": "Adresse..."
   },
   "purchases": {
     "title": "Kaufhistorie",
@@ -375,7 +386,9 @@
     "active": "Aktiv",
     "inactive": "Inaktiv",
     "saved": "Promo erfolgreich gespeichert",
-    "deleted": "Promo erfolgreich gelöscht"
+    "deleted": "Promo erfolgreich gelöscht",
+    "codePlaceholder": "CODE",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "Reklamationen",
@@ -386,7 +399,9 @@
     "status": "Status",
     "submitted": "Eingereicht",
     "description": "Beschreibung",
-    "orderId": "Bestell-ID"
+    "orderId": "Bestell-ID",
+    "orderIdPlaceholder": "BEST-001",
+    "descriptionPlaceholder": "Beschreibung..."
   },
   "inventory": {
     "inventoryControl": "Bestandskontrolle",
@@ -416,7 +431,9 @@
     "quantity": "Menge",
     "totalValue": "Gesamtwert",
     "adjustmentAmount": "Anpassungsbetrag",
-    "reason": "Grund"
+    "reason": "Grund",
+    "changePlaceholder": "0",
+    "reasonPlaceholder": "Grund..."
   },
   "payroll": {
     "currency": "Währung",
@@ -457,7 +474,8 @@
     "list": "Produktliste",
     "detail": "Produktdetail",
     "search": "Produkte suchen",
-    "add": "Produkt hinzufügen"
+    "add": "Produkt hinzufügen",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "Profil",

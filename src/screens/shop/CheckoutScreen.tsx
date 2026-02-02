@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -88,7 +87,7 @@ export const CheckoutScreen = () => {
       if (!promoObj) {
         AlertService.showError(
           toast,
-          t('cart.invalidPromo') || 'Invalid Promo Code'
+          t('cart.invalidPromo') || 'Invalid Promo Code',
         );
         return;
       }
@@ -114,15 +113,15 @@ export const CheckoutScreen = () => {
         AlertService.showSuccess(
           toast,
           `${t('cart.discountApplied') || 'Discount Applied'}: ${formatPrice(
-            totalDiscount
-          )}`
+            totalDiscount,
+          )}`,
         );
       } else {
         AlertService.showAlert(
           modal,
           t('common.info'),
           t('cart.promoNotApplicable') ||
-          'Promo code not applicable to these items'
+            'Promo code not applicable to these items',
         );
         setDiscount(0);
       }
@@ -135,7 +134,7 @@ export const CheckoutScreen = () => {
     if (!address.trim()) {
       AlertService.showError(
         toast,
-        t('cart.addressRequired') || 'Address is required'
+        t('cart.addressRequired') || 'Address is required',
       );
       return;
     }
@@ -175,7 +174,7 @@ export const CheckoutScreen = () => {
         t('common.success'),
         t('cart.orderPlaced') || 'Order placed successfully!',
         'OK',
-        () => navigation.navigate('Home')
+        () => navigation.navigate('Home'),
       );
     } catch (error) {
       console.error('Order placement error:', error);

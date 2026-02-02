@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "Añadir anuncio",
     "noAnnouncements": "Aún no hay anuncios",
-    "title": "Anuncios"
+    "title": "Anuncios",
+    "titlePlaceholder": "Título",
+    "contentPlaceholder": "Contenido"
   },
   "cart": {
     "addToCart": "Añadir al carrito",
@@ -89,7 +91,10 @@
     "addBtn": "Añadir moneda",
     "editTitle": "Editar moneda",
     "addNew": "Añadir nueva moneda",
-    "manageTitle": "Gestión de monedas"
+    "manageTitle": "Gestión de monedas",
+    "codePlaceholder": "EUR",
+    "symbolPlaceholder": "€",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "Categorías",
@@ -109,7 +114,9 @@
     "parent": "Categoría padre",
     "noCategories": "No se encontraron categorías",
     "detail": "Detalle de la categoría",
-    "filter": "Filtrar categorías"
+    "filter": "Filtrar categorías",
+    "namePlaceholder": "ej. Electrónica",
+    "descriptionPlaceholder": "Descripción..."
   },
   "chat": {
     "noMessages": "Aún no hay mensajes",
@@ -236,7 +243,10 @@
     "selectDate": "Seleccionar fecha",
     "unauthorized": "Acceso no autorizado",
     "validate": "Validar",
-    "viewAll": "Ver todo"
+    "viewAll": "Ver todo",
+    "placeholderZero": "0",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "AAAA-MM-DD"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "Dirección de envío",
     "createNew": "Crear nuevo pedido",
     "manageStatus": "Gestionar estado",
-    "customers": "Clientes"
+    "customers": "Clientes",
+    "addressPlaceholder": "Dirección..."
   },
   "purchases": {
     "title": "Historial de compras",
@@ -375,7 +386,9 @@
     "active": "Activo",
     "inactive": "Inactivo",
     "saved": "Promoción guardada con éxito",
-    "deleted": "Promoción eliminada con éxito"
+    "deleted": "Promoción eliminada con éxito",
+    "codePlaceholder": "CODIGO",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "Reclamaciones",
@@ -386,7 +399,9 @@
     "status": "Estado",
     "submitted": "Enviada",
     "description": "Descripción",
-    "orderId": "ID de pedido"
+    "orderId": "ID de pedido",
+    "orderIdPlaceholder": "PED-001",
+    "descriptionPlaceholder": "Descripción..."
   },
   "inventory": {
     "inventoryControl": "Control de inventario",
@@ -416,7 +431,9 @@
     "quantity": "Cantidad",
     "totalValue": "Valor total",
     "adjustmentAmount": "Monto de ajuste",
-    "reason": "Razón"
+    "reason": "Razón",
+    "changePlaceholder": "0",
+    "reasonPlaceholder": "Razón..."
   },
   "payroll": {
     "currency": "Moneda",
@@ -457,7 +474,8 @@
     "list": "Lista de productos",
     "detail": "Detalle del producto",
     "search": "Buscar productos",
-    "add": "Añadir producto"
+    "add": "Añadir producto",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "Perfil",

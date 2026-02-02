@@ -160,7 +160,7 @@ const ModalContent: React.FC<{
                 style={[
                   styles.buttonText,
                   button.style === 'destructive' &&
-                  styles.destructiveButtonText,
+                    styles.destructiveButtonText,
                   button.style === 'cancel' && styles.cancelButtonText,
                 ]}
               >

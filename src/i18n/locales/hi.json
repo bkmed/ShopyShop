@@ -24,7 +24,9 @@
   "announcements": {
     "addAnnouncement": "घोषणा जोड़ें",
     "noAnnouncements": "अभी कोई घोषणा नहीं",
-    "title": "घोषणाएं"
+    "title": "घोषणाएं",
+    "titlePlaceholder": "शीर्षक",
+    "contentPlaceholder": "सामग्री"
   },
   "cart": {
     "addToCart": "कार्ट में जोड़ें",
@@ -89,7 +91,10 @@
     "addBtn": "मुद्रा जोड़ें",
     "editTitle": "मुद्रा संपादित करें",
     "addNew": "नई मुद्रा जोड़ें",
-    "manageTitle": "मुद्रा प्रबंधन"
+    "manageTitle": "मुद्रा प्रबंधन",
+    "codePlaceholder": "INR",
+    "symbolPlaceholder": "₹",
+    "ratePlaceholder": "1.0"
   },
   "categories": {
     "title": "श्रेणियां",
@@ -109,7 +114,9 @@
     "parent": "मूल श्रेणी",
     "noCategories": "कोई श्रेणी नहीं मिली",
     "detail": "श्रेणी विवरण",
-    "filter": "श्रेणियां फ़िल्टर करें"
+    "filter": "श्रेणियां फ़िल्टर करें",
+    "namePlaceholder": "उदाहरण इलेक्ट्रॉनिक्स",
+    "descriptionPlaceholder": "विवरण..."
   },
   "chat": {
     "noMessages": "अभी कोई संदेश नहीं",
@@ -236,7 +243,10 @@
     "selectDate": "तारीख चुनें",
     "unauthorized": "अनधिकृत पहुंच",
     "validate": "मान्य करें",
-    "viewAll": "सभी देखें"
+    "viewAll": "सभी देखें",
+    "placeholderZero": "0",
+    "placeholderAmount": "0.00",
+    "dateFormatPlaceholder": "YYYY-MM-DD"
   },
   "home": {
     "appName": "ShopyShop",
@@ -355,7 +365,8 @@
     "shippingAddress": "शिपिंग पता",
     "createNew": "नया ऑर्डर बनाएं",
     "manageStatus": "स्थिति प्रबंधित करें",
-    "customers": "ग्राहक"
+    "customers": "ग्राहक",
+    "addressPlaceholder": "पता..."
   },
   "purchases": {
     "title": "खरीद इतिहास",
@@ -375,7 +386,9 @@
     "active": "सक्रिय",
     "inactive": "निष्क्रिय",
     "saved": "प्रोमो सफलतापूर्वक सहेजा गया",
-    "deleted": "प्रोमो सफलतापूर्वक हटाया गया"
+    "deleted": "प्रोमो सफलतापूर्वक हटाया गया",
+    "codePlaceholder": "CODE",
+    "percentagePlaceholder": "20"
   },
   "reclamations": {
     "title": "शिकायतें",
@@ -386,7 +399,9 @@
     "status": "स्थिति",
     "submitted": "जमा किया गया",
     "description": "विवरण",
-    "orderId": "ऑर्डर आईडी"
+    "orderId": "ऑर्डर आईडी",
+    "orderIdPlaceholder": "ORD-001",
+    "descriptionPlaceholder": "विवरण..."
   },
   "inventory": {
     "inventoryControl": "इन्वेंटरी नियंत्रण",
@@ -416,7 +431,9 @@
     "quantity": "मात्रा",
     "totalValue": "कुल मूल्य",
     "adjustmentAmount": "समायोजन राशि",
-    "reason": "कारण"
+    "reason": "कारण",
+    "changePlaceholder": "0",
+    "reasonPlaceholder": "कारण..."
   },
   "payroll": {
     "currency": "मुद्रा",
@@ -457,7 +474,8 @@
     "list": "उत्पाद सूची",
     "detail": "उत्पाद विवरण",
     "search": "उत्पाद खोजें",
-    "add": "उत्पाद जोड़ें"
+    "add": "उत्पाद जोड़ें",
+    "skuPlaceholder": "SKU-001"
   },
   "profile": {
     "title": "प्रोफ़ाइल",
