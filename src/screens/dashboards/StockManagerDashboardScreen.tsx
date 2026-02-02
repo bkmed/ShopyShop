@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { productsDb } from '../../database/productsDb';
 import { inventoryDb } from '../../database/inventoryDb';
 
 export const StockManagerDashboardScreen = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const navigation = useNavigation<any>();
 
@@ -69,7 +71,7 @@ export const StockManagerDashboardScreen = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Text style={[styles.headerTitle, { color: theme.colors.text }]}>
-        Inventory Control
+        {t('inventory.inventoryControl')}
       </Text>
 
       <View style={styles.mainStats}>
@@ -89,10 +91,10 @@ export const StockManagerDashboardScreen = () => {
                 { color: stats.lowStock > 0 ? '#FF3B30' : '#4CD964' },
               ]}
             >
-              {stats.lowStock} Low Stock Alerts
+              {stats.lowStock} {t('inventory.lowStockAlerts')}
             </Text>
             <Text style={[styles.alertSub, { color: theme.colors.subText }]}>
-              Items requiring immediate attention
+              {t('inventory.immediateAttention')}
             </Text>
           </View>
         </View>
@@ -106,7 +108,7 @@ export const StockManagerDashboardScreen = () => {
             {stats.totalItems}
           </Text>
           <Text style={[styles.smallLabel, { color: theme.colors.subText }]}>
-            Total Units
+            {t('inventory.totalUnits')}
           </Text>
         </View>
         <View
@@ -116,13 +118,13 @@ export const StockManagerDashboardScreen = () => {
             {stats.recentLogs}
           </Text>
           <Text style={[styles.smallLabel, { color: theme.colors.subText }]}>
-            Recent Movements
+            {t('inventory.recentMovements')}
           </Text>
         </View>
       </View>
 
       <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-        Warehouse Ops
+        {t('inventory.warehouseOps')}
       </Text>
       <View style={styles.opsGrid}>
         <TouchableOpacity
@@ -131,7 +133,7 @@ export const StockManagerDashboardScreen = () => {
         >
           <Text style={{ fontSize: 24 }}>📋</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
-            Full Inventory
+            {t('inventory.fullInventory')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -140,7 +142,7 @@ export const StockManagerDashboardScreen = () => {
         >
           <Text style={{ fontSize: 24 }}>📥</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
-            Receive Stock
+            {t('inventory.receiveStock')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -149,7 +151,7 @@ export const StockManagerDashboardScreen = () => {
         >
           <Text style={{ fontSize: 24 }}>📦</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
-            Pick & Pack
+            {t('inventory.pickAndPack')}
           </Text>
         </TouchableOpacity>
       </View>

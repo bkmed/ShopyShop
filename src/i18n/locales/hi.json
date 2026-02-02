@@ -71,6 +71,12 @@
     "detail": "उत्पाद विवरण",
     "search": "कैटलॉग खोजें"
   },
+  "catalogue": {
+    "title": "कैटलॉग",
+    "list": "कैटलॉग सूची",
+    "detail": "कैटलॉग विवरण",
+    "add": "कैटलॉग में जोड़ें"
+  },
   "categories": {
     "title": "श्रेणियां",
     "add": "श्रेणी जोड़ें",
@@ -81,7 +87,8 @@
     "name": "श्रेणी का नाम",
     "description": "श्रेणी विवरण",
     "parent": "मूल श्रेणी",
-    "noCategories": "कोई श्रेणी नहीं मिली"
+    "noCategories": "कोई श्रेणी नहीं मिली",
+    "detail": "श्रेणी विवरण"
   },
   "chat": {
     "noMessages": "अभी कोई संदेश नहीं",
@@ -129,6 +136,7 @@
   "common": {
     "add": "जोड़ें",
     "edit": "संपादित करें",
+    "id": "आईडी",
     "delete": "हटाएं",
     "save": "सहेजें",
     "cancel": "रद्द करें",
@@ -319,6 +327,22 @@
     "search": "ऑर्डर खोजें",
     "add": "नया ऑर्डर"
   },
+  "purchases": {
+    "title": "खरीद इतिहास",
+    "list": "खरीद सूची",
+    "detail": "खरीद विवरण"
+  },
+  "reclamations": {
+    "title": "शिकायतें",
+    "list": "शिकायत सूची",
+    "add": "नई शिकायत",
+    "detail": "शिकायत विवरण",
+    "reason": "कारण",
+    "status": "स्थिति",
+    "submitted": "जमा किया गया",
+    "description": "विवरण",
+    "orderId": "ऑर्डर आईडी"
+  },
   "inventory": {
     "inventoryControl": "इन्वेंटरी नियंत्रण",
     "lowStockAlerts": "कम स्टॉक अलर्ट",
@@ -328,7 +352,14 @@
     "warehouseOps": "गोदाम संचालन",
     "fullInventory": "पूर्ण इन्वेंटरी",
     "receiveStock": "स्टॉक प्राप्त करें",
-    "pickAndPack": "पिक और पैक"
+    "pickAndPack": "चुनें और पैक करें",
+    "title": "इन्वेंटरी",
+    "stockLevels": "स्टॉक स्तर",
+    "reports": "रिपोर्ट",
+    "unitPrice": "इकाई मूल्य (लागत)",
+    "sellingPrice": "विक्रय मूल्य",
+    "fiche": "उत्पाद विवरण",
+    "missingProducts": "लापता उत्पाद"
   },
   "payroll": {
     "currency": "मुद्रा",
@@ -403,8 +434,9 @@
     "updatedSuccessfully": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई"
   },
   "roles": {
-    "admin": "एडमिन",
-    "stockManager": "स्टॉक मैनेजर",
+    "admin": "प्रशासक",
+    "stockManager": "स्टॉक प्रबंधक",
+    "gestionnaire_de_stock": "स्टॉक प्रबंधक",
     "customer": "ग्राहक",
     "user": "उपयोगकर्ता",
     "title": "भूमिकाएं",

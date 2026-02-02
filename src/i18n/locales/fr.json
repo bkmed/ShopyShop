@@ -68,8 +68,14 @@
     "title": "Catalogue",
     "viewProduct": "Voir le produit",
     "list": "Liste des produits",
-    "detail": "Détail du produit",
-    "search": "Rechercher dans le catalogue"
+    "detail": "Détails du Produit",
+    "search": "Rechercher dans le Catalogue"
+  },
+  "catalogue": {
+    "title": "Catalogue",
+    "list": "Liste du Catalogue",
+    "detail": "Détails du Catalogue",
+    "add": "Ajouter au Catalogue"
   },
   "categories": {
     "title": "Catégories",
@@ -81,7 +87,8 @@
     "name": "Nom de la catégorie",
     "description": "Description de la catégorie",
     "parent": "Catégorie parente",
-    "noCategories": "Aucune catégorie trouvée"
+    "noCategories": "Aucune catégorie trouvée",
+    "detail": "Détail de la catégorie"
   },
   "chat": {
     "noMessages": "Pas encore de messages",
@@ -129,6 +136,7 @@
   "common": {
     "add": "Ajouter",
     "edit": "Modifier",
+    "id": "ID",
     "delete": "Supprimer",
     "save": "Enregistrer",
     "cancel": "Annuler",
@@ -319,6 +327,22 @@
     "search": "Rechercher des commandes",
     "add": "Nouvelle commande"
   },
+  "purchases": {
+    "title": "Historique d'achats",
+    "list": "Liste des achats",
+    "detail": "Détail de l'achat"
+  },
+  "reclamations": {
+    "title": "Réclamations",
+    "list": "Liste des réclamations",
+    "add": "Nouvelle réclamation",
+    "detail": "Détail de la réclamation",
+    "reason": "Raison",
+    "status": "Statut",
+    "submitted": "Soumise",
+    "description": "Description",
+    "orderId": "ID de commande"
+  },
   "inventory": {
     "inventoryControl": "Contrôle des stocks",
     "lowStockAlerts": "Alertes de stock bas",
@@ -327,8 +351,15 @@
     "recentMovements": "Mouvements récents",
     "warehouseOps": "Opérations d'entrepôt",
     "fullInventory": "Inventaire complet",
-    "receiveStock": "Réception de stock",
-    "pickAndPack": "Préparation & Emballage"
+    "receiveStock": "Réception de Stock",
+    "pickAndPack": "Préparation & Emballage",
+    "title": "Inventaire",
+    "stockLevels": "Niveaux de Stock",
+    "reports": "Rapports",
+    "unitPrice": "Prix Unitaire (Coût)",
+    "sellingPrice": "Prix de Vente",
+    "fiche": "Fiche Produit",
+    "missingProducts": "Produits Manquants"
   },
   "payroll": {
     "currency": "Devise",
@@ -404,7 +435,8 @@
   },
   "roles": {
     "admin": "Administrateur",
-    "stockManager": "Gestionnaire de stock",
+    "stockManager": "Gestionnaire de Stock",
+    "gestionnaire_de_stock": "Gestionnaire de Stock",
     "customer": "Client",
     "user": "Utilisateur",
     "title": "Rôles",

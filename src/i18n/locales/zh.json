@@ -71,6 +71,12 @@
     "detail": "产品详情",
     "search": "搜索目录"
   },
+  "catalogue": {
+    "title": "目录",
+    "list": "目录列表",
+    "detail": "目录详情",
+    "add": "添加到目录"
+  },
   "categories": {
     "title": "类别",
     "add": "添加类别",
@@ -81,7 +87,8 @@
     "name": "类别名称",
     "description": "类别说明",
     "parent": "父级类别",
-    "noCategories": "未找到类别"
+    "noCategories": "未找到类别",
+    "detail": "类别详情"
   },
   "chat": {
     "noMessages": "暂无消息",
@@ -129,6 +136,7 @@
   "common": {
     "add": "添加",
     "edit": "编辑",
+    "id": "ID",
     "delete": "删除",
     "save": "保存",
     "cancel": "取消",
@@ -319,6 +327,22 @@
     "search": "搜索订单",
     "add": "新订单"
   },
+  "purchases": {
+    "title": "购买历史",
+    "list": "购买列表",
+    "detail": "购买详情"
+  },
+  "reclamations": {
+    "title": "投诉",
+    "list": "投诉列表",
+    "add": "新投诉",
+    "detail": "投诉详情",
+    "reason": "原因",
+    "status": "状态",
+    "submitted": "已提交",
+    "description": "描述",
+    "orderId": "订单 ID"
+  },
   "inventory": {
     "inventoryControl": "库存控制",
     "lowStockAlerts": "低库存警报",
@@ -328,7 +352,14 @@
     "warehouseOps": "仓库运营",
     "fullInventory": "完整库存",
     "receiveStock": "接收库存",
-    "pickAndPack": "拣货与包装"
+    "pickAndPack": "拣货与包装",
+    "title": "库存",
+    "stockLevels": "库存水平",
+    "reports": "报告",
+    "unitPrice": "单价 (成本)",
+    "sellingPrice": "售价",
+    "fiche": "产品资料",
+    "missingProducts": "缺失产品"
   },
   "payroll": {
     "currency": "货币",
@@ -405,6 +436,7 @@
   "roles": {
     "admin": "管理员",
     "stockManager": "库存管理员",
+    "gestionnaire_de_stock": "库存管理员",
     "customer": "客户",
     "user": "用户",
     "title": "角色",

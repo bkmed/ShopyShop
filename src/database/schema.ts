@@ -21,11 +21,13 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  unitPrice: number; // Wholesale/Cost price for stock management
   currency: string;
   stockQuantity: number;
   categoryId: string;
   imageUris: string[];
   attributes?: Record<string, any>; // e.g. { size: 'M', color: 'red' }
+  fiche?: string; // Technical details/fiche
   rating?: number;
   reviewCount?: number;
   isActive: boolean;
@@ -149,4 +151,17 @@ export interface InventoryLog {
   reason: string;
   performedBy: string; // userId
   createdAt: string;
+}
+
+export type ReclamationStatus = 'pending' | 'investigating' | 'resolved' | 'rejected';
+
+export interface Reclamation {
+  id: string;
+  userId: string;
+  orderId: string;
+  reason: string;
+  description: string;
+  status: ReclamationStatus;
+  createdAt: string;
+  updatedAt: string;
 }

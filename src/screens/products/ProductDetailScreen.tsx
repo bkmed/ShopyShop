@@ -8,11 +8,18 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 import { productsDb } from '../../database/productsDb';
+import { rbacService } from '../../services/rbacService';
+import { wishlistDb } from '../../database/wishlistDb';
+import { addToCart } from '../../store/slices/cartSlice';
 import { Product } from '../../database/schema';
+
+
 
 export const ProductDetailScreen = () => {
   const { theme } = useTheme();
@@ -21,44 +28,88 @@ export const ProductDetailScreen = () => {
   const route = useRoute<any>();
   const { id } = route.params;
 
+  const { user } = useAuth();
+  const isStockManager = rbacService.isStockManager(user);
+  const isAdmin = rbacService.isAdmin(user);
+  const isManager = isStockManager || isAdmin;
+  const dispatch = useDispatch();
+
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const styles = React.useMemo(() => createStyles(theme), [theme]);
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        setLoading(true);
-        const data = await productsDb.getById(id);
-        setProduct(data);
-      } catch (error) {
-        console.error('Error loading product:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
     loadProduct();
+    checkWishlist();
   }, [id]);
 
-  const handleDelete = () => {
-    Alert.alert(t('common.confirmDelete'), t('products.deleteConfirm'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.delete'),
-        style: 'destructive',
-        onPress: async () => {
-          await productsDb.delete(id);
-          navigation.goBack();
-        },
-      },
-    ]);
+  const loadProduct = async () => {
+    try {
+      setLoading(true);
+      const data = await productsDb.getById(id);
+      setProduct(data);
+    } catch (error) {
+      console.error('Error loading product:', error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const checkWishlist = () => {
+    if (user) {
+      const wishlisted = wishlistDb.isWishlisted(id);
+      setIsWishlisted(wishlisted);
+    }
+  };
+
+  const toggleWishlist = async () => {
+    if (!user) {
+      Alert.alert(t('common.error'), t('session_expired'));
+      return;
+    }
+    if (isWishlisted) {
+      await wishlistDb.remove(id);
+    } else if (product) {
+      await wishlistDb.add(product.id);
+    }
+    setIsWishlisted(!isWishlisted);
+  };
+
+  const handleAddToCart = () => {
+    if (!user) {
+      Alert.alert(t('common.error'), t('session_expired'));
+      return;
+    }
+    if (product) {
+      dispatch(addToCart({ productId: product.id, quantity }));
+      Alert.alert(t('common.success'), t('cart.itemAdded'));
+    }
+  };
+
+  const handleDelete = async () => {
+    Alert.alert(
+      t('common.deleteTitle'),
+      t('products.deleteConfirm'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: async () => {
+            await productsDb.delete(id);
+            navigation.goBack();
+          }
+        }
+      ]
+    );
+  };
+
+  const screenStyles = createStyles(theme);
 
   if (loading) {
     return (
-      <View
-        style={[styles.centered, { backgroundColor: theme.colors.background }]}
-      >
+      <View style={[screenStyles.centered, { backgroundColor: theme.colors.background }]}>
         <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
@@ -66,101 +117,128 @@ export const ProductDetailScreen = () => {
 
   if (!product) {
     return (
-      <View
-        style={[styles.centered, { backgroundColor: theme.colors.background }]}
-      >
-        <Text style={{ color: theme.colors.subText }}>
-          {t('products.noProducts')}
-        </Text>
+      <View style={[screenStyles.centered, { backgroundColor: theme.colors.background }]}>
+        <Text style={{ color: theme.colors.subText }}>{t('products.noProducts')}</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
-      <View
-        style={[styles.headerImage, { backgroundColor: 'rgba(0,0,0,0.05)' }]}
-      >
-        <Text style={{ fontSize: 80 }}>🛍️</Text>
+    <ScrollView style={[screenStyles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={screenStyles.headerImage}>
+        <Text style={{ fontSize: 80 }}>🏷️</Text>
       </View>
 
-      <View style={[styles.content, { backgroundColor: theme.colors.surface }]}>
-        <View style={styles.titleRow}>
-          <Text style={[styles.name, { color: theme.colors.text }]}>
+      <View style={[screenStyles.content, { backgroundColor: theme.colors.surface }]}>
+        <View style={screenStyles.titleRow}>
+          <Text style={[screenStyles.name, { color: theme.colors.text }]}>
             {product.name}
           </Text>
-          <Text style={[styles.price, { color: theme.colors.primary }]}>
-            {product.currency} {product.price}
-          </Text>
-        </View>
-
-        <View
-          style={[
-            styles.badge,
-            { backgroundColor: theme.colors.primary + '15' },
-          ]}
-        >
-          <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
-            {product.stockQuantity > 0
-              ? t('catalog.inStock')
-              : t('catalog.outOfStock')}
-          </Text>
-        </View>
-
-        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-          {t('products.productDescription')}
-        </Text>
-        <Text style={[styles.description, { color: theme.colors.subText }]}>
-          {product.description}
-        </Text>
-
-        <View style={styles.statsContainer}>
-          <View
-            style={[styles.statItem, { backgroundColor: theme.colors.surface }]}
-          >
-            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
-              {t('products.productStock')}
-            </Text>
-            <Text style={[styles.statValue, { color: theme.colors.text }]}>
-              {product.stockQuantity}
-            </Text>
-          </View>
-          <View
-            style={[styles.statItem, { backgroundColor: theme.colors.surface }]}
-          >
-            <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
-              {t('products.productSKU')}
-            </Text>
-            <Text style={[styles.statValue, { color: theme.colors.text }]}>
-              {product.id}
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.actions}>
-          <TouchableOpacity
-            style={[
-              styles.editButton,
-              { borderColor: theme.colors.primary, borderWidth: 1 },
-            ]}
-            onPress={() => navigation.navigate('ProductAdd', { product })}
-          >
-            <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
-              {t('common.edit')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.deleteButton, { backgroundColor: '#FF4444' }]}
-            onPress={handleDelete}
-          >
-            <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
-              {t('common.delete')}
+          <TouchableOpacity onPress={toggleWishlist} style={screenStyles.wishlistIcon}>
+            <Text style={{ fontSize: 32 }}>
+              {isWishlisted ? '❤️' : '🤍'}
             </Text>
           </TouchableOpacity>
         </View>
+
+        <Text style={[screenStyles.price, { color: theme.colors.primary }]}>
+          {product.currency} {isManager ? (product.unitPrice || product.price) : product.price}
+          {isManager && ` (${t('inventory.unitPrice')})`}
+        </Text>
+
+        <View style={[screenStyles.stockBadge, { backgroundColor: product.stockQuantity > 0 ? '#4CD96420' : '#FF3B3020' }]}>
+          <Text style={[screenStyles.stockText, { color: product.stockQuantity > 0 ? '#4CD964' : '#FF3B30' }]}>
+            {product.stockQuantity > 0 ? t('products.inStock') : t('products.outOfStock')} ({product.stockQuantity})
+          </Text>
+        </View>
+
+        {product.fiche && (
+          <View style={screenStyles.section}>
+            <Text style={[screenStyles.sectionTitle, { color: theme.colors.text }]}>
+              {t('inventory.fiche')}
+            </Text>
+            <Text style={[screenStyles.description, { color: theme.colors.subText }]}>
+              {product.fiche}
+            </Text>
+          </View>
+        )}
+
+        <View style={screenStyles.section}>
+          <Text style={[screenStyles.sectionTitle, { color: theme.colors.text }]}>
+            {t('products.productDescription')}
+          </Text>
+          <Text style={[screenStyles.description, { color: theme.colors.subText }]}>
+            {product.description}
+          </Text>
+
+          <View style={screenStyles.statsContainer}>
+            <View style={[screenStyles.statItem, { backgroundColor: theme.colors.surface }]}>
+              <Text style={[screenStyles.statLabel, { color: theme.colors.subText }]}>
+                {t('products.productStock')}
+              </Text>
+              <Text style={[screenStyles.statValue, { color: theme.colors.text }]}>
+                {product.stockQuantity}
+              </Text>
+            </View>
+            <View style={[screenStyles.statItem, { backgroundColor: theme.colors.surface }]}>
+              <Text style={[screenStyles.statLabel, { color: theme.colors.subText }]}>
+                {t('products.productSKU')}
+              </Text>
+              <Text style={[screenStyles.statValue, { color: theme.colors.text }]}>
+                {product.id}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {isAdmin && (
+          <View style={screenStyles.actions}>
+            <TouchableOpacity
+              style={[screenStyles.editButton, { borderColor: theme.colors.primary, borderWidth: 1 }]}
+              onPress={() => navigation.navigate('ProductAdd', { product })}
+            >
+              <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
+                {t('common.edit')}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[screenStyles.deleteButton, { backgroundColor: '#FF4444' }]}
+              onPress={handleDelete}
+            >
+              <Text style={{ color: '#FFF', fontWeight: 'bold' }}>
+                {t('common.delete')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
+
+      {!isStockManager && (
+        <View style={[screenStyles.footer, { backgroundColor: theme.colors.surface, borderTopColor: theme.colors.border, borderTopWidth: 1 }]}>
+          <View style={screenStyles.quantityContainer}>
+            <TouchableOpacity
+              style={[screenStyles.quantityBtn, { backgroundColor: theme.colors.background }]}
+              onPress={() => setQuantity(Math.max(1, quantity - 1))}
+            >
+              <Text style={[screenStyles.quantityBtnText, { color: theme.colors.text }]}>-</Text>
+            </TouchableOpacity>
+            <Text style={[screenStyles.quantity, { color: theme.colors.text }]}>{quantity}</Text>
+            <TouchableOpacity
+              style={[screenStyles.quantityBtn, { backgroundColor: theme.colors.background }]}
+              onPress={() => setQuantity(Math.min(product.stockQuantity, quantity + 1))}
+            >
+              <Text style={[screenStyles.quantityBtnText, { color: theme.colors.text }]}>+</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            style={[screenStyles.addToCartBtn, { backgroundColor: theme.colors.primary }]}
+            onPress={handleAddToCart}
+          >
+            <Text style={screenStyles.addToCartText}>{t('cart.addToCart')}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </ScrollView>
   );
 };
@@ -171,16 +249,16 @@ const createStyles = (theme: any) =>
       flex: 1,
     },
     headerImage: {
-      height: 380,
+      height: 300,
       justifyContent: 'center',
       alignItems: 'center',
     },
     content: {
-      padding: 32,
-      borderTopLeftRadius: 40,
-      borderTopRightRadius: 40,
-      marginTop: -40,
-      minHeight: 600,
+      padding: 24,
+      borderTopLeftRadius: 32,
+      borderTopRightRadius: 32,
+      marginTop: -32,
+      minHeight: 500,
       ...theme.shadows.large,
     },
     titleRow: {
@@ -190,75 +268,123 @@ const createStyles = (theme: any) =>
       marginBottom: 16,
     },
     name: {
-      fontSize: 32,
+      fontSize: 28,
       fontWeight: '900',
       flex: 1,
       marginRight: 16,
     },
+    wishlistIcon: {
+      padding: 8,
+    },
     price: {
-      fontSize: 28,
+      fontSize: 24,
       fontWeight: '900',
-    },
-    badge: {
-      alignSelf: 'flex-start',
-      paddingHorizontal: 16,
-      paddingVertical: 8,
-      borderRadius: 12,
-      marginBottom: 32,
-    },
-    sectionTitle: {
-      fontSize: 20,
-      fontWeight: '800',
       marginBottom: 12,
     },
+    stockBadge: {
+      alignSelf: 'flex-start',
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 8,
+      marginBottom: 24,
+    },
+    stockText: {
+      fontSize: 12,
+      fontWeight: 'bold',
+    },
+    section: {
+      marginBottom: 24,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: '800',
+      marginBottom: 8,
+    },
     description: {
-      fontSize: 17,
-      lineHeight: 28,
-      marginBottom: 32,
+      fontSize: 16,
+      lineHeight: 24,
     },
     statsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: 40,
+      marginTop: 20,
     },
     statItem: {
       flex: 0.48,
-      padding: 20,
-      borderRadius: 24,
+      padding: 16,
+      borderRadius: 16,
       alignItems: 'center',
       ...theme.shadows.small,
     },
     statLabel: {
-      fontSize: 13,
+      fontSize: 12,
       textTransform: 'uppercase',
-      marginBottom: 6,
+      marginBottom: 4,
       fontWeight: '600',
-      letterSpacing: 1,
     },
     statValue: {
-      fontSize: 20,
-      fontWeight: '900',
+      fontSize: 18,
+      fontWeight: '800',
     },
     actions: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginTop: 20,
-      paddingBottom: 60,
+      paddingBottom: 40,
     },
     editButton: {
       flex: 0.48,
-      height: 64,
-      borderRadius: 20,
-      justifyContent: 'center',
+      padding: 16,
+      borderRadius: 12,
       alignItems: 'center',
-      backgroundColor: 'rgba(45, 91, 255, 0.05)',
     },
     deleteButton: {
       flex: 0.48,
-      height: 64,
-      borderRadius: 20,
+      padding: 16,
+      borderRadius: 12,
+      alignItems: 'center',
+    },
+    footer: {
+      flexDirection: 'row',
+      padding: 20,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    quantityContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.05)',
+      borderRadius: 12,
+      padding: 4,
+    },
+    quantityBtn: {
+      width: 40,
+      height: 40,
+      borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    quantityBtnText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    quantity: {
+      paddingHorizontal: 16,
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    addToCartBtn: {
+      flex: 1,
+      marginLeft: 20,
+      height: 50,
+      borderRadius: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    addToCartText: {
+      color: '#FFF',
+      fontSize: 16,
+      fontWeight: 'bold',
     },
     centered: {
       flex: 1,

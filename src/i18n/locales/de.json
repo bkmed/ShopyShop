@@ -71,6 +71,12 @@
     "detail": "Produktdetail",
     "search": "Katalog durchsuchen"
   },
+  "catalogue": {
+    "title": "Katalog",
+    "list": "Katalogliste",
+    "detail": "Katalogdetail",
+    "add": "Zum Katalog hinzufügen"
+  },
   "categories": {
     "title": "Kategorien",
     "add": "Kategorie hinzufügen",
@@ -81,7 +87,8 @@
     "name": "Kategoriename",
     "description": "Kategoriebeschreibung",
     "parent": "Übergeordnete Kategorie",
-    "noCategories": "Keine Kategorien gefunden"
+    "noCategories": "Keine Kategorien gefunden",
+    "detail": "Kategoriedetail"
   },
   "chat": {
     "noMessages": "Noch keine Nachrichten",
@@ -129,6 +136,7 @@
   "common": {
     "add": "Hinzufügen",
     "edit": "Bearbeiten",
+    "id": "ID",
     "delete": "Löschen",
     "save": "Speichern",
     "cancel": "Abbrechen",
@@ -319,6 +327,22 @@
     "search": "Bestellungen suchen",
     "add": "Neue Bestellung"
   },
+  "purchases": {
+    "title": "Kaufhistorie",
+    "list": "Kaufliste",
+    "detail": "Kaufdetail"
+  },
+  "reclamations": {
+    "title": "Reklamationen",
+    "list": "Reklamationsliste",
+    "add": "Neue Reklamation",
+    "detail": "Reklamationsdetail",
+    "reason": "Grund",
+    "status": "Status",
+    "submitted": "Eingereicht",
+    "description": "Beschreibung",
+    "orderId": "Bestell-ID"
+  },
   "inventory": {
     "inventoryControl": "Bestandskontrolle",
     "lowStockAlerts": "Warnungen bei geringem Bestand",
@@ -328,7 +352,14 @@
     "warehouseOps": "Lagerbetrieb",
     "fullInventory": "Vollständiges Inventar",
     "receiveStock": "Bestand erhalten",
-    "pickAndPack": "Kommissionieren & Verpacken"
+    "pickAndPack": "Kommissionieren & Packen",
+    "title": "Inventar",
+    "stockLevels": "Lagerbestände",
+    "reports": "Berichte",
+    "unitPrice": "Stückpreis (Kosten)",
+    "sellingPrice": "Verkaufspreis",
+    "fiche": "Produktblatt",
+    "missingProducts": "Fehlende Produkte"
   },
   "payroll": {
     "currency": "Währung",
@@ -405,6 +436,7 @@
   "roles": {
     "admin": "Administrator",
     "stockManager": "Lagerverwalter",
+    "gestionnaire_de_stock": "Lagerverwalter",
     "customer": "Kunde",
     "user": "Benutzer",
     "title": "Rollen",

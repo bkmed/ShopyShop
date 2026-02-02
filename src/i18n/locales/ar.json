@@ -71,6 +71,12 @@
     "detail": "تفاصيل المنتج",
     "search": "البحث في الكتالوج"
   },
+  "catalogue": {
+    "title": "الكتالوج",
+    "list": "قائمة الكتالوج",
+    "detail": "تفاصيل الكتالوج",
+    "add": "إضافة إلى الكتالوج"
+  },
   "categories": {
     "title": "الفئات",
     "add": "إضافة فئة",
@@ -81,7 +87,8 @@
     "name": "اسم الفئة",
     "description": "وصف الفئة",
     "parent": "الفئة الأم",
-    "noCategories": "لم يتم العثور على فئات"
+    "noCategories": "لم يتم العثور على فئات",
+    "detail": "تفاصيل الفئة"
   },
   "chat": {
     "noMessages": "لا توجد رسائل بعد",
@@ -129,6 +136,7 @@
   "common": {
     "add": "إضافة",
     "edit": "تعديل",
+    "id": "المعرف",
     "delete": "حذف",
     "save": "حفظ",
     "cancel": "إلغاء",
@@ -319,6 +327,22 @@
     "search": "البحث في الطلبات",
     "add": "طلب جديد"
   },
+  "purchases": {
+    "title": "سجل المشتريات",
+    "list": "قائمة المشتريات",
+    "detail": "تفاصيل الشراء"
+  },
+  "reclamations": {
+    "title": "الشكاوى",
+    "list": "قائمة الشكاوى",
+    "add": "شكوى جديدة",
+    "detail": "تفاصيل الشكوى",
+    "reason": "السبب",
+    "status": "الحالة",
+    "submitted": "تم تقديمها",
+    "description": "الوصف",
+    "orderId": "رقم الطلب"
+  },
   "inventory": {
     "inventoryControl": "التحكم في المخزون",
     "lowStockAlerts": "تنبيهات نقص المخزون",
@@ -328,7 +352,14 @@
     "warehouseOps": "عمليات المستودع",
     "fullInventory": "المخزون الكامل",
     "receiveStock": "استلام المخزون",
-    "pickAndPack": "التحميل والتغليف"
+    "pickAndPack": "التحميل والتغليف",
+    "title": "المخزون",
+    "stockLevels": "مستويات المخزون",
+    "reports": "التقارير",
+    "unitPrice": "سعر الوحدة (التكلفة)",
+    "sellingPrice": "سعر البيع",
+    "fiche": "بطاقة المنتج",
+    "missingProducts": "المنتجات المفقودة"
   },
   "payroll": {
     "currency": "العملة",
@@ -403,8 +434,9 @@
     "updatedSuccessfully": "تم تحديث الملف الشخصي بنجاح"
   },
   "roles": {
-    "admin": "مسؤول",
+    "admin": "مشرف",
     "stockManager": "مدير المخزون",
+    "gestionnaire_de_stock": "مدير المخزون",
     "customer": "عميل",
     "user": "مستخدم",
     "title": "الأدوار",

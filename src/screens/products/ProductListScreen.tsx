@@ -13,11 +13,15 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { productsDb } from '../../database/productsDb';
 import { Product } from '../../database/schema';
+import { useAuth } from '../../context/AuthContext';
+import { rbacService } from '../../services/rbacService';
 
 export const ProductListScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const { user } = useAuth();
+  const isStockManager = rbacService.isStockManager(user) || rbacService.isAdmin(user);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -66,15 +70,16 @@ export const ProductListScreen = () => {
       <View style={styles.productIconContainer}>
         <Text style={{ fontSize: 32 }}>🏷️</Text>
       </View>
-      <div style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <Text style={[styles.productName, { color: theme.colors.text }]}>
           {item.name}
         </Text>
         <Text style={[styles.productDetails, { color: theme.colors.subText }]}>
           {t('products.productStock')}: {item.stockQuantity} | {item.currency}{' '}
-          {item.price}
+          {isStockManager ? (item.unitPrice || item.price) : item.price}
+          {isStockManager && ` (${t('inventory.unitPrice')})`}
         </Text>
-      </div>
+      </View>
       <Text style={{ color: theme.colors.primary }}>➔</Text>
     </TouchableOpacity>
   );

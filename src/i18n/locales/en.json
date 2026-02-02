@@ -71,6 +71,12 @@
     "detail": "Product Detail",
     "search": "Search Catalog"
   },
+  "catalogue": {
+    "title": "Catalogue",
+    "list": "Catalogue List",
+    "detail": "Catalogue Detail",
+    "add": "Add to Catalogue"
+  },
   "categories": {
     "title": "Categories",
     "add": "Add Category",
@@ -81,7 +87,8 @@
     "name": "Category Name",
     "description": "Category Description",
     "parent": "Parent Category",
-    "noCategories": "No categories found"
+    "noCategories": "No categories found",
+    "detail": "Category Detail"
   },
   "chat": {
     "noMessages": "No messages yet",
@@ -129,6 +136,7 @@
   "common": {
     "add": "Add",
     "edit": "Edit",
+    "id": "ID",
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
@@ -319,6 +327,22 @@
     "search": "Search Orders",
     "add": "New Order"
   },
+  "purchases": {
+    "title": "Purchase History",
+    "list": "Purchase List",
+    "detail": "Purchase Detail"
+  },
+  "reclamations": {
+    "title": "Claims",
+    "list": "Claims List",
+    "add": "New Claim",
+    "detail": "Claim Detail",
+    "reason": "Reason",
+    "status": "Status",
+    "submitted": "Submitted",
+    "description": "Description",
+    "orderId": "Order ID"
+  },
   "inventory": {
     "inventoryControl": "Inventory Control",
     "lowStockAlerts": "Low Stock Alerts",
@@ -328,7 +352,14 @@
     "warehouseOps": "Warehouse Ops",
     "fullInventory": "Full Inventory",
     "receiveStock": "Receive Stock",
-    "pickAndPack": "Pick & Pack"
+    "pickAndPack": "Pick & Pack",
+    "title": "Inventory",
+    "stockLevels": "Stock Levels",
+    "reports": "Reports",
+    "unitPrice": "Unit Price (Cost)",
+    "sellingPrice": "Selling Price",
+    "fiche": "Product Fiche",
+    "missingProducts": "Missing Products"
   },
   "payroll": {
     "currency": "Currency",
@@ -405,6 +436,7 @@
   "roles": {
     "admin": "Admin",
     "stockManager": "Stock Manager",
+    "gestionnaire_de_stock": "Stock Manager",
     "customer": "Customer",
     "user": "User",
     "title": "Roles",

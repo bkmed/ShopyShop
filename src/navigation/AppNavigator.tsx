@@ -61,6 +61,15 @@ import { ChatBot } from '../components/common/ChatBot';
 import { useAuth } from '../context/AuthContext';
 import { GlassHeader } from '../components/common/GlassHeader';
 
+// New Screens
+import { PurchaseHistoryScreen } from '../screens/purchases/PurchaseHistoryScreen';
+import { PurchaseDetailScreen } from '../screens/purchases/PurchaseDetailScreen';
+import { ReclamationListScreen } from '../screens/reclamations/ReclamationListScreen';
+import { ReclamationAddScreen } from '../screens/reclamations/ReclamationAddScreen';
+import { ReclamationDetailScreen } from '../screens/reclamations/ReclamationDetailScreen';
+import { UserListScreen } from '../screens/admin/UserListScreen';
+import { UserDetailsScreen } from '../screens/admin/UserDetailsScreen';
+
 enableScreens();
 
 import { WebNavigationContext } from './WebNavigationContext';
@@ -327,6 +336,87 @@ const InventoryStack = () => {
   );
 };
 
+const PurchasesStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="PurchaseHistory"
+        component={PurchaseHistoryScreen}
+        options={{ title: t('purchases.title') }}
+      />
+      <Stack.Screen
+        name="PurchaseDetail"
+        component={PurchaseDetailScreen}
+        options={{ title: t('purchases.detail') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ReclamationsStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="ReclamationList"
+        component={ReclamationListScreen}
+        options={{ title: t('reclamations.title') }}
+      />
+      <Stack.Screen
+        name="ReclamationAdd"
+        component={ReclamationAddScreen}
+        options={{ title: t('reclamations.add') }}
+      />
+      <Stack.Screen
+        name="ReclamationDetail"
+        component={ReclamationDetailScreen}
+        options={{ title: t('reclamations.detail') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const UserManagementStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="UserList"
+        component={UserListScreen}
+        options={{ title: t('roles.title') }}
+      />
+      <Stack.Screen
+        name="UserDetails"
+        component={UserDetailsScreen}
+        options={{ title: t('roles.detail') || 'User Details' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 // Stacks are defined below
 
 // ======= Tabs (Mobile) =======
@@ -373,42 +463,61 @@ const useNavigationSections = () => {
   const { user } = useAuth();
 
   return useMemo(() => {
+    const isStockManager = rbacService.isStockManager(user);
+    const isAdmin = rbacService.isAdmin(user);
+
     const sections = [
       {
         title: t('sections.shop') || 'Shop',
         items: [
-          { key: 'Home', label: t('navigation.home'), icon: '🏠' },
+          ...(!isStockManager ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }] : []),
           {
             key: 'Catalog',
-            label: t('navigation.catalog') || 'Catalog',
+            label: (t('navigation.catalog') || 'Catalog'),
             icon: '🛍️',
           },
-          {
-            key: 'Categories',
-            label: t('navigation.categories') || 'Categories',
-            icon: '🗂️',
-          },
-          { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+          ...(!isStockManager ? [
+            {
+              key: 'Categories',
+              label: t('navigation.categories') || 'Categories',
+              icon: '🗂️',
+            },
+            { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+          ] : []),
         ],
       },
       {
         title: t('sections.account') || 'Account',
         items: [
-          { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-          {
-            key: 'Wishlist',
-            label: t('navigation.wishlist') || 'Wishlist',
-            icon: '❤️',
-          },
+          ...(!isStockManager ? [
+            { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+            {
+              key: 'Wishlist',
+              label: t('navigation.wishlist') || 'Wishlist',
+              icon: '❤️',
+            },
+          ] : []),
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
+          ...(!isStockManager ? [
+            {
+              key: 'Purchases',
+              label: t('navigation.purchases') || 'Purchases',
+              icon: '🛍️',
+            },
+            {
+              key: 'Reclamations',
+              label: t('navigation.reclamations') || 'Claims',
+              icon: '⚠️',
+            },
+          ] : []),
         ],
       },
     ];
@@ -436,6 +545,14 @@ const useNavigationSections = () => {
         key: 'ManageOrders',
         label: t('navigation.orders') || 'Manage Orders',
         icon: '🚚',
+      });
+    }
+
+    if (isAdmin) {
+      managementItems.push({
+        key: 'UserManagement',
+        label: t('roles.title') || 'User Management',
+        icon: '👥',
       });
     }
 
@@ -588,9 +705,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -664,6 +781,10 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Cart" component={CartStack} />
       <Drawer.Screen name="Orders" component={OrdersStack} />
       <Drawer.Screen name="Wishlist" component={WishlistStack} />
+      <Drawer.Screen name="Purchases" component={PurchasesStack} />
+      <Drawer.Screen name="Reclamations" component={ReclamationsStack} />
+      <Drawer.Screen name="Analytics" component={AnalyticsStack} />
+      <Drawer.Screen name="UserManagement" component={UserManagementStack} />
       <Drawer.Screen name="Products" component={ProductsStack} />
       <Drawer.Screen name="Categories" component={CategoriesStack} />
       <Drawer.Screen name="Settings" component={SettingsStack} />
@@ -756,6 +877,10 @@ const WebNavigator = () => {
         return <OrdersStack />;
       case 'Wishlist':
         return <WishlistStack />;
+      case 'Purchases':
+        return <PurchasesStack />;
+      case 'Reclamations':
+        return <ReclamationsStack />;
       case 'Analytics':
         if (!rbacService.hasPermission(user, Permission.VIEW_ANALYTICS))
           return <HomeStack />;
@@ -785,7 +910,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -799,7 +924,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (
