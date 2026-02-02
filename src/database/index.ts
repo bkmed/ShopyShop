@@ -5,8 +5,17 @@
 export { productsDb } from './productsDb';
 export { categoriesDb } from './categoriesDb';
 export { ordersDb } from './ordersDb';
-export { currenciesDb } from './currenciesDb';
+export { inventoryDb } from './inventoryDb';
+export { usersDb } from './usersDb';
+export { wishlistDb } from './wishlistDb';
+export { promosDb } from './promosDb';
 export { reclamationsDb } from './reclamationsDb';
+export { currenciesDb } from './currenciesDb';
+export { addressesDb, paymentMethodsDb, deliveryMethods } from './checkoutDb';
+export { suppliersDb, supplierProductsDb } from './suppliersDb';
+export { purchasesDb } from './purchasesDb';
+export { stockReceptionDb } from './stockReceptionDb';
+export { pickPackDb } from './pickPackDb';
 // export { companySettingsDb } from './companySettingsDb';
 
 // Export schemas

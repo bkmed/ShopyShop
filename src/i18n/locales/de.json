@@ -321,7 +321,15 @@
     "wishlist": "Wunschliste",
     "categories": "Kategorien",
     "chatBot": "Assistent",
-    "chat": "Chat"
+    "chat": "Chat",
+    "suppliers": "Lieferanten",
+    "purchases": "Einkäufe",
+    "reclamations": "Reklamationen",
+    "dashboard": "Dashboard",
+    "stockReception": "Wareneingang",
+    "pickPack": "Kommissionierung",
+    "admin": "Admin",
+    "userManagement": "Benutzerverwaltung"
   },
   "notifications": {
     "markAllAsRead": "Alle als gelesen markieren",

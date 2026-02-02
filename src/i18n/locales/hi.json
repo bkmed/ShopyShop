@@ -318,10 +318,18 @@
     "settings": "सेटिंग्स",
     "theme": "थीम",
     "stockManagement": "स्टॉक प्रबंधन",
-    "wishlist": "विशलिस्ट",
+    "wishlist": "पसंदीदा सूची",
     "categories": "श्रेणियां",
     "chatBot": "सहायक",
-    "chat": "चैट"
+    "chat": "चैट",
+    "suppliers": "आपूर्तिकर्ता",
+    "purchases": "खरीदारी",
+    "reclamations": "शिकायतें",
+    "dashboard": "डैशबोर्ड",
+    "stockReception": "स्टॉक प्राप्ति",
+    "pickPack": "पिक और पैक",
+    "admin": "व्यवस्थापक",
+    "userManagement": "उपयोगकर्ता प्रबंधन"
   },
   "notifications": {
     "markAllAsRead": "सभी को पढ़ा हुआ मानें",

@@ -171,6 +171,24 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => handleNavigate('Purchases')}
+        >
+          <Text style={{ fontSize: 24 }}>🛒</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.purchases')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => handleNavigate('Reclamations')}
+        >
+          <Text style={{ fontSize: 24 }}>📋</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.reclamations')}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
           onPress={() => handleNavigate('Analytics')}
         >
           <Text style={{ fontSize: 24 }}>📊</Text>

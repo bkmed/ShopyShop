@@ -11,8 +11,17 @@ ameliorer la dashboard de user comme si cest un site dachat de vetteme de zara
 
 ajouter navigation.* missing all lang
 
-
+------------
 
 ajouter a ladimin et a son menu (manage purchase (add, edit delete) and manage reclamations of all user) for admin dashboard, 
 fix eslin eroror et lang dismatch
 enhance ui for user need to be more beautiful
+
+common.noResult missing all lang
+rajouter a tt les formulaires add edit delete les message derreur ou les field required 
+manage caterogie only admin any add or delete or update manage by admin
+user can only add product to his cart or add reclamation
+gestionaire de stock  preparation embalage et la list des entreprise provider et leur produit et leur price, remove catalogue from menu de gestionaire de stock
+
+
+rajouter les page adequate pour passe a la caise le mange des carte bancaire le manage dadresse pour les user et le moyen de paiement  et de livraison

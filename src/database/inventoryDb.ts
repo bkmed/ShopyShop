@@ -1,5 +1,6 @@
 import { productsDb } from './productsDb';
 import { InventoryLog } from './schema';
+import { stockAlertService } from '../services/stockAlertService';
 
 // We'll use a local mock for log storage since it's not in Redux yet, or we could add a slice.
 // For now, let's just use productsDb for stock changes and mock the logs.
@@ -38,5 +39,8 @@ export const inventoryDb = {
       createdAt: new Date().toISOString(),
     };
     mockLogs = [newLog, ...mockLogs];
+
+    // Trigger stock alert check after inventory change
+    await stockAlertService.monitorStockChange(productId);
   },
 };

@@ -15,6 +15,7 @@ import {
   MenuPreferences,
 } from '../../services/menuPreferencesService';
 import { notificationService } from '../../services/notificationService';
+import { useAuth } from '../../context/AuthContext';
 
 // Define the available menu items that can be toggled
 // This should ideally match what's in useNavigationSections in AppNavigator
@@ -23,7 +24,7 @@ const AVAILABLE_MENU_ITEMS = [
   { key: 'Announcements', category: 'communication' },
   { key: 'Chat', category: 'communication' },
   { key: 'Assistant', category: 'communication' },
-  { key: 'Catalog', category: 'shop' },
+  { key: 'Catalog', category: 'shop', restrictedRoles: ['gestionnaire_de_stock'] },
   { key: 'Cart', category: 'shop' },
   { key: 'Orders', category: 'shop' },
 ];
@@ -31,6 +32,7 @@ const AVAILABLE_MENU_ITEMS = [
 export const MenuCustomizationScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const { user } = useAuth();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const [preferences, setPreferences] = useState<MenuPreferences>({
@@ -147,10 +149,18 @@ export const MenuCustomizationScreen = () => {
         ? preferences.customOrder
         : AVAILABLE_MENU_ITEMS.map(i => i.key);
 
+    // Filter items based on user role restrictions
+    const userRole = user?.role || 'user';
+
     return order
       .map(key => AVAILABLE_MENU_ITEMS.find(i => i.key === key))
-      .filter(Boolean) as { key: string; category: string }[];
-  }, [preferences.customOrder]);
+      .filter(item => {
+        if (!item) return false;
+        // Check if item has role restrictions
+        const restrictedRoles = (item as any).restrictedRoles || [];
+        return !restrictedRoles.includes(userRole);
+      }) as { key: string; category: string }[];
+  }, [preferences.customOrder, user?.role]);
 
   return (
     <View style={styles.container}>

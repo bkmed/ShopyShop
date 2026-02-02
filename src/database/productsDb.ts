@@ -7,6 +7,7 @@ import {
   selectProductById,
 } from '../store/slices/productsSlice';
 import { Product } from './schema';
+import { stockAlertService } from '../services/stockAlertService';
 
 export const productsDb = {
   getAll: async (): Promise<Product[]> => {
@@ -29,6 +30,10 @@ export const productsDb = {
       updatedAt: now,
     };
     store.dispatch(addProductAction(newProduct));
+
+    // Check stock level for newly added product
+    await stockAlertService.monitorStockChange(id);
+
     return id;
   },
 
@@ -41,10 +46,17 @@ export const productsDb = {
         updatedAt: new Date().toISOString(),
       };
       store.dispatch(updateProductAction(updated));
+
+      // Check stock level if stock quantity was updated
+      if ('stockQuantity' in updates) {
+        await stockAlertService.monitorStockChange(id);
+      }
     }
   },
 
   delete: async (id: string): Promise<void> => {
     store.dispatch(deleteProductAction(id));
+    // Clear alerts for deleted product
+    stockAlertService.clearProductAlerts(id);
   },
 };

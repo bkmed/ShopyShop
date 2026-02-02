@@ -321,7 +321,15 @@
     "wishlist": "我的收藏",
     "categories": "类别",
     "chatBot": "助手",
-    "chat": "聊天"
+    "chat": "聊天",
+    "suppliers": "供应商",
+    "purchases": "采购",
+    "reclamations": "投诉",
+    "dashboard": "仪表板",
+    "stockReception": "收货",
+    "pickPack": "拣货打包",
+    "admin": "管理员",
+    "userManagement": "用户管理"
   },
   "notifications": {
     "markAllAsRead": "全部设为已读",

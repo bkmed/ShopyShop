@@ -320,8 +320,16 @@
     "stockManagement": "إدارة المخزون",
     "wishlist": "قائمة الأمنيات",
     "categories": "الفئات",
-    "chatBot": "المساعد",
-    "chat": "المحادثة"
+    "chatBot": "مساعد",
+    "chat": "دردشة",
+    "suppliers": "الموردين",
+    "purchases": "المشتريات",
+    "reclamations": "الشكاوى",
+    "dashboard": "لوحة التحكم",
+    "stockReception": "استلام المخزون",
+    "pickPack": "الانتقاء والتعبئة",
+    "admin": "المسؤول",
+    "userManagement": "إدارة المستخدمين"
   },
   "notifications": {
     "markAllAsRead": "تمحيض الكل كمقروء",

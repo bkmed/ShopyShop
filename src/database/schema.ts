@@ -183,3 +183,110 @@ export interface Currency {
   createdAt: string;
   updatedAt: string;
 }
+
+// ========== Stock Manager Enhancements ==========
+
+export interface Supplier {
+  id: string;
+  name: string;
+  contactPerson?: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  website?: string;
+  notes?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SupplierProduct {
+  id: string;
+  supplierId: string;
+  productId: string;
+  supplierSKU?: string; // Supplier's product code
+  supplierPrice: number; // Cost from this supplier
+  currency: string;
+  minimumOrderQuantity?: number;
+  leadTimeDays?: number; // Delivery time in days
+  isPreferred: boolean; // Preferred supplier for this product
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type StockReceptionStatus = 'pending' | 'in_progress' | 'completed' | 'cancelled';
+
+export interface StockReceptionItem {
+  productId: string;
+  productName: string;
+  expectedQuantity: number;
+  receivedQuantity: number;
+  unitPrice: number;
+}
+
+export interface StockReception {
+  id: string;
+  supplierId: string;
+  supplierName: string;
+  status: StockReceptionStatus;
+  referenceNumber?: string; // PO number, invoice, etc.
+  items: StockReceptionItem[];
+  totalCost: number;
+  currency: string;
+  receivedBy?: string; // userId of stock manager
+  notes?: string;
+  expectedDate?: string;
+  receivedDate?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type PickPackStatus = 'pending' | 'picking' | 'packing' | 'ready_to_ship' | 'shipped';
+
+export interface PickPackItem {
+  productId: string;
+  productName: string;
+  quantity: number;
+  location?: string; // Warehouse location
+  picked: boolean;
+  packed: boolean;
+}
+
+export interface PickPackOrder {
+  id: string;
+  orderId: string;
+  orderNumber: string;
+  customerId: string;
+  customerName: string;
+  status: PickPackStatus;
+  items: PickPackItem[];
+  assignedTo?: string; // userId of warehouse worker
+  shippingAddress: string;
+  shippingMethod?: string;
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  notes?: string;
+  pickedAt?: string;
+  packedAt?: string;
+  shippedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Purchase {
+  id: string;
+  userId: string;
+  userName: string;
+  orderId: string; // Links to Order
+  items: OrderItem[];
+  totalAmount: number;
+  currency: string;
+  status: OrderStatus;
+  paymentStatus: PaymentStatus;
+  paymentMethod?: string;
+  shippingAddress: string;
+  billingAddress?: string;
+  trackingNumber?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}

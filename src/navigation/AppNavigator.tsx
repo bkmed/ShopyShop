@@ -71,6 +71,11 @@ import { ReclamationDetailScreen } from '../screens/reclamations/ReclamationDeta
 import { UserListScreen } from '../screens/admin/UserListScreen';
 import { UserDetailsScreen } from '../screens/admin/UserDetailsScreen';
 
+// Supplier Management Screens
+import { SupplierListScreen } from '../screens/suppliers/SupplierListScreen';
+import { SupplierAddEditScreen } from '../screens/suppliers/SupplierAddEditScreen';
+import { SupplierDetailScreen } from '../screens/suppliers/SupplierDetailScreen';
+
 enableScreens();
 
 import { WebNavigationContext } from './WebNavigationContext';
@@ -394,6 +399,38 @@ const InventoryStack = () => {
   );
 };
 
+const SuppliersStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="SupplierList"
+        component={SupplierListScreen}
+        options={{ title: t('suppliers.title') }}
+      />
+      <Stack.Screen
+        name="SupplierAddEdit"
+        component={SupplierAddEditScreen}
+        options={({ route }: any) => ({
+          title: route.params?.supplierId ? t('suppliers.edit') : t('suppliers.add'),
+        })}
+      />
+      <Stack.Screen
+        name="SupplierDetail"
+        component={SupplierDetailScreen}
+        options={{ title: t('suppliers.detail') }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const PurchasesStack = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -572,20 +609,22 @@ const useNavigationSections = () => {
           ...(!isManagementRole
             ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }]
             : []),
-          {
-            key: 'Catalog',
-            label: t('navigation.catalog') || 'Catalog',
-            icon: '🛍️',
-          },
+          ...(!isStockManager
+            ? [{
+              key: 'Catalog',
+              label: t('navigation.catalog') || 'Catalog',
+              icon: '🛍️',
+            }]
+            : []),
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Categories',
-                  label: t('navigation.categories') || 'Categories',
-                  icon: '🗂️',
-                },
-                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-              ]
+              {
+                key: 'Categories',
+                label: t('navigation.categories') || 'Categories',
+                icon: '🗂️',
+              },
+              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+            ]
             : []),
         ],
       },
@@ -594,36 +633,36 @@ const useNavigationSections = () => {
         items: [
           ...(!isManagementRole
             ? [
-                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-                {
-                  key: 'Wishlist',
-                  label: t('navigation.wishlist') || 'Wishlist',
-                  icon: '❤️',
-                },
-              ]
+              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+              {
+                key: 'Wishlist',
+                label: t('navigation.wishlist') || 'Wishlist',
+                icon: '❤️',
+              },
+            ]
             : []),
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Purchases',
-                  label: t('navigation.purchases') || 'Purchases',
-                  icon: '🛍️',
-                },
-                {
-                  key: 'Reclamations',
-                  label: t('navigation.reclamations') || 'Claims',
-                  icon: '⚠️',
-                },
-              ]
+              {
+                key: 'Purchases',
+                label: t('navigation.purchases') || 'Purchases',
+                icon: '🛍️',
+              },
+              {
+                key: 'Reclamations',
+                label: t('navigation.reclamations') || 'Claims',
+                icon: '⚠️',
+              },
+            ]
             : []),
         ],
       },
@@ -636,6 +675,11 @@ const useNavigationSections = () => {
         key: 'Inventory',
         label: t('navigation.inventory') || 'Inventory',
         icon: '🏭',
+      });
+      managementItems.push({
+        key: 'Suppliers',
+        label: t('navigation.suppliers') || 'Suppliers',
+        icon: '🏢',
       });
     }
 
@@ -833,9 +877,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -1001,6 +1045,10 @@ const WebNavigator = () => {
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
         return <InventoryStack />;
+      case 'Suppliers':
+        if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
+          return <HomeStack />;
+        return <SuppliersStack />;
       case 'Products':
         if (!rbacService.hasPermission(user, Permission.MANAGE_PRODUCTS))
           return <HomeStack />;
@@ -1038,7 +1086,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -1052,7 +1100,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (
