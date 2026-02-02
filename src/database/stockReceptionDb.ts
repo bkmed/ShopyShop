@@ -1,5 +1,4 @@
-import { StockReception, StockReceptionStatus, StockReceptionItem } from './schema';
-import { productsDb } from './productsDb';
+import { StockReception, StockReceptionStatus } from './schema';
 import { inventoryDb } from './inventoryDb';
 
 // Mock storage

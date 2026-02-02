@@ -1,4 +1,4 @@
-import { Purchase, OrderStatus, PaymentStatus, OrderItem } from './schema';
+import { Purchase, OrderStatus, PaymentStatus } from './schema';
 
 // Mock storage
 let mockPurchases: Purchase[] = [];

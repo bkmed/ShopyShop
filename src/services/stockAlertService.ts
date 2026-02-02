@@ -1,4 +1,3 @@
-import { inventoryDb } from '../database/inventoryDb';
 import { productsDb } from '../database/productsDb';
 import { notificationService } from './notificationService';
 import { usersDb } from '../database/usersDb';
@@ -9,13 +8,7 @@ import { usersDb } from '../database/usersDb';
  * when products reach critical levels (0 or low stock)
  */
 
-interface StockAlert {
-    productId: string;
-    productName: string;
-    currentStock: number;
-    threshold: number;
-    alertType: 'zero' | 'low';
-}
+
 
 class StockAlertService {
     private readonly LOW_STOCK_THRESHOLD = 10;

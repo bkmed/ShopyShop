@@ -25,3 +25,5 @@ gestionaire de stock  preparation embalage et la list des entreprise provider et
 
 
 rajouter les page adequate pour passe a la caise le mange des carte bancaire le manage dadresse pour les user et le moyen de paiement  et de livraison
+
+rajouter accueil dans les menu de chaque dashboard et clean menu for all dashboard

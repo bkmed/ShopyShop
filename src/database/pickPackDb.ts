@@ -1,4 +1,4 @@
-import { PickPackOrder, PickPackStatus, PickPackItem } from './schema';
+import { PickPackOrder, PickPackStatus } from './schema';
 import { ordersDb } from './ordersDb';
 
 // Mock storage

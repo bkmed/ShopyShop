@@ -13,7 +13,7 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { suppliersDb, Supplier } from '../../database';
+import { suppliersDb } from '../../database';
 
 export const SupplierAddEditScreen = () => {
     const { t } = useTranslation();

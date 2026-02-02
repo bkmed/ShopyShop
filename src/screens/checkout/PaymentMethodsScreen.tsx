@@ -39,9 +39,7 @@ export const PaymentMethodsScreen = () => {
         }
     };
 
-    const handleEdit = (method: PaymentMethod) => {
-        navigation.navigate('PaymentMethodAddEdit', { methodId: method.id });
-    };
+
 
     const handleDelete = async (id: string) => {
         try {
@@ -61,18 +59,7 @@ export const PaymentMethodsScreen = () => {
         }
     };
 
-    const getCardIcon = (brand?: string) => {
-        switch (brand?.toLowerCase()) {
-            case 'visa':
-                return '💳';
-            case 'mastercard':
-                return '💳';
-            case 'amex':
-                return '💳';
-            default:
-                return '💳';
-        }
-    };
+
 
     const getMethodIcon = (type: string) => {
         switch (type) {

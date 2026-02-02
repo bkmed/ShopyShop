@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
-import { addressesDb, Address } from '../../database/checkoutDb';
+import { addressesDb } from '../../database/checkoutDb';
 import { AlertService } from '../../services/alertService';
 
 export const AddressAddEditScreen = () => {
