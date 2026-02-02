@@ -31,7 +31,6 @@
     "cart": "Shopping Cart",
     "checkout": "Proceed to Checkout",
     "continueShopping": "Continue Shopping",
-    "emptyCart": "Your cart is empty",
     "empty": "Your cart is empty",
     "itemAdded": "Item added to cart",
     "itemRemoved": "Item removed from cart",
@@ -41,7 +40,6 @@
     "title": "Cart",
     "total": "Total",
     "updateQuantity": "Update Quantity",
-    "shoppingCart": "Shopping Cart",
     "clear": "Clear Cart",
     "cartSummary": "Cart Summary",
     "vouchers": "Vouchers",
@@ -73,24 +71,36 @@
     "detail": "Product Detail",
     "search": "Search Catalog"
   },
-  "catalogue": {
-    "title": "Catalogue",
-    "list": "Catalogue List",
-    "detail": "Catalogue Detail",
-    "add": "Add to Catalogue"
+  "currencies": {
+    "title": "Currencies",
+    "select": "Select Currency",
+    "code": "Currency Code",
+    "symbol": "Symbol",
+    "rate": "Exchange Rate",
+    "add": "Add Currency",
+    "edit": "Edit Currency",
+    "delete": "Delete Currency",
+    "base": "Base Currency",
+    "chooseDisplay": "Choose Display Currency",
+    "updateSuccess": "Currency updated successfully",
+    "deleteSuccess": "Currency deleted successfully"
   },
   "categories": {
     "title": "Categories",
     "add": "Add Category",
     "edit": "Edit Category",
-    "delete": "Delete Category",
-    "search": "Search Categories",
+    "nameRequired": "Category name is required",
+    "savedSuccessfully": "Category saved successfully",
+    "updatedSuccessfully": "Category updated successfully",
+    "deletedSuccessfully": "Category deleted successfully",
+    "search": "Search categories...",
     "list": "Category List",
     "name": "Category Name",
     "description": "Category Description",
     "parent": "Parent Category",
     "noCategories": "No categories found",
-    "detail": "Category Detail"
+    "detail": "Category Detail",
+    "filter": "Filter Categories"
   },
   "chat": {
     "noMessages": "No messages yet",
@@ -139,7 +149,6 @@
     "add": "Add",
     "edit": "Edit",
     "id": "ID",
-    "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
     "search": "Search",
@@ -150,6 +159,7 @@
     "list": "List",
     "detail": "Detail",
     "update": "Update",
+    "categories": "Categories",
     "address": "Address",
     "actions": "Actions",
     "all": "All",
@@ -165,7 +175,8 @@
     "deleteTitle": "Delete Item",
     "description": "Description",
     "details": "Details",
-    "done": "Done",
+    "delete": "Delete",
+    "deleteError": "Error deleting item",
     "email": "Email",
     "error": "Error",
     "errorTitle": "Error",
@@ -285,6 +296,7 @@
     "products": "Products",
     "profile": "Profile",
     "settings": "Settings",
+    "theme": "Theme",
     "stockManagement": "Stock Management",
     "wishlist": "Wishlist",
     "categories": "Categories",
@@ -329,7 +341,6 @@
     "detail": "Order Detail",
     "search": "Search Orders",
     "add": "New Order",
-    "searchplaceholder": "Search orders...",
     "searchPlaceholder": "Search orders...",
     "totalAmount": "Total Amount",
     "shippingAddress": "Shipping Address",
@@ -390,7 +401,9 @@
     "detail": "Inventory Detail",
     "noHistory": "No stock movement recorded yet.",
     "currentStock": "Current Stock",
-    "notFound": "Product not found in inventory"
+    "notFound": "Product not found in inventory",
+    "quantity": "Quantity",
+    "totalValue": "Total Value"
   },
   "payroll": {
     "currency": "Currency",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "Add Product",
+    "availableDate": "Available Date",
+    "deleteError": "Failed to delete product",
+    "deletedSuccessfully": "Product deleted successfully",
     "editProduct": "Edit Product",
     "deleteProduct": "Delete Product",
     "productName": "Product Name",
@@ -428,8 +444,7 @@
     "list": "Product List",
     "detail": "Product Detail",
     "search": "Search Products",
-    "add": "Add Product",
-    "availableDate": "Available Date"
+    "add": "Add Product"
   },
   "profile": {
     "title": "Profile",
@@ -475,7 +490,6 @@
   },
   "roles": {
     "admin": "Admin",
-    "stockManager": "Stock Manager",
     "gestionnaire_de_stock": "Stock Manager",
     "customer": "Customer",
     "user": "User",
@@ -522,7 +536,8 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
     "backgroundColor": "Background Color",
-    "customizeColors": "Customize Colors",
+    "customizeColors": "Minimize Colors",
+    "regional": "Regional",
     "customizeMenu": "Customize Menu",
     "customizeMenuDesc": "Manage your sidebar links",
     "personal": "Personal Settings",
@@ -530,8 +545,6 @@
     "secondaryColor": "Secondary Color",
     "surfaceColor": "Surface Color",
     "themeCustom": "Custom",
-    "themeDark": "Dark",
-    "themeLight": "Light",
     "themePremium": "Premium"
   },
   "signUp": {
@@ -568,7 +581,6 @@
     "currentStock": "Current Stock",
     "availableStock": "Available Stock",
     "reservedStock": "Reserved Stock",
-    "title": "Inventory",
     "list": "Inventory List",
     "detail": "Stock Detail",
     "search": "Search Inventory",

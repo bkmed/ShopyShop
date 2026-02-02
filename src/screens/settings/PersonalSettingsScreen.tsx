@@ -8,25 +8,37 @@ import {
   Platform,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useTheme } from '../../context/ThemeContext';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { Theme } from '../../theme';
+import { selectSelectedCurrencyCode } from '../../store/slices/currenciesSlice';
 
 export const PersonalSettingsScreen = ({ navigation }: any) => {
   const { theme, themeMode, setThemeMode } = useTheme() as any;
   const { setActiveTab } = React.useContext(WebNavigationContext) as any;
   const { t } = useTranslation();
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const selectedCurrency = useSelector(selectSelectedCurrencyCode);
 
   const themes = [
-    { id: 'light', label: t('settings.themeLight') || 'Light' },
-    { id: 'dark', label: t('settings.themeDark') || 'Dark' },
+    { id: 'light', label: t('settings.light') || 'Light' },
+    { id: 'dark', label: t('settings.dark') || 'Dark' },
     { id: 'premium', label: t('settings.themePremium') || 'Premium' },
     { id: 'custom', label: t('settings.themeCustom') || 'Custom' },
   ];
 
+  const handleNavigate = (screen: string) => {
+    if (Platform.OS === 'web' && setActiveTab) {
+      setActiveTab(screen);
+    } else {
+      navigation.navigate(screen);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
+      {/* Theme Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>
           {t('settings.theme') || 'Theme'}
@@ -50,13 +62,7 @@ export const PersonalSettingsScreen = ({ navigation }: any) => {
           {themeMode === 'custom' && (
             <TouchableOpacity
               style={[styles.row, styles.customThemeButton]}
-              onPress={() => {
-                if (Platform.OS === 'web') {
-                  setActiveTab('CustomThemeColors');
-                } else {
-                  navigation.navigate('CustomThemeColors');
-                }
-              }}
+              onPress={() => handleNavigate('CustomThemeColors')}
             >
               <Text style={styles.customThemeButtonText}>
                 🎨 {t('settings.customizeColors') || 'Configure Colors'}
@@ -64,6 +70,29 @@ export const PersonalSettingsScreen = ({ navigation }: any) => {
               <Text style={styles.menuItemArrow}>›</Text>
             </TouchableOpacity>
           )}
+        </View>
+      </View>
+
+      {/* Regional Section */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>
+          {t('settings.regional') || 'Regional'}
+        </Text>
+        <View style={styles.card}>
+          <TouchableOpacity
+            style={styles.row}
+            onPress={() => handleNavigate('Currency')}
+          >
+            <View>
+              <Text style={styles.rowText}>
+                {t('settings.currency') || 'Currency'}
+              </Text>
+              <Text style={[styles.subText, { color: theme.colors.primary }]}>
+                {selectedCurrency}
+              </Text>
+            </View>
+            <Text style={styles.menuItemArrow}>›</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -78,6 +107,7 @@ const createStyles = (theme: Theme) =>
     },
     section: {
       padding: theme.spacing.m,
+      paddingBottom: 0,
     },
     sectionTitle: {
       ...theme.textVariants.body,
@@ -93,6 +123,7 @@ const createStyles = (theme: Theme) =>
       borderRadius: theme.spacing.m,
       overflow: 'hidden',
       ...theme.shadows.small,
+      marginBottom: theme.spacing.m,
     },
     row: {
       flexDirection: 'row',
@@ -104,6 +135,11 @@ const createStyles = (theme: Theme) =>
       ...theme.textVariants.body,
       color: theme.colors.text,
       fontSize: 16,
+    },
+    subText: {
+      fontSize: 14,
+      marginTop: 4,
+      fontWeight: '600',
     },
     borderBottom: {
       borderBottomWidth: 1,
@@ -117,30 +153,11 @@ const createStyles = (theme: Theme) =>
       fontWeight: 'bold',
       fontSize: 18,
     },
-    customThemeContainer: {
-      marginTop: theme.spacing.m,
-    },
-    subTitle: {
-      ...theme.textVariants.body,
-      fontWeight: '600',
-      color: theme.colors.text,
-      marginBottom: theme.spacing.s,
-      marginTop: theme.spacing.m,
-    },
-    colorPickerRow: {
-      padding: theme.spacing.m,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.colors.border,
-    },
-    colorPreview: {
-      width: '100%',
-      height: 4,
-      borderRadius: 2,
-      marginTop: -theme.spacing.s,
-    },
     customThemeButton: {
       backgroundColor: `${theme.colors.primary}10`,
-      marginTop: theme.spacing.s,
+      marginTop: 0,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.border,
     },
     customThemeButtonText: {
       ...theme.textVariants.body,

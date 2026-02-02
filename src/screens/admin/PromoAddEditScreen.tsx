@@ -12,6 +12,9 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '../../context/ThemeContext';
 import { promosDb } from '../../database/promosDb';
+import { categoriesDb } from '../../database/categoriesDb';
+import { Category } from '../../database/schema';
+import { Picker } from '@react-native-picker/picker';
 
 export const PromoAddEditScreen = () => {
   const { theme } = useTheme();
@@ -27,12 +30,23 @@ export const PromoAddEditScreen = () => {
   const [expiryDate, setExpiryDate] = useState(
     new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   );
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
+    loadCategories();
     if (isEditing) {
       loadPromo();
     }
   }, [id]);
+
+  const loadCategories = async () => {
+    try {
+      const allCats = await categoriesDb.getAll();
+      setCategories(allCats);
+    } catch (error) {
+      console.error('Error loading categories:', error);
+    }
+  };
 
   const loadPromo = async () => {
     const promo = await promosDb.getById(id);
@@ -106,18 +120,29 @@ export const PromoAddEditScreen = () => {
         />
 
         <Text style={[styles.label, { color: theme.colors.text }]}>
-          Category ID (or 'all')
+          Category
         </Text>
-        <TextInput
+        <View
           style={[
-            styles.input,
-            { color: theme.colors.text, borderColor: theme.colors.border },
+            styles.pickerContainer,
+            {
+              borderColor: theme.colors.border,
+              backgroundColor: theme.colors.surface,
+            },
           ]}
-          value={categoryId}
-          onChangeText={setCategoryId}
-          placeholder="electronics"
-          placeholderTextColor={theme.colors.subText}
-        />
+        >
+          <Picker
+            selectedValue={categoryId}
+            onValueChange={itemValue => setCategoryId(itemValue)}
+            style={{ color: theme.colors.text }}
+            dropdownIconColor={theme.colors.text}
+          >
+            <Picker.Item label="All Categories" value="all" />
+            {categories.map(cat => (
+              <Picker.Item key={cat.id} label={cat.name} value={cat.id} />
+            ))}
+          </Picker>
+        </View>
 
         <View style={styles.switchRow}>
           <Text
@@ -162,6 +187,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   switchRow: {
     flexDirection: 'row',

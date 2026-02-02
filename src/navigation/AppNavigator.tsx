@@ -56,6 +56,7 @@ import { StockManagerDashboardScreen } from '../screens/dashboards/StockManagerD
 import { UserDashboardScreen } from '../screens/dashboards/UserDashboardScreen';
 import { CurrencySelectionScreen } from '../screens/settings/CurrencySelectionScreen';
 import { CurrencyAdminScreen } from '../screens/admin/CurrencyAdminScreen';
+import { CustomThemeColorsScreen } from '../screens/settings/CustomThemeColorsScreen';
 import { NotificationBell } from '../components/common/NotificationBell';
 import { SearchOverlay } from '../components/common/SearchOverlay';
 import { ChatBot } from '../components/common/ChatBot';
@@ -579,13 +580,13 @@ const useNavigationSections = () => {
           },
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Categories',
-                  label: t('navigation.categories') || 'Categories',
-                  icon: '🗂️',
-                },
-                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-              ]
+              {
+                key: 'Categories',
+                label: t('navigation.categories') || 'Categories',
+                icon: '🗂️',
+              },
+              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+            ]
             : []),
         ],
       },
@@ -594,36 +595,36 @@ const useNavigationSections = () => {
         items: [
           ...(!isManagementRole
             ? [
-                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-                {
-                  key: 'Wishlist',
-                  label: t('navigation.wishlist') || 'Wishlist',
-                  icon: '❤️',
-                },
-              ]
+              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+              {
+                key: 'Wishlist',
+                label: t('navigation.wishlist') || 'Wishlist',
+                icon: '❤️',
+              },
+            ]
             : []),
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Purchases',
-                  label: t('navigation.purchases') || 'Purchases',
-                  icon: '🛍️',
-                },
-                {
-                  key: 'Reclamations',
-                  label: t('navigation.reclamations') || 'Claims',
-                  icon: '⚠️',
-                },
-              ]
+              {
+                key: 'Purchases',
+                label: t('navigation.purchases') || 'Purchases',
+                icon: '🛍️',
+              },
+              {
+                key: 'Reclamations',
+                label: t('navigation.reclamations') || 'Claims',
+                icon: '⚠️',
+              },
+            ]
             : []),
         ],
       },
@@ -662,11 +663,6 @@ const useNavigationSections = () => {
         icon: '👥',
       });
       managementItems.push({
-        key: 'CurrencyAdmin',
-        label: 'Currencies',
-        icon: '💱',
-      });
-      managementItems.push({
         key: 'Promos',
         label: 'Promos',
         icon: '🎟️',
@@ -693,7 +689,7 @@ const useNavigationSections = () => {
     });
 
     const personalItems = [
-      { key: 'Settings', label: t('navigation.settings'), icon: '⚙️' },
+      { key: 'Settings', label: t('navigation.settings'), icon: '🎨' },
       { key: 'Language', label: t('profile.language'), icon: '🌐' },
       { key: 'Currency', label: t('settings.currency'), icon: '💵' },
       { key: 'Profile', label: t('navigation.profile'), icon: '👤' },
@@ -838,9 +834,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -1050,6 +1046,8 @@ const WebNavigator = () => {
         return <CurrencyStack />;
       case 'Devise':
         return <CurrencyStack />;
+      case 'CustomThemeColors':
+        return <CustomThemeColorsScreen />;
       case 'Promos':
         return <PromoStack />;
       default:
@@ -1061,7 +1059,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -1075,7 +1073,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (

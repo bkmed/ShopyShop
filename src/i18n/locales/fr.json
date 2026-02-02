@@ -31,7 +31,6 @@
     "cart": "Panier d'achat",
     "checkout": "Passer à la caisse",
     "continueShopping": "Continuer les achats",
-    "emptyCart": "Votre panier est vide",
     "empty": "Votre panier est vide",
     "itemAdded": "Article ajouté au panier",
     "itemRemoved": "Article retiré du panier",
@@ -41,13 +40,12 @@
     "title": "Panier",
     "total": "Total",
     "updateQuantity": "Mettre à jour la quantité",
-    "shoppingCart": "Panier d'achat",
     "clear": "Vider le panier",
     "cartSummary": "Résumé du panier",
     "vouchers": "Bons d'achat",
     "applyVoucher": "Appliquer le bon",
     "buyNow": "Acheter maintenant",
-    "shop_now": "Acheter maintenant"
+    "shop_now": "Magasiner maintenant"
   },
   "catalog": {
     "addNewProduct": "Ajouter un nouveau produit",
@@ -73,24 +71,36 @@
     "detail": "Détails du Produit",
     "search": "Rechercher dans le Catalogue"
   },
-  "catalogue": {
-    "title": "Catalogue",
-    "list": "Liste du Catalogue",
-    "detail": "Détails du Catalogue",
-    "add": "Ajouter au Catalogue"
+  "currencies": {
+    "title": "Devises",
+    "select": "Sélectionner la devise",
+    "code": "Code de devise",
+    "symbol": "Symbole",
+    "rate": "Taux de change",
+    "add": "Ajouter une devise",
+    "edit": "Modifier la devise",
+    "delete": "Supprimer la devise",
+    "base": "Devise de base",
+    "chooseDisplay": "Choisir la devise d'affichage",
+    "updateSuccess": "Devise mise à jour avec succès",
+    "deleteSuccess": "Devise supprimée avec succès"
   },
   "categories": {
     "title": "Catégories",
     "add": "Ajouter une catégorie",
     "edit": "Modifier la catégorie",
-    "delete": "Supprimer la catégorie",
     "search": "Rechercher des catégories",
+    "nameRequired": "Le nom de la catégorie est requis",
+    "savedSuccessfully": "Catégorie enregistrée avec succès",
+    "updatedSuccessfully": "Catégorie mise à jour avec succès",
+    "deletedSuccessfully": "Catégorie supprimée avec succès",
     "list": "Liste des catégories",
     "name": "Nom de la catégorie",
     "description": "Description de la catégorie",
     "parent": "Catégorie parente",
     "noCategories": "Aucune catégorie trouvée",
-    "detail": "Détail de la catégorie"
+    "detail": "Détail de la catégorie",
+    "filter": "Filtrer les catégories"
   },
   "chat": {
     "noMessages": "Pas encore de messages",
@@ -139,7 +149,6 @@
     "add": "Ajouter",
     "edit": "Modifier",
     "id": "ID",
-    "delete": "Supprimer",
     "save": "Enregistrer",
     "cancel": "Annuler",
     "search": "Rechercher",
@@ -150,6 +159,7 @@
     "list": "Liste",
     "detail": "Détail",
     "update": "Mettre à jour",
+    "categories": "Catégories",
     "address": "Adresse",
     "actions": "Actions",
     "all": "Tout",
@@ -165,7 +175,8 @@
     "deleteTitle": "Supprimer l'article",
     "description": "Description",
     "details": "Détails",
-    "done": "Terminé",
+    "delete": "Supprimer",
+    "deleteError": "Erreur lors de la suppression de l'élément",
     "email": "E-mail",
     "error": "Erreur",
     "errorTitle": "Erreur",
@@ -285,6 +296,7 @@
     "products": "Produits",
     "profile": "Profil",
     "settings": "Paramètres",
+    "theme": "Thème",
     "stockManagement": "Gestion des stocks",
     "wishlist": "Liste de souhaits",
     "categories": "Catégories",
@@ -329,7 +341,6 @@
     "detail": "Détail de la commande",
     "search": "Rechercher des commandes",
     "add": "Nouvelle commande",
-    "searchplaceholder": "Rechercher des commandes...",
     "searchPlaceholder": "Rechercher des commandes...",
     "totalAmount": "Montant total",
     "shippingAddress": "Adresse de livraison",
@@ -390,7 +401,9 @@
     "detail": "Détails de l'inventaire",
     "noHistory": "Aucun mouvement de stock enregistré pour le moment.",
     "currentStock": "Stock Actuel",
-    "notFound": "Produit non trouvé dans l'inventaire"
+    "notFound": "Produit non trouvé dans l'inventaire",
+    "quantity": "Quantité",
+    "totalValue": "Valeur totale"
   },
   "payroll": {
     "currency": "Devise",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "Ajouter un produit",
+    "availableDate": "Date de disponibilité",
+    "deleteError": "Échec de la suppression du produit",
+    "deletedSuccessfully": "Produit supprimé avec succès",
     "editProduct": "Modifier le produit",
     "deleteProduct": "Supprimer le produit",
     "productName": "Nom du produit",
@@ -428,8 +444,7 @@
     "list": "Liste des produits",
     "detail": "Détail du produit",
     "search": "Rechercher des produits",
-    "add": "Ajouter un produit",
-    "availableDate": "Date de disponibilité"
+    "add": "Ajouter un produit"
   },
   "profile": {
     "title": "Profil",
@@ -475,7 +490,6 @@
   },
   "roles": {
     "admin": "Administrateur",
-    "stockManager": "Gestionnaire de Stock",
     "gestionnaire_de_stock": "Gestionnaire de Stock",
     "customer": "Client",
     "user": "Utilisateur",
@@ -529,10 +543,9 @@
     "primaryColor": "Couleur primaire",
     "secondaryColor": "Couleur secondaire",
     "surfaceColor": "Couleur de surface",
-    "themeCustom": "Personnalisé",
-    "themeDark": "Sombre",
-    "themeLight": "Clair",
-    "themePremium": "Premium"
+    "themeCustom": "Thème personnalisé",
+    "themePremium": "Premium",
+    "regional": "Régional"
   },
   "signUp": {
     "title": "Créer un compte",
@@ -568,7 +581,6 @@
     "currentStock": "Stock actuel",
     "availableStock": "Stock disponible",
     "reservedStock": "Stock réservé",
-    "title": "Inventaire",
     "list": "Liste d'inventaire",
     "detail": "Détail du stock",
     "search": "Rechercher dans l'inventaire",
@@ -626,7 +638,7 @@
     "billingAddress": "Adresse de facturation",
     "payNow": "Payer maintenant",
     "paymentSuccessful": "Paiement réussi",
-    "paymentFailed": "Échec du paiement"
+    "paymentFailed": "Paiement failed"
   },
   "forgotPassword": {
     "backToLogin": "Retour à la connexion",

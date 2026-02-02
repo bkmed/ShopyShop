@@ -92,17 +92,36 @@ export const InventoryDetailScreen = () => {
           <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
             {t('inventory.history') || 'Stock History'}
           </Text>
-          <TouchableOpacity
-            style={[
-              styles.adjustBtn,
-              { backgroundColor: theme.colors.primary },
-            ]}
-            onPress={() => navigation.navigate('InventoryAdd', { product })}
-          >
-            <Text style={styles.adjustBtnText}>
-              {t('inventory.adjust') || 'Adjust'}
-            </Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <TouchableOpacity
+              style={[
+                styles.adjustBtn,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderWidth: 1,
+                  borderColor: theme.colors.primary,
+                },
+              ]}
+              onPress={() => navigation.navigate('ProductAdd', { product })}
+            >
+              <Text
+                style={[styles.adjustBtnText, { color: theme.colors.primary }]}
+              >
+                {t('common.edit') || 'Edit'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.adjustBtn,
+                { backgroundColor: theme.colors.primary },
+              ]}
+              onPress={() => navigation.navigate('InventoryAdd', { product })}
+            >
+              <Text style={styles.adjustBtnText}>
+                {t('inventory.adjust') || 'Adjust'}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {logs.length === 0 ? (

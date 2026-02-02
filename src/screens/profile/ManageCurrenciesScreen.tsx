@@ -43,7 +43,13 @@ export const ManageCurrenciesScreen = () => {
       showToast(t('payroll.fillRequired'), 'info');
       return;
     }
-    await currenciesDb.add(newCode.trim().toUpperCase(), newSymbol.trim());
+    await currenciesDb.add({
+      code: newCode.trim().toUpperCase(),
+      symbol: newSymbol.trim(),
+      rate: 1,
+      isBase: false,
+      isActive: true,
+    });
     setNewCode('');
     setNewSymbol('');
     loadCurrencies();
@@ -51,11 +57,10 @@ export const ManageCurrenciesScreen = () => {
 
   const handleUpdate = async () => {
     if (!editingId || !editingCode.trim() || !editingSymbol.trim()) return;
-    await currenciesDb.update(
-      editingId,
-      editingCode.trim().toUpperCase(),
-      editingSymbol.trim(),
-    );
+    await currenciesDb.update(editingId, {
+      code: editingCode.trim().toUpperCase(),
+      symbol: editingSymbol.trim(),
+    });
     setEditingId(null);
     setEditingCode('');
     setEditingSymbol('');

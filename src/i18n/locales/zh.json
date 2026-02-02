@@ -31,7 +31,6 @@
     "cart": "购物车",
     "checkout": "去结算",
     "continueShopping": "继续购物",
-    "emptyCart": "您的购物车是空的",
     "empty": "您的购物车是空的",
     "itemAdded": "商品已加入购物车",
     "itemRemoved": "商品已从购物车移除",
@@ -41,7 +40,6 @@
     "title": "购物车",
     "total": "总计",
     "updateQuantity": "更新数量",
-    "shoppingCart": "购物车",
     "clear": "清空购物车",
     "cartSummary": "购物车摘要",
     "vouchers": "代金券",
@@ -73,24 +71,36 @@
     "detail": "产品详情",
     "search": "搜索目录"
   },
-  "catalogue": {
-    "title": "目录",
-    "list": "目录列表",
-    "detail": "目录详情",
-    "add": "添加到目录"
+  "currencies": {
+    "title": "货币",
+    "select": "选择货币",
+    "code": "货币代码",
+    "symbol": "符号",
+    "rate": "汇率",
+    "add": "添加货币",
+    "edit": "编辑货币",
+    "delete": "删除货币",
+    "base": "基础货币",
+    "chooseDisplay": "选择显示货币",
+    "updateSuccess": "货币更新成功",
+    "deleteSuccess": "货币删除成功"
   },
   "categories": {
     "title": "类别",
     "add": "添加类别",
     "edit": "编辑类别",
-    "delete": "删除类别",
+    "nameRequired": "类别名称必填",
+    "savedSuccessfully": "类别保存成功",
+    "updatedSuccessfully": "类别更新成功",
+    "deletedSuccessfully": "类别删除成功",
     "search": "搜索类别",
     "list": "类别列表",
     "name": "类别名称",
     "description": "类别说明",
     "parent": "父级类别",
     "noCategories": "未找到类别",
-    "detail": "类别详情"
+    "detail": "类别详情",
+    "filter": "筛选类别"
   },
   "chat": {
     "noMessages": "暂无消息",
@@ -139,17 +149,19 @@
     "add": "添加",
     "edit": "编辑",
     "id": "ID",
-    "delete": "删除",
     "save": "保存",
     "cancel": "取消",
     "search": "搜索",
     "searchPlaceholder": "搜索...",
     "filter": "筛选",
     "sort": "排序",
+    "categories": "类别",
     "view": "查看",
     "list": "列表",
     "detail": "详情",
     "update": "更新",
+    "delete": "删除",
+    "deleteError": "删除项目时出错",
     "address": "地址",
     "actions": "操作",
     "all": "全部",
@@ -165,7 +177,6 @@
     "deleteTitle": "删除项",
     "description": "说明",
     "details": "详情",
-    "done": "完成",
     "email": "电子邮件",
     "error": "错误",
     "errorTitle": "错误",
@@ -285,6 +296,7 @@
     "products": "产品",
     "profile": "个人资料",
     "settings": "设置",
+    "theme": "主题",
     "stockManagement": "库存管理",
     "wishlist": "我的收藏",
     "categories": "类别",
@@ -329,7 +341,6 @@
     "detail": "订单详情",
     "search": "搜索订单",
     "add": "新订单",
-    "searchplaceholder": "搜索订单...",
     "searchPlaceholder": "搜索订单...",
     "totalAmount": "总金额",
     "shippingAddress": "收货地址",
@@ -390,7 +401,9 @@
     "detail": "库存详情",
     "noHistory": "尚无库存变动记录。",
     "currentStock": "当前库存",
-    "notFound": "库存中未找到该产品"
+    "notFound": "库存中未找到该产品",
+    "quantity": "数量",
+    "totalValue": "总价值"
   },
   "payroll": {
     "currency": "货币",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "添加产品",
+    "availableDate": "可用日期",
+    "deleteError": "删除产品失败",
+    "deletedSuccessfully": "产品删除成功",
     "editProduct": "编辑产品",
     "deleteProduct": "删除产品",
     "productName": "产品名称",
@@ -428,8 +444,7 @@
     "list": "产品列表",
     "detail": "产品详情",
     "search": "搜索产品",
-    "add": "添加产品",
-    "availableDate": "可用日期"
+    "add": "添加产品"
   },
   "profile": {
     "title": "个人资料",
@@ -465,6 +480,14 @@
     "restartRequiredMessage": "请重启应用程序以应用更改。",
     "updatedSuccessfully": "个人资料已成功更新"
   },
+  "roles": {
+    "admin": "管理员",
+    "gestionnaire_de_stock": "库存管理员",
+    "customer": "客户",
+    "user": "用户",
+    "title": "角色",
+    "anonyme": "访客"
+  },
   "users": {
     "title": "用户管理",
     "detail": "用户详情",
@@ -472,15 +495,6 @@
     "stockManager": "库存管理员",
     "customer": "客户",
     "user": "用户"
-  },
-  "roles": {
-    "admin": "管理员",
-    "stockManager": "库存管理员",
-    "gestionnaire_de_stock": "库存管理员",
-    "customer": "客户",
-    "user": "用户",
-    "title": "角色",
-    "anonyme": "访客"
   },
   "search": {
     "noResultsFor": "未找到相关结果"
@@ -529,9 +543,8 @@
     "primaryColor": "原色",
     "secondaryColor": "辅助色",
     "surfaceColor": "表面颜色",
-    "themeCustom": "自定义",
-    "themeDark": "深色",
-    "themeLight": "浅色",
+    "themeCustom": "自定义主题",
+    "regional": "区域",
     "themePremium": "高级版"
   },
   "signUp": {
@@ -568,7 +581,6 @@
     "currentStock": "当前库存",
     "availableStock": "可用库存",
     "reservedStock": "预留库存",
-    "title": "库存",
     "list": "库存列表",
     "detail": "库存详情",
     "search": "搜索库存",

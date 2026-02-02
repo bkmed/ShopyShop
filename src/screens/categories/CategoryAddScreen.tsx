@@ -70,6 +70,37 @@ export const CategoryAddScreen = () => {
     }
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      t('common.delete') || 'Delete',
+      t('common.confirmDelete') ||
+        'Are you sure you want to delete this category?',
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              if (editingCategory) {
+                await categoriesDb.delete(editingCategory.id);
+                Alert.alert(
+                  t('common.success'),
+                  t('categories.deletedSuccessfully') ||
+                    'Category deleted successfully',
+                );
+                navigation.goBack();
+              }
+            } catch (error) {
+              console.error('Error deleting category:', error);
+              Alert.alert(t('common.error'), t('common.deleteError'));
+            }
+          },
+        },
+      ],
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -149,6 +180,19 @@ export const CategoryAddScreen = () => {
         >
           <Text style={styles.saveButtonText}>{t('common.save')}</Text>
         </TouchableOpacity>
+
+        {editingCategory && (
+          <TouchableOpacity
+            style={[styles.deleteButton, { borderColor: theme.colors.error }]}
+            onPress={handleDelete}
+          >
+            <Text
+              style={[styles.deleteButtonText, { color: theme.colors.error }]}
+            >
+              {t('common.delete') || 'Delete'}
+            </Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -195,7 +239,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   saveButtonText: {
-    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  deleteButton: {
+    height: 55,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+    borderWidth: 1,
+    backgroundColor: 'transparent',
+  },
+  deleteButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
   },

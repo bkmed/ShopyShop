@@ -31,7 +31,6 @@
     "cart": "शॉपिंग कार्ट",
     "checkout": "चेकआउट करें",
     "continueShopping": "खरीदारी जारी रखें",
-    "emptyCart": "आपकी कार्ट खाली है",
     "empty": "आपकी कार्ट खाली है",
     "itemAdded": "आइटम कार्ट में जोड़ा गया",
     "itemRemoved": "आइटम कार्ट से हटाया गया",
@@ -41,7 +40,6 @@
     "title": "कार्ट",
     "total": "कुल",
     "updateQuantity": "मात्रा अपडेट करें",
-    "shoppingCart": "शॉपिंग कार्ट",
     "clear": "कार्ट खाली करें",
     "cartSummary": "कार्ट सारांश",
     "vouchers": "वाउचर",
@@ -65,7 +63,7 @@
     "searchProducts": "उत्पाद खोजें...",
     "sortBy": "इसके द्वारा क्रमबद्ध करें",
     "sortNewest": "नवीनतम",
-    "sortPriceAsc": "मूल्य ↑",
+    "sortPriceAsc": "मूलय ↑",
     "sortPriceDesc": "मूल्य ↓",
     "title": "कैटलॉग",
     "viewProduct": "उत्पाद देखें",
@@ -73,24 +71,36 @@
     "detail": "उत्पाद विवरण",
     "search": "कैटलॉग खोजें"
   },
-  "catalogue": {
-    "title": "कैटलॉग",
-    "list": "कैटलॉग सूची",
-    "detail": "कैटलॉग विवरण",
-    "add": "कैटलॉग में जोड़ें"
+  "currencies": {
+    "title": "मुद्राएँ",
+    "select": "मुद्रा चुनें",
+    "code": "मुद्रा कोड",
+    "symbol": "प्रतीक",
+    "rate": "विनिमय दर",
+    "add": "मुद्रा जोड़ें",
+    "edit": "मुद्रा संपादित करें",
+    "delete": "मुद्रा हटाएँ",
+    "base": "आधार मुद्रा",
+    "chooseDisplay": "प्रदर्शन मुद्रा चुनें",
+    "updateSuccess": "मुद्रा सफलतापूर्वक अपडेट की गई",
+    "deleteSuccess": "मुद्रा सफलतापूर्वक हटाई गई"
   },
   "categories": {
     "title": "श्रेणियां",
     "add": "श्रेणी जोड़ें",
     "edit": "श्रेणी संपादित करें",
-    "delete": "श्रेणी हटाएं",
+    "nameRequired": "श्रेणी का नाम अनिवार्य है",
+    "savedSuccessfully": "श्रेणी सफलतापूर्वक सहेजी गई",
+    "updatedSuccessfully": "श्रेणी सफलतापूर्वक अपडेट की गई",
+    "deletedSuccessfully": "श्रेणी सफलतापूर्वक हटा दी गई",
     "search": "श्रेणियां खोजें",
     "list": "श्रेणी सूची",
     "name": "श्रेणी का नाम",
     "description": "श्रेणी विवरण",
     "parent": "मूल श्रेणी",
     "noCategories": "कोई श्रेणी नहीं मिली",
-    "detail": "श्रेणी विवरण"
+    "detail": "श्रेणी विवरण",
+    "filter": "श्रेणियां फ़िल्टर करें"
   },
   "chat": {
     "noMessages": "अभी कोई संदेश नहीं",
@@ -139,7 +149,6 @@
     "add": "जोड़ें",
     "edit": "संपादित करें",
     "id": "आईडी",
-    "delete": "हटाएं",
     "save": "सहेजें",
     "cancel": "रद्द करें",
     "search": "खोजें",
@@ -150,6 +159,9 @@
     "list": "सूची",
     "detail": "विवरण",
     "update": "अपडेट करें",
+    "delete": "हटाएं",
+    "deleteError": "आइटम हटाने में त्रुटि",
+    "categories": "श्रेणियाँ",
     "address": "पता",
     "actions": "कार्रवाई",
     "all": "सभी",
@@ -165,7 +177,6 @@
     "deleteTitle": "आइटम हटाएं",
     "description": "विवरण",
     "details": "विवरण",
-    "done": "हो गया",
     "email": "ईमेल",
     "error": "त्रुटि",
     "errorTitle": "त्रुटि",
@@ -285,6 +296,7 @@
     "products": "उत्पाद",
     "profile": "प्रोफ़ाइल",
     "settings": "सेटिंग्स",
+    "theme": "थीम",
     "stockManagement": "स्टॉक प्रबंधन",
     "wishlist": "विशलिस्ट",
     "categories": "श्रेणियां",
@@ -329,7 +341,6 @@
     "detail": "ऑर्डर विवरण",
     "search": "ऑर्डर खोजें",
     "add": "नया ऑर्डर",
-    "searchplaceholder": "ऑर्डर खोजें...",
     "searchPlaceholder": "ऑर्डर खोजें...",
     "totalAmount": "कुल राशि",
     "shippingAddress": "शिपिंग पता",
@@ -390,7 +401,9 @@
     "detail": "इन्वेंटरी विवरण",
     "noHistory": "अभी तक कोई स्टॉक मूवमेंट रिकॉर्ड नहीं किया गया है।",
     "currentStock": "वर्तमान स्टॉक",
-    "notFound": "इन्वेंटरी में उत्पाद नहीं मिला"
+    "notFound": "इन्वेंटरी में उत्पाद नहीं मिला",
+    "quantity": "मात्रा",
+    "totalValue": "कुल मूल्य"
   },
   "payroll": {
     "currency": "मुद्रा",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "उत्पाद जोड़ें",
+    "availableDate": "उपलब्धता तिथि",
+    "deleteError": "उत्पाद हटाने में त्रुटि",
+    "deletedSuccessfully": "उत्पाद सफलतापूर्वक हटा दिया गया",
     "editProduct": "उत्पाद संपादित करें",
     "deleteProduct": "उत्पाद हटाएं",
     "productName": "उत्पाद का नाम",
@@ -428,8 +444,7 @@
     "list": "उत्पाद सूची",
     "detail": "उत्पाद विवरण",
     "search": "उत्पाद खोजें",
-    "add": "उत्पाद जोड़ें",
-    "availableDate": "उपलब्धता तिथि"
+    "add": "उत्पाद जोड़ें"
   },
   "profile": {
     "title": "प्रोफ़ाइल",
@@ -467,7 +482,6 @@
   },
   "roles": {
     "admin": "प्रशासक",
-    "stockManager": "स्टॉक मैनेजर",
     "gestionnaire_de_stock": "स्टॉक मैनेजर",
     "customer": "ग्राहक",
     "user": "उपयोगकर्ता",
@@ -529,10 +543,9 @@
     "primaryColor": "प्राथमिक रंग",
     "secondaryColor": "द्वितीयक रंग",
     "surfaceColor": "सतह का रंग",
-    "themeCustom": "कस्टम",
-    "themeDark": "डार्क",
-    "themeLight": "लाइट",
-    "themePremium": "प्रीमियम"
+    "themeCustom": "कस्टम थीम",
+    "themePremium": "प्रीमियम",
+    "regional": "क्षेत्रीय"
   },
   "signUp": {
     "title": "खाता बनाएं",
@@ -568,7 +581,6 @@
     "currentStock": "वर्तमान स्टॉक",
     "availableStock": "उपलब्ध स्टॉक",
     "reservedStock": "आरक्षित स्टॉक",
-    "title": "इन्वेंटरी",
     "list": "इन्वेंटरी सूची",
     "detail": "स्टॉक विवरण",
     "search": "इन्वेंटरी खोजें",

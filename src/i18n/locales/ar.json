@@ -31,7 +31,6 @@
     "cart": "سلة التسوق",
     "checkout": "إتمام الشراء",
     "continueShopping": "مواصلة التسوق",
-    "emptyCart": "سلتك فارغة",
     "empty": "سلتك فارغة",
     "itemAdded": "تمت إضافة العنصر إلى السلة",
     "itemRemoved": "تمت إزالة العنصر من السلة",
@@ -41,7 +40,6 @@
     "title": "السلة",
     "total": "الإجمالي",
     "updateQuantity": "تحديث الكمية",
-    "shoppingCart": "سلة التسوق",
     "clear": "مسح السلة",
     "cartSummary": "ملخص السلة",
     "vouchers": "القسائم",
@@ -73,24 +71,36 @@
     "detail": "تفاصيل المنتج",
     "search": "البحث في الكتالوج"
   },
-  "catalogue": {
-    "title": "الكتالوج",
-    "list": "قائمة الكتالوج",
-    "detail": "تفاصيل الكتالوج",
-    "add": "إضافة إلى الكتالوج"
+  "currencies": {
+    "title": "العملات",
+    "select": "اختر العملة",
+    "code": "رمز العملة",
+    "symbol": "الرمز",
+    "rate": "سعر الصرف",
+    "add": "إضافة عملة",
+    "edit": "تعديل العملة",
+    "delete": "حذف العملة",
+    "base": "العملة الأساسية",
+    "chooseDisplay": "اختر عملة العرض",
+    "updateSuccess": "تم تحديث العملة بنجاح",
+    "deleteSuccess": "تم حذف العملة بنجاح"
   },
   "categories": {
     "title": "الفئات",
     "add": "إضافة فئة",
     "edit": "تعديل الفئة",
-    "delete": "حذف الفئة",
+    "nameRequired": "اسم الفئة مطلوب",
+    "savedSuccessfully": "تم حفظ الفئة بنجاح",
+    "updatedSuccessfully": "تم تحديث الفئة بنجاح",
+    "deletedSuccessfully": "تم حذف الفئة بنجاح",
     "search": "البحث في الفئات",
     "list": "قائمة الفئات",
     "name": "اسم الفئة",
     "description": "وصف الفئة",
     "parent": "الفئة الأم",
     "noCategories": "لم يتم العثور على فئات",
-    "detail": "تفاصيل الفئة"
+    "detail": "تفاصيل الفئة",
+    "filter": "تصفية الفئات"
   },
   "chat": {
     "noMessages": "لا توجد رسائل بعد",
@@ -139,17 +149,18 @@
     "add": "إضافة",
     "edit": "تعديل",
     "id": "المعرف",
-    "delete": "حذف",
     "save": "حفظ",
     "cancel": "إلغاء",
     "search": "بحث",
     "searchPlaceholder": "بحث...",
     "filter": "تصفية",
     "sort": "ترتيب",
+    "select": "اختر",
     "view": "عرض",
     "list": "قائمة",
     "detail": "تفاصيل",
     "update": "تحديث",
+    "categories": "فئات",
     "address": "العنوان",
     "actions": "إجراءات",
     "all": "الكل",
@@ -165,7 +176,8 @@
     "deleteTitle": "حذف العنصر",
     "description": "الوصف",
     "details": "التفاصيل",
-    "done": "تم",
+    "delete": "حذف",
+    "deleteError": "خطأ في حذف العنصر",
     "email": "البريد الإلكتروني",
     "error": "خطأ",
     "errorTitle": "خطأ",
@@ -190,7 +202,6 @@
     "quantity": "الكمية",
     "required": "هذا الحقل مطلوب",
     "saveError": "فشل حفظ التغييرات",
-    "select": "اختيار",
     "selectCategory": "اختر الفئة",
     "send": "إرسال",
     "sku": "SKU",
@@ -285,6 +296,7 @@
     "products": "المنتجات",
     "profile": "الملف الشخصي",
     "settings": "الإعدادات",
+    "theme": "المظهر",
     "stockManagement": "إدارة المخزون",
     "wishlist": "قائمة الأمنيات",
     "categories": "الفئات",
@@ -329,8 +341,7 @@
     "detail": "تفاصيل الطلب",
     "search": "البحث في الطلبات",
     "add": "طلب جديد",
-    "searchplaceholder": "البحث في الطلبات...",
-    "searchPlaceholder": "بحث في الطلبات...",
+    "searchPlaceholder": "البحث في الطلبات...",
     "totalAmount": "المبلغ الإجمالي",
     "shippingAddress": "عنوان الشحن",
     "createNew": "إنشاء طلب جديد"
@@ -363,7 +374,7 @@
     "reason": "السبب",
     "status": "الحالة",
     "submitted": "تم تقديمها",
-    "description": "الوصف",
+    "description": "Description",
     "orderId": "رقم الطلب"
   },
   "inventory": {
@@ -390,7 +401,9 @@
     "detail": "تفاصيل المخزون",
     "noHistory": "لا يوجد سجل حركة مخزون مسجل بعد.",
     "currentStock": "المخزون الحالي",
-    "notFound": "المنتج غير موجود في المخزون"
+    "notFound": "المنتج غير موجود في المخزون",
+    "quantity": "الكمية",
+    "totalValue": "القيمة الإجمالية"
   },
   "payroll": {
     "currency": "العملة",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "إضافة منتج",
+    "availableDate": "تاريخ التوفر",
+    "deleteError": "فشل في حذف المنتج",
+    "deletedSuccessfully": "تم حذف المنتج بنجاح",
     "editProduct": "تعديل المنتج",
     "deleteProduct": "حذف المنتج",
     "productName": "اسم المنتج",
@@ -428,8 +444,7 @@
     "list": "قائمة المنتجات",
     "detail": "تفاصيل المنتج",
     "search": "البحث عن منتجات",
-    "add": "إضافة منتج",
-    "availableDate": "تاريخ التوفر"
+    "add": "إضافة منتج"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -475,7 +490,6 @@
   },
   "roles": {
     "admin": "مشرف",
-    "stockManager": "مدير المخزون",
     "gestionnaire_de_stock": "مدير المخزون",
     "customer": "عميل",
     "user": "مستخدم",
@@ -523,6 +537,7 @@
     "privacyPolicy": "سياسة الخصوصية",
     "backgroundColor": "لون الخلفية",
     "customizeColors": "تخصيص الألوان",
+    "regional": "اجليمي",
     "customizeMenu": "تخصيص القائمة",
     "customizeMenuDesc": "إدارة روابط الشريط الجانبي",
     "personal": "الإعدادات الشخصية",
@@ -530,8 +545,6 @@
     "secondaryColor": "اللون الثانوي",
     "surfaceColor": "لون السطح",
     "themeCustom": "مخصص",
-    "themeDark": "داكن",
-    "themeLight": "فاتح",
     "themePremium": "مميز"
   },
   "signUp": {
@@ -568,7 +581,6 @@
     "currentStock": "المخزون الحالي",
     "availableStock": "المخزون المتاح",
     "reservedStock": "المخزون المحجوز",
-    "title": "المخزون",
     "list": "قائمة المخزون",
     "detail": "تفاصيل المخزون",
     "search": "البحث في المخزون",

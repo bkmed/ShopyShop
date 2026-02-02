@@ -6,20 +6,30 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { productsDb } from '../../database/productsDb';
 import { categoriesDb } from '../../database/categoriesDb';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 export const AdminDashboardScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
   const navigation = useNavigation<any>();
+  const { setActiveTab } = React.useContext(WebNavigationContext) || {};
+
+  const handleNavigate = (screen: string) => {
+    if (Platform.OS === 'web' && setActiveTab) {
+      setActiveTab(screen);
+    } else {
+      navigation.navigate(screen);
+    }
+  };
 
   const [stats, setStats] = useState({
     totalOrders: 0,
@@ -125,7 +135,7 @@ export const AdminDashboardScreen = () => {
       <View style={styles.actionsGrid}>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Products')}
+          onPress={() => handleNavigate('Products')}
         >
           <Text style={{ fontSize: 24 }}>🏷️</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
@@ -134,7 +144,7 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Categories')}
+          onPress={() => handleNavigate('Categories')}
         >
           <Text style={{ fontSize: 24 }}>📁</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
@@ -143,7 +153,7 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Orders')}
+          onPress={() => handleNavigate('Orders')}
         >
           <Text style={{ fontSize: 24 }}>🚚</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
@@ -152,7 +162,7 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('UserManagement')}
+          onPress={() => handleNavigate('UserManagement')}
         >
           <Text style={{ fontSize: 24 }}>👥</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
@@ -161,7 +171,7 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Analytics')}
+          onPress={() => handleNavigate('Analytics')}
         >
           <Text style={{ fontSize: 24 }}>📊</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
@@ -170,11 +180,11 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Catalog')}
+          onPress={() => handleNavigate('Catalog')}
         >
           <Text style={{ fontSize: 24 }}>📑</Text>
           <Text style={[styles.actionText, { color: theme.colors.text }]}>
-            {t('catalogue.title')}
+            {t('catalog.title')}
           </Text>
         </TouchableOpacity>
       </View>

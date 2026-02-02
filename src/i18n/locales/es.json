@@ -31,7 +31,6 @@
     "cart": "Carrito de compras",
     "checkout": "Proceder al pago",
     "continueShopping": "Continuar comprando",
-    "emptyCart": "Tu carrito está vacío",
     "empty": "Tu carrito está vacío",
     "itemAdded": "Artículo añadido al carrito",
     "itemRemoved": "Artículo eliminado del carrito",
@@ -41,7 +40,6 @@
     "title": "Carrito",
     "total": "Total",
     "updateQuantity": "Actualizar cantidad",
-    "shoppingCart": "Carrito de compras",
     "clear": "Vaciar carrito",
     "cartSummary": "Resumen del carrito",
     "vouchers": "Cupones",
@@ -73,24 +71,36 @@
     "detail": "Detalle del Producto",
     "search": "Buscar en el Catálogo"
   },
-  "catalogue": {
-    "title": "Catálogo",
-    "list": "Lista del Catálogo",
-    "detail": "Detalle del Catálogo",
-    "add": "Añadir al Catálogo"
+  "currencies": {
+    "title": "Monedas",
+    "select": "Seleccionar moneda",
+    "code": "Código de moneda",
+    "symbol": "Símbolo",
+    "rate": "Tipo de cambio",
+    "add": "Añadir moneda",
+    "edit": "Editar moneda",
+    "delete": "Eliminar moneda",
+    "base": "Moneda base",
+    "chooseDisplay": "Elegir moneda de visualización",
+    "updateSuccess": "Moneda actualizada con éxito",
+    "deleteSuccess": "Moneda eliminada con éxito"
   },
   "categories": {
     "title": "Categorías",
     "add": "Añadir categoría",
     "edit": "Editar categoría",
-    "delete": "Eliminar categoría",
+    "nameRequired": "El nombre de la categoría es obligatorio",
+    "savedSuccessfully": "Categoría guardada con éxito",
+    "updatedSuccessfully": "Categoría actualizada con éxito",
+    "deletedSuccessfully": "Categoría eliminada con éxito",
     "search": "Buscar categorías",
     "list": "Lista de categorías",
     "name": "Nombre de la categoría",
     "description": "Descripción de la categoría",
     "parent": "Categoría padre",
     "noCategories": "No se encontraron categorías",
-    "detail": "Detalle de la categoría"
+    "detail": "Detalle de la categoría",
+    "filter": "Filtrar categorías"
   },
   "chat": {
     "noMessages": "Aún no hay mensajes",
@@ -139,8 +149,6 @@
     "add": "Añadir",
     "edit": "Editar",
     "id": "ID",
-    "delete": "Eliminar",
-    "save": "Guardar",
     "cancel": "Cancelar",
     "search": "Buscar",
     "searchPlaceholder": "Buscar...",
@@ -150,6 +158,8 @@
     "list": "Lista",
     "detail": "Detalle",
     "update": "Actualizar",
+    "save": "Guardar",
+    "categories": "Categorías",
     "address": "Dirección",
     "actions": "Acciones",
     "all": "Todo",
@@ -165,7 +175,8 @@
     "deleteTitle": "Eliminar elemento",
     "description": "Descripción",
     "details": "Detalles",
-    "done": "Hecho",
+    "delete": "Eliminar",
+    "deleteError": "Error al eliminar el elemento",
     "email": "Correo electrónico",
     "error": "Error",
     "errorTitle": "Error",
@@ -285,6 +296,7 @@
     "products": "Productos",
     "profile": "Perfil",
     "settings": "Ajustes",
+    "theme": "Tema",
     "stockManagement": "Gestión de stock",
     "wishlist": "Lista de deseos",
     "categories": "Categorías",
@@ -329,7 +341,6 @@
     "detail": "Detalle del pedido",
     "search": "Buscar pedidos",
     "add": "Nuevo pedido",
-    "searchplaceholder": "Buscar pedidos...",
     "searchPlaceholder": "Buscar pedidos...",
     "totalAmount": "Importe total",
     "shippingAddress": "Dirección de envío",
@@ -390,7 +401,9 @@
     "detail": "Detalle de stock",
     "noHistory": "Aún no se han registrado movimientos de stock.",
     "currentStock": "Stock actual",
-    "notFound": "Producto no encontrado en el inventario"
+    "notFound": "Producto no encontrado en el inventario",
+    "quantity": "Cantidad",
+    "totalValue": "Valor total"
   },
   "payroll": {
     "currency": "Moneda",
@@ -398,6 +411,9 @@
   },
   "products": {
     "addProduct": "Añadir producto",
+    "availableDate": "Fecha de disponibilidad",
+    "deleteError": "Error al eliminar el producto",
+    "deletedSuccessfully": "Producto eliminado con éxito",
     "editProduct": "Editar producto",
     "deleteProduct": "Eliminar producto",
     "productName": "Nombre del producto",
@@ -428,8 +444,7 @@
     "list": "Lista de productos",
     "detail": "Detalle del producto",
     "search": "Buscar productos",
-    "add": "Añadir producto",
-    "availableDate": "Fecha de disponibilidad"
+    "add": "Añadir producto"
   },
   "profile": {
     "title": "Perfil",
@@ -467,7 +482,7 @@
   },
   "users": {
     "title": "Gestión de usuarios",
-    "detail": "Détails de l'utilisateur",
+    "detail": "Detalles del usuario",
     "admin": "Administrador",
     "stockManager": "Gestor de Stock",
     "customer": "Cliente",
@@ -475,7 +490,6 @@
   },
   "roles": {
     "admin": "Administrador",
-    "stockManager": "Gestor de Stock",
     "gestionnaire_de_stock": "Gestor de Stock",
     "customer": "Cliente",
     "user": "Usuario",
@@ -518,7 +532,7 @@
     "changePassword": "Cambiar contraseña",
     "deleteAccount": "Eliminar cuenta",
     "about": "Acerca de",
-    "version": "Versión",
+    "version": "Version",
     "termsOfService": "Términos de servicio",
     "privacyPolicy": "Política de privacidad",
     "backgroundColor": "Color de fondo",
@@ -529,10 +543,9 @@
     "primaryColor": "Color primario",
     "secondaryColor": "Color secundario",
     "surfaceColor": "Color de superficie",
-    "themeCustom": "Personalizado",
-    "themeDark": "Oscuro",
-    "themeLight": "Claro",
-    "themePremium": "Premium"
+    "themeCustom": "Tema personalizado",
+    "themePremium": "Premium",
+    "regional": "Regional"
   },
   "signUp": {
     "title": "Crear cuenta",
@@ -568,7 +581,6 @@
     "currentStock": "Stock actual",
     "availableStock": "Stock disponible",
     "reservedStock": "Stock reservado",
-    "title": "Inventario",
     "list": "Lista de inventario",
     "detail": "Detalle de stock",
     "search": "Buscar inventario",
