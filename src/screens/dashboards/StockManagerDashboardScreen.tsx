@@ -136,22 +136,34 @@ export const StockManagerDashboardScreen = () => {
             {t('inventory.fullInventory')}
           </Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('InventoryAdd')}
+          onPress={() => navigation.navigate('StockReceptionList')}
         >
           <Text style={{ fontSize: 24 }}>📥</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('inventory.receiveStock')}
+            {t('navigation.stockReception') || 'Reception'}
           </Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Orders')}
+          onPress={() => navigation.navigate('PickPackList')}
         >
           <Text style={{ fontSize: 24 }}>📦</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('inventory.pickAndPack')}
+            {t('navigation.pickPack') || 'Pick & Pack'}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => navigation.navigate('SupplierList')}
+        >
+          <Text style={{ fontSize: 24 }}>🚚</Text>
+          <Text style={[styles.opText, { color: theme.colors.text }]}>
+            {t('suppliers.title') || 'Suppliers'}
           </Text>
         </TouchableOpacity>
       </View>

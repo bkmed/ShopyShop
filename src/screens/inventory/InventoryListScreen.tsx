@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  TextInput,
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +28,8 @@ export const InventoryListScreen = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  const [searchQuery, setSearchQuery] = useState('');
 
   const styles = React.useMemo(() => createStyles(theme), [theme]);
 
@@ -53,7 +56,9 @@ export const InventoryListScreen = () => {
   );
 
   const filteredProducts = products.filter(
-    p => selectedCategory === 'all' || p.categoryId === selectedCategory,
+    p => (selectedCategory === 'all' || p.categoryId === selectedCategory) &&
+      (p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.id.toLowerCase().includes(searchQuery.toLowerCase())),
   );
 
   const categoryOptions = [
@@ -66,8 +71,21 @@ export const InventoryListScreen = () => {
 
   const renderItem = ({ item }: { item: Product }) => {
     const category = categories.find(c => c.id === item.categoryId);
-    const lowStock = item.stockQuantity < 10;
-    const stockValue = (item.unitPrice || item.price) * item.stockQuantity;
+    const stockQuantity = item.stockQuantity || 0;
+    const isOutOfStock = stockQuantity === 0;
+    const lowStock = stockQuantity < 10 && stockQuantity > 0;
+    const stockValue = (item.unitPrice || item.price) * stockQuantity;
+
+    let statusColor = theme.colors.success || '#4CD964';
+    let statusLabel = t('common.active');
+
+    if (isOutOfStock) {
+      statusColor = '#EF4444';
+      statusLabel = t('inventory.outOfStock') || 'Out of Stock';
+    } else if (lowStock) {
+      statusColor = '#F59E0B';
+      statusLabel = t('inventory.lowStock');
+    }
 
     return (
       <TouchableOpacity
@@ -108,9 +126,7 @@ export const InventoryListScreen = () => {
               style={[
                 styles.statusBadge,
                 {
-                  backgroundColor: lowStock
-                    ? '#FF4444' + '20'
-                    : theme.colors.success + '20',
+                  backgroundColor: statusColor + '20',
                 },
               ]}
             >
@@ -118,13 +134,11 @@ export const InventoryListScreen = () => {
                 style={[
                   styles.statusText,
                   {
-                    color: lowStock
-                      ? '#FF4444'
-                      : theme.colors.success || '#4CD964',
+                    color: statusColor,
                   },
                 ]}
               >
-                {lowStock ? t('inventory.lowStock') : t('common.active')}
+                {statusLabel}
               </Text>
             </View>
           </View>
@@ -137,8 +151,11 @@ export const InventoryListScreen = () => {
             <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
               {t('inventory.quantity')}
             </Text>
-            <Text style={[styles.statValue, { color: theme.colors.text }]}>
-              {item.stockQuantity}
+            <Text style={[
+              styles.statValue,
+              { color: isOutOfStock ? '#EF4444' : theme.colors.text }
+            ]}>
+              {stockQuantity}
             </Text>
           </View>
           <View style={styles.statItem}>
@@ -179,6 +196,20 @@ export const InventoryListScreen = () => {
       </View>
 
       <View style={styles.filterContainer}>
+        <TextInput
+          style={[
+            styles.searchInput,
+            {
+              backgroundColor: theme.colors.surface,
+              color: theme.colors.text,
+              borderColor: theme.colors.border,
+            }
+          ]}
+          placeholder={t('common.searchPlaceholder')}
+          placeholderTextColor={theme.colors.subText}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
         <Dropdown
           label={t('categories.filter') || 'Filter by Category'}
           data={categoryOptions}
@@ -234,6 +265,14 @@ const createStyles = (theme: any) =>
     addBtnText: {
       color: '#FFF',
       fontWeight: 'bold',
+    },
+    searchInput: {
+      height: 48,
+      borderRadius: 12,
+      paddingHorizontal: 16,
+      fontSize: 16,
+      borderWidth: 1,
+      marginBottom: 12,
     },
     filterContainer: {
       marginBottom: 16,

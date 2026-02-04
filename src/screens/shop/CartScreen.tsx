@@ -194,7 +194,7 @@ export const CartScreen = () => {
                 borderTopWidth: 1,
               },
               Platform.OS === 'web' &&
-                ({ backdropFilter: 'blur(16px)' } as any),
+              ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
@@ -212,13 +212,7 @@ export const CartScreen = () => {
                 styles.checkoutBtn,
                 { backgroundColor: theme.colors.primary },
               ]}
-              onPress={() =>
-                AlertService.showAlert(
-                  modal,
-                  t('cart.checkout'),
-                  t('cart.featureUnderConstruction'),
-                )
-              }
+              onPress={() => navigation.navigate('DeliveryMethod')}
             >
               <Text style={styles.checkoutBtnText}>
                 {t('cart.checkout') || 'Checkout'}
@@ -226,8 +220,9 @@ export const CartScreen = () => {
             </TouchableOpacity>
           </View>
         </>
-      )}
-    </View>
+      )
+      }
+    </View >
   );
 };
 

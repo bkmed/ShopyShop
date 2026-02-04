@@ -71,10 +71,39 @@ import { ReclamationDetailScreen } from '../screens/reclamations/ReclamationDeta
 import { UserListScreen } from '../screens/admin/UserListScreen';
 import { UserDetailsScreen } from '../screens/admin/UserDetailsScreen';
 
-// Supplier Management Screens
 import { SupplierListScreen } from '../screens/suppliers/SupplierListScreen';
 import { SupplierAddEditScreen } from '../screens/suppliers/SupplierAddEditScreen';
 import { SupplierDetailScreen } from '../screens/suppliers/SupplierDetailScreen';
+import { SupplierProductListScreen } from '../screens/suppliers/SupplierProductListScreen';
+
+// Stock Reception Screens
+import { StockReceptionListScreen } from '../screens/inventory/StockReceptionListScreen';
+import { StockReceptionDetailScreen } from '../screens/inventory/StockReceptionDetailScreen';
+
+// Pick & Pack Screens
+import { PickPackListScreen } from '../screens/inventory/PickPackListScreen';
+import { PickPackDetailScreen } from '../screens/inventory/PickPackDetailScreen';
+
+// Stock Movement Screen
+import { StockMovementScreen } from '../screens/inventory/StockMovementScreen';
+
+// Admin Purchase Screens
+import { AdminPurchaseListScreen } from '../screens/admin/AdminPurchaseListScreen';
+import { AdminPurchaseDetailScreen } from '../screens/admin/AdminPurchaseDetailScreen';
+
+// Admin Reclamation Screens
+import { AdminReclamationListScreen } from '../screens/admin/AdminReclamationListScreen';
+import { AdminReclamationDetailScreen } from '../screens/admin/AdminReclamationDetailScreen';
+
+// Checkout Screens
+// Checkout Screens
+import { DeliveryMethodScreen } from '../screens/checkout/DeliveryMethodScreen';
+import { ReviewCartScreen } from '../screens/checkout/ReviewCartScreen';
+import { AddressSelectionScreen } from '../screens/checkout/AddressSelectionScreen';
+import { PaymentSelectionScreen } from '../screens/checkout/PaymentSelectionScreen';
+import { OrderConfirmationScreen } from '../screens/checkout/OrderConfirmationScreen';
+import { AddressAddEditScreen } from '../screens/checkout/AddressAddEditScreen';
+
 
 enableScreens();
 
@@ -242,18 +271,50 @@ const CatalogStack = () => {
 import { CheckoutScreen } from '../screens/shop/CheckoutScreen';
 
 const CartStack = () => {
+  const { theme } = useTheme();
   const { t } = useTranslation();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
       <Stack.Screen
-        name="Cart"
+        name="CartMain"
         component={CartScreen}
-        options={{ title: t('cart.title') }}
+        options={{ title: t('navigation.cart') }}
       />
       <Stack.Screen
-        name="Checkout"
-        component={CheckoutScreen}
-        options={{ title: t('cart.checkout') || 'Checkout' }}
+        name="DeliveryMethod"
+        component={DeliveryMethodScreen}
+        options={{ title: t('checkout.delivery') || 'DELIVERY' }}
+      />
+      <Stack.Screen
+        name="AddressSelection"
+        component={AddressSelectionScreen}
+        options={{ title: t('checkout.address') || 'ADDRESS' }}
+      />
+      <Stack.Screen
+        name="AddressAddEdit"
+        component={AddressAddEditScreen}
+        options={{ title: t('checkout.address') || 'ADDRESS' }}
+      />
+      <Stack.Screen
+        name="PaymentSelection"
+        component={PaymentSelectionScreen}
+        options={{ title: t('checkout.payment') || 'PAYMENT' }}
+      />
+      <Stack.Screen
+        name="ReviewCart"
+        component={ReviewCartScreen}
+        options={{ title: 'REVIEW' }}
+      />
+      <Stack.Screen
+        name="OrderConfirmation"
+        component={OrderConfirmationScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -395,6 +456,31 @@ const InventoryStack = () => {
         component={InventoryAddScreen}
         options={{ title: t('inventory.adjust') || 'Adjust Stock' }}
       />
+      <Stack.Screen
+        name="StockReceptionList"
+        component={StockReceptionListScreen}
+        options={{ title: t('navigation.stockReception') || 'Stock Reception' }}
+      />
+      <Stack.Screen
+        name="StockReceptionDetail"
+        component={StockReceptionDetailScreen}
+        options={{ title: t('stockReception.detail') || 'Reception Detail' }}
+      />
+      <Stack.Screen
+        name="PickPackList"
+        component={PickPackListScreen}
+        options={{ title: t('navigation.pickPack') || 'Pick & Pack' }}
+      />
+      <Stack.Screen
+        name="PickPackDetail"
+        component={PickPackDetailScreen}
+        options={{ title: t('pickPack.detail') || 'Pick & Pack Detail' }}
+      />
+      <Stack.Screen
+        name="StockMovement"
+        component={StockMovementScreen}
+        options={{ title: t('inventory.history') || 'Stock Movement' }}
+      />
     </Stack.Navigator>
   );
 };
@@ -426,6 +512,11 @@ const SuppliersStack = () => {
         name="SupplierDetail"
         component={SupplierDetailScreen}
         options={{ title: t('suppliers.detail') }}
+      />
+      <Stack.Screen
+        name="SupplierProductList"
+        component={SupplierProductListScreen}
+        options={{ title: t('suppliers.products') }}
       />
     </Stack.Navigator>
   );
@@ -551,6 +642,56 @@ const PromoStack = () => {
   );
 };
 
+const AdminPurchasesStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="AdminPurchaseList"
+        component={AdminPurchaseListScreen}
+        options={{ title: t('admin.purchases.title') || 'Purchase Management' }}
+      />
+      <Stack.Screen
+        name="AdminPurchaseDetail"
+        component={AdminPurchaseDetailScreen}
+        options={{ title: t('admin.purchases.detail') || 'Purchase Detail' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const AdminReclamationsStack = () => {
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.surface },
+        headerTintColor: theme.colors.text,
+        headerTitleStyle: { color: theme.colors.text, fontWeight: '600' },
+      }}
+    >
+      <Stack.Screen
+        name="AdminReclamationList"
+        component={AdminReclamationListScreen}
+        options={{ title: t('admin.reclamations.title') || 'Reclamation Management' }}
+      />
+      <Stack.Screen
+        name="AdminReclamationDetail"
+        component={AdminReclamationDetailScreen}
+        options={{ title: t('admin.reclamations.detail') || 'Reclamation Detail' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 // Stacks are defined below
 
 // ======= Tabs (Mobile) =======
@@ -606,9 +747,10 @@ const useNavigationSections = () => {
       {
         title: t('sections.shop') || 'Shop',
         items: [
-          ...(!isManagementRole
-            ? [{ key: 'Home', label: t('navigation.home'), icon: '🏠' }]
-            : []),
+          // Home for everyone
+          { key: 'Home', label: t('navigation.home'), icon: '🏠' },
+
+          // Catalog hidden for Stock Manager
           ...(!isStockManager
             ? [{
               key: 'Catalog',
@@ -616,6 +758,8 @@ const useNavigationSections = () => {
               icon: '🛍️',
             }]
             : []),
+
+          // Categories, Cart only for non-management roles (Users)
           ...(!isManagementRole
             ? [
               {
@@ -631,6 +775,7 @@ const useNavigationSections = () => {
       {
         title: t('sections.account') || 'Account',
         items: [
+          // Orders and Wishlist only for regular users
           ...(!isManagementRole
             ? [
               { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
@@ -641,6 +786,8 @@ const useNavigationSections = () => {
               },
             ]
             : []),
+
+          // Analytics for those with permission
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
               {
@@ -650,6 +797,8 @@ const useNavigationSections = () => {
               },
             ]
             : []),
+
+          // Purchases and Reclamations for regular users
           ...(!isManagementRole
             ? [
               {
@@ -676,12 +825,24 @@ const useNavigationSections = () => {
         label: t('navigation.inventory') || 'Inventory',
         icon: '🏭',
       });
+      // New Stock Manager Items
       managementItems.push({
         key: 'Suppliers',
-        label: t('navigation.suppliers') || 'Suppliers',
-        icon: '🏢',
+        label: t('suppliers.title') || 'Suppliers',
+        icon: '🚚',
+      });
+      managementItems.push({
+        key: 'StockReceptionList',
+        label: t('navigation.stockReception') || 'Reception',
+        icon: '📥',
+      });
+      managementItems.push({
+        key: 'PickPackList',
+        label: t('navigation.pickPack') || 'Pick & Pack',
+        icon: '📦',
       });
     }
+
 
     if (rbacService.hasPermission(user, Permission.MANAGE_PRODUCTS)) {
       managementItems.push({
@@ -706,6 +867,16 @@ const useNavigationSections = () => {
         icon: '👥',
       });
       managementItems.push({
+        key: 'AdminPurchases',
+        label: t('admin.purchases.title') || 'Purchases (Admin)',
+        icon: '💰',
+      });
+      managementItems.push({
+        key: 'AdminReclamations',
+        label: t('admin.reclamations.title') || 'Claims (Admin)',
+        icon: '🎴',
+      });
+      managementItems.push({
         key: 'Promos',
         label: 'Promos',
         icon: '🎟️',
@@ -713,6 +884,16 @@ const useNavigationSections = () => {
     }
 
     if (managementItems.length > 0) {
+      managementItems.push({
+        key: 'AdminPurchases',
+        label: t('admin.purchases.title') || 'Purchases (Admin)',
+        icon: '💰',
+      });
+      managementItems.push({
+        key: 'AdminReclamations',
+        label: t('admin.reclamations.title') || 'Claims (Admin)',
+        icon: '🎴',
+      });
       sections.push({
         title: t('sections.management') || 'Management',
         items: managementItems,
@@ -955,6 +1136,8 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Wishlist" component={WishlistStack} />
       <Drawer.Screen name="Purchases" component={PurchasesStack} />
       <Drawer.Screen name="Reclamations" component={ReclamationsStack} />
+      <Drawer.Screen name="AdminPurchases" component={AdminPurchasesStack} />
+      <Drawer.Screen name="AdminReclamations" component={AdminReclamationsStack} />
       <Drawer.Screen name="Analytics" component={AnalyticsStack} />
       <Drawer.Screen name="UserManagement" component={UserManagementStack} />
       <Drawer.Screen name="Products" component={ProductsStack} />
@@ -1045,6 +1228,18 @@ const WebNavigator = () => {
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
         return <InventoryStack />;
+      case 'StockReception':
+        if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
+          return <HomeStack />;
+        return <InventoryStack />;
+      case 'PickPack':
+        if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
+          return <HomeStack />;
+        return <InventoryStack />;
+      case 'StockMovement':
+        if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
+          return <HomeStack />;
+        return <InventoryStack />;
       case 'Suppliers':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
@@ -1077,6 +1272,10 @@ const WebNavigator = () => {
         return <CustomThemeColorsScreen />;
       case 'Promos':
         return <PromoStack />;
+      case 'AdminPurchases':
+        return <AdminPurchasesStack />;
+      case 'AdminReclamations':
+        return <AdminReclamationsStack />;
       default:
         return <HomeStack />;
     }

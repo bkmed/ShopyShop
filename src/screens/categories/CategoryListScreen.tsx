@@ -99,12 +99,14 @@ export const CategoryListScreen = () => {
         <Text style={[styles.title, { color: theme.colors.text }]}>
           {t('categories.title')}
         </Text>
-        <TouchableOpacity
-          style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
-          onPress={() => navigation.navigate('CategoryAdd')}
-        >
-          <Text style={styles.addButtonText}>+ {t('common.add')}</Text>
-        </TouchableOpacity>
+        {rbacService.isAdmin(user) && (
+          <TouchableOpacity
+            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            onPress={() => navigation.navigate('CategoryAdd')}
+          >
+            <Text style={styles.addButtonText}>+ {t('common.add')}</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       <View
