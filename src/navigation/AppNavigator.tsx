@@ -90,10 +90,12 @@ import { StockMovementScreen } from '../screens/inventory/StockMovementScreen';
 // Admin Purchase Screens
 import { AdminPurchaseListScreen } from '../screens/admin/AdminPurchaseListScreen';
 import { AdminPurchaseDetailScreen } from '../screens/admin/AdminPurchaseDetailScreen';
+import { AdminPurchaseAddEditScreen } from '../screens/admin/AdminPurchaseAddEditScreen';
 
 // Admin Reclamation Screens
 import { AdminReclamationListScreen } from '../screens/admin/AdminReclamationListScreen';
 import { AdminReclamationDetailScreen } from '../screens/admin/AdminReclamationDetailScreen';
+import { AdminReclamationAddEditScreen } from '../screens/admin/AdminReclamationAddEditScreen';
 
 // Checkout Screens
 // Checkout Screens
@@ -663,6 +665,11 @@ const AdminPurchasesStack = () => {
         component={AdminPurchaseDetailScreen}
         options={{ title: t('admin.purchases.detail') || 'Purchase Detail' }}
       />
+      <Stack.Screen
+        name="AdminPurchaseAddEdit"
+        component={AdminPurchaseAddEditScreen}
+        options={{ title: t('admin.purchases.edit') || 'Purchase Detail' }}
+      />
     </Stack.Navigator>
   );
 };
@@ -687,6 +694,11 @@ const AdminReclamationsStack = () => {
         name="AdminReclamationDetail"
         component={AdminReclamationDetailScreen}
         options={{ title: t('admin.reclamations.detail') || 'Reclamation Detail' }}
+      />
+      <Stack.Screen
+        name="AdminReclamationAddEdit"
+        component={AdminReclamationAddEditScreen}
+        options={{ title: t('admin.reclamations.edit') || 'Reclamation Detail' }}
       />
     </Stack.Navigator>
   );
@@ -825,7 +837,6 @@ const useNavigationSections = () => {
         label: t('navigation.inventory') || 'Inventory',
         icon: '🏭',
       });
-      // New Stock Manager Items
       managementItems.push({
         key: 'Suppliers',
         label: t('suppliers.title') || 'Suppliers',
@@ -842,7 +853,6 @@ const useNavigationSections = () => {
         icon: '📦',
       });
     }
-
 
     if (rbacService.hasPermission(user, Permission.MANAGE_PRODUCTS)) {
       managementItems.push({
@@ -884,16 +894,6 @@ const useNavigationSections = () => {
     }
 
     if (managementItems.length > 0) {
-      managementItems.push({
-        key: 'AdminPurchases',
-        label: t('admin.purchases.title') || 'Purchases (Admin)',
-        icon: '💰',
-      });
-      managementItems.push({
-        key: 'AdminReclamations',
-        label: t('admin.reclamations.title') || 'Claims (Admin)',
-        icon: '🎴',
-      });
       sections.push({
         title: t('sections.management') || 'Management',
         items: managementItems,

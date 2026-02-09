@@ -156,6 +156,12 @@ export const AdminPurchaseListScreen = () => {
                     </View>
                 }
             />
+            <TouchableOpacity
+                style={[styles.fab, { backgroundColor: theme.colors.primary }]}
+                onPress={() => navigation.navigate('AdminPurchaseAddEdit')}
+            >
+                <Text style={styles.fabIcon}>+</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -256,4 +262,33 @@ const styles = StyleSheet.create({
     emptyText: {
         fontSize: 16,
     },
+    fab: {
+        position: 'absolute',
+        bottom: 24,
+        right: 24,
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+        elevation: 8,
+    },
+    fabIcon: {
+        fontSize: 32,
+        color: '#FFF',
+        marginTop: -4,
+    },
+    deleteButton: {
+        padding: 8,
+    },
+    deleteIcon: {
+        fontSize: 18,
+    }
 });

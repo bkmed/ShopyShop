@@ -39,9 +39,25 @@ export const ProductAddScreen = () => {
     categoryId: editingProduct?.categoryId || '1',
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!form.name.trim()) newErrors.name = t('common.required');
+    if (!form.price.trim()) newErrors.price = t('common.required');
+    else if (isNaN(parseFloat(form.price))) newErrors.price = t('common.invalidAmount');
+
+    if (form.stockQuantity && isNaN(parseInt(form.stockQuantity, 10))) {
+      newErrors.stockQuantity = t('common.invalidAmount');
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSave = async () => {
-    if (!form.name.trim() || !form.price.trim()) {
-      AlertService.showError(toast, t('signUp.errorEmptyFields'));
+    if (!validate()) {
+      AlertService.showError(toast, t('common.fillRequired') || 'Please fill all required fields correctly');
       return;
     }
 
@@ -49,13 +65,13 @@ export const ProductAddScreen = () => {
       name: form.name,
       description: form.description,
       price: parseFloat(form.price),
-      stockQuantity: parseInt(form.stockQuantity, 10),
+      stockQuantity: parseInt(form.stockQuantity || '0', 10),
       categoryId: form.categoryId,
       currency: form.currency,
       imageUris: [],
       isActive: true,
       availableDate: new Date(form.availableDate).toISOString(),
-      unitPrice: parseFloat(form.unitPrice),
+      unitPrice: parseFloat(form.unitPrice || '0'),
     };
 
     try {
@@ -78,7 +94,7 @@ export const ProductAddScreen = () => {
       modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-        'Are you sure you want to delete this product?',
+      'Are you sure you want to delete this product?',
       async () => {
         try {
           if (editingProduct) {
@@ -86,7 +102,7 @@ export const ProductAddScreen = () => {
             AlertService.showSuccess(
               toast,
               t('products.deletedSuccessfully') ||
-                'Product deleted successfully',
+              'Product deleted successfully',
             );
             navigation.goBack();
           }
@@ -98,6 +114,13 @@ export const ProductAddScreen = () => {
       t('common.delete'),
     );
   };
+
+  const RequiredLabel = ({ label }: { label: string }) => (
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={[styles.label, { color: theme.colors.subText }]}>{label}</Text>
+      <Text style={{ color: theme.colors.error, marginLeft: 4 }}>*</Text>
+    </View>
+  );
 
   return (
     <KeyboardAvoidingView
@@ -112,22 +135,26 @@ export const ProductAddScreen = () => {
         </Text>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('products.productName')}
-          </Text>
+          <RequiredLabel label={t('products.productName')} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.name ? theme.colors.error : 'transparent',
+                borderWidth: errors.name ? 1 : 0,
               },
             ]}
             value={form.name}
-            onChangeText={text => setForm({ ...form, name: text })}
+            onChangeText={text => {
+              setForm({ ...form, name: text });
+              if (errors.name) setErrors({ ...errors, name: '' });
+            }}
             placeholder={t('products.productNamePlaceholder')}
             placeholderTextColor={theme.colors.subText}
           />
+          {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
         </View>
 
         <View style={styles.formGroup}>
@@ -154,23 +181,27 @@ export const ProductAddScreen = () => {
 
         <View style={styles.row}>
           <View style={[styles.formGroup, { flex: 1, marginRight: 8 }]}>
-            <Text style={[styles.label, { color: theme.colors.subText }]}>
-              {t('products.productPrice')}
-            </Text>
+            <RequiredLabel label={t('products.productPrice')} />
             <TextInput
               style={[
                 styles.input,
                 {
                   backgroundColor: theme.colors.surface,
                   color: theme.colors.text,
+                  borderColor: errors.price ? theme.colors.error : 'transparent',
+                  borderWidth: errors.price ? 1 : 0,
                 },
               ]}
               value={form.price}
-              onChangeText={text => setForm({ ...form, price: text })}
+              onChangeText={text => {
+                setForm({ ...form, price: text });
+                if (errors.price) setErrors({ ...errors, price: '' });
+              }}
               placeholder={t('common.placeholderAmount')}
               keyboardType="decimal-pad"
               placeholderTextColor={theme.colors.subText}
             />
+            {errors.price && <Text style={styles.errorText}>{errors.price}</Text>}
           </View>
           <View style={[styles.formGroup, { flex: 1, marginLeft: 8 }]}>
             <Text style={[styles.label, { color: theme.colors.subText }]}>
@@ -182,14 +213,20 @@ export const ProductAddScreen = () => {
                 {
                   backgroundColor: theme.colors.surface,
                   color: theme.colors.text,
+                  borderColor: errors.stockQuantity ? theme.colors.error : 'transparent',
+                  borderWidth: errors.stockQuantity ? 1 : 0,
                 },
               ]}
               value={form.stockQuantity}
-              onChangeText={text => setForm({ ...form, stockQuantity: text })}
+              onChangeText={text => {
+                setForm({ ...form, stockQuantity: text });
+                if (errors.stockQuantity) setErrors({ ...errors, stockQuantity: '' });
+              }}
               placeholder={t('common.placeholderZero')}
               keyboardType="number-pad"
               placeholderTextColor={theme.colors.subText}
             />
+            {errors.stockQuantity && <Text style={styles.errorText}>{errors.stockQuantity}</Text>}
           </View>
         </View>
 
@@ -322,5 +359,11 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

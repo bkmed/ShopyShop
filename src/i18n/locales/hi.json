@@ -298,7 +298,8 @@
     "viewAll": "सभी देखें",
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
-    "dateFormatPlaceholder": "YYYY-MM-DD"
+    "dateFormatPlaceholder": "DD-MM-YYYY",
+    "noResult": "कोई परिणाम नहीं मिला"
   },
   "home": {
     "appName": "ShopyShop",

@@ -198,6 +198,15 @@ export const AdminDashboardScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => handleNavigate('Home')}
+        >
+          <Text style={{ fontSize: 24 }}>🏠</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.home') || 'Home'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
           onPress={() => handleNavigate('Catalog')}
         >
           <Text style={{ fontSize: 24 }}>📑</Text>

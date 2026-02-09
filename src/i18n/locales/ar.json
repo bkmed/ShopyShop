@@ -298,7 +298,8 @@
     "viewAll": "عرض الكل",
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
-    "dateFormatPlaceholder": "YYYY-MM-DD"
+    "dateFormatPlaceholder": "DD-MM-YYYY",
+    "noResult": "لا توجد نتائج"
   },
   "home": {
     "appName": "ShopyShop",

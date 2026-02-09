@@ -298,7 +298,8 @@
     "viewAll": "查看全部",
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
-    "dateFormatPlaceholder": "YYYY-MM-DD"
+    "dateFormatPlaceholder": "YYYY-MM-DD",
+    "noResult": "未找到结果"
   },
   "home": {
     "appName": "ShopyShop",

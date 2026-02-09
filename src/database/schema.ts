@@ -158,7 +158,7 @@ export interface InventoryLog {
 
 export type ReclamationStatus =
   | 'pending'
-  | 'investigating'
+  | 'in_progress'
   | 'resolved'
   | 'rejected';
 

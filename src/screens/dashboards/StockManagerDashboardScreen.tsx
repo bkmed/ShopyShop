@@ -21,6 +21,7 @@ export const StockManagerDashboardScreen = () => {
   const navigation = useNavigation<any>();
 
   const [stats, setStats] = useState({
+    outOfStock: 0,
     lowStock: 0,
     totalItems: 0,
     recentLogs: 0,
@@ -36,9 +37,11 @@ export const StockManagerDashboardScreen = () => {
         inventoryDb.getLogs(),
       ]);
 
-      const lowStock = products.filter(p => p.stockQuantity < 10).length;
+      const outOfStock = products.filter(p => p.stockQuantity === 0).length;
+      const lowStock = products.filter(p => p.stockQuantity > 0 && p.stockQuantity < 10).length;
 
       setStats({
+        outOfStock,
         lowStock,
         totalItems: products.reduce((acc, p) => acc + p.stockQuantity, 0),
         recentLogs: logs.length,
@@ -75,10 +78,31 @@ export const StockManagerDashboardScreen = () => {
       </Text>
 
       <View style={styles.mainStats}>
+        {/* Out of Stock Alert - Critical */}
+        {stats.outOfStock > 0 && (
+          <View
+            style={[
+              styles.stockAlertCard,
+              { backgroundColor: '#FF3B3015', marginBottom: 16 },
+            ]}
+          >
+            <Text style={{ fontSize: 40 }}>🚨</Text>
+            <View style={{ marginLeft: 20 }}>
+              <Text style={[styles.alertValue, { color: '#FF3B30' }]}>
+                {stats.outOfStock} {t('catalog.outOfStock') || 'Out of Stock'}
+              </Text>
+              <Text style={[styles.alertSub, { color: theme.colors.subText }]}>
+                {t('inventory.immediateAttention')}
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {/* Low Stock Alert - Warning */}
         <View
           style={[
             styles.stockAlertCard,
-            { backgroundColor: stats.lowStock > 0 ? '#FF3B3020' : '#4CD96420' },
+            { backgroundColor: stats.lowStock > 0 ? '#FF950015' : '#4CD96415' },
           ]}
         >
           <Text style={{ fontSize: 40 }}>
@@ -88,13 +112,15 @@ export const StockManagerDashboardScreen = () => {
             <Text
               style={[
                 styles.alertValue,
-                { color: stats.lowStock > 0 ? '#FF3B30' : '#4CD964' },
+                { color: stats.lowStock > 0 ? '#FF9500' : '#4CD964' },
               ]}
             >
               {stats.lowStock} {t('inventory.lowStockAlerts')}
             </Text>
             <Text style={[styles.alertSub, { color: theme.colors.subText }]}>
-              {t('inventory.immediateAttention')}
+              {stats.lowStock > 0
+                ? t('inventory.reorderSoon') || 'Reorder soon'
+                : t('inventory.stockHealthy') || 'Stock levels specific'}
             </Text>
           </View>
         </View>
@@ -164,6 +190,16 @@ export const StockManagerDashboardScreen = () => {
           <Text style={{ fontSize: 24 }}>🚚</Text>
           <Text style={[styles.opText, { color: theme.colors.text }]}>
             {t('suppliers.title') || 'Suppliers'}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Text style={{ fontSize: 24 }}>🏠</Text>
+          <Text style={[styles.opText, { color: theme.colors.text }]}>
+            {t('navigation.home') || 'Home'}
           </Text>
         </TouchableOpacity>
       </View>

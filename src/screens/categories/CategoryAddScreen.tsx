@@ -35,11 +35,21 @@ export const CategoryAddScreen = () => {
       editingCategory?.availableDate || new Date().toISOString().split('T')[0],
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!form.name.trim()) newErrors.name = t('categories.nameRequired') || 'Category name is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSave = async () => {
-    if (!form.name.trim()) {
+    if (!validate()) {
       AlertService.showError(
         toast,
-        t('categories.nameRequired') || 'Category name is required',
+        t('common.fillRequired') || 'Please fill all required fields',
       );
       return;
     }
@@ -58,7 +68,7 @@ export const CategoryAddScreen = () => {
         AlertService.showSuccess(
           toast,
           t('categories.updatedSuccessfully') ||
-            'Category updated successfully',
+          'Category updated successfully',
         );
       } else {
         await categoriesDb.add(categoryData);
@@ -79,7 +89,7 @@ export const CategoryAddScreen = () => {
       modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-        'Are you sure you want to delete this category?',
+      'Are you sure you want to delete this category?',
       async () => {
         try {
           if (editingCategory) {
@@ -87,7 +97,7 @@ export const CategoryAddScreen = () => {
             AlertService.showSuccess(
               toast,
               t('categories.deletedSuccessfully') ||
-                'Category deleted successfully',
+              'Category deleted successfully',
             );
             navigation.goBack();
           }
@@ -100,6 +110,13 @@ export const CategoryAddScreen = () => {
     );
   };
 
+  const RequiredLabel = ({ label }: { label: string }) => (
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={[styles.label, { color: theme.colors.subText }]}>{label}</Text>
+      <Text style={{ color: theme.colors.error, marginLeft: 4 }}>*</Text>
+    </View>
+  );
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -111,22 +128,26 @@ export const CategoryAddScreen = () => {
         </Text>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('categories.name')}
-          </Text>
+          <RequiredLabel label={t('categories.name')} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.name ? theme.colors.error : 'transparent',
+                borderWidth: errors.name ? 1 : 0,
               },
             ]}
             value={form.name}
-            onChangeText={text => setForm({ ...form, name: text })}
+            onChangeText={text => {
+              setForm({ ...form, name: text });
+              if (errors.name) setErrors({ ...errors, name: '' });
+            }}
             placeholder={t('categories.namePlaceholder')}
             placeholderTextColor={theme.colors.subText}
           />
+          {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
         </View>
 
         <View style={styles.formGroup}>
@@ -250,5 +271,11 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

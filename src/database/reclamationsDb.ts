@@ -31,6 +31,20 @@ export const reclamationsDb = {
     return id;
   },
 
+  update: async (
+    id: string,
+    data: Partial<Omit<Reclamation, 'id' | 'createdAt' | 'userId'>>,
+  ): Promise<void> => {
+    const index = reclamationsDb._reclamations.findIndex(r => r.id === id);
+    if (index !== -1) {
+      reclamationsDb._reclamations[index] = {
+        ...reclamationsDb._reclamations[index],
+        ...data,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+  },
+
   updateStatus: async (
     id: string,
     status: Reclamation['status'],

@@ -26,6 +26,7 @@ export const SupplierAddEditScreen = () => {
 
     const [loading, setLoading] = useState(isEditing);
     const [saving, setSaving] = useState(false);
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const [formData, setFormData] = useState({
         name: '',
@@ -43,6 +44,21 @@ export const SupplierAddEditScreen = () => {
             loadSupplier();
         }
     }, [supplierId]);
+
+    const validate = () => {
+        const newErrors: Record<string, string> = {};
+        if (!formData.name.trim()) newErrors.name = t('suppliers.nameRequired');
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email.trim()) {
+            newErrors.email = t('suppliers.emailRequired');
+        } else if (!emailRegex.test(formData.email)) {
+            newErrors.email = t('common.invalidEmail') || 'Invalid email format';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const loadSupplier = async () => {
         try {
@@ -69,13 +85,8 @@ export const SupplierAddEditScreen = () => {
     };
 
     const handleSave = async () => {
-        // Validation
-        if (!formData.name.trim()) {
-            Alert.alert(t('common.error'), t('suppliers.nameRequired'));
-            return;
-        }
-        if (!formData.email.trim()) {
-            Alert.alert(t('common.error'), t('suppliers.emailRequired'));
+        if (!validate()) {
+            Alert.alert(t('common.error'), t('common.fillRequired') || 'Please fill all required fields correctly');
             return;
         }
 
@@ -97,6 +108,13 @@ export const SupplierAddEditScreen = () => {
         }
     };
 
+    const RequiredLabel = ({ label }: { label: string }) => (
+        <View style={styles.labelContainer}>
+            <Text style={[styles.label, { color: theme.colors.text }]}>{label}</Text>
+            <Text style={styles.requiredStar}>*</Text>
+        </View>
+    );
+
     if (loading) {
         return (
             <View style={[styles.centered, { backgroundColor: theme.colors.background }]}>
@@ -109,23 +127,25 @@ export const SupplierAddEditScreen = () => {
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <View style={styles.form}>
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, { color: theme.colors.text }]}>
-                        {t('suppliers.name')} *
-                    </Text>
+                    <RequiredLabel label={t('suppliers.name')} />
                     <TextInput
                         style={[
                             styles.input,
                             {
                                 backgroundColor: theme.colors.surface,
                                 color: theme.colors.text,
-                                borderColor: theme.colors.border,
+                                borderColor: errors.name ? '#EF4444' : theme.colors.border,
                             },
                         ]}
                         placeholder={t('suppliers.namePlaceholder')}
                         placeholderTextColor={theme.colors.subText}
                         value={formData.name}
-                        onChangeText={(text) => setFormData({ ...formData, name: text })}
+                        onChangeText={(text) => {
+                            setFormData({ ...formData, name: text });
+                            if (errors.name) setErrors({ ...errors, name: '' });
+                        }}
                     />
+                    {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
                 </View>
 
                 <View style={styles.formGroup}>
@@ -149,25 +169,27 @@ export const SupplierAddEditScreen = () => {
                 </View>
 
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, { color: theme.colors.text }]}>
-                        {t('common.email')} *
-                    </Text>
+                    <RequiredLabel label={t('common.email')} />
                     <TextInput
                         style={[
                             styles.input,
                             {
                                 backgroundColor: theme.colors.surface,
                                 color: theme.colors.text,
-                                borderColor: theme.colors.border,
+                                borderColor: errors.email ? '#EF4444' : theme.colors.border,
                             },
                         ]}
                         placeholder={t('suppliers.emailPlaceholder')}
                         placeholderTextColor={theme.colors.subText}
                         value={formData.email}
-                        onChangeText={(text) => setFormData({ ...formData, email: text })}
+                        onChangeText={(text) => {
+                            setFormData({ ...formData, email: text });
+                            if (errors.email) setErrors({ ...errors, email: '' });
+                        }}
                         keyboardType="email-address"
                         autoCapitalize="none"
                     />
+                    {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
                 </View>
 
                 <View style={styles.formGroup}>
@@ -305,7 +327,22 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         fontWeight: '600',
+    },
+    labelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 8,
+    },
+    requiredStar: {
+        color: '#EF4444',
+        marginLeft: 4,
+        fontWeight: 'bold',
+    },
+    errorText: {
+        color: '#EF4444',
+        fontSize: 12,
+        marginTop: 4,
+        marginLeft: 4,
     },
     input: {
         height: 48,

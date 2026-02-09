@@ -298,7 +298,8 @@
     "viewAll": "Alle anzeigen",
     "placeholderZero": "0",
     "placeholderAmount": "0,00",
-    "dateFormatPlaceholder": "JJJJ-MM-TT"
+    "dateFormatPlaceholder": "TT.MM.JJJJ",
+    "noResult": "Keine Ergebnisse gefunden"
   },
   "home": {
     "appName": "ShopyShop",

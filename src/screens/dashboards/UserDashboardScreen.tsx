@@ -41,7 +41,6 @@ export const UserDashboardScreen = () => {
       setActiveTab(tab, screen, params);
     } else {
       if (screen) {
-        // Handle nested stack navigation if needed, or just pass params to tab
         navigation.navigate(tab, { screen, params });
       } else {
         navigation.navigate(tab, params);
@@ -74,18 +73,18 @@ export const UserDashboardScreen = () => {
 
   if (loading) {
     return (
-      <View style={[styles.centered, { backgroundColor: theme.colors.background }]}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+      <View style={[styles.centered, { backgroundColor: '#FFF' }]}>
+        <ActivityIndicator size="small" color="#000" />
       </View>
     );
   }
 
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={[styles.container, { backgroundColor: '#FFF' }]}
       showsVerticalScrollIndicator={false}
     >
-      {/* Hero Section */}
+      {/* Editorial Hero Section */}
       <View style={styles.heroContainer}>
         <ImageBackground
           source={require('../../../public/hero.png')}
@@ -93,52 +92,52 @@ export const UserDashboardScreen = () => {
           resizeMode="cover"
         >
           <View style={styles.heroOverlay}>
-            <Text style={styles.heroSubtitle}>NEW SEASON</Text>
-            <Text style={styles.heroTitle}>{t('home.appName').toUpperCase()}</Text>
-            <TouchableOpacity
-              style={[styles.heroButton, { backgroundColor: theme.colors.text }]}
-              onPress={() => handleNavigate('Catalog')}
-            >
-              <Text style={[styles.heroButtonText, { color: theme.colors.background }]}>
-                {t('home.browseProducts').toUpperCase()}
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.heroTextContent}>
+              <Text style={styles.heroSubtitle}>COLLECTION 2026</Text>
+              <Text style={styles.heroTitle}>ESSENTIALS</Text>
+              <TouchableOpacity
+                style={styles.heroButton}
+                onPress={() => handleNavigate('Catalog')}
+              >
+                <Text style={styles.heroButtonText}>
+                  {t('home.browseProducts').toUpperCase()}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
       </View>
 
-      {/* Featured Categories */}
-      <View style={styles.sectionContainer}>
-        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-          COLLECTIONS
-        </Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesScroll}>
-          <TouchableOpacity
-            style={styles.categoryCard}
-            onPress={() => handleNavigate('Catalog')} // Ideally filter by category
-          >
-            <Image source={require('../../../public/womens.png')} style={styles.categoryImage} />
-            <Text style={styles.categoryLabel}>WOMAN</Text>
+      {/* Modern Collections Grid */}
+      <View style={styles.collectionGridContainer}>
+        <View style={styles.collectionItem}>
+          <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
+            <Image source={require('../../../public/womens.png')} style={styles.collectionImage} />
+            <View style={styles.collectionOverlay}>
+              <Text style={styles.collectionTitle}>WOMAN</Text>
+              <Text style={styles.collectionLink}>VIEW ALL</Text>
+            </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.categoryCard}
-            onPress={() => handleNavigate('Catalog')}
-          >
-            <Image source={require('../../../public/mens.png')} style={styles.categoryImage} />
-            <Text style={styles.categoryLabel}>MAN</Text>
+        </View>
+        <View style={styles.collectionItem}>
+          <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
+            <Image source={require('../../../public/mens.png')} style={styles.collectionImage} />
+            <View style={styles.collectionOverlay}>
+              <Text style={styles.collectionTitle}>MAN</Text>
+              <Text style={styles.collectionLink}>VIEW ALL</Text>
+            </View>
           </TouchableOpacity>
-          {/* Placeholder for KIDS/ACCESSORIES if images existed */}
-        </ScrollView>
+        </View>
       </View>
 
-      {/* Trending Section */}
+      {/* Trending Minimalist Section */}
       <View style={styles.sectionContainer}>
-        <View style={styles.sectionHeaderRow}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-            TRENDING NOW
+        <View style={[styles.sectionHeaderRow, { borderTopWidth: 1, paddingTop: 40, borderTopColor: '#f0f0f0' }]}>
+          <Text style={styles.sectionTitle}>
+            NEW ARRIVALS
           </Text>
           <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
-            <Text style={[styles.viewAllText, { color: theme.colors.subText }]}>VIEW ALL</Text>
+            <Text style={styles.viewAllText}>+ VIEW MORE</Text>
           </TouchableOpacity>
         </View>
 
@@ -147,57 +146,61 @@ export const UserDashboardScreen = () => {
             <ProductCard
               key={product.id}
               product={product}
-              onPress={() => handleNavigate('ProductDetail', undefined, { id: product.id })} // Adjust param passing depending on setup
+              onPress={() => handleNavigate('Catalog', 'ProductDetail', { id: product.id })}
             />
           ))}
         </View>
       </View>
 
-      {/* Promotional Banner */}
-      <View style={styles.promoContainer}>
-        <View style={[styles.promoContent, { backgroundColor: theme.colors.surface }]}>
-          <Text style={[styles.promoTitle, { color: theme.colors.text }]}>SUMMER SALE</Text>
-          <Text style={[styles.promoSubtitle, { color: theme.colors.subText }]}>Up to 50% off on selected items</Text>
-          <TouchableOpacity style={{ marginTop: 16 }} onPress={() => handleNavigate('Catalog')}>
-            <Text style={{ borderBottomWidth: 1, borderBottomColor: theme.colors.text, textTransform: 'uppercase', fontSize: 12, fontWeight: '700' }}>
-              Shop Sale
-            </Text>
+      {/* Featured Editorial Section */}
+      <View style={styles.editorialSection}>
+        <View style={styles.editorialContent}>
+          <Text style={styles.editorialLabel}>JOIN THE CLUB</Text>
+          <Text style={styles.editorialHeading}>PREMIUM ACCESS</Text>
+          <Text style={styles.editorialSub}>Exclusive drops, early access and member only benefits.</Text>
+          <TouchableOpacity style={styles.editorialButton}>
+            <Text style={styles.editorialButtonText}>SUBSCRIBE</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Recent Orders - Minimalist View */}
+      {/* Recent Activity - High Contrast */}
       {recentOrders.length > 0 && (
         <View style={styles.sectionContainer}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text, marginBottom: 12 }]}>RECENT ORDERS</Text>
+          <Text style={[styles.sectionTitle, { marginBottom: 24 }]}>ACTIVITY</Text>
           {recentOrders.map((order) => (
             <TouchableOpacity
               key={order.id}
-              style={[styles.miniOrderRow, { borderBottomColor: theme.colors.border }]}
+              style={styles.miniOrderRow}
               onPress={() => handleNavigate('Orders')}
             >
-              <Text style={{ fontSize: 12, fontWeight: '600', color: theme.colors.text }}>{new Date(order.createdAt).toLocaleDateString()}</Text>
-              <Text style={{ fontSize: 12, color: theme.colors.subText }}>#{order.id.slice(0, 6)}</Text>
-              <Text style={{ fontSize: 12, fontWeight: '700', color: theme.colors.primary }}>{order.status}</Text>
+              <View>
+                <Text style={styles.orderDate}>{new Date(order.createdAt).toLocaleDateString()}</Text>
+                <Text style={styles.orderId}>ORDER #{order.id.slice(0, 8).toUpperCase()}</Text>
+              </View>
+              <Text style={styles.orderStatus}>{order.status.toUpperCase()}</Text>
             </TouchableOpacity>
           ))}
         </View>
       )}
 
-      {/* Quick Links Footer */}
-      <View style={[styles.footer, { borderTopColor: theme.colors.border }]}>
-        <TouchableOpacity onPress={() => handleNavigate('Profile')} style={styles.footerLink}>
-          <Text style={[styles.footerLinkText, { color: theme.colors.subText }]}>MY ACCOUNT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleNavigate('Wishlist')} style={styles.footerLink}>
-          <Text style={[styles.footerLinkText, { color: theme.colors.subText }]}>WISHLIST</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleNavigate('Proflie')} style={styles.footerLink}> {/* Typo fix later if needed */}
-          <Text style={[styles.footerLinkText, { color: theme.colors.subText }]}>HELP</Text>
-        </TouchableOpacity>
+      {/* Footer Minimalist */}
+      <View style={styles.footer}>
+        <View style={styles.footerLinks}>
+          <TouchableOpacity onPress={() => handleNavigate('Profile')} style={styles.footerLink}>
+            <Text style={styles.footerLinkText}>MY ACCOUNT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleNavigate('Wishlist')} style={styles.footerLink}>
+            <Text style={styles.footerLinkText}>WISHLIST</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleNavigate('Profile')} style={styles.footerLink}>
+            <Text style={styles.footerLinkText}>HELP</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.copyright}>© {new Date().getFullYear()} SHOPYSHOP. ALL RIGHTS RESERVED.</Text>
       </View>
 
-      <View style={{ height: 100 }} />
+      <View style={{ height: 60 }} />
     </ScrollView>
   );
 };
@@ -212,137 +215,208 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heroContainer: {
-    height: height * 0.7, // 70% of screen height
+    height: Platform.OS === 'web' ? height * 0.9 : height * 0.85,
     width: '100%',
-    marginBottom: 40,
   },
   heroImage: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingBottom: 60,
   },
   heroOverlay: {
-    alignItems: 'center',
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.05)',
+    justifyContent: 'flex-end',
+    padding: 32,
   },
-  heroTitle: {
-    color: '#FFF',
-    fontSize: 42,
-    fontWeight: '900',
-    letterSpacing: -1,
-    marginBottom: 24,
-    textShadowColor: 'rgba(0,0,0,0.3)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 10,
+  heroTextContent: {
+    alignItems: 'flex-start',
   },
   heroSubtitle: {
     color: '#FFF',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
-    letterSpacing: 2,
-    marginBottom: 12,
+    letterSpacing: 4,
+    marginBottom: 8,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
+  },
+  heroTitle: {
+    color: '#FFF',
+    fontSize: 52,
+    fontWeight: '900',
+    letterSpacing: -1,
+    marginBottom: 32,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
   },
   heroButton: {
-    paddingHorizontal: 32,
-    paddingVertical: 16,
-    borderRadius: 0, // Sharp edges
+    backgroundColor: '#FFF',
+    paddingHorizontal: 40,
+    paddingVertical: 18,
+    borderRadius: 0,
   },
   heroButtonText: {
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: '700',
+    color: '#000',
+    letterSpacing: 2,
+  },
+  collectionGridContainer: {
+    flexDirection: 'row',
+    height: 600,
+    width: '100%',
+  },
+  collectionItem: {
+    flex: 1,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  collectionImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  collectionOverlay: {
+    position: 'absolute',
+    bottom: 40,
+    left: 40,
+  },
+  collectionTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#FFF',
     letterSpacing: 1,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
+  },
+  collectionLink: {
+    fontSize: 10,
+    color: '#FFF',
+    fontWeight: '500',
+    letterSpacing: 2,
+    marginTop: 8,
+    textDecorationLine: 'underline',
   },
   sectionContainer: {
-    marginBottom: 48,
-    paddingHorizontal: 16,
+    paddingVertical: 60,
+    paddingHorizontal: 24,
   },
   sectionHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'baseline',
-    marginBottom: 24,
+    marginBottom: 40,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '900',
-    letterSpacing: 0.5,
-    textTransform: 'uppercase',
+    fontSize: 12,
+    fontWeight: '800',
+    letterSpacing: 3,
+    color: '#000',
   },
   viewAllText: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
-    textDecorationLine: 'underline',
-  },
-  categoriesScroll: {
-    overflow: 'visible',
-    marginTop: 16,
-  },
-  categoryCard: {
-    width: width * 0.7,
-    height: width * 0.9,
-    marginRight: 16,
-    position: 'relative',
-  },
-  categoryImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  categoryLabel: {
-    position: 'absolute',
-    bottom: 24,
-    left: 24,
-    fontSize: 24,
-    fontWeight: '800',
-    color: '#FFF',
-    textTransform: 'uppercase',
-    textShadowColor: 'rgba(0,0,0,0.5)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
+    letterSpacing: 1,
+    color: '#666',
   },
   productsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  promoContainer: {
-    padding: 16,
-    marginBottom: 48,
-  },
-  promoContent: {
-    padding: 40,
+  editorialSection: {
+    padding: 60,
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  promoTitle: {
-    fontSize: 32,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    marginBottom: 8,
+  editorialContent: {
+    alignItems: 'center',
+    maxWidth: 300,
   },
-  promoSubtitle: {
-    fontSize: 16,
+  editorialLabel: {
+    color: '#FFF',
+    fontSize: 10,
+    letterSpacing: 4,
+    marginBottom: 16,
+  },
+  editorialHeading: {
+    color: '#FFF',
+    fontSize: 28,
+    fontWeight: '900',
+    textAlign: 'center',
+    marginBottom: 16,
+    letterSpacing: 1,
+  },
+  editorialSub: {
+    color: '#999',
+    textAlign: 'center',
+    fontSize: 14,
+    lineHeight: 22,
+    marginBottom: 32,
+  },
+  editorialButton: {
+    borderWidth: 1,
+    borderColor: '#FFF',
+    paddingHorizontal: 32,
+    paddingVertical: 14,
+  },
+  editorialButtonText: {
+    color: '#FFF',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 2,
   },
   miniOrderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 16,
+    alignItems: 'center',
+    paddingVertical: 24,
     borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  orderDate: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#000',
+    marginBottom: 4,
+  },
+  orderId: {
+    fontSize: 10,
+    color: '#999',
+    letterSpacing: 1,
+  },
+  orderStatus: {
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    color: '#000',
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 32,
-    paddingVertical: 40,
+    paddingVertical: 100,
+    alignItems: 'center',
     borderTopWidth: 1,
-    marginHorizontal: 16,
+    borderTopColor: '#f0f0f0',
+  },
+  footerLinks: {
+    flexDirection: 'row',
+    gap: 40,
+    marginBottom: 40,
   },
   footerLink: {
     paddingVertical: 8,
   },
   footerLinkText: {
-    fontSize: 11,
-    fontWeight: '600',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 2,
+    color: '#000',
+  },
+  copyright: {
+    fontSize: 9,
+    color: '#999',
     letterSpacing: 1,
   }
 });

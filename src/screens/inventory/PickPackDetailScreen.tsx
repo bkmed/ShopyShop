@@ -11,7 +11,7 @@ import {
 import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { pickPackDb, ordersDb, PickPackOrder, PickPackItem } from '../../database';
+import { pickPackDb, ordersDb, inventoryDb, productsDb, PickPackOrder, PickPackItem } from '../../database';
 import { GlassHeader } from '../../components/common/GlassHeader';
 import { useAuth } from '../../context/AuthContext';
 
@@ -92,6 +92,24 @@ export const PickPackDetailScreen = () => {
         try {
             setSaving(true);
             const now = new Date().toISOString();
+
+            // Deduct stock for each packed item
+            for (const item of order.items) {
+                if (item.packed) {
+                    try {
+                        await inventoryDb.adjustStock(
+                            item.productId,
+                            -item.quantity,
+                            `Shipped Order: ${order.orderNumber}`,
+                            user?.name || 'System'
+                        );
+                    } catch (stockError) {
+                        console.error(`Failed to deduct stock for ${item.productName}:`, stockError);
+                        // We continue with other items, or we could bail?
+                        // For now, let's log it. In a real app, we'd want atomic transactions.
+                    }
+                }
+            }
 
             await pickPackDb.update(order.id, {
                 status: 'shipped',

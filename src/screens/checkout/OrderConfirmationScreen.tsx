@@ -41,7 +41,13 @@ export const OrderConfirmationScreen = () => {
 
                 <TouchableOpacity
                     style={[styles.receiptButton, { borderColor: theme.colors.text }]}
-                    onPress={() => alert('Download starting...')}
+                    onPress={() => {
+                        // Simulate download
+                        alert(t('common.downloading') || 'Downloading receipt...');
+                        setTimeout(() => {
+                            alert(t('common.downloadSuccess') || 'Receipt downloaded successfully');
+                        }, 1500);
+                    }}
                 >
                     <Text style={[styles.receiptText, { color: theme.colors.text }]}>DOWNLOAD RECEIPT</Text>
                 </TouchableOpacity>
@@ -75,63 +81,75 @@ const styles = StyleSheet.create({
         fontWeight: '200',
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        letterSpacing: 4,
+        fontSize: 32,
+        fontWeight: '800',
+        letterSpacing: 6,
         marginBottom: 16,
+        textTransform: 'uppercase',
     },
     subtitle: {
         fontSize: 12,
         textAlign: 'center',
         lineHeight: 20,
         letterSpacing: 1,
-        marginBottom: 40,
+        marginBottom: 48,
+        maxWidth: 240,
+        textTransform: 'uppercase',
     },
     orderRefBox: {
         width: '100%',
-        padding: 24,
+        padding: 32,
         alignItems: 'center',
-        marginBottom: 30,
+        marginBottom: 32,
+        borderWidth: 1,
+        borderColor: '#E5E5E5',
     },
     refLabel: {
         fontSize: 10,
-        fontWeight: 'bold',
+        fontWeight: '700',
         letterSpacing: 2,
-        marginBottom: 8,
+        marginBottom: 12,
+        textTransform: 'uppercase',
     },
     refValue: {
-        fontSize: 18,
-        fontWeight: '800',
-        letterSpacing: 1,
+        fontSize: 20,
+        fontWeight: '700',
+        letterSpacing: 2,
     },
     emailInfo: {
-        fontSize: 10,
+        fontSize: 11,
         textAlign: 'center',
         lineHeight: 18,
-        letterSpacing: 1,
-        marginBottom: 40,
+        letterSpacing: 0.5,
+        marginBottom: 48,
+        maxWidth: 260,
+        color: '#666',
     },
     receiptButton: {
-        borderWidth: 1,
-        paddingHorizontal: 30,
-        paddingVertical: 12,
+        borderBottomWidth: 1,
+        paddingBottom: 4,
+        borderColor: '#000',
     },
     receiptText: {
         fontSize: 11,
-        fontWeight: 'bold',
+        fontWeight: '700',
         letterSpacing: 1,
+        textTransform: 'uppercase',
     },
     footer: {
         padding: 20,
     },
     doneButton: {
-        height: 50,
+        height: 56,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#000',
     },
     doneText: {
         fontSize: 13,
-        fontWeight: 'bold',
+        fontWeight: '700',
         letterSpacing: 2,
+        textTransform: 'uppercase',
+        color: '#FFF',
     },
 });

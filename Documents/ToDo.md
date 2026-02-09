@@ -34,7 +34,7 @@ Enhance inventory list screen (complete list view)
 Create stock reception screen
 Create stock movement tracking screen
 Create pick & pack screen
-Add stock alerts for zero quantity products
+[x] Add stock alerts for zero quantity products
 Menu & Navigation
  Remove catalog from stock manager menu
  Add suppliers to stock manager menu
@@ -76,24 +76,24 @@ Checkout Flow Enhancement
  Create cart review screen
  Enhance checkout process flow
  Add order confirmation screen
- Generate receipt/invoice
+ [x] Generate receipt/invoice (Simulated)
 Translation Fixes
 Navigation Keys
- Add missing navigation.* keys to en.json
- Add missing navigation.* keys to fr.json
- Add missing navigation.* keys to es.json
- Add missing navigation.* keys to ar.json
- Add missing navigation.* keys to de.json
- Add missing navigation.* keys to hi.json
- Add missing navigation.* keys to zh.json
+ [x] Add missing navigation.* keys to en.json
+ [x] Add missing navigation.* keys to fr.json
+ [x] Add missing navigation.* keys to es.json
+ [x] Add missing navigation.* keys to ar.json
+ [x] Add missing navigation.* keys to de.json
+ [x] Add missing navigation.* keys to hi.json
+ [x] Add missing navigation.* keys to zh.json
 Supplier Keys
- Add suppliers.* keys to en.json
-Add suppliers.* keys to fr.json (navigation only)
- Add suppliers.* keys to es.json
- Add stock management (stockReception.*, pickPack.*) keys to en.json
- Add stock management keys to es.json
- Add admin purchase management keys to en.json and es.json
- Add all feature keys to ar.json, de.json, hi.json, zh.json
+ [x] Add suppliers.* keys to en.json
+[x] Add suppliers.* keys to fr.json (navigation only)
+ [x] Add suppliers.* keys to es.json
+ [x] Add stock management (stockReception.*, pickPack.*) keys to en.json
+ [x] Add stock management keys to es.json
+ [x] Add admin purchase management keys to en.json and es.json
+ [x] Add all feature keys to ar.json, de.json, hi.json, zh.json
 Code Quality
 Linting & Standards
  Run ESLint and fix errors
@@ -107,11 +107,11 @@ UI/UX Improvements
  Improve typography
 ------------
 
-ajouter a l'admin et a son menu (manage purchase (add, edit delete) and manage reclamations of all user) for admin dashboard, 
-fix eslin eroror et lang dismatch
+[x] ajouter a l'admin et a son menu (manage purchase (add, edit delete) and manage reclamations of all user) for admin dashboard, 
+[x] fix eslin eroror et lang dismatch
 enhance ui for user need to be more beautiful
 
-common.noResult missing all lang
+[x] common.noResult missing all lang
 rajouter a tt les formulaires add edit delete les message derreur ou les field required 
 manage caterogie only admin any add or delete or update manage by admin
 user can only add product to his cart or add reclamation
