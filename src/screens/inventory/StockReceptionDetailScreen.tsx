@@ -202,7 +202,12 @@ export const StockReceptionDetailScreen = () => {
             <Text style={[styles.itemName, { color: theme.colors.text }]}>
               {item.productName}
             </Text>
-            <Text style={[styles.itemSku, { color: theme.colors.subText, fontSize: 12, marginBottom: 8 }]}>
+            <Text
+              style={[
+                styles.itemSku,
+                { color: theme.colors.subText, fontSize: 12, marginBottom: 8 },
+              ]}
+            >
               {item.sku}
             </Text>
             <View style={styles.itemRow}>

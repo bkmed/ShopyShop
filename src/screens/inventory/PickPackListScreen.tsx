@@ -150,7 +150,10 @@ export const PickPackListScreen = () => {
         title={t('pickPack.title')}
         rightElement={
           <TouchableOpacity
-            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            style={[
+              styles.addButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
             onPress={() => navigation.navigate('PickPackAdd')}
           >
             <Text style={styles.addButtonText}>+</Text>

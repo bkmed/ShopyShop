@@ -4,32 +4,18 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   ActivityIndicator,
-  Platform,
 } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
 import { productsDb } from '../../database/productsDb';
 import { categoriesDb } from '../../database/categoriesDb';
-import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 export const AdminDashboardScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-
-  const navigation = useNavigation<any>();
-  const { setActiveTab } = React.useContext(WebNavigationContext) || {};
-
-  const handleNavigate = (screen: string) => {
-    if (Platform.OS === 'web' && setActiveTab) {
-      setActiveTab(screen);
-    } else {
-      navigation.navigate(screen);
-    }
-  };
 
   const [stats, setStats] = useState({
     totalOrders: 0,
@@ -128,7 +114,6 @@ export const AdminDashboardScreen = () => {
           color="#FF2D55"
         />
       </View>
-
     </ScrollView>
   );
 };

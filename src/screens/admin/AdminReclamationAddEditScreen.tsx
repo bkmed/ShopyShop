@@ -148,9 +148,7 @@ export const AdminReclamationAddEditScreen = () => {
 
   const RequiredLabel = ({ label }: { label: string }) => (
     <View style={{ flexDirection: 'row', marginBottom: 8 }}>
-      <Text style={[styles.label, { color: theme.colors.text }]}>
-        {label}
-      </Text>
+      <Text style={[styles.label, { color: theme.colors.text }]}>{label}</Text>
       <Text style={{ color: '#EF4444', marginLeft: 4 }}>*</Text>
     </View>
   );

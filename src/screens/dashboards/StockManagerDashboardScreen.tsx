@@ -4,10 +4,9 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
@@ -17,8 +16,6 @@ import { inventoryDb } from '../../database/inventoryDb';
 export const StockManagerDashboardScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-
-  const navigation = useNavigation<any>();
 
   const [stats, setStats] = useState({
     outOfStock: 0,
@@ -150,7 +147,6 @@ export const StockManagerDashboardScreen = () => {
           </Text>
         </View>
       </View>
-
     </ScrollView>
   );
 };

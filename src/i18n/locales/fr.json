@@ -320,7 +320,11 @@
     "Continue": "Continuer",
     "fillallfields": "Veuillez remplir tous les champs",
     "orderId": "ID de commande",
-    "namePlaceholder": "Entrez le nom..."
+    "namePlaceholder": "Entrez le nom...",
+    "welcome": "Bienvenue",
+    "ourStores": "Nos Magasins",
+    "contactUs": "Contactez-nous",
+    "copyrightText": "Tous droits réservés."
   },
   "home": {
     "appName": "ShopyShop",
@@ -337,7 +341,11 @@
     "viewOrders": "Voir les commandes",
     "manageInventory": "Gérer l'inventaire",
     "featured": "Produits vedettes",
-    "welcome_desc": "Découvrez des produits incroyables aujourd'hui."
+    "welcome_desc": "Découvrez des produits incroyables aujourd'hui.",
+    "allRayons": "Tous nos rayons",
+    "newArrivalsMytek": "Nouveautés",
+    "requestQuote": "Demander un devis",
+    "requestQuoteDesc": "Recevez une offre personnalisée rapidement"
   },
   "languages": {
     "ar": "العربية",
