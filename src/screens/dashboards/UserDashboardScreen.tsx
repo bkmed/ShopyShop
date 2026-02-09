@@ -1,4 +1,3 @@
-```
 import React, { useState, useCallback, useContext } from 'react';
 import {
   Platform,
@@ -10,20 +9,19 @@ import {
   Image,
   Dimensions,
   ImageBackground,
-  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import { ordersDb } from '../../database/ordersDb';
 import { productsDb } from '../../database/productsDb';
 import { Product } from '../../database/schema';
 import { ProductCard } from '../../components/ProductCard';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export const UserDashboardScreen = () => {
   const { t } = useTranslation();
@@ -111,7 +109,10 @@ export const UserDashboardScreen = () => {
       <View style={styles.collectionGridContainer}>
         <View style={styles.collectionItem}>
           <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
-            <Image source={require('../../../public/womens.png')} style={styles.collectionImage} />
+            <Image
+              source={require('../../../public/womens.png')}
+              style={styles.collectionImage}
+            />
             <View style={styles.collectionOverlay}>
               <Text style={styles.collectionTitle}>WOMAN</Text>
               <Text style={styles.collectionLink}>VIEW ALL</Text>
@@ -120,7 +121,10 @@ export const UserDashboardScreen = () => {
         </View>
         <View style={styles.collectionItem}>
           <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
-            <Image source={require('../../../public/mens.png')} style={styles.collectionImage} />
+            <Image
+              source={require('../../../public/mens.png')}
+              style={styles.collectionImage}
+            />
             <View style={styles.collectionOverlay}>
               <Text style={styles.collectionTitle}>MAN</Text>
               <Text style={styles.collectionLink}>VIEW ALL</Text>
@@ -131,21 +135,26 @@ export const UserDashboardScreen = () => {
 
       {/* Trending Minimalist Section */}
       <View style={styles.sectionContainer}>
-        <View style={[styles.sectionHeaderRow, { borderTopWidth: 1, paddingTop: 40, borderTopColor: '#f0f0f0' }]}>
-          <Text style={styles.sectionTitle}>
-            NEW ARRIVALS
-          </Text>
+        <View
+          style={[
+            styles.sectionHeaderRow,
+            { borderTopWidth: 1, paddingTop: 40, borderTopColor: '#f0f0f0' },
+          ]}
+        >
+          <Text style={styles.sectionTitle}>NEW ARRIVALS</Text>
           <TouchableOpacity onPress={() => handleNavigate('Catalog')}>
             <Text style={styles.viewAllText}>+ VIEW MORE</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.productsGrid}>
-          {trendingProducts.map((product) => (
+          {trendingProducts.map(product => (
             <ProductCard
               key={product.id}
               product={product}
-              onPress={() => handleNavigate('Catalog', 'ProductDetail', { id: product.id })}
+              onPress={() =>
+                handleNavigate('Catalog', 'ProductDetail', { id: product.id })
+              }
             />
           ))}
         </View>
@@ -156,7 +165,9 @@ export const UserDashboardScreen = () => {
         <View style={styles.editorialContent}>
           <Text style={styles.editorialLabel}>JOIN THE CLUB</Text>
           <Text style={styles.editorialHeading}>PREMIUM ACCESS</Text>
-          <Text style={styles.editorialSub}>Exclusive drops, early access and member only benefits.</Text>
+          <Text style={styles.editorialSub}>
+            Exclusive drops, early access and member only benefits.
+          </Text>
           <TouchableOpacity style={styles.editorialButton}>
             <Text style={styles.editorialButtonText}>SUBSCRIBE</Text>
           </TouchableOpacity>
@@ -166,18 +177,26 @@ export const UserDashboardScreen = () => {
       {/* Recent Activity - High Contrast */}
       {recentOrders.length > 0 && (
         <View style={styles.sectionContainer}>
-          <Text style={[styles.sectionTitle, { marginBottom: 24 }]}>ACTIVITY</Text>
-          {recentOrders.map((order) => (
+          <Text style={[styles.sectionTitle, { marginBottom: 24 }]}>
+            ACTIVITY
+          </Text>
+          {recentOrders.map(order => (
             <TouchableOpacity
               key={order.id}
               style={styles.miniOrderRow}
               onPress={() => handleNavigate('Orders')}
             >
               <View>
-                <Text style={styles.orderDate}>{new Date(order.createdAt).toLocaleDateString()}</Text>
-                <Text style={styles.orderId}>ORDER #{order.id.slice(0, 8).toUpperCase()}</Text>
+                <Text style={styles.orderDate}>
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </Text>
+                <Text style={styles.orderId}>
+                  ORDER #{order.id.slice(0, 8).toUpperCase()}
+                </Text>
               </View>
-              <Text style={styles.orderStatus}>{order.status.toUpperCase()}</Text>
+              <Text style={styles.orderStatus}>
+                {order.status.toUpperCase()}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -186,17 +205,28 @@ export const UserDashboardScreen = () => {
       {/* Footer Minimalist */}
       <View style={styles.footer}>
         <View style={styles.footerLinks}>
-          <TouchableOpacity onPress={() => handleNavigate('Profile')} style={styles.footerLink}>
+          <TouchableOpacity
+            onPress={() => handleNavigate('Profile')}
+            style={styles.footerLink}
+          >
             <Text style={styles.footerLinkText}>MY ACCOUNT</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleNavigate('Wishlist')} style={styles.footerLink}>
+          <TouchableOpacity
+            onPress={() => handleNavigate('Wishlist')}
+            style={styles.footerLink}
+          >
             <Text style={styles.footerLinkText}>WISHLIST</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleNavigate('Profile')} style={styles.footerLink}>
+          <TouchableOpacity
+            onPress={() => handleNavigate('Profile')}
+            style={styles.footerLink}
+          >
             <Text style={styles.footerLinkText}>HELP</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.copyright}>© {new Date().getFullYear()} SHOPYSHOP. ALL RIGHTS RESERVED.</Text>
+        <Text style={styles.copyright}>
+          © {new Date().getFullYear()} SHOPYSHOP. ALL RIGHTS RESERVED.
+        </Text>
       </View>
 
       <View style={{ height: 60 }} />
@@ -417,6 +447,5 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: '#999',
     letterSpacing: 1,
-  }
+  },
 });
-

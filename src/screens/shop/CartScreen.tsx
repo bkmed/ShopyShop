@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useContext } from 'react';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { useTheme } from '../../context/ThemeContext';
-import { useModal } from '../../context/ModalContext';
+
 import { useSelector, useDispatch } from 'react-redux';
 // import { RootState } from '../../store';
 import {
@@ -34,7 +34,7 @@ export const CartScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
-  const modal = useModal();
+
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const { formatPrice } = useCurrency();

@@ -159,7 +159,9 @@ export const AdminPurchaseAddEditScreen = () => {
 
   const RequiredLabel = ({ label }: { label: string }) => (
     <View style={styles.labelContainer}>
-      <Text style={[styles.label, { color: theme.colors.text }]}>{label}</Text>
+      <Text style={[styles.label, { color: theme.colors.text }]}>
+        {label.toUpperCase()}
+      </Text>
       <Text style={styles.requiredStar}>*</Text>
     </View>
   );
@@ -266,7 +268,7 @@ export const AdminPurchaseAddEditScreen = () => {
           </View>
           <View style={[styles.formGroup, { width: 100 }]}>
             <Text style={[styles.label, { color: theme.colors.text }]}>
-              {t('common.currency') || 'Curr'}
+              {(t('common.currency') || 'Currency').toUpperCase()}
             </Text>
             <TextInput
               style={[
@@ -288,7 +290,7 @@ export const AdminPurchaseAddEditScreen = () => {
 
         <View style={styles.formGroup}>
           <Text style={[styles.label, { color: theme.colors.text }]}>
-            {t('common.status') || 'Status'}
+            {(t('common.status') || 'Status').toUpperCase()}
           </Text>
           <View style={styles.statusGrid}>
             <StatusButton
@@ -354,13 +356,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 2,
   },
   labelContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 12,
   },
   requiredStar: {
     color: '#EF4444',
@@ -369,42 +372,46 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: '#EF4444',
-    fontSize: 12,
-    marginTop: 4,
-    marginLeft: 4,
+    fontSize: 10,
+    marginTop: 6,
+    letterSpacing: 0.5,
   },
   input: {
     height: 50,
-    borderRadius: 12,
+    borderRadius: 0,
     paddingHorizontal: 16,
-    fontSize: 16,
+    fontSize: 13,
     borderWidth: 1,
   },
   statusGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 12,
   },
   statusButton: {
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 20,
+    borderRadius: 0,
   },
   statusButtonText: {
-    fontSize: 12,
-    fontWeight: 'bold',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   saveButton: {
     height: 56,
-    borderRadius: 28,
+    borderRadius: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 32,
     marginBottom: 40,
   },
   saveButtonText: {
     color: '#FFF',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 13,
+    fontWeight: '700',
+    letterSpacing: 2,
+    textTransform: 'uppercase',
   },
 });

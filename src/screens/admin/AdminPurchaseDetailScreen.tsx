@@ -8,16 +8,11 @@ import {
   ActivityIndicator,
   TextInput,
   Alert,
-  Image,
 } from 'react-native';
-import {
-  useRoute,
-  useNavigation,
-  useFocusEffect,
-} from '@react-navigation/native';
+import { useRoute, useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { purchasesDb, Purchase, OrderStatus, productsDb } from '../../database';
+import { purchasesDb, Purchase, OrderStatus } from '../../database';
 import { GlassHeader } from '../../components/common/GlassHeader';
 import { useCurrency } from '../../utils/currencyUtils';
 
@@ -25,7 +20,6 @@ export const AdminPurchaseDetailScreen = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const route = useRoute<any>();
-  const navigation = useNavigation<any>();
   const { formatPrice } = useCurrency();
   const { purchaseId } = route.params;
 

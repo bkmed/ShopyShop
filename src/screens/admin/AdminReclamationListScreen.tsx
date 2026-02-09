@@ -22,7 +22,7 @@ export const AdminReclamationListScreen = () => {
   const [loading, setLoading] = useState(true);
   const [reclamations, setReclamations] = useState<Reclamation[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [selectedStatus] = useState<string>('all');
 
   const loadData = useCallback(async () => {
     try {

@@ -269,8 +269,6 @@ const CatalogStack = () => {
   );
 };
 
-import { CheckoutScreen } from '../screens/shop/CheckoutScreen';
-
 const CartStack = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();

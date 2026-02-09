@@ -16,14 +16,9 @@ const { width } = Dimensions.get('window');
 interface ProductCardProps {
   product: Product;
   onPress: () => void;
-  onAddToCart?: () => void;
 }
 
-export const ProductCard = ({
-  product,
-  onPress,
-  onAddToCart,
-}: ProductCardProps) => {
+export const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const { theme } = useTheme();
   const { formatPrice } = useCurrency();
 

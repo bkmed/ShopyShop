@@ -26,7 +26,7 @@ export const AdminPurchaseListScreen = () => {
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [stats, setStats] = useState<any>(null);
-  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [selectedStatus] = useState<string>('all');
 
   const loadData = useCallback(async () => {
     try {
