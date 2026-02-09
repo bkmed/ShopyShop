@@ -106,7 +106,6 @@ import { PaymentSelectionScreen } from '../screens/checkout/PaymentSelectionScre
 import { OrderConfirmationScreen } from '../screens/checkout/OrderConfirmationScreen';
 import { AddressAddEditScreen } from '../screens/checkout/AddressAddEditScreen';
 
-
 enableScreens();
 
 import { WebNavigationContext } from './WebNavigationContext';
@@ -507,7 +506,9 @@ const SuppliersStack = () => {
         name="SupplierAddEdit"
         component={SupplierAddEditScreen}
         options={({ route }: any) => ({
-          title: route.params?.supplierId ? t('suppliers.edit') : t('suppliers.add'),
+          title: route.params?.supplierId
+            ? t('suppliers.edit')
+            : t('suppliers.add'),
         })}
       />
       <Stack.Screen
@@ -688,17 +689,23 @@ const AdminReclamationsStack = () => {
       <Stack.Screen
         name="AdminReclamationList"
         component={AdminReclamationListScreen}
-        options={{ title: t('admin.reclamations.title') || 'Reclamation Management' }}
+        options={{
+          title: t('admin.reclamations.title') || 'Reclamation Management',
+        }}
       />
       <Stack.Screen
         name="AdminReclamationDetail"
         component={AdminReclamationDetailScreen}
-        options={{ title: t('admin.reclamations.detail') || 'Reclamation Detail' }}
+        options={{
+          title: t('admin.reclamations.detail') || 'Reclamation Detail',
+        }}
       />
       <Stack.Screen
         name="AdminReclamationAddEdit"
         component={AdminReclamationAddEditScreen}
-        options={{ title: t('admin.reclamations.edit') || 'Reclamation Detail' }}
+        options={{
+          title: t('admin.reclamations.edit') || 'Reclamation Detail',
+        }}
       />
     </Stack.Navigator>
   );
@@ -764,23 +771,25 @@ const useNavigationSections = () => {
 
           // Catalog hidden for Stock Manager
           ...(!isStockManager
-            ? [{
-              key: 'Catalog',
-              label: t('navigation.catalog') || 'Catalog',
-              icon: '🛍️',
-            }]
+            ? [
+                {
+                  key: 'Catalog',
+                  label: t('navigation.catalog') || 'Catalog',
+                  icon: '🛍️',
+                },
+              ]
             : []),
 
           // Categories, Cart only for non-management roles (Users)
           ...(!isManagementRole
             ? [
-              {
-                key: 'Categories',
-                label: t('navigation.categories') || 'Categories',
-                icon: '🗂️',
-              },
-              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-            ]
+                {
+                  key: 'Categories',
+                  label: t('navigation.categories') || 'Categories',
+                  icon: '🗂️',
+                },
+                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+              ]
             : []),
         ],
       },
@@ -790,40 +799,40 @@ const useNavigationSections = () => {
           // Orders and Wishlist only for regular users
           ...(!isManagementRole
             ? [
-              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-              {
-                key: 'Wishlist',
-                label: t('navigation.wishlist') || 'Wishlist',
-                icon: '❤️',
-              },
-            ]
+                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+                {
+                  key: 'Wishlist',
+                  label: t('navigation.wishlist') || 'Wishlist',
+                  icon: '❤️',
+                },
+              ]
             : []),
 
           // Analytics for those with permission
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-              {
-                key: 'Analytics',
-                label: t('navigation.analytics'),
-                icon: '📊',
-              },
-            ]
+                {
+                  key: 'Analytics',
+                  label: t('navigation.analytics'),
+                  icon: '📊',
+                },
+              ]
             : []),
 
           // Purchases and Reclamations for regular users
           ...(!isManagementRole
             ? [
-              {
-                key: 'Purchases',
-                label: t('navigation.purchases') || 'Purchases',
-                icon: '🛍️',
-              },
-              {
-                key: 'Reclamations',
-                label: t('navigation.reclamations') || 'Claims',
-                icon: '⚠️',
-              },
-            ]
+                {
+                  key: 'Purchases',
+                  label: t('navigation.purchases') || 'Purchases',
+                  icon: '🛍️',
+                },
+                {
+                  key: 'Reclamations',
+                  label: t('navigation.reclamations') || 'Claims',
+                  icon: '⚠️',
+                },
+              ]
             : []),
         ],
       },
@@ -1058,9 +1067,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                        borderWidth: 1,
-                        borderColor: theme.colors.primary,
-                      }),
+                          borderWidth: 1,
+                          borderColor: theme.colors.primary,
+                        }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -1137,7 +1146,10 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Purchases" component={PurchasesStack} />
       <Drawer.Screen name="Reclamations" component={ReclamationsStack} />
       <Drawer.Screen name="AdminPurchases" component={AdminPurchasesStack} />
-      <Drawer.Screen name="AdminReclamations" component={AdminReclamationsStack} />
+      <Drawer.Screen
+        name="AdminReclamations"
+        component={AdminReclamationsStack}
+      />
       <Drawer.Screen name="Analytics" component={AnalyticsStack} />
       <Drawer.Screen name="UserManagement" component={UserManagementStack} />
       <Drawer.Screen name="Products" component={ProductsStack} />
@@ -1285,7 +1297,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      { }
+      {}
       <View
         style={
           [
@@ -1299,7 +1311,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        { }
+        {}
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (

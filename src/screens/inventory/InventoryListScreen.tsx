@@ -56,7 +56,8 @@ export const InventoryListScreen = () => {
   );
 
   const filteredProducts = products.filter(
-    p => (selectedCategory === 'all' || p.categoryId === selectedCategory) &&
+    p =>
+      (selectedCategory === 'all' || p.categoryId === selectedCategory) &&
       (p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.id.toLowerCase().includes(searchQuery.toLowerCase())),
   );
@@ -151,10 +152,12 @@ export const InventoryListScreen = () => {
             <Text style={[styles.statLabel, { color: theme.colors.subText }]}>
               {t('inventory.quantity')}
             </Text>
-            <Text style={[
-              styles.statValue,
-              { color: isOutOfStock ? '#EF4444' : theme.colors.text }
-            ]}>
+            <Text
+              style={[
+                styles.statValue,
+                { color: isOutOfStock ? '#EF4444' : theme.colors.text },
+              ]}
+            >
               {stockQuantity}
             </Text>
           </View>
@@ -203,7 +206,7 @@ export const InventoryListScreen = () => {
               backgroundColor: theme.colors.surface,
               color: theme.colors.text,
               borderColor: theme.colors.border,
-            }
+            },
           ]}
           placeholder={t('common.searchPlaceholder')}
           placeholderTextColor={theme.colors.subText}

@@ -45,7 +45,8 @@ export const ProductAddScreen = () => {
     const newErrors: Record<string, string> = {};
     if (!form.name.trim()) newErrors.name = t('common.required');
     if (!form.price.trim()) newErrors.price = t('common.required');
-    else if (isNaN(parseFloat(form.price))) newErrors.price = t('common.invalidAmount');
+    else if (isNaN(parseFloat(form.price)))
+      newErrors.price = t('common.invalidAmount');
 
     if (form.stockQuantity && isNaN(parseInt(form.stockQuantity, 10))) {
       newErrors.stockQuantity = t('common.invalidAmount');
@@ -57,7 +58,10 @@ export const ProductAddScreen = () => {
 
   const handleSave = async () => {
     if (!validate()) {
-      AlertService.showError(toast, t('common.fillRequired') || 'Please fill all required fields correctly');
+      AlertService.showError(
+        toast,
+        t('common.fillRequired') || 'Please fill all required fields correctly',
+      );
       return;
     }
 
@@ -94,7 +98,7 @@ export const ProductAddScreen = () => {
       modal,
       t('common.delete') || 'Delete',
       t('common.confirmDelete') ||
-      'Are you sure you want to delete this product?',
+        'Are you sure you want to delete this product?',
       async () => {
         try {
           if (editingProduct) {
@@ -102,7 +106,7 @@ export const ProductAddScreen = () => {
             AlertService.showSuccess(
               toast,
               t('products.deletedSuccessfully') ||
-              'Product deleted successfully',
+                'Product deleted successfully',
             );
             navigation.goBack();
           }
@@ -117,7 +121,9 @@ export const ProductAddScreen = () => {
 
   const RequiredLabel = ({ label }: { label: string }) => (
     <View style={{ flexDirection: 'row' }}>
-      <Text style={[styles.label, { color: theme.colors.subText }]}>{label}</Text>
+      <Text style={[styles.label, { color: theme.colors.subText }]}>
+        {label}
+      </Text>
       <Text style={{ color: theme.colors.error, marginLeft: 4 }}>*</Text>
     </View>
   );
@@ -188,7 +194,9 @@ export const ProductAddScreen = () => {
                 {
                   backgroundColor: theme.colors.surface,
                   color: theme.colors.text,
-                  borderColor: errors.price ? theme.colors.error : 'transparent',
+                  borderColor: errors.price
+                    ? theme.colors.error
+                    : 'transparent',
                   borderWidth: errors.price ? 1 : 0,
                 },
               ]}
@@ -201,7 +209,9 @@ export const ProductAddScreen = () => {
               keyboardType="decimal-pad"
               placeholderTextColor={theme.colors.subText}
             />
-            {errors.price && <Text style={styles.errorText}>{errors.price}</Text>}
+            {errors.price && (
+              <Text style={styles.errorText}>{errors.price}</Text>
+            )}
           </View>
           <View style={[styles.formGroup, { flex: 1, marginLeft: 8 }]}>
             <Text style={[styles.label, { color: theme.colors.subText }]}>
@@ -213,20 +223,25 @@ export const ProductAddScreen = () => {
                 {
                   backgroundColor: theme.colors.surface,
                   color: theme.colors.text,
-                  borderColor: errors.stockQuantity ? theme.colors.error : 'transparent',
+                  borderColor: errors.stockQuantity
+                    ? theme.colors.error
+                    : 'transparent',
                   borderWidth: errors.stockQuantity ? 1 : 0,
                 },
               ]}
               value={form.stockQuantity}
               onChangeText={text => {
                 setForm({ ...form, stockQuantity: text });
-                if (errors.stockQuantity) setErrors({ ...errors, stockQuantity: '' });
+                if (errors.stockQuantity)
+                  setErrors({ ...errors, stockQuantity: '' });
               }}
               placeholder={t('common.placeholderZero')}
               keyboardType="number-pad"
               placeholderTextColor={theme.colors.subText}
             />
-            {errors.stockQuantity && <Text style={styles.errorText}>{errors.stockQuantity}</Text>}
+            {errors.stockQuantity && (
+              <Text style={styles.errorText}>{errors.stockQuantity}</Text>
+            )}
           </View>
         </View>
 

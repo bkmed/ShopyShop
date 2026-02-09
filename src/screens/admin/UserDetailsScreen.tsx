@@ -66,7 +66,9 @@ export const UserDetailsScreen = () => {
         await usersDb.delete(id);
 
         // Broadcast notification (admin only)
-        const { notificationService } = await import('../../services/notificationService');
+        const { notificationService } = await import(
+          '../../services/notificationService'
+        );
         const { useAuth } = await import('../../context/AuthContext');
         const auth = useAuth();
         if (auth?.user?.role === 'admin') {

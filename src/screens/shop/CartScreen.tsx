@@ -193,7 +193,7 @@ export const CartScreen = () => {
                 borderTopWidth: 1,
               },
               Platform.OS === 'web' &&
-              ({ backdropFilter: 'blur(16px)' } as any),
+                ({ backdropFilter: 'blur(16px)' } as any),
             ]}
           >
             <View style={styles.totalRow}>
@@ -219,9 +219,8 @@ export const CartScreen = () => {
             </TouchableOpacity>
           </View>
         </>
-      )
-      }
-    </View >
+      )}
+    </View>
   );
 };
 

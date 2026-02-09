@@ -38,7 +38,9 @@ export const StockManagerDashboardScreen = () => {
       ]);
 
       const outOfStock = products.filter(p => p.stockQuantity === 0).length;
-      const lowStock = products.filter(p => p.stockQuantity > 0 && p.stockQuantity < 10).length;
+      const lowStock = products.filter(
+        p => p.stockQuantity > 0 && p.stockQuantity < 10,
+      ).length;
 
       setStats({
         outOfStock,

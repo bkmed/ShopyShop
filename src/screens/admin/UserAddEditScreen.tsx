@@ -67,7 +67,9 @@ export const UserAddEditScreen = () => {
         AlertService.showSuccess(toast, t('users.updatedSuccessfully'));
 
         // Broadcast notification (admin only)
-        const { notificationService } = await import('../../services/notificationService');
+        const { notificationService } = await import(
+          '../../services/notificationService'
+        );
         const { useAuth } = await import('../../context/AuthContext');
         const auth = useAuth();
         if (auth?.user?.role === 'admin') {
@@ -93,7 +95,9 @@ export const UserAddEditScreen = () => {
         );
 
         // Broadcast notification (admin only)
-        const { notificationService } = await import('../../services/notificationService');
+        const { notificationService } = await import(
+          '../../services/notificationService'
+        );
         const { useAuth } = await import('../../context/AuthContext');
         const auth = useAuth();
         if (auth?.user?.role === 'admin') {

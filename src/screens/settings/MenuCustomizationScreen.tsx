@@ -24,7 +24,11 @@ const AVAILABLE_MENU_ITEMS = [
   { key: 'Announcements', category: 'communication' },
   { key: 'Chat', category: 'communication' },
   { key: 'Assistant', category: 'communication' },
-  { key: 'Catalog', category: 'shop', restrictedRoles: ['gestionnaire_de_stock'] },
+  {
+    key: 'Catalog',
+    category: 'shop',
+    restrictedRoles: ['gestionnaire_de_stock'],
+  },
   { key: 'Cart', category: 'shop' },
   { key: 'Orders', category: 'shop' },
 ];

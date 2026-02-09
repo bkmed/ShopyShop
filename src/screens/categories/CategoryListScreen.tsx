@@ -101,7 +101,10 @@ export const CategoryListScreen = () => {
         </Text>
         {rbacService.isAdmin(user) && (
           <TouchableOpacity
-            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            style={[
+              styles.addButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
             onPress={() => navigation.navigate('CategoryAdd')}
           >
             <Text style={styles.addButtonText}>+ {t('common.add')}</Text>

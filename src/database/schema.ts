@@ -214,7 +214,11 @@ export interface SupplierProduct {
   updatedAt: string;
 }
 
-export type StockReceptionStatus = 'pending' | 'in_progress' | 'completed' | 'cancelled';
+export type StockReceptionStatus =
+  | 'pending'
+  | 'in_progress'
+  | 'completed'
+  | 'cancelled';
 
 export interface StockReceptionItem {
   productId: string;
@@ -241,7 +245,12 @@ export interface StockReception {
   updatedAt: string;
 }
 
-export type PickPackStatus = 'pending' | 'picking' | 'packing' | 'ready_to_ship' | 'shipped';
+export type PickPackStatus =
+  | 'pending'
+  | 'picking'
+  | 'packing'
+  | 'ready_to_ship'
+  | 'shipped';
 
 export interface PickPackItem {
   productId: string;
