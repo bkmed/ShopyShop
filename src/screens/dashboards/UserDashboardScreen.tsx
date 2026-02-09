@@ -1,3 +1,4 @@
+```
 import React, { useState, useCallback, useContext } from 'react';
 import {
   Platform,
@@ -6,7 +7,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
   Image,
   Dimensions,
   ImageBackground,
@@ -27,7 +27,6 @@ const { width, height } = Dimensions.get('window');
 
 export const UserDashboardScreen = () => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
   const { user } = useAuth();
   const navigation = useNavigation<any>();
   const { setActiveTab } = useContext(WebNavigationContext);

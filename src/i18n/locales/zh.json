@@ -783,7 +783,12 @@
     "updated": "供应商更新成功",
     "deleted": "供应商删除成功",
     "deleteConfirm": "您确定要删除 {{name}} 吗？",
-    "preferred": "首选"
+    "preferred": "首选",
+    "linkProduct": "关联产品",
+    "selectProduct": "选择产品",
+    "supplierPrice": "供应商价格",
+    "supplierSKU": "供应商SKU",
+    "productLinked": "产品关联成功"
   },
   "stockReception": {
     "title": "库存接收",

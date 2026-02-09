@@ -147,7 +147,16 @@ export const SupplierDetailScreen = () => {
                     style={[styles.editButton, { backgroundColor: theme.colors.primary }]}
                     onPress={() => navigation.navigate('SupplierAddEdit', { supplierId: supplier.id })}
                 >
-                    <Text style={styles.editButtonText}>{t('common.edit')}</Text>
+                    <Text style={styles.editButtonText}>{t('common.edit') || 'EDIT'}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={[styles.manageButton, { borderColor: theme.colors.text }]}
+                    onPress={() => navigation.navigate('SupplierProductList', { supplierId: supplier.id })}
+                >
+                    <Text style={[styles.manageButtonText, { color: theme.colors.text }]}>
+                        {t('suppliers.manageProducts') || 'MANAGE PRODUCTS'}
+                    </Text>
                 </TouchableOpacity>
             </View>
 
@@ -196,45 +205,61 @@ const styles = StyleSheet.create({
     },
     card: {
         margin: 16,
-        borderRadius: 16,
-        padding: 20,
+        padding: 24,
+        borderWidth: 1,
+        borderColor: '#E5E5E5',
+        backgroundColor: '#FFF',
+        marginBottom: 0,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 24,
     },
     name: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
         flex: 1,
     },
     badge: {
         paddingHorizontal: 12,
         paddingVertical: 6,
-        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'transparent',
     },
     badgeText: {
-        fontSize: 12,
-        fontWeight: '600',
+        fontSize: 10,
+        fontWeight: '700',
         textTransform: 'uppercase',
+        letterSpacing: 1,
     },
     section: {
-        marginBottom: 20,
+        marginBottom: 24,
     },
     sectionTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 12,
+        fontSize: 14,
+        fontWeight: '700',
+        marginBottom: 16,
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+        borderBottomWidth: 1,
+        borderBottomColor: '#000',
+        paddingBottom: 8,
     },
     infoRow: {
         flexDirection: 'row',
-        marginBottom: 8,
+        marginBottom: 12,
+        alignItems: 'center',
     },
     infoLabel: {
-        fontSize: 14,
+        fontSize: 12,
+        fontWeight: '600',
         width: 120,
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
     },
     infoValue: {
         fontSize: 14,
@@ -242,51 +267,69 @@ const styles = StyleSheet.create({
     },
     notes: {
         fontSize: 14,
-        lineHeight: 20,
+        lineHeight: 22,
     },
     editButton: {
-        height: 48,
-        borderRadius: 12,
+        height: 56,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 8,
+        backgroundColor: '#000',
     },
     editButtonText: {
         color: '#FFF',
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 13,
+        fontWeight: '700',
+        letterSpacing: 2,
+        textTransform: 'uppercase',
+    },
+    manageButton: {
+        height: 56,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 16,
+        borderWidth: 1,
+    },
+    manageButtonText: {
+        fontSize: 13,
+        fontWeight: '700',
+        letterSpacing: 2,
+        textTransform: 'uppercase',
     },
     productItem: {
-        paddingVertical: 12,
+        paddingVertical: 16,
         borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
+        borderBottomColor: '#F0F0F0',
     },
     productName: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '600',
-        marginBottom: 4,
+        marginBottom: 8,
+        textTransform: 'uppercase',
     },
     productInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 8,
+        justifyContent: 'space-between',
     },
     productPrice: {
         fontSize: 14,
-        fontWeight: '600',
+        fontWeight: '700',
     },
     preferredBadge: {
         paddingHorizontal: 8,
         paddingVertical: 4,
-        borderRadius: 6,
+        borderRadius: 0,
     },
     preferredText: {
-        fontSize: 12,
-        fontWeight: '600',
+        fontSize: 10,
+        fontWeight: '700',
+        textTransform: 'uppercase',
     },
     emptyText: {
         fontSize: 14,
         textAlign: 'center',
-        paddingVertical: 20,
+        paddingVertical: 32,
+        fontStyle: 'italic',
     },
 });

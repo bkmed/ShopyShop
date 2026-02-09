@@ -783,7 +783,12 @@
     "updated": "Lieferant erfolgreich aktualisiert",
     "deleted": "Lieferant erfolgreich gelöscht",
     "deleteConfirm": "Sind Sie sicher, dass Sie {{name}} löschen möchten?",
-    "preferred": "Bevorzugt"
+    "preferred": "Bevorzugt",
+    "linkProduct": "Produkt verknüpfen",
+    "selectProduct": "Produkt auswählen",
+    "supplierPrice": "Lieferantenpreis",
+    "supplierSKU": "Lieferanten-SKU",
+    "productLinked": "Produkt erfolgreich verknüpft"
   },
   "stockReception": {
     "title": "Wareneingang",

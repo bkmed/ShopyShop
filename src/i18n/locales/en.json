@@ -783,7 +783,12 @@
     "updated": "Supplier updated successfully",
     "deleted": "Supplier deleted successfully",
     "deleteConfirm": "Are you sure you want to delete {{name}}?",
-    "preferred": "Preferred"
+    "preferred": "Preferred",
+    "linkProduct": "Link Product",
+    "selectProduct": "Select Product",
+    "supplierPrice": "Supplier Price",
+    "supplierSKU": "Supplier SKU",
+    "productLinked": "Product linked successfully"
   },
   "stockReception": {
     "title": "Stock Reception",

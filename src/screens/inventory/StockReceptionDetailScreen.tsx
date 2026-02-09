@@ -12,7 +12,7 @@ import {
 import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
-import { stockReceptionDb, productsDb, inventoryDb, StockReception, StockReceptionItem } from '../../database';
+import { stockReceptionDb, productsDb, inventoryDb, StockReception } from '../../database';
 import { GlassHeader } from '../../components/common/GlassHeader';
 import { useAuth } from '../../context/AuthContext';
 

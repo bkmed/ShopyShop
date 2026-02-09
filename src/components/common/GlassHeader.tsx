@@ -25,6 +25,7 @@ interface GlassHeaderProps {
   showBack?: boolean;
   onBackPress?: () => void;
   onProfilePress?: () => void;
+  rightElement?: React.ReactNode;
 }
 
 const createStyles = (theme: Theme) =>
@@ -178,6 +179,7 @@ export const GlassHeader = ({
   showBack,
   onBackPress,
   onProfilePress,
+  rightElement,
 }: GlassHeaderProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
@@ -264,6 +266,7 @@ export const GlassHeader = ({
       </View>
 
       <View style={styles.rightSection}>
+        {rightElement}
         {onSearchPress && (
           <TouchableOpacity style={styles.iconButton} onPress={onSearchPress}>
             <Text style={{ fontSize: 20 }}>🔍</Text>

@@ -783,7 +783,12 @@
     "updated": "تم تحديث المورد بنجاح",
     "deleted": "تم حذف المورد بنجاح",
     "deleteConfirm": "هل أنت متأكد أنك تريد حذف {{name}}؟",
-    "preferred": "المفضل"
+    "preferred": "مفضل",
+    "linkProduct": "ربط المنتج",
+    "selectProduct": "اختر المنتج",
+    "supplierPrice": "سعر المورد",
+    "supplierSKU": "رمز المورد (SKU)",
+    "productLinked": "تم ربط المنتج بنجاح"
   },
   "stockReception": {
     "title": "استلام المخزون",

@@ -783,7 +783,12 @@
     "updated": "Fournisseur mis à jour avec succès",
     "deleted": "Fournisseur supprimé avec succès",
     "deleteConfirm": "Êtes-vous sûr de vouloir supprimer {{name}} ?",
-    "preferred": "Préféré"
+    "preferred": "Préféré",
+    "linkProduct": "Lier un produit",
+    "selectProduct": "Sélectionner un produit",
+    "supplierPrice": "Prix fournisseur",
+    "supplierSKU": "SKU fournisseur",
+    "productLinked": "Produit lié avec succès"
   },
   "stockReception": {
     "title": "Réception de Stock",

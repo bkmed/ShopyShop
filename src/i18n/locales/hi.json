@@ -783,7 +783,12 @@
     "updated": "आपूर्तिकर्ता सफलतापूर्वक अपडेट किया गया",
     "deleted": "आपूर्तिकर्ता सफलतापूर्वक हटा दिया गया",
     "deleteConfirm": "क्या आप वाकई {{name}} को हटाना चाहते हैं?",
-    "preferred": "पसंदीदा"
+    "preferred": "पसंदीदा",
+    "linkProduct": "उत्पाद लिंक करें",
+    "selectProduct": "उत्पाद चुनें",
+    "supplierPrice": "आपूर्तिकर्ता मूल्य",
+    "supplierSKU": "आपूर्तिकर्ता SKU",
+    "productLinked": "उत्पाद सफलतापूर्वक लिंक किया गया"
   },
   "stockReception": {
     "title": "स्टॉक प्राप्ति (Stock Reception)",

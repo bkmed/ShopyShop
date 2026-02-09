@@ -783,7 +783,12 @@
     "updated": "Proveedor actualizado exitosamente",
     "deleted": "Proveedor eliminado exitosamente",
     "deleteConfirm": "¿Está seguro de que desea eliminar {{name}}?",
-    "preferred": "Preferido"
+    "preferred": "Preferido",
+    "linkProduct": "Vincular producto",
+    "selectProduct": "Seleccionar producto",
+    "supplierPrice": "Precio de proveedor",
+    "supplierSKU": "SKU de proveedor",
+    "productLinked": "Producto vinculado con éxito"
   },
   "stockReception": {
     "title": "Recepción de Stock",

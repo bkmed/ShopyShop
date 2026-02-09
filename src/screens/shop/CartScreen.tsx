@@ -14,7 +14,6 @@ import { useContext } from 'react';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useModal } from '../../context/ModalContext';
-import { AlertService } from '../../services/alertService';
 import { useSelector, useDispatch } from 'react-redux';
 // import { RootState } from '../../store';
 import {
