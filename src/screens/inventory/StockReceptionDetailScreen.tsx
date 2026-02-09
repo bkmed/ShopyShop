@@ -135,6 +135,28 @@ export const StockReceptionDetailScreen = () => {
     >
       <GlassHeader
         title={reception.referenceNumber || t('stockReception.detail')}
+        showBack
+        rightElement={
+          isEditable && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('StockReceptionAddEdit', {
+                  receptionId: reception.id,
+                })
+              }
+            >
+              <Text
+                style={{
+                  color: theme.colors.primary,
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                }}
+              >
+                {t('common.edit') || 'EDIT'}
+              </Text>
+            </TouchableOpacity>
+          )
+        }
       />
 
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -179,6 +201,9 @@ export const StockReceptionDetailScreen = () => {
           >
             <Text style={[styles.itemName, { color: theme.colors.text }]}>
               {item.productName}
+            </Text>
+            <Text style={[styles.itemSku, { color: theme.colors.subText, fontSize: 12, marginBottom: 8 }]}>
+              {item.sku}
             </Text>
             <View style={styles.itemRow}>
               <View style={{ flex: 1 }}>
@@ -299,6 +324,10 @@ const styles = StyleSheet.create({
   itemValue: {
     fontSize: 16,
     fontWeight: '600',
+  },
+  itemSku: {
+    fontSize: 12,
+    marginBottom: 8,
   },
   qtyInput: {
     width: 80,

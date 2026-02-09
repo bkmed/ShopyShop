@@ -79,10 +79,12 @@ import { SupplierProductListScreen } from '../screens/suppliers/SupplierProductL
 // Stock Reception Screens
 import { StockReceptionListScreen } from '../screens/inventory/StockReceptionListScreen';
 import { StockReceptionDetailScreen } from '../screens/inventory/StockReceptionDetailScreen';
+import { StockReceptionAddEditScreen } from '../screens/inventory/StockReceptionAddEditScreen';
 
 // Pick & Pack Screens
 import { PickPackListScreen } from '../screens/inventory/PickPackListScreen';
 import { PickPackDetailScreen } from '../screens/inventory/PickPackDetailScreen';
+import { PickPackAddScreen } from '../screens/inventory/PickPackAddScreen';
 
 // Stock Movement Screen
 import { StockMovementScreen } from '../screens/inventory/StockMovementScreen';
@@ -466,6 +468,15 @@ const InventoryStack = () => {
         options={{ title: t('stockReception.detail') || 'Reception Detail' }}
       />
       <Stack.Screen
+        name="StockReceptionAddEdit"
+        component={StockReceptionAddEditScreen}
+        options={({ route }: any) => ({
+          title: route.params?.receptionId
+            ? t('stockReception.edit') || 'Edit Reception'
+            : t('stockReception.add') || 'New Reception',
+        })}
+      />
+      <Stack.Screen
         name="PickPackList"
         component={PickPackListScreen}
         options={{ title: t('navigation.pickPack') || 'Pick & Pack' }}
@@ -474,6 +485,11 @@ const InventoryStack = () => {
         name="PickPackDetail"
         component={PickPackDetailScreen}
         options={{ title: t('pickPack.detail') || 'Pick & Pack Detail' }}
+      />
+      <Stack.Screen
+        name="PickPackAdd"
+        component={PickPackAddScreen}
+        options={{ title: t('pickPack.add') || 'New Picking Task' }}
       />
       <Stack.Screen
         name="StockMovement"
@@ -770,24 +786,24 @@ const useNavigationSections = () => {
           // Catalog hidden for Stock Manager
           ...(!isStockManager
             ? [
-                {
-                  key: 'Catalog',
-                  label: t('navigation.catalog') || 'Catalog',
-                  icon: '🛍️',
-                },
-              ]
+              {
+                key: 'Catalog',
+                label: t('navigation.catalog') || 'Catalog',
+                icon: '🛍️',
+              },
+            ]
             : []),
 
           // Categories, Cart only for non-management roles (Users)
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Categories',
-                  label: t('navigation.categories') || 'Categories',
-                  icon: '🗂️',
-                },
-                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-              ]
+              {
+                key: 'Categories',
+                label: t('navigation.categories') || 'Categories',
+                icon: '🗂️',
+              },
+              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+            ]
             : []),
         ],
       },
@@ -797,40 +813,40 @@ const useNavigationSections = () => {
           // Orders and Wishlist only for regular users
           ...(!isManagementRole
             ? [
-                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-                {
-                  key: 'Wishlist',
-                  label: t('navigation.wishlist') || 'Wishlist',
-                  icon: '❤️',
-                },
-              ]
+              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+              {
+                key: 'Wishlist',
+                label: t('navigation.wishlist') || 'Wishlist',
+                icon: '❤️',
+              },
+            ]
             : []),
 
           // Analytics for those with permission
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
 
           // Purchases and Reclamations for regular users
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Purchases',
-                  label: t('navigation.purchases') || 'Purchases',
-                  icon: '🛍️',
-                },
-                {
-                  key: 'Reclamations',
-                  label: t('navigation.reclamations') || 'Claims',
-                  icon: '⚠️',
-                },
-              ]
+              {
+                key: 'Purchases',
+                label: t('navigation.purchases') || 'Purchases',
+                icon: '🛍️',
+              },
+              {
+                key: 'Reclamations',
+                label: t('navigation.reclamations') || 'Claims',
+                icon: '⚠️',
+              },
+            ]
             : []),
         ],
       },
@@ -1065,9 +1081,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
                     onPress={() => navigation.navigate(item.key)}
                   >
@@ -1295,7 +1311,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -1309,7 +1325,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (

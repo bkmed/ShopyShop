@@ -19,7 +19,17 @@
     "manageProducts": "إدارة المنتجات",
     "manageCategories": "إدارة الفئات",
     "viewAllOrders": "عرض جميع الطلبات",
-    "globalAnalytics": "التحليلات العالمية"
+    "globalAnalytics": "التحليلات العالمية",
+    "purchases": {
+      "title": "إدارة المشتريات",
+      "total": "الإجمالي",
+      "revenue": "إجمالي الإيرادات",
+      "noPurchases": "لم يتم العثور على مشتريات",
+      "edit": "تعديل الشراء"
+    },
+    "reclamations": {
+      "noReclamations": "لم يتم العثور على مطالبات"
+    }
   },
   "announcements": {
     "addAnnouncement": "إضافة إعلان",
@@ -93,8 +103,11 @@
     "addNew": "إضافة عملة جديدة",
     "manageTitle": "إدارة العملات",
     "codePlaceholder": "SAR",
-    "symbolPlaceholder": "ر.س",
-    "ratePlaceholder": "1.0"
+    "symbolPlaceholder": "€",
+    "ratePlaceholder": "1.0",
+    "USD": "USD",
+    "EUR": "EUR",
+    "TND": "TND"
   },
   "categories": {
     "title": "الفئات",
@@ -200,9 +213,13 @@
     "overnightDelivery": "التوصيل خلال ليلة وضحاها",
     "storePickup": "الاستلام من المتجر",
     "free": "مجاني",
-    "confirmationSent": "تم إرسال رسالة تأكيد إلكترونية إلى",
-    "continueShopping": "مواصلة التسوق",
-    "viewOrders": "عرض طلباتي"
+    "confirmationSent": "تم إرسال بريد إلكتروني للتأكيد إلى",
+    "continueShopping": "استمرار التسوق",
+    "viewOrders": "عرض طلباتي",
+    "delivery": "التوصيل",
+    "chooseDelivery": "اختر طريقة التوصيل",
+    "addnewaddress": "إضافة عنوان جديد",
+    "address": "العنوان"
   },
   "dashboard": {
     "hi": "مرحباً",
@@ -298,8 +315,12 @@
     "viewAll": "عرض الكل",
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
-    "dateFormatPlaceholder": "DD-MM-YYYY",
-    "noResult": "لا توجد نتائج"
+    "dateFormatPlaceholder": "YYYY-MM-DD",
+    "noResult": "لم يتم العثور على نتائج",
+    "Continue": "استمرار",
+    "fillallfields": "يرجى ملء جميع الحقول",
+    "orderId": "معرف الطلب",
+    "namePlaceholder": "أدخل الاسم..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -415,8 +436,15 @@
     "pending": "قيد الانتظار",
     "processing": "جاري المعالجة",
     "shipped": "تم الشحن",
-    "delivered": "تم التسليم",
-    "cancelled": "ملغى",
+    "delivered": "تم التوصيل",
+    "cancelled": "ملغي",
+    "status": {
+      "pending": "قيد الانتظار",
+      "processing": "قيد المعالجة",
+      "shipped": "تم الشحن",
+      "delivered": "تم التوصيل",
+      "cancelled": "ملغي"
+    },
     "shippingInfo": "معلومات الشحن",
     "estimatedDelivery": "وقت التسليم المتوقع",
     "items": "العناصر",
@@ -466,8 +494,13 @@
     "add": "شكوى جديدة",
     "detail": "تفاصيل الشكوى",
     "reason": "السبب",
-    "status": "الحالة",
-    "submitted": "تم تقديمها",
+    "status": {
+      "pending": "قيد الانتظار",
+      "in_progress": "قيد التنفيذ",
+      "resolved": "تم الحل",
+      "rejected": "مرفوض"
+    },
+    "submitted": "تم التقديم",
     "description": "Description",
     "orderId": "رقم الطلب",
     "orderIdPlaceholder": "TLB-001",
@@ -867,5 +900,13 @@
   },
   "session_expired": "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
   "T": "T",
-  "window": "نافذة"
+  "window": "نافذة",
+  "COMMON": {
+    "ORDERID": "معرف الطلب",
+    "USER": "المستخدم",
+    "CURRENCY": "العملة",
+    "STATUS": "الحالة",
+    "AMOUNT": "المبلغ"
+  },
+  "USD": "USD"
 }

@@ -19,7 +19,17 @@
     "manageProducts": "Manage Products",
     "manageCategories": "Manage Categories",
     "viewAllOrders": "View All Orders",
-    "globalAnalytics": "Global Analytics"
+    "globalAnalytics": "Global Analytics",
+    "purchases": {
+      "title": "Purchases",
+      "total": "Total",
+      "revenue": "Revenue",
+      "noPurchases": "No purchases found",
+      "edit": "Edit Purchase"
+    },
+    "reclamations": {
+      "noReclamations": "No reclamations found"
+    }
   },
   "announcements": {
     "addAnnouncement": "Add Announcement",
@@ -94,7 +104,10 @@
     "manageTitle": "Currency Management",
     "codePlaceholder": "EUR",
     "symbolPlaceholder": "€",
-    "ratePlaceholder": "1.0"
+    "ratePlaceholder": "1.0",
+    "USD": "USD",
+    "EUR": "EUR",
+    "TND": "TND"
   },
   "categories": {
     "title": "Categories",
@@ -202,7 +215,11 @@
     "free": "Free",
     "confirmationSent": "A confirmation email has been sent to",
     "continueShopping": "Continue Shopping",
-    "viewOrders": "View My Orders"
+    "viewOrders": "View My Orders",
+    "delivery": "Delivery",
+    "chooseDelivery": "Choose Delivery Method",
+    "addnewaddress": "Add New Address",
+    "address": "Address"
   },
   "dashboard": {
     "hi": "Hi",
@@ -299,7 +316,11 @@
     "viewAll": "View All",
     "placeholderAmount": "0.00",
     "dateFormatPlaceholder": "YYYY-MM-DD",
-    "noResult": "No result found"
+    "noResult": "No result found",
+    "Continue": "Continue",
+    "fillallfields": "Please fill all fields",
+    "orderId": "Order ID",
+    "namePlaceholder": "Enter name..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -417,6 +438,13 @@
     "shipped": "Shipped",
     "delivered": "Delivered",
     "cancelled": "Cancelled",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
     "shippingInfo": "Shipping Information",
     "estimatedDelivery": "Estimated Delivery",
     "items": "Items",
@@ -466,7 +494,12 @@
     "add": "New Claim",
     "detail": "Claim Detail",
     "reason": "Reason",
-    "status": "Status",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "resolved": "Resolved",
+      "rejected": "Rejected"
+    },
     "submitted": "Submitted",
     "description": "Description",
     "orderId": "Order ID",
@@ -867,5 +900,13 @@
   },
   "session_expired": "Session expired. Please log in again.",
   "T": "T",
-  "window": "Window"
+  "window": "Window",
+  "COMMON": {
+    "ORDERID": "Order ID",
+    "USER": "User",
+    "CURRENCY": "Currency",
+    "STATUS": "Status",
+    "AMOUNT": "Amount"
+  },
+  "USD": "USD"
 }

@@ -30,6 +30,7 @@ export const AdminReclamationAddEditScreen = () => {
   const [reason, setReason] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState<Reclamation['status']>('pending');
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (isEditing) {
@@ -64,7 +65,13 @@ export const AdminReclamationAddEditScreen = () => {
   };
 
   const handleSave = async () => {
-    if (!orderId || !reason || !description) {
+    const newErrors: Record<string, string> = {};
+    if (!orderId.trim()) newErrors.orderId = t('common.required');
+    if (!reason.trim()) newErrors.reason = t('common.required');
+    if (!description.trim()) newErrors.description = t('common.required');
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       Alert.alert(
         t('common.error'),
         t('common.required') || 'Please fill all required fields',
@@ -139,6 +146,15 @@ export const AdminReclamationAddEditScreen = () => {
     </TouchableOpacity>
   );
 
+  const RequiredLabel = ({ label }: { label: string }) => (
+    <View style={{ flexDirection: 'row', marginBottom: 8 }}>
+      <Text style={[styles.label, { color: theme.colors.text }]}>
+        {label}
+      </Text>
+      <Text style={{ color: '#EF4444', marginLeft: 4 }}>*</Text>
+    </View>
+  );
+
   if (initialLoading) {
     return (
       <View
@@ -164,66 +180,80 @@ export const AdminReclamationAddEditScreen = () => {
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.text }]}>
-            {t('common.orderId') || 'Order ID'}
-          </Text>
+          <RequiredLabel label={t('common.orderId') || 'Order ID'} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
-                borderColor: theme.colors.border,
+                borderColor: errors.orderId ? '#EF4444' : theme.colors.border,
               },
             ]}
             value={orderId}
-            onChangeText={setOrderId}
+            onChangeText={text => {
+              setOrderId(text);
+              if (errors.orderId) setErrors({ ...errors, orderId: '' });
+            }}
             placeholder="ORD-001"
             placeholderTextColor={theme.colors.subText}
           />
+          {errors.orderId && (
+            <Text style={styles.errorText}>{errors.orderId}</Text>
+          )}
         </View>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.text }]}>
-            {t('reclamations.reason')}
-          </Text>
+          <RequiredLabel label={t('reclamations.reason')} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
-                borderColor: theme.colors.border,
+                borderColor: errors.reason ? '#EF4444' : theme.colors.border,
               },
             ]}
             value={reason}
-            onChangeText={setReason}
+            onChangeText={text => {
+              setReason(text);
+              if (errors.reason) setErrors({ ...errors, reason: '' });
+            }}
             placeholder={t('reclamations.reasonPlaceholder') || 'Enter reason'}
             placeholderTextColor={theme.colors.subText}
           />
+          {errors.reason && (
+            <Text style={styles.errorText}>{errors.reason}</Text>
+          )}
         </View>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.text }]}>
-            {t('reclamations.description')}
-          </Text>
+          <RequiredLabel label={t('reclamations.description')} />
           <TextInput
             style={[
               styles.textArea,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
-                borderColor: theme.colors.border,
+                borderColor: errors.description
+                  ? '#EF4444'
+                  : theme.colors.border,
               },
             ]}
             value={description}
-            onChangeText={setDescription}
+            onChangeText={text => {
+              setDescription(text);
+              if (errors.description) setErrors({ ...errors, description: '' });
+            }}
             placeholder={t('reclamations.descriptionPlaceholder')}
             placeholderTextColor={theme.colors.subText}
             multiline
             numberOfLines={4}
             textAlignVertical="top"
           />
+          {errors.description && (
+            <Text style={styles.errorText}>{errors.description}</Text>
+          )}
         </View>
 
         <View style={styles.formGroup}>
@@ -331,5 +361,10 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginTop: 4,
   },
 });

@@ -19,7 +19,17 @@
     "manageProducts": "管理产品",
     "manageCategories": "管理类别",
     "viewAllOrders": "查看所有订单",
-    "globalAnalytics": "全局分析"
+    "globalAnalytics": "全局分析",
+    "purchases": {
+      "title": "采购管理",
+      "total": "总计",
+      "revenue": "总收入",
+      "noPurchases": "未找到采购",
+      "edit": "编辑采购"
+    },
+    "reclamations": {
+      "noReclamations": "未找到投诉"
+    }
   },
   "announcements": {
     "addAnnouncement": "添加公告",
@@ -202,7 +212,11 @@
     "free": "免费",
     "confirmationSent": "确认邮件已发送至",
     "continueShopping": "继续购物",
-    "viewOrders": "查看我的订单"
+    "viewOrders": "查看我的订单",
+    "delivery": "配送",
+    "chooseDelivery": "选择配送方式",
+    "addnewaddress": "添加新地址",
+    "address": "地址"
   },
   "dashboard": {
     "hi": "您好",
@@ -299,7 +313,11 @@
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
     "dateFormatPlaceholder": "YYYY-MM-DD",
-    "noResult": "未找到结果"
+    "noResult": "未找到结果",
+    "Continue": "继续",
+    "fillallfields": "请填写所有字段",
+    "orderId": "订单号",
+    "namePlaceholder": "输入姓名..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -417,6 +435,13 @@
     "shipped": "已发货",
     "delivered": "已送达",
     "cancelled": "已取消",
+    "status": {
+      "pending": "待处理",
+      "processing": "处理中",
+      "shipped": "已出货",
+      "delivered": "已送达",
+      "cancelled": "已取消"
+    },
     "shippingInfo": "配送信息",
     "estimatedDelivery": "预计送达时间",
     "items": "商品",
@@ -466,7 +491,12 @@
     "add": "新投诉",
     "detail": "投诉详情",
     "reason": "原因",
-    "status": "状态",
+    "status": {
+      "pending": "待处理",
+      "in_progress": "进行中",
+      "resolved": "已解决",
+      "rejected": "已驳回"
+    },
     "submitted": "已提交",
     "description": "描述",
     "orderId": "订单 ID",
@@ -867,5 +897,13 @@
   },
   "session_expired": "会话已过期，请重新登录。",
   "T": "T",
-  "window": "窗口"
+  "window": "窗口",
+  "COMMON": {
+    "ORDERID": "订单号",
+    "USER": "用户",
+    "CURRENCY": "货币",
+    "STATUS": "状态",
+    "AMOUNT": "金额"
+  },
+  "USD": "USD"
 }

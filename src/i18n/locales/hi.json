@@ -19,7 +19,17 @@
     "manageProducts": "उत्पादों का प्रबंधन करें",
     "manageCategories": "श्रेणियों का प्रबंधन करें",
     "viewAllOrders": "सभी ऑर्डर देखें",
-    "globalAnalytics": "वैश्विक विश्लेषण"
+    "globalAnalytics": "वैश्विक विश्लेषण",
+    "purchases": {
+      "title": "खरीद प्रबंधन",
+      "total": "कुल",
+      "revenue": "कुल राजस्व",
+      "noPurchases": "कोई खरीद नहीं मिली",
+      "edit": "खरीद संपादित करें"
+    },
+    "reclamations": {
+      "noReclamations": "कोई शिकायत नहीं मिली"
+    }
   },
   "announcements": {
     "addAnnouncement": "घोषणा जोड़ें",
@@ -94,7 +104,10 @@
     "manageTitle": "मुद्रा प्रबंधन",
     "codePlaceholder": "INR",
     "symbolPlaceholder": "₹",
-    "ratePlaceholder": "1.0"
+    "ratePlaceholder": "1.0",
+    "USD": "USD",
+    "EUR": "EUR",
+    "TND": "TND"
   },
   "categories": {
     "title": "श्रेणियां",
@@ -202,7 +215,11 @@
     "free": "नि: शुल्क",
     "confirmationSent": "एक पुष्टिकरण ईमेल भेजा गया है",
     "continueShopping": "खरीदारी जारी रखें",
-    "viewOrders": "मेरे ऑर्डर देखें"
+    "viewOrders": "मेरे आदेश देखें",
+    "delivery": "डिलीवरी",
+    "chooseDelivery": "डिलीवरी विधि चुनें",
+    "addnewaddress": "नया पता जोड़ें",
+    "address": "पता"
   },
   "dashboard": {
     "hi": "नमस्ते",
@@ -299,7 +316,11 @@
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
     "dateFormatPlaceholder": "DD-MM-YYYY",
-    "noResult": "कोई परिणाम नहीं मिला"
+    "noResult": "कोई परिणाम नहीं मिला",
+    "Continue": "जारी रखें",
+    "fillallfields": "कृपया सभी फ़ील्ड भरें",
+    "orderId": "ऑर्डर आईडी",
+    "namePlaceholder": "नाम दर्ज करें..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -417,6 +438,13 @@
     "shipped": "शिप किया गया",
     "delivered": "डिलीवर किया गया",
     "cancelled": "रद्द",
+    "status": {
+      "pending": "लंबित",
+      "processing": "प्रसंस्करण",
+      "shipped": "भेज दिया गया",
+      "delivered": "वितरित",
+      "cancelled": "रद्द"
+    },
     "shippingInfo": "शिपिंग जानकारी",
     "estimatedDelivery": "अनुमानित वितरण",
     "items": "आइटम",
@@ -466,7 +494,12 @@
     "add": "नई शिकायत",
     "detail": "शिकायत विवरण",
     "reason": "कारण",
-    "status": "स्थिति",
+    "status": {
+      "pending": "लंबित",
+      "in_progress": "प्रगति में",
+      "resolved": "हल किया गया",
+      "rejected": "अस्वीकार कर दिया गया"
+    },
     "submitted": "जमा किया गया",
     "description": "विवरण",
     "orderId": "ऑर्डर आईडी",
@@ -867,5 +900,13 @@
   },
   "session_expired": "सत्र समाप्त हो गया। कृपया फिर से लॉग इन करें।",
   "T": "T",
-  "window": "विंडो"
+  "window": "खिड़की",
+  "COMMON": {
+    "ORDERID": "ऑर्डर आईडी",
+    "USER": "उपयोगकर्ता",
+    "CURRENCY": "मुद्रा",
+    "STATUS": "स्थिति",
+    "AMOUNT": "राशि"
+  },
+  "USD": "USD"
 }

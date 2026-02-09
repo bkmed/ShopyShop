@@ -19,7 +19,17 @@
     "manageProducts": "Gestionar productos",
     "manageCategories": "Gestionar categorías",
     "viewAllOrders": "Ver todos los pedidos",
-    "globalAnalytics": "Analítica global"
+    "globalAnalytics": "Análisis Global",
+    "purchases": {
+      "title": "Gestión de Compras",
+      "total": "Total",
+      "revenue": "Ingresos Totales",
+      "noPurchases": "No se encontraron compras",
+      "edit": "Editar Compra"
+    },
+    "reclamations": {
+      "noReclamations": "No se encontraron reclamaciones"
+    }
   },
   "announcements": {
     "addAnnouncement": "Añadir anuncio",
@@ -94,7 +104,10 @@
     "manageTitle": "Gestión de monedas",
     "codePlaceholder": "EUR",
     "symbolPlaceholder": "€",
-    "ratePlaceholder": "1.0"
+    "ratePlaceholder": "1.0",
+    "USD": "USD",
+    "EUR": "EUR",
+    "TND": "TND"
   },
   "categories": {
     "title": "Categorías",
@@ -200,9 +213,13 @@
     "overnightDelivery": "Entrega al día siguiente",
     "storePickup": "Recogida en tienda",
     "free": "Gratis",
-    "confirmationSent": "Se ha enviado un correo de confirmación a",
+    "confirmationSent": "Se ha enviado un correo electrónico de confirmación a",
     "continueShopping": "Continuar comprando",
-    "viewOrders": "Ver mis pedidos"
+    "viewOrders": "Ver mis pedidos",
+    "delivery": "Entrega",
+    "chooseDelivery": "Elija el método de entrega",
+    "addnewaddress": "Agregar nueva dirección",
+    "address": "Dirección"
   },
   "dashboard": {
     "hi": "Hola",
@@ -299,7 +316,11 @@
     "placeholderZero": "0",
     "placeholderAmount": "0.00",
     "dateFormatPlaceholder": "AAAA-MM-DD",
-    "noResult": "No se han encontrado resultados"
+    "noResult": "No se encontraron resultados",
+    "Continue": "Continuar",
+    "fillallfields": "Por favor, complete todos los campos",
+    "orderId": "ID de pedido",
+    "namePlaceholder": "Ingrese el nombre..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -417,6 +438,13 @@
     "shipped": "Enviado",
     "delivered": "Entregado",
     "cancelled": "Cancelado",
+    "status": {
+      "pending": "Pendiente",
+      "processing": "Procesando",
+      "shipped": "Enviado",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado"
+    },
     "shippingInfo": "Información de envío",
     "estimatedDelivery": "Entrega estimada",
     "items": "Artículos",
@@ -466,7 +494,12 @@
     "add": "Nueva reclamación",
     "detail": "Detalle de la reclamación",
     "reason": "Razón",
-    "status": "Estado",
+    "status": {
+      "pending": "Pendiente",
+      "in_progress": "En progreso",
+      "resolved": "Resuelto",
+      "rejected": "Rechazado"
+    },
     "submitted": "Enviada",
     "description": "Descripción",
     "orderId": "ID de pedido",
@@ -867,5 +900,13 @@
   },
   "session_expired": "Sesión expirada. Por favor, inicia sesión de nuevo.",
   "T": "T",
-  "window": "Ventana"
+  "window": "Ventana",
+  "COMMON": {
+    "ORDERID": "ID DE PEDIDO",
+    "USER": "USUARIO",
+    "CURRENCY": "MONEDA",
+    "STATUS": "ESTADO",
+    "AMOUNT": "CANTIDAD"
+  },
+  "USD": "USD"
 }

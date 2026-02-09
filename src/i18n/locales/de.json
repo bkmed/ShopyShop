@@ -19,7 +19,17 @@
     "manageProducts": "Produkte verwalten",
     "manageCategories": "Kategorien verwalten",
     "viewAllOrders": "Alle Bestellungen anzeigen",
-    "globalAnalytics": "Globale Analysen"
+    "globalAnalytics": "Globale Analysen",
+    "purchases": {
+      "title": "Einkaufsverwaltung",
+      "total": "Gesamt",
+      "revenue": "Gesamtumsatz",
+      "noPurchases": "Keine Einkäufe gefunden",
+      "edit": "Einkauf bearbeiten"
+    },
+    "reclamations": {
+      "noReclamations": "Keine Reklamationen gefunden"
+    }
   },
   "announcements": {
     "addAnnouncement": "Ankündigung hinzufügen",
@@ -94,7 +104,10 @@
     "manageTitle": "Währungsverwaltung",
     "codePlaceholder": "EUR",
     "symbolPlaceholder": "€",
-    "ratePlaceholder": "1,0"
+    "ratePlaceholder": "1,0",
+    "USD": "USD",
+    "EUR": "EUR",
+    "TND": "TND"
   },
   "categories": {
     "title": "Kategorien",
@@ -202,7 +215,11 @@
     "free": "Kostenlos",
     "confirmationSent": "Eine Bestätigungs-E-Mail wurde gesendet an",
     "continueShopping": "Weiter einkaufen",
-    "viewOrders": "Meine Bestellungen ansehen"
+    "viewOrders": "Meine Bestellungen ansehen",
+    "delivery": "Lieferung",
+    "chooseDelivery": "Liefermethode wählen",
+    "addnewaddress": "Neue Adresse hinzufügen",
+    "address": "Adresse"
   },
   "dashboard": {
     "hi": "Hallo",
@@ -299,7 +316,11 @@
     "placeholderZero": "0",
     "placeholderAmount": "0,00",
     "dateFormatPlaceholder": "TT.MM.JJJJ",
-    "noResult": "Keine Ergebnisse gefunden"
+    "noResult": "Keine Ergebnisse gefunden",
+    "Continue": "Weiter",
+    "fillallfields": "Bitte alle Felder ausfüllen",
+    "orderId": "Bestellnummer",
+    "namePlaceholder": "Name eingeben..."
   },
   "home": {
     "appName": "ShopyShop",
@@ -415,8 +436,15 @@
     "pending": "Ausstehend",
     "processing": "In Bearbeitung",
     "shipped": "Versandt",
-    "delivered": "Zugestellt",
+    "delivered": "Geliefert",
     "cancelled": "Storniert",
+    "status": {
+      "pending": "Ausstehend",
+      "processing": "In Bearbeitung",
+      "shipped": "Versandt",
+      "delivered": "Geliefert",
+      "cancelled": "Storniert"
+    },
     "shippingInfo": "Versandinformationen",
     "estimatedDelivery": "Voraussichtliche Lieferung",
     "items": "Artikel",
@@ -466,7 +494,12 @@
     "add": "Neue Reklamation",
     "detail": "Reklamationsdetail",
     "reason": "Grund",
-    "status": "Status",
+    "status": {
+      "pending": "Ausstehend",
+      "in_progress": "In Bearbeitung",
+      "resolved": "Gelöst",
+      "rejected": "Abgelehnt"
+    },
     "submitted": "Eingereicht",
     "description": "Beschreibung",
     "orderId": "Bestell-ID",
@@ -867,5 +900,13 @@
   },
   "session_expired": "Sitzung abgelaufen. Bitte erneut anmelden.",
   "T": "T",
-  "window": "Fenster"
+  "window": "Fenster",
+  "COMMON": {
+    "ORDERID": "BESTELLNUMMER",
+    "USER": "BENUTZER",
+    "CURRENCY": "WÄHRUNG",
+    "STATUS": "STATUS",
+    "AMOUNT": "BETRAG"
+  },
+  "USD": "USD"
 }

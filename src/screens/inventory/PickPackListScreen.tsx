@@ -146,7 +146,17 @@ export const PickPackListScreen = () => {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <GlassHeader title={t('pickPack.title')} />
+      <GlassHeader
+        title={t('pickPack.title')}
+        rightElement={
+          <TouchableOpacity
+            style={[styles.addButton, { backgroundColor: theme.colors.primary }]}
+            onPress={() => navigation.navigate('PickPackAdd')}
+          >
+            <Text style={styles.addButtonText}>+</Text>
+          </TouchableOpacity>
+        }
+      />
 
       <View style={styles.header}>
         <TextInput
@@ -279,5 +289,19 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 1,
     color: '#999',
+  },
+  addButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  addButtonText: {
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: '700',
+    lineHeight: 28,
   },
 });

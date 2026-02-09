@@ -33,9 +33,16 @@ export const InventoryAddScreen = () => {
     change: '',
     reason: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleAdjust = async () => {
-    if (!form.productId || !form.change || !form.reason) {
+    const newErrors: Record<string, string> = {};
+    if (!form.productId) newErrors.productId = t('common.required');
+    if (!form.change) newErrors.change = t('common.required');
+    if (!form.reason) newErrors.reason = t('common.required');
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       AlertService.showError(
         toast,
         t('common.errorEmptyFields') || 'Please fill required fields',
@@ -61,6 +68,17 @@ export const InventoryAddScreen = () => {
     }
   };
 
+  const RequiredLabel = ({ label }: { label: string }) => (
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={[styles.label, { color: theme.colors.subText }]}>
+        {label}
+      </Text>
+      <Text style={{ color: theme.colors.error || '#EF4444', marginLeft: 4 }}>
+        *
+      </Text>
+    </View>
+  );
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -73,59 +91,86 @@ export const InventoryAddScreen = () => {
 
         {!initialProduct && (
           <View style={styles.formGroup}>
-            <Text style={[styles.label, { color: theme.colors.subText }]}>
-              Product SKU
-            </Text>
+            <RequiredLabel label="Product SKU" />
             <TextInput
               style={[
                 styles.input,
                 {
                   backgroundColor: theme.colors.surface,
                   color: theme.colors.text,
+                  borderColor: errors.productId
+                    ? theme.colors.error
+                    : 'transparent',
+                  borderWidth: errors.productId ? 1 : 0,
                 },
               ]}
               value={form.productId}
-              onChangeText={text => setForm({ ...form, productId: text })}
+              onChangeText={text => {
+                setForm({ ...form, productId: text });
+                if (errors.productId) setErrors({ ...errors, productId: '' });
+              }}
               placeholder={t('products.skuPlaceholder')}
+              placeholderTextColor={theme.colors.subText}
             />
+            {errors.productId && (
+              <Text style={styles.errorText}>{errors.productId}</Text>
+            )}
           </View>
         )}
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('inventory.adjustmentAmount') || 'Adjustment (e.g. +10 or -5)'}
-          </Text>
+          <RequiredLabel
+            label={
+              t('inventory.adjustmentAmount') || 'Adjustment (e.g. +10 or -5)'
+            }
+          />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.change ? theme.colors.error : 'transparent',
+                borderWidth: errors.change ? 1 : 0,
               },
             ]}
             value={form.change}
-            onChangeText={text => setForm({ ...form, change: text })}
+            onChangeText={text => {
+              setForm({ ...form, change: text });
+              if (errors.change) setErrors({ ...errors, change: '' });
+            }}
             keyboardType="numbers-and-punctuation"
             placeholder={t('inventory.changePlaceholder')}
+            placeholderTextColor={theme.colors.subText}
           />
+          {errors.change && (
+            <Text style={styles.errorText}>{errors.change}</Text>
+          )}
         </View>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('inventory.reason') || 'Reason'}
-          </Text>
+          <RequiredLabel label={t('inventory.reason') || 'Reason'} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.reason ? theme.colors.error : 'transparent',
+                borderWidth: errors.reason ? 1 : 0,
               },
             ]}
             value={form.reason}
-            onChangeText={text => setForm({ ...form, reason: text })}
+            onChangeText={text => {
+              setForm({ ...form, reason: text });
+              if (errors.reason) setErrors({ ...errors, reason: '' });
+            }}
             placeholder={t('inventory.reasonPlaceholder')}
+            placeholderTextColor={theme.colors.subText}
           />
+          {errors.reason && (
+            <Text style={styles.errorText}>{errors.reason}</Text>
+          )}
         </View>
 
         <TouchableOpacity
@@ -178,5 +223,11 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

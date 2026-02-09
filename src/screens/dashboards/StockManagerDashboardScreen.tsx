@@ -151,60 +151,6 @@ export const StockManagerDashboardScreen = () => {
         </View>
       </View>
 
-      <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-        {t('inventory.warehouseOps')}
-      </Text>
-      <View style={styles.opsGrid}>
-        <TouchableOpacity
-          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Inventory')}
-        >
-          <Text style={{ fontSize: 24 }}>📋</Text>
-          <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('inventory.fullInventory')}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('StockReceptionList')}
-        >
-          <Text style={{ fontSize: 24 }}>📥</Text>
-          <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('navigation.stockReception') || 'Reception'}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('PickPackList')}
-        >
-          <Text style={{ fontSize: 24 }}>📦</Text>
-          <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('navigation.pickPack') || 'Pick & Pack'}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('SupplierList')}
-        >
-          <Text style={{ fontSize: 24 }}>🚚</Text>
-          <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('suppliers.title') || 'Suppliers'}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
-          onPress={() => navigation.navigate('Home')}
-        >
-          <Text style={{ fontSize: 24 }}>🏠</Text>
-          <Text style={[styles.opText, { color: theme.colors.text }]}>
-            {t('navigation.home') || 'Home'}
-          </Text>
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   );
 };

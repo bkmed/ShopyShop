@@ -117,7 +117,24 @@ export const StockReceptionListScreen = () => {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <GlassHeader title={t('stockReception.title')} />
+      <GlassHeader
+        title={t('stockReception.title')}
+        rightElement={
+          <TouchableOpacity
+            onPress={() => navigation.navigate('StockReceptionAddEdit')}
+          >
+            <Text
+              style={{
+                color: theme.colors.primary,
+                fontWeight: 'bold',
+                fontSize: 16,
+              }}
+            >
+              {t('common.add') || '+ ADD'}
+            </Text>
+          </TouchableOpacity>
+        }
+      />
 
       <View style={styles.header}>
         <TextInput
