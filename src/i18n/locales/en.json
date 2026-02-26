@@ -28,6 +28,7 @@
       "edit": "Edit Purchase"
     },
     "reclamations": {
+      "title": "Claims Management",
       "noReclamations": "No reclamations found"
     }
   },
@@ -324,7 +325,11 @@
     "welcome": "Welcome",
     "ourStores": "Our Stores",
     "contactUs": "Contact Us",
-    "copyrightText": "All rights reserved."
+    "copyrightText": "All rights reserved.",
+    "user": "User",
+    "currency": "Currency",
+    "status": "Status",
+    "amount": "Amount"
   },
   "home": {
     "appName": "ShopyShop",
@@ -544,6 +549,7 @@
     "adjustmentAmount": "Adjustment Amount",
     "reason": "Reason",
     "changePlaceholder": "+0",
+    "stockHealthy": "Stock Healthy",
     "reasonPlaceholder": "e.g. Restock, Damaged, Sale"
   },
   "payroll": {
@@ -909,12 +915,5 @@
   "session_expired": "Session expired. Please log in again.",
   "T": "T",
   "window": "Window",
-  "COMMON": {
-    "ORDERID": "Order ID",
-    "USER": "User",
-    "CURRENCY": "Currency",
-    "STATUS": "Status",
-    "AMOUNT": "Amount"
-  },
   "USD": "USD"
 }

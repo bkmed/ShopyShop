@@ -28,6 +28,7 @@
       "edit": "खरीद संपादित करें"
     },
     "reclamations": {
+      "title": "दावा प्रबंधन",
       "noReclamations": "कोई शिकायत नहीं मिली"
     }
   },
@@ -320,7 +321,11 @@
     "Continue": "जारी रखें",
     "fillallfields": "कृपया सभी फ़ील्ड भरें",
     "orderId": "ऑर्डर आईडी",
-    "namePlaceholder": "नाम दर्ज करें..."
+    "namePlaceholder": "नाम दर्ज करें...",
+    "user": "उपयोगकर्ता",
+    "currency": "मुद्रा",
+    "status": "स्थिति",
+    "amount": "राशि"
   },
   "home": {
     "appName": "ShopyShop",
@@ -536,6 +541,7 @@
     "adjustmentAmount": "समायोजन राशि",
     "reason": "कारण",
     "changePlaceholder": "0",
+    "stockHealthy": "स्वस्थ स्टॉक",
     "reasonPlaceholder": "कारण..."
   },
   "payroll": {
@@ -901,12 +907,5 @@
   "session_expired": "सत्र समाप्त हो गया। कृपया फिर से लॉग इन करें।",
   "T": "T",
   "window": "खिड़की",
-  "COMMON": {
-    "ORDERID": "ऑर्डर आईडी",
-    "USER": "उपयोगकर्ता",
-    "CURRENCY": "मुद्रा",
-    "STATUS": "स्थिति",
-    "AMOUNT": "राशि"
-  },
   "USD": "USD"
 }

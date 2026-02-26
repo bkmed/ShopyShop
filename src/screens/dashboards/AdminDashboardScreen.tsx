@@ -5,8 +5,12 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { Platform } from 'react-native';
+import { useContext } from 'react';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
 import { ordersDb } from '../../database/ordersDb';
@@ -16,6 +20,8 @@ import { categoriesDb } from '../../database/categoriesDb';
 export const AdminDashboardScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation<any>();
+  const { setActiveTab } = useContext(WebNavigationContext);
 
   const [stats, setStats] = useState({
     totalOrders: 0,
@@ -113,6 +119,76 @@ export const AdminDashboardScreen = () => {
           icon="📂"
           color="#FF2D55"
         />
+      </View>
+
+      <Text style={[styles.sectionTitle, { color: theme.colors.text, marginTop: 16 }]}>
+        {t('admin.quickActions')}
+      </Text>
+
+      <View style={styles.actionsGrid}>
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('UserManagement', '');
+            } else {
+              navigation.navigate('UserManagement');
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>👥</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.userManagement')}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('Dashboard', 'ManageNotifications');
+            } else {
+              navigation.navigate('ManageNotifications');
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>📢</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('notifications.broadcast') || 'Broadcast'}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('AdminPurchases', '');
+            } else {
+              navigation.navigate('AdminPurchaseList');
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>🛒</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.purchases')}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.actionBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('AdminReclamations', '');
+            } else {
+              navigation.navigate('AdminReclamationList');
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>💬</Text>
+          <Text style={[styles.actionText, { color: theme.colors.text }]}>
+            {t('navigation.reclamations')}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

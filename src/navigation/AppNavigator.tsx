@@ -61,6 +61,7 @@ import { NotificationBell } from '../components/common/NotificationBell';
 import { ChatBot } from '../components/common/ChatBot';
 import { useAuth } from '../context/AuthContext';
 import { GlassHeader } from '../components/common/GlassHeader';
+import { ManageNotificationsScreen } from '../screens/notifications/ManageNotificationsScreen';
 
 // New Screens
 import { PurchaseHistoryScreen } from '../screens/purchases/PurchaseHistoryScreen';
@@ -431,11 +432,12 @@ const OrdersStack = () => {
   );
 };
 
-const InventoryStack = () => {
+const InventoryStack = ({ initialRouteName }: { initialRouteName?: string }) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName || 'InventoryList'}
       screenOptions={{
         headerStyle: { backgroundColor: theme.colors.surface },
         headerTintColor: theme.colors.text,
@@ -500,11 +502,12 @@ const InventoryStack = () => {
   );
 };
 
-const SuppliersStack = () => {
+const SuppliersStack = ({ initialRouteName }: { initialRouteName?: string }) => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName || 'SupplierList'}
       screenOptions={{
         headerStyle: { backgroundColor: theme.colors.surface },
         headerTintColor: theme.colors.text,
@@ -770,13 +773,20 @@ const useNavigationSections = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
+  interface NavigationItem {
+    key: string;
+    label: string;
+    icon: string;
+    subScreen?: string;
+  }
+
   return useMemo(() => {
     const isStockManager = rbacService.isStockManager(user);
     const isAdmin = rbacService.isAdmin(user);
     const isManagementRole = isStockManager || isAdmin;
     const isManager = isAdmin || user?.role === 'gestionnaire_de_stock';
 
-    const sections = [
+    const sections: { title: string; items: NavigationItem[] }[] = [
       {
         title: t('sections.shop') || 'Shop',
         items: [
@@ -786,24 +796,24 @@ const useNavigationSections = () => {
           // Catalog hidden for Stock Manager
           ...(!isStockManager
             ? [
-                {
-                  key: 'Catalog',
-                  label: t('navigation.catalog') || 'Catalog',
-                  icon: '🛍️',
-                },
-              ]
+              {
+                key: 'Catalog',
+                label: t('navigation.catalog') || 'Catalog',
+                icon: '🛍️',
+              },
+            ]
             : []),
 
           // Categories, Cart only for non-management roles (Users)
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Categories',
-                  label: t('navigation.categories') || 'Categories',
-                  icon: '🗂️',
-                },
-                { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
-              ]
+              {
+                key: 'Categories',
+                label: t('navigation.categories') || 'Categories',
+                icon: '🗂️',
+              },
+              { key: 'Cart', label: t('navigation.cart'), icon: '🛒' },
+            ]
             : []),
         ],
       },
@@ -813,40 +823,40 @@ const useNavigationSections = () => {
           // Orders and Wishlist only for regular users
           ...(!isManagementRole
             ? [
-                { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
-                {
-                  key: 'Wishlist',
-                  label: t('navigation.wishlist') || 'Wishlist',
-                  icon: '❤️',
-                },
-              ]
+              { key: 'Orders', label: t('navigation.orders'), icon: '📦' },
+              {
+                key: 'Wishlist',
+                label: t('navigation.wishlist') || 'Wishlist',
+                icon: '❤️',
+              },
+            ]
             : []),
 
           // Analytics for those with permission
           ...(rbacService.hasPermission(user, Permission.VIEW_ANALYTICS)
             ? [
-                {
-                  key: 'Analytics',
-                  label: t('navigation.analytics'),
-                  icon: '📊',
-                },
-              ]
+              {
+                key: 'Analytics',
+                label: t('navigation.analytics'),
+                icon: '📊',
+              },
+            ]
             : []),
 
           // Purchases and Reclamations for regular users
           ...(!isManagementRole
             ? [
-                {
-                  key: 'Purchases',
-                  label: t('navigation.purchases') || 'Purchases',
-                  icon: '🛍️',
-                },
-                {
-                  key: 'Reclamations',
-                  label: t('navigation.reclamations') || 'Claims',
-                  icon: '⚠️',
-                },
-              ]
+              {
+                key: 'Purchases',
+                label: t('navigation.purchases') || 'Purchases',
+                icon: '🛍️',
+              },
+              {
+                key: 'Reclamations',
+                label: t('navigation.reclamations') || 'Claims',
+                icon: '⚠️',
+              },
+            ]
             : []),
         ],
       },
@@ -866,12 +876,12 @@ const useNavigationSections = () => {
         icon: '🚚',
       });
       managementItems.push({
-        key: 'StockReceptionList',
+        key: 'StockReception',
         label: t('navigation.stockReception') || 'Reception',
         icon: '📥',
       });
       managementItems.push({
-        key: 'PickPackList',
+        key: 'PickPack',
         label: t('navigation.pickPack') || 'Pick & Pack',
         icon: '📦',
       });
@@ -935,7 +945,7 @@ const useNavigationSections = () => {
       ],
     });
 
-    const personalItems = [
+    const personalItems: NavigationItem[] = [
       { key: 'Settings', label: t('navigation.settings'), icon: '🎨' },
       { key: 'Language', label: t('profile.language'), icon: '🌐' },
       { key: 'Currency', label: t('settings.currency'), icon: '💵' },
@@ -1081,11 +1091,17 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         : 'transparent',
                       ...(isFocused &&
                         themeMode === 'premium' && {
-                          borderWidth: 1,
-                          borderColor: theme.colors.primary,
-                        }),
+                        borderWidth: 1,
+                        borderColor: theme.colors.primary,
+                      }),
                     }}
-                    onPress={() => navigation.navigate(item.key)}
+                    onPress={() => {
+                      if (item.subScreen) {
+                        navigation.navigate(item.key, { screen: item.subScreen });
+                      } else {
+                        navigation.navigate(item.key);
+                      }
+                    }}
                   >
                     <Text style={{ fontSize: 20, marginRight: 16 }}>
                       {item.icon}
@@ -1114,6 +1130,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
 const DashboardsStack = () => {
   const { theme } = useTheme();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const getDashboard = () => {
     switch (user?.role) {
@@ -1138,6 +1155,11 @@ const DashboardsStack = () => {
         name="DashboardRoot"
         component={getDashboard()}
         options={{ title: 'Dashboard' }}
+      />
+      <Stack.Screen
+        name="ManageNotifications"
+        component={ManageNotificationsScreen}
+        options={{ title: t('notifications.broadcastTitle') || 'Broadcast' }}
       />
     </Stack.Navigator>
   );
@@ -1231,6 +1253,9 @@ const WebNavigator = () => {
         }
         return <HomeStack />;
       case 'Dashboard':
+        if (subScreen === 'ManageNotifications') {
+          return <ManageNotificationsScreen />;
+        }
         return <DashboardsStack />;
       case 'Catalog':
         return <CatalogStack />;
@@ -1253,23 +1278,23 @@ const WebNavigator = () => {
       case 'Inventory':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <InventoryStack />;
+        return <InventoryStack initialRouteName={subScreen || 'InventoryList'} />;
       case 'StockReception':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <InventoryStack />;
+        return <InventoryStack initialRouteName="StockReceptionList" />;
       case 'PickPack':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <InventoryStack />;
+        return <InventoryStack initialRouteName="PickPackList" />;
       case 'StockMovement':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <InventoryStack />;
+        return <InventoryStack initialRouteName="StockMovement" />;
       case 'Suppliers':
         if (!rbacService.hasPermission(user, Permission.MANAGE_STOCK))
           return <HomeStack />;
-        return <SuppliersStack />;
+        return <SuppliersStack initialRouteName={subScreen} />;
       case 'Products':
         if (!rbacService.hasPermission(user, Permission.MANAGE_PRODUCTS))
           return <HomeStack />;
@@ -1311,7 +1336,7 @@ const WebNavigator = () => {
 
   return (
     <WebNavigationContext.Provider value={contextValue}>
-      {}
+      { }
       <View
         style={
           [
@@ -1325,7 +1350,7 @@ const WebNavigator = () => {
           ] as any
         }
       >
-        {}
+        { }
 
         {/* Desktop Sidebar OR Mobile Header */}
         {!isMobile ? (
@@ -1431,7 +1456,7 @@ const WebNavigator = () => {
                     section.items.map(item => (
                       <TouchableOpacity
                         key={item.key}
-                        onPress={() => handleNavigate(item.key)}
+                        onPress={() => handleNavigate(item.key, item.subScreen)}
                         style={[
                           webStyles.sidebarNavItem,
                           activeTab === item.key && {
@@ -1609,7 +1634,7 @@ const WebNavigator = () => {
                         <TouchableOpacity
                           key={item.key}
                           onPress={() => {
-                            handleNavigate(item.key);
+                            handleNavigate(item.key, item.subScreen);
                             setIsMenuOpen(false);
                           }}
                           style={[

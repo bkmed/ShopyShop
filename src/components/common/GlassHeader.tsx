@@ -17,6 +17,7 @@ import { productsDb } from '../../database/productsDb';
 import { Product } from '../../database/schema';
 import { useCurrency } from '../../utils/currencyUtils';
 import { WebNavigationContext } from '../../navigation/WebNavigationContext';
+import { Icon } from './Icon';
 
 interface GlassHeaderProps {
   title?: string;
@@ -54,6 +55,7 @@ const createStyles = (theme: Theme) =>
         right: 0,
       }),
       ...theme.shadows.small,
+      paddingVertical: Platform.OS === 'web' ? 8 : 0,
     },
     leftSection: {
       flexDirection: 'row',
@@ -254,12 +256,12 @@ export const GlassHeader = ({
       <View style={styles.leftSection}>
         {onMenuPress && (
           <TouchableOpacity style={styles.iconButton} onPress={onMenuPress}>
-            <Text style={{ fontSize: 24 }}>☰</Text>
+            <Icon name="menu" color={theme.colors.text} size={24} />
           </TouchableOpacity>
         )}
         {showBack && (
           <TouchableOpacity style={styles.iconButton} onPress={onBackPress}>
-            <Text style={{ fontSize: 24 }}>←</Text>
+            <Icon name="back" color={theme.colors.text} size={24} />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title || t('home.appName')}</Text>
@@ -269,7 +271,7 @@ export const GlassHeader = ({
         {rightElement}
         {onSearchPress && (
           <TouchableOpacity style={styles.iconButton} onPress={onSearchPress}>
-            <Text style={{ fontSize: 20 }}>🔍</Text>
+            <Icon name="search" color={theme.colors.text} size={20} />
           </TouchableOpacity>
         )}
 
@@ -284,14 +286,14 @@ export const GlassHeader = ({
                   <Text style={styles.badgeText}>{cartCount}</Text>
                 </View>
               )}
-              <Text style={{ fontSize: 24 }}>🛒</Text>
+              <Icon name="cart" color={theme.colors.text} size={24} />
             </TouchableOpacity>
 
             {showCart && cartItems.length > 0 && (
               <View style={styles.cartDropdown}>
                 {cartItems.map(item => (
                   <View key={item.productId} style={styles.cartItem}>
-                    <Text style={{ fontSize: 24 }}>📦</Text>
+                    <Icon name="package" color={theme.colors.primary} size={24} />
                     <View style={styles.cartItemInfo}>
                       <Text style={styles.cartItemName} numberOfLines={1}>
                         {cartProducts[item.productId]?.name || '...'}

@@ -18,6 +18,7 @@ import {
 } from '../../store/slices/notificationsSlice';
 import { formatDate } from '../../utils/dateUtils';
 import { Theme } from '../../theme';
+import { Icon } from './Icon';
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -157,7 +158,7 @@ export const NotificationBell = () => {
         style={styles.bellButton}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.bellIcon}>🔔</Text>
+        <Icon name="bell" color={theme.colors.text} size={22} />
         {unreadCount > 0 && (
           <View style={[styles.badge, { backgroundColor: theme.colors.error }]}>
             <Text style={styles.badgeText}>{unreadCount}</Text>

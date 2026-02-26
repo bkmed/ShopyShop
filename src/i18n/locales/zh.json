@@ -28,6 +28,7 @@
       "edit": "编辑采购"
     },
     "reclamations": {
+      "title": "投诉管理",
       "noReclamations": "未找到投诉"
     }
   },
@@ -317,7 +318,11 @@
     "Continue": "继续",
     "fillallfields": "请填写所有字段",
     "orderId": "订单号",
-    "namePlaceholder": "输入姓名..."
+    "namePlaceholder": "输入姓名...",
+    "user": "用户",
+    "currency": "货币",
+    "status": "状态",
+    "amount": "金额"
   },
   "home": {
     "appName": "ShopyShop",
@@ -533,6 +538,7 @@
     "adjustmentAmount": "调整金额",
     "reason": "原因",
     "changePlaceholder": "0",
+    "stockHealthy": "库存健康",
     "reasonPlaceholder": "原因..."
   },
   "payroll": {
@@ -898,12 +904,5 @@
   "session_expired": "会话已过期，请重新登录。",
   "T": "T",
   "window": "窗口",
-  "COMMON": {
-    "ORDERID": "订单号",
-    "USER": "用户",
-    "CURRENCY": "货币",
-    "STATUS": "状态",
-    "AMOUNT": "金额"
-  },
   "USD": "USD"
 }

@@ -22,6 +22,7 @@ import { categoriesDb } from '../database/categoriesDb';
 import { ordersDb } from '../database/ordersDb';
 import { Product, Category, Order } from '../database/schema';
 import { useCurrency } from '../utils/currencyUtils';
+import { rbacService } from '../services/rbacService';
 
 // ======= Helper Components =======
 
@@ -136,6 +137,13 @@ export const HomeScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
+      // Role-based redirection for Mobile
+      if (Platform.OS !== 'web') {
+        if (rbacService.isAdmin(user) || rbacService.isStockManager(user)) {
+          navigation.navigate('DashboardTab');
+          return;
+        }
+      }
       loadData();
     }, [user]),
   );

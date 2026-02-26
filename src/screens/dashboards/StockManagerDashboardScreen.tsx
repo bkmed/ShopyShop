@@ -5,8 +5,12 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { Platform } from 'react-native';
+import { useContext } from 'react';
+import { WebNavigationContext } from '../../navigation/WebNavigationContext';
 
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../context/ThemeContext';
@@ -16,6 +20,8 @@ import { inventoryDb } from '../../database/inventoryDb';
 export const StockManagerDashboardScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation<any>();
+  const { setActiveTab } = useContext(WebNavigationContext);
 
   const [stats, setStats] = useState({
     outOfStock: 0,
@@ -146,6 +152,60 @@ export const StockManagerDashboardScreen = () => {
             {t('inventory.recentMovements')}
           </Text>
         </View>
+      </View>
+
+      <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+        {t('inventory.warehouseOps')}
+      </Text>
+
+      <View style={styles.opsGrid}>
+        <TouchableOpacity
+          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('StockReception', '');
+            } else {
+              navigation.navigate('Inventory', { screen: 'StockReceptionList' });
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>📥</Text>
+          <Text style={[styles.opText, { color: theme.colors.text }]}>
+            {t('inventory.receiveStock')}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('PickPack', '');
+            } else {
+              navigation.navigate('Inventory', { screen: 'PickPackList' });
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>📦</Text>
+          <Text style={[styles.opText, { color: theme.colors.text }]}>
+            {t('inventory.pickAndPack')}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.opBtn, { backgroundColor: theme.colors.surface }]}
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              setActiveTab('Inventory', '');
+            } else {
+              navigation.navigate('Inventory', { screen: 'InventoryList' });
+            }
+          }}
+        >
+          <Text style={{ fontSize: 32 }}>📋</Text>
+          <Text style={[styles.opText, { color: theme.colors.text }]}>
+            {t('inventory.fullInventory')}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

@@ -28,6 +28,7 @@
       "edit": "Einkauf bearbeiten"
     },
     "reclamations": {
+      "title": "Reklamationsmanagement",
       "noReclamations": "Keine Reklamationen gefunden"
     }
   },
@@ -320,7 +321,11 @@
     "Continue": "Weiter",
     "fillallfields": "Bitte alle Felder ausfüllen",
     "orderId": "Bestellnummer",
-    "namePlaceholder": "Name eingeben..."
+    "namePlaceholder": "Name eingeben...",
+    "user": "Benutzer",
+    "currency": "Währung",
+    "status": "Status",
+    "amount": "Betrag"
   },
   "home": {
     "appName": "ShopyShop",
@@ -536,6 +541,7 @@
     "adjustmentAmount": "Anpassungsbetrag",
     "reason": "Grund",
     "changePlaceholder": "0",
+    "stockHealthy": "Gesunder Lagerbestand",
     "reasonPlaceholder": "Grund..."
   },
   "payroll": {
@@ -901,12 +907,5 @@
   "session_expired": "Sitzung abgelaufen. Bitte erneut anmelden.",
   "T": "T",
   "window": "Fenster",
-  "COMMON": {
-    "ORDERID": "BESTELLNUMMER",
-    "USER": "BENUTZER",
-    "CURRENCY": "WÄHRUNG",
-    "STATUS": "STATUS",
-    "AMOUNT": "BETRAG"
-  },
   "USD": "USD"
 }

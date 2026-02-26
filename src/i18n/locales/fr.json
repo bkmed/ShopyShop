@@ -28,6 +28,7 @@
       "edit": "Modifier l'Achat"
     },
     "reclamations": {
+      "title": "Gestion des Réclamations",
       "noReclamations": "Aucune réclamation trouvée"
     }
   },
@@ -324,7 +325,11 @@
     "welcome": "Bienvenue",
     "ourStores": "Nos Magasins",
     "contactUs": "Contactez-nous",
-    "copyrightText": "Tous droits réservés."
+    "copyrightText": "Tous droits réservés.",
+    "user": "Utilisateur",
+    "currency": "Devise",
+    "status": "Statut",
+    "amount": "Montant"
   },
   "home": {
     "appName": "ShopyShop",
@@ -544,6 +549,7 @@
     "adjustmentAmount": "Montant de l'ajustement",
     "reason": "Raison",
     "changePlaceholder": "0",
+    "stockHealthy": "Stock sain",
     "reasonPlaceholder": "Raison..."
   },
   "payroll": {
@@ -909,12 +915,5 @@
   "session_expired": "Session expirée. Veuillez vous reconnecter.",
   "T": "T",
   "window": "Fenêtre",
-  "COMMON": {
-    "ORDERID": "ID DE COMMANDE",
-    "USER": "UTILISATEUR",
-    "CURRENCY": "DEVISE",
-    "STATUS": "STATUT",
-    "AMOUNT": "MONTANT"
-  },
   "USD": "USD"
 }

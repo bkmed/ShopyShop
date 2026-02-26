@@ -34,11 +34,28 @@ export const OrderAddScreen = () => {
     billingAddress: '',
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!form.totalAmount.trim()) {
+      newErrors.totalAmount = t('common.required');
+    } else if (isNaN(parseFloat(form.totalAmount))) {
+      newErrors.totalAmount = t('common.invalidAmount');
+    }
+    if (!form.shippingAddress.trim()) {
+      newErrors.shippingAddress = t('common.required');
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleCreate = async () => {
-    if (!form.totalAmount || !form.shippingAddress) {
+    if (!validate()) {
       AlertService.showError(
         toast,
-        t('common.errorEmptyFields') || 'Please fill required fields',
+        t('common.fillRequired') || 'Please fill required fields',
       );
       return;
     }
@@ -67,6 +84,15 @@ export const OrderAddScreen = () => {
     }
   };
 
+  const RequiredLabel = ({ label }: { label: string }) => (
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={[styles.label, { color: theme.colors.subText }]}>
+        {label}
+      </Text>
+      <Text style={{ color: theme.colors.error, marginLeft: 4 }}>*</Text>
+    </View>
+  );
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -78,28 +104,32 @@ export const OrderAddScreen = () => {
         </Text>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('orders.totalAmount')}
-          </Text>
+          <RequiredLabel label={t('orders.totalAmount')} />
           <TextInput
             style={[
               styles.input,
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.totalAmount ? theme.colors.error : 'transparent',
+                borderWidth: errors.totalAmount ? 1 : 0,
               },
             ]}
             value={form.totalAmount}
-            onChangeText={text => setForm({ ...form, totalAmount: text })}
+            onChangeText={text => {
+              setForm({ ...form, totalAmount: text });
+              if (errors.totalAmount) setErrors({ ...errors, totalAmount: '' });
+            }}
             keyboardType="decimal-pad"
             placeholder={t('common.placeholderAmount')}
           />
+          {errors.totalAmount && (
+            <Text style={styles.errorText}>{errors.totalAmount}</Text>
+          )}
         </View>
 
         <View style={styles.formGroup}>
-          <Text style={[styles.label, { color: theme.colors.subText }]}>
-            {t('orders.shippingAddress')}
-          </Text>
+          <RequiredLabel label={t('orders.shippingAddress')} />
           <TextInput
             style={[
               styles.input,
@@ -107,14 +137,22 @@ export const OrderAddScreen = () => {
               {
                 backgroundColor: theme.colors.surface,
                 color: theme.colors.text,
+                borderColor: errors.shippingAddress ? theme.colors.error : 'transparent',
+                borderWidth: errors.shippingAddress ? 1 : 0,
               },
             ]}
             value={form.shippingAddress}
-            onChangeText={text => setForm({ ...form, shippingAddress: text })}
+            onChangeText={text => {
+              setForm({ ...form, shippingAddress: text });
+              if (errors.shippingAddress) setErrors({ ...errors, shippingAddress: '' });
+            }}
             multiline
             numberOfLines={3}
             placeholder={t('orders.addressPlaceholder')}
           />
+          {errors.shippingAddress && (
+            <Text style={styles.errorText}>{errors.shippingAddress}</Text>
+          )}
         </View>
 
         <TouchableOpacity
@@ -172,5 +210,11 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

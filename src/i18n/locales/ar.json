@@ -28,6 +28,7 @@
       "edit": "تعديل الشراء"
     },
     "reclamations": {
+      "title": "إدارة المطالبات",
       "noReclamations": "لم يتم العثور على مطالبات"
     }
   },
@@ -320,7 +321,11 @@
     "Continue": "استمرار",
     "fillallfields": "يرجى ملء جميع الحقول",
     "orderId": "معرف الطلب",
-    "namePlaceholder": "أدخل الاسم..."
+    "namePlaceholder": "أدخل الاسم...",
+    "user": "مستخدم",
+    "currency": "عملة",
+    "status": "حالة",
+    "amount": "قيمة"
   },
   "home": {
     "appName": "ShopyShop",
@@ -536,6 +541,7 @@
     "adjustmentAmount": "مبلغ التعديل",
     "reason": "السبب",
     "changePlaceholder": "٠",
+    "stockHealthy": "مخزون صحي",
     "reasonPlaceholder": "السبب..."
   },
   "payroll": {
@@ -901,12 +907,5 @@
   "session_expired": "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
   "T": "T",
   "window": "نافذة",
-  "COMMON": {
-    "ORDERID": "معرف الطلب",
-    "USER": "المستخدم",
-    "CURRENCY": "العملة",
-    "STATUS": "الحالة",
-    "AMOUNT": "المبلغ"
-  },
   "USD": "USD"
 }
